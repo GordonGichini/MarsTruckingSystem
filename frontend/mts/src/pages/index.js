@@ -1,6 +1,6 @@
 import HomePage from "./HomePage";
 import SignInSide from "./login";
-import ErrorPage from "./Errorage";
+import ErrorPage from "./ErrorPage";
 import Dashboard from "./Dashboard";
 
 export {
