@@ -20,7 +20,7 @@ const theme = createTheme();
 
 
 
-export default function SignInSide() { 
+export default function SignUpSide() { 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -77,7 +77,7 @@ export default function SignInSide() {
               <LockOutlinedIcon />
             </Avatar>
             <Typography component="h1" variant="h5">
-              Sign in
+              Sign up
             </Typography>
             <Box component="form" noValidate onSubmit={handleFormSubmit} sx={{ mt: 1 }}>
               <TextField
@@ -111,21 +111,8 @@ export default function SignInSide() {
                 sx={{ mt: 3, mb: 2 }}
                 
               >
-                Sign In
+                Sign Up
               </Button>
-              <Grid container>
-                <Grid item xs>
-                  <Link href="#" variant="body2">
-                    Forgot password?
-                  </Link>
-                </Grid>
-                <Grid item>
-                  <Link href="/signup" variant="body2">
-                    {"Don't have an account? Sign Up"}
-                  </Link>
-                </Grid>
-              </Grid>
-
             </Box>
           </Box>
         </Grid>

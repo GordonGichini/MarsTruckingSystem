@@ -1,40 +1,102 @@
 import React from 'react';
-import { AppBar, Toolbar, IconButton, Typography, Button } from '@material-ui/core';
+import { AppBar, Toolbar, IconButton, Typography, Button, makeStyles } from '@material-ui/core';
 import { AccountCircle } from '@material-ui/icons';
-import { Link } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom'; 
+
+
+const useStyles = makeStyles((theme) => ({
+  appBar: {
+    backgroundColor: 'black',
+    marginBottom: theme.spacing(2),
+  },
+  title: {
+    flexGrow: 1,
+  },
+  navLink: {
+    marginLeft: theme.spacing(0.5),
+    marginRight: theme.spacing(2),
+    color: 'white',
+    textDecoration: 'none',
+    '&:hover': {
+      color: 'green',
+    },
+  },
+  active: {
+    fontWeight: 'bold',
+  },
+}));
 
 function OutNavBar() {
+  const classes = useStyles();
+
   return ( 
     <AppBar 
-    position="static">
+    position="static" className={classes.appBar}>
       <Toolbar>
         <Typography 
-        variant="h6" style={{
-          flexGrow: 1
-        }}>
-          Mars Trucking System
+        variant="h6" component={Link} to="/">
+          <img src="mts/src/common/assets/brand/logo.png" alt="Logo" style={{ marginRight: '10px', height: '30px' }} />
+          MTS
         </Typography>
         <Button 
-        color="inherit" component=
-        {Link} to="/home">Home</Button> 
-         <Button 
-        color="inherit" component=
-        {Link} to="/mts">MTS</Button>
-         <Button 
-        color="inherit" component=
-        {Link} to="/eld">ELD</Button>
-         <Button 
-        color="inherit" component=
-        {Link} to="/our-story">Our Story</Button>
-         <Button 
-        color="inherit" component=
-        {Link} to="/blog">Blog</Button>
-         <Button 
-        color="inherit" component=
-        {Link} to="/support">Support</Button>
-         <Button 
-        color="inherit" component=
-        {Link} to="/login">login</Button> 
+        color="inherit"
+        component={NavLink}
+        to="/"
+        exact
+        activeClassName={classes.active}
+        className={classes.navLink}
+        >Home</Button> 
+
+        <Button 
+        color="inherit"
+        component={NavLink}
+        to="/MTS"
+        exact
+        activeClassName={classes.active}
+        className={classes.navLink}
+        >MTS</Button> 
+
+        <Button 
+        color="inherit"
+        component={NavLink}
+        to="/ELD"
+        exact
+        activeClassName={classes.active}
+        className={classes.navLink}
+        >ELD</Button> 
+        <Button 
+        color="inherit"
+        component={NavLink}
+        to="/Our_story"
+        exact
+        activeClassName={classes.active}
+        className={classes.navLink}
+        >Our Story</Button>  
+
+        <Button 
+        color="inherit"
+        component={NavLink}
+        to="/Blog"
+        exact
+        activeClassName={classes.active}
+        className={classes.navLink}
+        >Blog</Button> 
+        <Button 
+        color="inherit"
+        component={NavLink}
+        to="/support"
+        exact
+        activeClassName={classes.active}
+        className={classes.navLink}
+        >Support</Button> 
+        <Button 
+        color="inherit"
+        component={NavLink}
+        to="/"
+        exact
+        activeClassName={classes.active}
+        className={classes.navLink}
+        >Login</Button> 
         <IconButton 
         color="inherit">
           <AccountCircle />

@@ -14,10 +14,7 @@ const MiddleNavBar = () => {
     <Box>
   <Stack direction="row" spacing={0.5}>
       <Button variant="outlined"  startIcon={<AddTaskOutlinedIcon />}  > 
-      <Typography className='icon_btn'> Add Planned Load </Typography> 
-      </Button>
-      <Button variant="outlined" startIcon={<LocalShippingOutlinedIcon />}>
-        Add Trip
+      <Typography className='icon_btn'> Add Dispatch</Typography> 
       </Button>
       <Button variant="outlined" startIcon={<AddShoppingCartOutlinedIcon />}>
         Add Expenses
@@ -26,18 +23,14 @@ const MiddleNavBar = () => {
         Add Invoice
       </Button>
       <Button variant="outlined" startIcon={<AddTaskOutlinedIcon />}>
-        Add Maintenace
+        Add Maintenance
       </Button>
       <Button variant="outlined" startIcon={<AddTaskOutlinedIcon />}>
-        Get Milestones
-      </Button>
-      <Button variant="outlined" startIcon={<AddTaskOutlinedIcon />}>
-        Advanced Search
+        Get Miles
       </Button>
       <Button variant="outlined" startIcon={<AddTaskOutlinedIcon />}>
         Reports
-      </Button>
-      
+      </Button>      
     </Stack>
     </Box>
   )

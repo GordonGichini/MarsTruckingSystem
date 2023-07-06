@@ -1,13 +1,42 @@
 import * as React from 'react';
-import Button from '@mui/material/Button';
+import { AppBar, Toolbar, Typography, Button, makeStyles } from '@material-ui/core';
 import ButtonGroup from '@mui/material/ButtonGroup';
 import { Box, colors } from '@mui/material';
-import { Link } from 'react-router-dom';
-import Divider from '@mui/material/Divider';
+import { NavLink, Link } from 'react-router-dom';
+import Divider from '@mui/material/Divider'; 
+
+const useStyles = makeStyles((theme) => ({
+  appBar: {
+    backgroundColor: 'black',
+    marginBottom: theme.spacing(2),
+  },
+  title: {
+    flexGrow: 1,
+  },
+  navLink: {
+    marginLeft: theme.spacing(0.2),
+    color: 'white',
+    textDecoration: 'none',
+    '&:hover': {
+      color: 'green',
+    },
+  },
+  active: {
+    fontWeight: 'bold',
+  },
+}));
 
 
-export default function InNavBar() {
+export default function InNavBar() { 
+  const classes = useStyles();
+
   return (
+    <AppBar position="static" className={classes.appBar}> 
+    <Toolbar>
+    <Typography variant="h6" component={Link} to="/" >
+  <img src="common/assets/brand/logoIcon.png" alt="Logo" style={{ marginRight: '10px', height: '30px' }} />
+  MTS
+    </Typography>
     <Box sx={{display:"flex",
     justifyContent:"space-between",
     alignItems:"center",
@@ -18,47 +47,79 @@ export default function InNavBar() {
       sx={{width:"100%",
     }}
       >
-          <Link to="/" style={{textDecoration:"none",
+          <Button
+           colour="inherit"
+           component={NavLink}
+           to="/"
+           exact
+           activeClassName={classes.active}
+           className={classes.navLink}
+          >Dashboard</Button>  
 
-          }}>
-          <Button  >Dashboard</Button>         
-          </Link>
           <Divider orientation="vertical" flexItem />
-          <Link to="/" style={{textDecoration:"none"}}>
-          <Button >Load Planner</Button>         
-          </Link>
+          <Button
+           colour="inherit"
+           component={NavLink}
+           to="/trips"
+           exact
+           activeClassName={classes.active}
+           className={classes.navLink}
+          >Dispatch</Button>
+
           <Divider orientation="vertical" flexItem />
-          <Link to="/" style={{textDecoration:"none"}}>
-          <Button >Trip</Button>         
-          </Link>
+          <Button
+           colour="inherit"
+           component={NavLink}
+           to="/invoices"
+           exact
+           activeClassName={classes.active}
+           className={classes.navLink}
+          >invoices</Button>
           <Divider orientation="vertical" flexItem />
-          <Link to="/" style={{textDecoration:"none"}}>
-          <Button >Loads</Button>         
-          </Link>
+          <Button
+           colour="inherit"
+           component={NavLink}
+           to="/expenses"
+           exact
+           activeClassName={classes.active}
+           className={classes.navLink}
+          >Expenses</Button>
           <Divider orientation="vertical" flexItem />
-          <Link to="/" style={{textDecoration:"none"}}>
-          <Button >Invoice</Button>         
-          </Link>
+          <Button
+           colour="inherit"
+           component={NavLink}
+           to="/maintenance_logs"
+           exact
+           activeClassName={classes.active}
+           className={classes.navLink}
+          >Maintenances</Button>
           <Divider orientation="vertical" flexItem />
-          <Link to="/" style={{textDecoration:"none"}}>
-          <Button >Expenses</Button>         
-          </Link>
+          <Button
+           colour="inherit"
+           component={NavLink}
+           to="/reports"
+           exact
+           activeClassName={classes.active}
+           className={classes.navLink}
+          >Reports</Button>
           <Divider orientation="vertical" flexItem />
-          <Link to="/" style={{textDecoration:"none"}}>
-          <Button >Reports</Button>         
-          </Link>
+          <Button
+           colour="inherit"
+           component={NavLink}
+           to="/settings"
+           exact
+           activeClassName={classes.active}
+           className={classes.navLink}
+          >Settings</Button>
           <Divider orientation="vertical" flexItem />
-          <Link to="/" style={{textDecoration:"none"}}>
-          <Button >Settings & More</Button>         
-          </Link>
-          <Divider orientation="vertical" flexItem />
-          <Link to="/" style={{textDecoration:"none"}}>
-          <Button >Switch ELD</Button>         
-          </Link>
-          <Divider orientation="vertical" flexItem />
-          <Link to="/" style={{textDecoration:"none"}}>
-          <Button >Profile</Button>         
-          </Link>
+          <Button
+           colour="inherit"
+           component={NavLink}
+           to="/"
+           exact
+           activeClassName={classes.active}
+           className={classes.navLink}
+          >Switch to ELD</Button>
           <Divider orientation="vertical" flexItem />
     </ButtonGroup>
     </Box>
@@ -67,26 +128,48 @@ export default function InNavBar() {
       sx={{width:"100%",
       }}
       >
-        <Link to="/" style={{textDecoration:"none"}}>
-          <Button >Profile</Button>         
-          </Link>
+        <Button
+           colour="inherit"
+           component={NavLink}
+           to="/profile"
+           exact
+           activeClassName={classes.active}
+           className={classes.navLink}
+          >Profile</Button>
           <Divider orientation="vertical" flexItem />
           <Divider orientation="vertical" flexItem />
-          <Link to="/" style={{textDecoration:"none"}}>
-          <Button >Support</Button>         
-          </Link>
+          <Button
+           colour="inherit"
+           component={NavLink}
+           to="/support"
+           exact
+           activeClassName={classes.active}
+           className={classes.navLink}
+          >Support</Button>
           <Divider orientation="vertical" flexItem />
-          <Link to="/" style={{textDecoration:"none"}}>
-          <Button >Chat</Button>         
-          </Link>
+          <Button
+           colour="inherit"
+           component={NavLink}
+           to="/"
+           exact
+           activeClassName={classes.active}
+           className={classes.navLink}
+          >Chat</Button>
           <Divider orientation="vertical" flexItem />
-          <Link to="/" style={{textDecoration:"none"}}>
-          <Button >Sign Out</Button>         
-          </Link>
+          <Button
+           colour="inherit"
+           component={NavLink}
+           to="/"
+           exact
+           activeClassName={classes.active}
+           className={classes.navLink}
+          >Signout</Button>
           <Divider orientation="vertical" flexItem />
 </ButtonGroup>
     </Box>
 
-    </Box>
+    </Box> 
+    </Toolbar>
+    </AppBar>
   );
 }
