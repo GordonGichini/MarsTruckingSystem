@@ -100,10 +100,17 @@ export default function DispatchFormPage() {
 
             <Button variant="contained" color="primary" onClick={handleTruckChange}>
                 Create Truck 
-                </Button>
-                <Button variant="contained" color="primary" onClick={handleTrailerChange}>
+            </Button>
+
+            <TextField
+            label="Trailer"
+            value={trailer}
+            onChange={handleTrailerChange}
+            />
+
+            <Button variant="contained" color="primary" onClick={handleTrailerChange}>
                     Create Trailer
-                    </Button> 
+            </Button> 
             
             <TextField
             label="Odometer"
@@ -113,7 +120,7 @@ export default function DispatchFormPage() {
 
             <TextField
             label="Customer"
-            value={Customer}
+            value={customer}
             onChange={handleCustomerChange}
             /> 
 
