@@ -25,40 +25,32 @@ const useStyles = makeStyles((theme) => ({
   searchInput: {
     width: '400px',
   },
-  maintenanceVideoContainer: {
-    display: 'flex',
-    justifyContent: 'center',
-    marginTop: theme.spacing(2),
-  },
-  addMaintenanceButton: {
+  videoContainer: {
     display: 'flex',
     justifyContent: 'center',
     marginTop: theme.spacing(2),
   },
 }));
 
-function Maintenance() {
-    const classes = useStyles();
+export default function Drivers() {
+  const classes = useStyles();
 
   return (
     <div>
       <AppBar position="static" className={classes.appBar}>
         <Toolbar>
           <Typography variant="h6" className={classes.title}>
-            Maintenance Page
+            Drivers
           </Typography>
         </Toolbar>
       </AppBar>
 
       <Box className={classes.buttonContainer}>
         <Button variant="contained" className={classes.button}>
-          View plans
+          Add Driver
         </Button>
         <Button variant="contained" className={classes.button}>
-          List Maintenance Vendors
-        </Button>
-        <Button variant="contained" className={classes.button}>
-          Add Log Entry
+          Print
         </Button>
       </Box>
 
@@ -73,20 +65,10 @@ function Maintenance() {
         />
       </Box>
 
-      <Box className={classes.maintenanceVideoContainer}>
-        {/* Add your maintenance video component here */}
-        {/* <MaintenanceVideo /> */}
-      </Box>
-
-      <Box className={classes.addMaintenanceButton}>
-        <Button variant="contained" color="primary">
-          Add your Maintenance Log Entry
-        </Button>
+      <Box className={classes.videoContainer}>
+        {/* Add your All drivers video component here */}
+        {/* <AllDriversVideo /> */}
       </Box>
     </div>
-
-   
-  )
+  );
 }
-
-export default Maintenance

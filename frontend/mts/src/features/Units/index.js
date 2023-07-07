@@ -1,5 +1,5 @@
 import React from 'react';
-import { AppBar, Toolbar, Typography, makeStyles, Button, TextField, Box } from '@material-ui/core';
+import { AppBar, Toolbar, Typography, makeStyles, ButtonGroup, Button, TextField, Box } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
   appBar: {
@@ -9,7 +9,7 @@ const useStyles = makeStyles((theme) => ({
   title: {
     flexGrow: 1,
   },
-  buttonContainer: {
+  buttonGroupContainer: {
     display: 'flex',
     justifyContent: 'center',
     marginTop: theme.spacing(2),
@@ -25,41 +25,33 @@ const useStyles = makeStyles((theme) => ({
   searchInput: {
     width: '400px',
   },
-  maintenanceVideoContainer: {
-    display: 'flex',
-    justifyContent: 'center',
-    marginTop: theme.spacing(2),
-  },
-  addMaintenanceButton: {
+  unitsVideoContainer: {
     display: 'flex',
     justifyContent: 'center',
     marginTop: theme.spacing(2),
   },
 }));
 
-function Maintenance() {
-    const classes = useStyles();
+export default function Units() {
+  const classes = useStyles();
 
   return (
     <div>
       <AppBar position="static" className={classes.appBar}>
         <Toolbar>
           <Typography variant="h6" className={classes.title}>
-            Maintenance Page
+            Units
           </Typography>
         </Toolbar>
       </AppBar>
 
-      <Box className={classes.buttonContainer}>
-        <Button variant="contained" className={classes.button}>
-          View plans
-        </Button>
-        <Button variant="contained" className={classes.button}>
-          List Maintenance Vendors
-        </Button>
-        <Button variant="contained" className={classes.button}>
-          Add Log Entry
-        </Button>
+      <Box className={classes.buttonGroupContainer}>
+        <ButtonGroup variant="contained" aria-label="unit selection buttons">
+          <Button className={classes.button}>Add unit</Button>
+          <Button className={classes.button}>All</Button>
+          <Button className={classes.button}>Active</Button>
+          <Button className={classes.button}>Inactive</Button>
+        </ButtonGroup>
       </Box>
 
       <Box className={classes.searchContainer}>
@@ -73,20 +65,10 @@ function Maintenance() {
         />
       </Box>
 
-      <Box className={classes.maintenanceVideoContainer}>
-        {/* Add your maintenance video component here */}
-        {/* <MaintenanceVideo /> */}
-      </Box>
-
-      <Box className={classes.addMaintenanceButton}>
-        <Button variant="contained" color="primary">
-          Add your Maintenance Log Entry
-        </Button>
+      <Box className={classes.unitsVideoContainer}>
+        {/* Add your units container video component here */}
+        {/* <UnitsVideo /> */}
       </Box>
     </div>
-
-   
-  )
+  );
 }
-
-export default Maintenance

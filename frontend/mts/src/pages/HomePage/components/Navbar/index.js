@@ -2,7 +2,7 @@ import * as React from 'react';
 import Button from '@mui/material/Button';
 import ButtonGroup from '@mui/material/ButtonGroup';
 import { AppBar, Toolbar, IconButton, Typography, Button } from '@material-ui/core';
-import { AccountCircle } from '@material-ui/icons'
+import { AccountCircle } from '@material-ui/icons';
 import { Box, colors } from '@mui/material';
 import { Link } from 'react-router-dom';
 import Divider from '@mui/material/Divider';

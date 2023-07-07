@@ -1,9 +1,10 @@
 import * as React from 'react';
-import { AppBar, Toolbar, Typography, Button, makeStyles } from '@material-ui/core';
+import { AppBar, Toolbar, Typography, IconButton, Button, makeStyles } from '@material-ui/core';
 import ButtonGroup from '@mui/material/ButtonGroup';
 import { Box, colors } from '@mui/material';
 import { NavLink, Link } from 'react-router-dom';
 import Divider from '@mui/material/Divider'; 
+
 
 const useStyles = makeStyles((theme) => ({
   appBar: {
@@ -28,15 +29,15 @@ const useStyles = makeStyles((theme) => ({
 
 
 export default function InNavBar() { 
-  const classes = useStyles();
-
+  const classes = useStyles(); 
+  
   return (
     <AppBar position="static" className={classes.appBar}> 
     <Toolbar>
     <Typography variant="h6" component={Link} to="/" >
   <img src="common/assets/brand/logoIcon.png" alt="Logo" style={{ marginRight: '10px', height: '30px' }} />
   MTS
-    </Typography>
+    </Typography> 
     <Box sx={{display:"flex",
     justifyContent:"space-between",
     alignItems:"center",
@@ -46,7 +47,8 @@ export default function InNavBar() {
       <ButtonGroup variant="text" aria-label="medium outlined primary button group" 
       sx={{width:"100%",
     }}
-      >
+      > 
+      
           <Button
            colour="inherit"
            component={NavLink}
