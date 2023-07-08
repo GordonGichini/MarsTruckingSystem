@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react';
 import { AppBar, Toolbar, Typography, makeStyles, Button, TextField, Box } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
@@ -34,6 +34,17 @@ const useStyles = makeStyles((theme) => ({
 
 function Invoices() {
     const classes = useStyles();
+    const [allLoadsInvoiced, setAllLoadsInvoiced] = useState(true);
+
+    const handleAddInvoiceClick = () => {
+      if (allLoadsInvoiced) {
+        // Set an error state or show a message
+        console.log('You cannot add an invoice: all loads are invoiced');
+      } else {
+        //lets proceed with the logic for adding a invoice
+      }
+    }
+
 
   return (
     <div>
