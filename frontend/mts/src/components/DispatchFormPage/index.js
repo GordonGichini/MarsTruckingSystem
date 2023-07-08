@@ -1,5 +1,6 @@
 import React from 'react';
 import { Typography, TextField, Button } from '@material-ui/core';
+import {Link} from 'react-router-dom';
 
 export default function DispatchFormPage() {
     // Defining state variables for capturing form inputs
@@ -58,7 +59,8 @@ export default function DispatchFormPage() {
     // Pickup form state
     const [shipperName, setShipperName] = React.useState('');
     const [pickupDate, setPickupDate] = React.useState('');
-    const [instructions, setInstructions] = React.useState('');
+    //shall revisit
+   // const [instructions, setInstructions] = React.useState('');
     const [bol, setBol] = React.useState('');
     const [customerRequiredInfo, setCustomerRequiredInfo] = React.useState('');
     const [weight, setWeight] = React.useState('');
@@ -72,9 +74,9 @@ export default function DispatchFormPage() {
         setPickupDate(event.target.value);
     };
 
-    const handleInstructionsChange = (event) => {
-        setInstructions(event.target.value);
-    };
+   // const handleInstructionsChange = (event) => {
+   //     setInstructions(event.target.value);
+   // };
 
     const handleBolChange = (event) => {
         setBol(event.target.value);
@@ -112,6 +114,23 @@ export default function DispatchFormPage() {
 
     const handleNotesChange = (event) => {
         setNotes(event.target.value);
+    }; 
+
+    //Delivery state
+    const [consigneeName, setConsigneeName] = React.useState('');
+    const [deliveryDate, setDeliveryDate] = React.useState('');
+    const [instructions, setInstructions] = React.useState('');
+
+    const handleConsigneeNameChange = (event) => {
+        setConsigneeName(event.target.value);
+    };
+
+    const handleDeliveryDateChange = (event) => {
+        setDeliveryDate(event.target.value);
+    };
+
+    const handleInstructionsChange = (event) => {
+        setInstructions(event.target.value);
     };
 
 
@@ -198,7 +217,7 @@ export default function DispatchFormPage() {
                         <Typography variant="subtitle2">Pickup</Typography>
                         <TextField
                         label="Shipper"
-                        value={shipper}
+                        value={shipperName}
                         onChange={handleShipperChange}
                         /> 
                         <Button variant="contained" color="primary" onClick={handleShipperChange}>
@@ -269,9 +288,44 @@ export default function DispatchFormPage() {
                     value={notes}
                     onChange={handleNotesChange}
                     />
+            </Box> 
+            </Box> 
+
+            <Box my={2}>
+                <Typography variant="subtitle2">Delivery</Typography>
+                <TextField
+                label="Consignee Name"
+                value={consigneeName}
+                onChange={handleConsigneeNameChange}
+                />
+                <Button variant="contained" color="primary" onClick={handleConsigneeNameChange}>
+                    Create Consignee
+                    </Button> 
+                <TextField
+                label="Delivery Date"
+                value={deliveryDate}
+                onChange={handleDeliveryDateChange}
+                />
+
+                <TextField
+                label="Instructions"
+                value={instructions}
+                onChange={handleInstructionsChange}
+                />
+
+                <Button variant="contained" color="primary" onClick={handleAddAnotherDeliveryChange}>
+                    Add Another Delivery
+                </Button>
             </Box>
 
             {/* Including other input fields and forms here */}
+            </Box>
+            <Box my={2}>
+                <Typography variant="subtitle2">Fees/Charges</Typography>
+                <TextField
+                label="Primary Fee"
+                value
+            </Box>
 
             </form> 
             </div> 
