@@ -4,6 +4,7 @@ import { InNavBar, OutNavBar } from "./common";
 import {Route, Routes} from 'react-router-dom';
 import CssBaseline from '@mui/material/CssBaseline';
 import ScopedCssBaseline from '@mui/material/ScopedCssBaseline';
+import DispatchFormPage from './components';
 
 
 
@@ -19,6 +20,7 @@ function App() {
         <Route path="/Dashboard" element={<Dashboard/>} />
         <Route path="*" element={<ErrorPage/>} />
         <Route path="/trips" element={<Trips/>} />
+        <Route path="/add-dispatch" component={DispatchFormPage} />
         <Route path="/expenses" element={<Expenses/>} />
         <Route path="/invoices" element={<Invoices/>} />
         <Route path="/maintenance_logs" element={<Maintenance/>} />

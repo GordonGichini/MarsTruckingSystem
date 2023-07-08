@@ -1,4 +1,5 @@
-import React from 'react' 
+import React from 'react';
+import { Link } from 'react-router-dom';
 import { AppBar, Toolbar, Typography, makeStyles, Button, TextField, Box } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
@@ -55,7 +56,12 @@ function Trips() {
       <Button variant="contained" className={classes.button}>
         Detailed List
       </Button>
-      <Button variant="contained" className={classes.button}>
+      <Button
+       variant="contained"
+       color="primary"
+       component={Link}
+       to="/add-dispatch"
+       >
         Add Dispatch
       </Button>
       <Button variant="contained" className={classes.button}>

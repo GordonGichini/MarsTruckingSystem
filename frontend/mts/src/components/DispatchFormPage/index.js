@@ -12,7 +12,7 @@ export default function DispatchFormPage() {
     const [odometer, setOdometer] = React.useState('');
     const [customer, setCustomer] = React.useState('');
 
-
+     // Basic details form state
     const handleCustomTripNumberChange = (event) => {
         setCustomTripNumber(event.target.value);
     };
@@ -55,11 +55,51 @@ export default function DispatchFormPage() {
         // Perform form submission logic here
     }; 
 
+    // Pickup form state
+    const [shipperName, setShipperName] = React.useState('');
+    const [pickupDate, setPickupDate] = React.useState('');
+    const [instructions, setInstructions] = React.useState('');
+    const [bol, setBol] = React.useState('');
+    const [customerRequiredInfo, setCustomerRequiredInfo] = React.useState('');
+    const [weight, setWeight] = React.useState('');
+    const [quantity, setQuantity] = React.useState('');
+
+    const handleShipperNameChange = (event) => {
+        setShipperName(event.target.value); 
+    };
+
+    const handlePickupDateChange = (event) => {
+        setPickupDate(event.target.value);
+    };
+
+    const handleInstructionsChange = (event) => {
+        setInstructions(event.target.value);
+    };
+
+    const handleBolChange = (event) => {
+        setBol(event.target.value);
+    };
+
+    const handleCustomerRequiredInfoChange = (event) => {
+        setCustomerRequiredInfo(event.target.value);
+    };
+
+    const handleWeightChange = (event) => {
+        setWeight(event.target.value);
+    };
+
+    const handleQuantityChange = (event) => {
+        setQuantity(event.target.value);
+    };
+
+
     return (
         <div>
         <Typography variant="h6">Add Dispatch</Typography>
 
         <form onSubmit={handleFormSubmit}>
+            <Box my={2}>
+                <Typography variant="subtitle1">Basic Details</Typography>
             <TextField
             label="Custom Trip Number"
             value={customTripNumber}
@@ -126,7 +166,58 @@ export default function DispatchFormPage() {
 
             <Button variant="contained" color="primary" onClick={handleCustomerChange}>
                 Create customer
-            </Button>
+            </Button> 
+            </Box> 
+
+            <Box my={2}>
+                <Typography variant="subtitle1">Stops</Typography>
+                <Box display="flex">
+                    <Box flex={1} mr={2}>
+                        <Typography variant="subtitle2">Pickup</Typography>
+                        <TextField
+                        label="Shipper"
+                        value={shipper}
+                        onChange={handleShipperChange}
+                        /> 
+                        <Button variant="contained" color="primary" onClick={handleShipperChange}>
+                            Create Shipper
+                            </Button>
+                        <TextField
+                        label="Pickup date"
+                        value={pickupDate}
+                        onChange={handlePickupDateChange}
+                        />
+
+                        <TextField
+                        label="Instructions"
+                        value={instructions}
+                        onChange={handleInstructionsChange}
+                        />
+
+                        <TextField
+                        label="BOL"
+                        value={bol}
+                        onChange={handleBolChange}
+                        />
+
+                        <TextField
+                        label="Customer Required Info (included on invoice)"
+                        value={customerRequiredInfo}
+                        onChange={handleCustomerRequiredInfoChange}
+                        />
+
+                        <TextField
+                        label="Weight"
+                        value={weight}
+                        onChange={handleWeightChange}
+                        />
+
+                        <TextField
+                        label="Quantity"
+                        value={quantity}
+                        onChange={handleQuantityChange}
+                        />
+            </Box>
 
             {/* Including other input fields and forms here */}
 
