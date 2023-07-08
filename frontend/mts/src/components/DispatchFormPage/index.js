@@ -90,6 +90,28 @@ export default function DispatchFormPage() {
 
     const handleQuantityChange = (event) => {
         setQuantity(event.target.value);
+    }; 
+
+    // Routing Stop form state
+    const [routingStopName, setRoutingStopName] = React.useState('');
+    const [routingStopDate, setRoutingStopDate] = React.useState('');
+    const [instructions, setInstructions] = React.useState('');
+    const [notes, setNotes] = React.useState('');
+
+    const handleRoutingStopNameChange = (event) => {
+        setRoutingStopName(event.target.value);
+    };
+
+    const handleRoutingStopDateChange = (event) => {
+        setRoutingStopDate(event.target.value);
+    };
+
+    const handleInstructionsChange = (event) => {
+        setInstructions(event.target.value);
+    };
+
+    const handleNotesChange = (event) => {
+        setNotes(event.target.value);
     };
 
 
@@ -217,6 +239,36 @@ export default function DispatchFormPage() {
                         value={quantity}
                         onChange={handleQuantityChange}
                         />
+            </Box>
+
+            <Box flex={1}>
+                <Typography variant="subtitle2">Routing Stop (Optional)</Typography>
+                <TextField
+                label="Routing Stop"
+                value={routingStopName}
+                onChange={handleRoutingStopNameChange}
+                />
+                <Button variant="contained" color="primary" onClick={handleRoutingStopName}>
+                    Create Routing stop
+                    </Button>
+
+                    <TextField
+                    label="Routing Stop Date"
+                    value={routingStopDate}
+                    onChange={handleRoutingStopDateChange}
+                    />
+
+                    <TextField
+                    label="Instructions"
+                    value={instructions}
+                    onChange={handleInstructionsChange}
+                    />
+
+                    <TextField
+                    label="Notes"
+                    value={notes}
+                    onChange={handleNotesChange}
+                    />
             </Box>
 
             {/* Including other input fields and forms here */}
