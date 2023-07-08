@@ -1,6 +1,6 @@
 import React from 'react';
-import { Typography, TextField, Button } from '@material-ui/core';
-import {Link} from 'react-router-dom';
+import { Typography, TextField, Button, Box } from '@material-ui/core';
+import { Link } from 'react-router-dom';
 
 export default function DispatchFormPage() {
     // Defining state variables for capturing form inputs
@@ -59,8 +59,7 @@ export default function DispatchFormPage() {
     // Pickup form state
     const [shipperName, setShipperName] = React.useState('');
     const [pickupDate, setPickupDate] = React.useState('');
-    //shall revisit
-   // const [instructions, setInstructions] = React.useState('');
+    const [instructions, setInstructions] = React.useState('');
     const [bol, setBol] = React.useState('');
     const [customerRequiredInfo, setCustomerRequiredInfo] = React.useState('');
     const [weight, setWeight] = React.useState('');
@@ -74,9 +73,9 @@ export default function DispatchFormPage() {
         setPickupDate(event.target.value);
     };
 
-   // const handleInstructionsChange = (event) => {
-   //     setInstructions(event.target.value);
-   // };
+    const handleInstructionsChange = (event) => {
+      setInstructions(event.target.value); 
+};
 
     const handleBolChange = (event) => {
         setBol(event.target.value);
@@ -97,7 +96,7 @@ export default function DispatchFormPage() {
     // Routing Stop form state
     const [routingStopName, setRoutingStopName] = React.useState('');
     const [routingStopDate, setRoutingStopDate] = React.useState('');
-    const [instructions, setInstructions] = React.useState('');
+    const [instructions1, setInstructions1] = React.useState('');
     const [notes, setNotes] = React.useState('');
 
     const handleRoutingStopNameChange = (event) => {
@@ -108,8 +107,8 @@ export default function DispatchFormPage() {
         setRoutingStopDate(event.target.value);
     };
 
-    const handleInstructionsChange = (event) => {
-        setInstructions(event.target.value);
+    const handleInstructions1Change = (event) => {
+        setInstructions1(event.target.value);
     };
 
     const handleNotesChange = (event) => {
@@ -119,7 +118,7 @@ export default function DispatchFormPage() {
     //Delivery state
     const [consigneeName, setConsigneeName] = React.useState('');
     const [deliveryDate, setDeliveryDate] = React.useState('');
-    const [instructions, setInstructions] = React.useState('');
+    const [instructions11, setInstructions11] = React.useState('');
 
     const handleConsigneeNameChange = (event) => {
         setConsigneeName(event.target.value);
@@ -129,8 +128,8 @@ export default function DispatchFormPage() {
         setDeliveryDate(event.target.value);
     };
 
-    const handleInstructionsChange = (event) => {
-        setInstructions(event.target.value);
+    const handleInstructions11Change = (event) => {
+        setInstructions11(event.target.value);
     }; 
 
     //Fee/Charge state
@@ -144,6 +143,8 @@ export default function DispatchFormPage() {
     const [tarpFee, setTarpFee] = React.useState('');
     const [additional, setAdditional] = React.useState('');
     const [invoiceAdvance, setInvoiceAdvance] = React.useState('');
+    const [addAnotherDelivery, setAddAnotherDelivery] = React.useState('');
+    const [addAdditionalFee, setAddAdditionalFee] = React.useState('');
 
     const handlePrimaryFeeChange = (event) => {
         setPrimaryFee(event.target.value);
@@ -155,6 +156,10 @@ export default function DispatchFormPage() {
 
     const handleFscAmountChange = (event) => {
         setFscAmount(event.target.value);
+    }; 
+
+    const handleFscAmountTypeChange = (event) => {
+        setFscAmountType(event.target.value);
     };
 
     const handleDetentionChange = (event) => {
@@ -179,6 +184,14 @@ export default function DispatchFormPage() {
 
     const handleInvoiceAdvanceChange = (event) => {
         setInvoiceAdvance(event.target.value);
+    };
+
+    const handleAddAnotherDeliveryChange = (event) => {
+        setAddAnotherDelivery(event.target.value);
+    };
+
+    const handleAddAdditionalFeeChange = (event) => {
+        setAddAdditionalFee(event.target.value);
     };
 
 
@@ -266,9 +279,9 @@ export default function DispatchFormPage() {
                         <TextField
                         label="Shipper"
                         value={shipperName}
-                        onChange={handleShipperChange}
+                        onChange={handleShipperNameChange}
                         /> 
-                        <Button variant="contained" color="primary" onClick={handleShipperChange}>
+                        <Button variant="contained" color="primary" onClick={handleShipperNameChange}>
                             Create Shipper
                             </Button>
                         <TextField
@@ -315,7 +328,7 @@ export default function DispatchFormPage() {
                 value={routingStopName}
                 onChange={handleRoutingStopNameChange}
                 />
-                <Button variant="contained" color="primary" onClick={handleRoutingStopName}>
+                <Button variant="contained" color="primary" onClick={handleRoutingStopNameChange}>
                     Create Routing stop
                     </Button>
 
@@ -357,8 +370,8 @@ export default function DispatchFormPage() {
 
                 <TextField
                 label="Instructions"
-                value={instructions}
-                onChange={handleInstructionsChange}
+                value={instructions11}
+                onChange={handleInstructions11Change}
                 />
 
                 <Button variant="contained" color="primary" onClick={handleAddAnotherDeliveryChange}>
@@ -381,19 +394,19 @@ export default function DispatchFormPage() {
                 <TextField
                 label="Primary Fee Type"
                 value={primaryFeeType}
-                onChange={handlePrimaryFeeType}
+                onChange={handlePrimaryFeeTypeChange}
                 />
 
                 <TextField
                 label="Fuel Surcharge Fee"
                 value={fscAmount}
-                onChange={handleFscAmount}
+                onChange={handleFscAmountChange}
                 />
 
                 <TextField
                 label= "FSC amount Type"
                 value={fscAmountType}
-                onChange={handleFscAmountType}
+                onChange={handleFscAmountTypeChange}
                 /> 
 
                 </Box>
