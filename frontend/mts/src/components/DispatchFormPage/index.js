@@ -131,6 +131,54 @@ export default function DispatchFormPage() {
 
     const handleInstructionsChange = (event) => {
         setInstructions(event.target.value);
+    }; 
+
+    //Fee/Charge state
+    const [primaryFee, setPrimaryFee] = React.useState('');
+    const [primaryFeeType, setPrimaryFeeType] = React.useState('');
+    const [fscAmount, setFscAmount] = React.useState('');
+    const [fscAmountType, setFscAmountType] = React.useState('');
+    const [detention, setDetention] = React.useState('');
+    const [lumper, setLumper] = React.useState('');
+    const [stopOff, setStopOff] = React.useState('');
+    const [tarpFee, setTarpFee] = React.useState('');
+    const [additional, setAdditional] = React.useState('');
+    const [invoiceAdvance, setInvoiceAdvance] = React.useState('');
+
+    const handlePrimaryFeeChange = (event) => {
+        setPrimaryFee(event.target.value);
+    };
+
+    const handlePrimaryFeeTypeChange = (event) => {
+        setPrimaryFeeType(event.target.value);
+    };
+
+    const handleFscAmountChange = (event) => {
+        setFscAmount(event.target.value);
+    };
+
+    const handleDetentionChange = (event) => {
+        setDetention(event.target.value);
+    };
+
+    const handleLumperChange = (event) => {
+        setLumper(event.target.value);
+    };
+
+    const handleStopOffChange = (event) => {
+        setStopOff(event.target.value);
+    };
+
+    const handleTarpFeeChange = (event) => {
+        setTarpFee(event.target.value);
+    };
+
+    const handleAdditionalChange = (event) => {
+        setAdditional(event.target.value);
+    };
+
+    const handleInvoiceAdvanceChange = (event) => {
+        setInvoiceAdvance(event.target.value);
     };
 
 
@@ -320,11 +368,80 @@ export default function DispatchFormPage() {
 
             {/* Including other input fields and forms here */}
             </Box>
-            <Box my={2}>
-                <Typography variant="subtitle2">Fees/Charges</Typography>
+                
+                <Box display="flex">
+                    <Box flex={1} mr={2}>
+                    <Typography variant="subtitle2">Fees/Charges</Typography>
                 <TextField
                 label="Primary Fee"
-                value
+                value={primaryFee}
+                onChange={handlePrimaryFeeChange}
+                />
+
+                <TextField
+                label="Primary Fee Type"
+                value={primaryFeeType}
+                onChange={handlePrimaryFeeType}
+                />
+
+                <TextField
+                label="Fuel Surcharge Fee"
+                value={fscAmount}
+                onChange={handleFscAmount}
+                />
+
+                <TextField
+                label= "FSC amount Type"
+                value={fscAmountType}
+                onChange={handleFscAmountType}
+                /> 
+
+                </Box>
+                <Box flex={1}>
+                    <Typography variant="subtitle2">Accessory Fees</Typography>
+                    <TextField
+                    label="Detention"
+                    value={detention}
+                    onChange={handleDetentionChange}
+                    />
+
+                    <TextField
+                    label="Lumper"
+                    value={lumper}
+                    onChange={handleLumperChange}
+                    />
+
+                    <TextField
+                    label="Stop Off"
+                    value={stopOff}
+                    onChange={handleStopOffChange}
+                    />
+
+                    <TextField
+                    label="Tarp Fee"
+                    value={tarpFee}
+                    onChange={handleTarpFeeChange}
+                    />
+
+                    <TextField
+                    label="Additional"
+                    value={additional}
+                    onChange={handleAdditionalChange}
+                    />
+
+                    <Button variant="outlined" color="primary" onClick={handleAddAdditionalFeeChange}>
+                        Add Additional Fee
+                        </Button>
+
+                    <TextField
+                    label="Invoice Advance"
+                    value={invoiceAdvance}
+                    onChange={handleInvoiceAdvanceChange}
+                    />
+
+                </Box>
+
+
             </Box>
 
             </form> 
