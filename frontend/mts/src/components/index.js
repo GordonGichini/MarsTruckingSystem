@@ -6,6 +6,7 @@ import MaintenanceLogEntryFormPage from './MaintenanceLogEntryFormPage';
 import DriverFormPage from './DriverFormPage';
 import UnitFormPage from './UnitFormPage';
 import AddressFormPage from './AddressFormPage';
+import ReportsFormPage from './ReportsFormPage';
 
 export {
     DispatchFormPage,
@@ -13,5 +14,6 @@ export {
     MaintenanceLogEntryFormPage,
     DriverFormPage,
     UnitFormPage,
-    AddressFormPage
+    AddressFormPage,
+    ReportsFormPage
 }

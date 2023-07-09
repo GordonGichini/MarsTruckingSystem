@@ -1,11 +1,11 @@
 import {HomePage, SignInSide, SignUpSide, ErrorPage, Dashboard} from "./pages";
-import {Trips, Expenses, Invoices, Maintenance, Reports, Drivers, Addresses, Units} from "./features";
+import {Trips, Expenses, Invoices, Maintenance, Drivers, Addresses, Units} from "./features";
 import { InNavBar, OutNavBar } from "./common";
 import {Route, Routes} from 'react-router-dom';
 import CssBaseline from '@mui/material/CssBaseline';
 import ScopedCssBaseline from '@mui/material/ScopedCssBaseline';
 //remember to add routes
-import { DispatchFormPage, ExpenseFormPage, MaintenanceLogEntryFormPage, DriverFormPage, UnitFormPage, AddressFormPage } from './components';
+import { DispatchFormPage, ExpenseFormPage, MaintenanceLogEntryFormPage, DriverFormPage, UnitFormPage, AddressFormPage, ReportsFormPage } from './components';
 
 
 
@@ -30,7 +30,8 @@ function App() {
         <Route path="/add-unit" element={<UnitFormPage/>} />
         <Route path="/add-address" element={<AddressFormPage/>} />
         <Route path="/maintenance_logs" element={<Maintenance/>} />
-        <Route path="/reports" element={<Reports/>} />
+        <Route path="/reports" element={<ReportsFormPage/>} />
+
         <Route path="/addresses" element={<Addresses/>} />
         <Route path="/units" element={<Units/>} />
         <Route path="/drivers" element={<Drivers/>} />
