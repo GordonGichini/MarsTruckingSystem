@@ -5,7 +5,7 @@ import {Route, Routes} from 'react-router-dom';
 import CssBaseline from '@mui/material/CssBaseline';
 import ScopedCssBaseline from '@mui/material/ScopedCssBaseline';
 //remember to add routes
-import { DispatchFormPage, ExpenseFormPage, MaintenanceLogEntryFormPage, DriverFormPage, UnitFormPage } from './components';
+import { DispatchFormPage, ExpenseFormPage, MaintenanceLogEntryFormPage, DriverFormPage, UnitFormPage, AddressFormPage } from './components';
 
 
 
@@ -25,9 +25,10 @@ function App() {
         <Route path="/invoices" element={<Invoices/>} />
         <Route path="/add-dispatch" element={<DispatchFormPage/>} />
         <Route path="/add-expense" element={<ExpenseFormPage/>} />
-        <Route path="add-log-entry" element={<MaintenanceLogEntryFormPage/>} />
-        <Route path="add-driver" element={<DriverFormPage/>} />
-        <Route path="add-unit" element={<UnitFormPage/>} />
+        <Route path="/add-log-entry" element={<MaintenanceLogEntryFormPage/>} />
+        <Route path="/add-driver" element={<DriverFormPage/>} />
+        <Route path="/add-unit" element={<UnitFormPage/>} />
+        <Route path="/add-address" element={<AddressFormPage/>} />
         <Route path="/maintenance_logs" element={<Maintenance/>} />
         <Route path="/reports" element={<Reports/>} />
         <Route path="/addresses" element={<Addresses/>} />

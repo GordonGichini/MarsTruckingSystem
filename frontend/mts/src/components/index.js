@@ -5,11 +5,13 @@ import ExpenseFormPage from './ExpenseFormPage';
 import MaintenanceLogEntryFormPage from './MaintenanceLogEntryFormPage';
 import DriverFormPage from './DriverFormPage';
 import UnitFormPage from './UnitFormPage';
+import AddressFormPage from './AddressFormPage';
 
 export {
     DispatchFormPage,
     ExpenseFormPage,
     MaintenanceLogEntryFormPage,
     DriverFormPage,
-    UnitFormPage
+    UnitFormPage,
+    AddressFormPage
 }
