@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
   },
   navLink: {
-    marginLeft: theme.spacing(0.2),
+    marginLeft: theme.spacing(0.1),
     color: 'white',
     textDecoration: 'none',
     '&:hover': {
@@ -26,8 +26,8 @@ const useStyles = makeStyles((theme) => ({
   active: {
     fontWeight: 'bold',
   }, 
-  expandMoreIcon: {
-    marginLeft: theme.spacing(0.4)
+  arrowIcon: {
+    marginRight: theme.spacing(0.2)
   },
 }));
 
@@ -135,7 +135,7 @@ export default function InNavBar() {
         aria-haspopup="true"
         onClick={handleReportsMenuOpen}
       >
-        <ExpandMoreIcon />
+        <ExpandMoreIcon className={classes.arrowIcon} />
       </IconButton> 
 
       <Menu
@@ -214,7 +214,7 @@ export default function InNavBar() {
         aria-haspopup="true"
         onClick={handleSettingsMenuOpen}
       >
-        <ExpandMoreIcon />
+        <ExpandMoreIcon className={classes.arrowIcon} />
       </IconButton> 
 
       <Menu
@@ -277,15 +277,6 @@ export default function InNavBar() {
            activeClassName={classes.active}
            className={classes.navLink}
           >Support</Button>
-          <Divider orientation="vertical" flexItem />
-          <Button
-           colour="inherit"
-           component={NavLink}
-           to="/"
-           exact
-           activeClassName={classes.active}
-           className={classes.navLink}
-          >Chat</Button>
           <Divider orientation="vertical" flexItem />
           <Button
            colour="inherit"
