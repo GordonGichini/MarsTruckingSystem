@@ -1,6 +1,7 @@
 import {HomePage, SignInSide, SignUpSide, ErrorPage, Dashboard} from "./pages";
 import {Trips, Expenses, Invoices, Maintenance, Drivers, Addresses, Units} from "./features";
 import { EmptyMove, DetailedList } from "./features/Dispatches";
+import { AddCategoryForm, ListCategories } from "./features/Expenses";
 import { InNavBar, OutNavBar } from "./common";
 import {Route, Routes} from 'react-router-dom';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -26,6 +27,9 @@ function App() {
         <Route path="/invoices" element={<Invoices/>} />
         <Route path="/add-dispatch" element={<DispatchFormPage/>} />
         <Route path="/add-expense" element={<ExpenseFormPage/>} />
+
+        <Route path="/list-categories" element={<ListCategories/>} />
+        <Route path="/add-category" element={<AddCategoryForm/>} />
         <Route path="/add-log-entry" element={<MaintenanceLogEntryFormPage/>} />
         <Route path="/add-driver" element={<DriverFormPage/>} />
         <Route path="/add-unit" element={<UnitFormPage/>} />

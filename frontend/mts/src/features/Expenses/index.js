@@ -1,5 +1,13 @@
-import React from 'react'
+import React, { useState } from 'react';
+import { Link } from "react-router-dom";
 import { AppBar, Toolbar, Typography, makeStyles, Button, TextField, Box } from '@material-ui/core';
+import AddCategoryForm from './AddCategoryForm';
+import ListCategories from './ListCategories';
+
+export {
+  AddCategoryForm,
+  ListCategories
+}
 
 const useStyles = makeStyles((theme) => ({
   appBar: {
@@ -44,7 +52,24 @@ const useStyles = makeStyles((theme) => ({
 
 
 function Expenses() {
-    const classes = useStyles();
+    const classes = useStyles(); 
+    const [isAddCategoryOpen, setAddCategoryOpen] = useState(false);
+
+  const handleOpenAddCategory = () => {
+    setAddCategoryOpen(true);
+  };
+
+  const handleCloseAddCategory = () => {
+    setAddCategoryOpen(false);
+  };
+
+  const handleSaveCategory = (category) => {
+    // Save the category data here
+    console.log(category);
+
+    // Close the form
+    setAddCategoryOpen(false);
+  };
   return (
     <div>
     <AppBar position="static" className={classes.appBar}>
@@ -62,12 +87,22 @@ function Expenses() {
        to="/add-expense">
         Add Expense
       </Button>
-      <Button variant="contained" className={classes.button}>
+      <Button variant="contained"
+       className={classes.button}
+       component={Link}
+       to="list-categories">
         List Categories
       </Button>
-      <Button variant="contained" className={classes.button}>
+      <Button variant="contained"
+       className={classes.button}
+       onClick={handleOpenAddCategory}>
         Add Category
-      </Button>
+      </Button> 
+      <AddCategoryForm
+      open={isAddCategoryOpen}
+      onClose={handleCloseAddCategory}
+      onSave={handleSaveCategory}
+      />
     </Box>
 
     <Box className={classes.searchContainer}>
