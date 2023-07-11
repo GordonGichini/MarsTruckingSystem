@@ -1,5 +1,16 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+import NewCalendarPlan from  './NewCalendarPlan';
+import NewMilePlan from './NewMilePlan';
+import MaintenancePlans from './MaintenancePlans';
 import { AppBar, Toolbar, Typography, makeStyles, Button, TextField, Box } from '@material-ui/core';
+
+
+export {
+  NewCalendarPlan,
+  NewMilePlan,
+  MaintenancePlans,
+}
 
 const useStyles = makeStyles((theme) => ({
   appBar: {
@@ -51,13 +62,22 @@ function Maintenance() {
       </AppBar>
 
       <Box className={classes.buttonContainer}>
-        <Button variant="contained" className={classes.button}>
+        <Button variant="contained"
+         className={classes.button}
+         component={Link}
+         to="/maintenance-plans">
           View plans
         </Button>
-        <Button variant="contained" className={classes.button}>
+        <Button variant="contained"
+         className={classes.button}
+         component={Link}
+         to="./addresses/vendors">
           List Maintenance Vendors
         </Button>
-        <Button variant="contained" className={classes.button}>
+        <Button variant="contained" 
+        className={classes.button}
+        component={Link}
+        to="./add-log-entry">
           Add Log Entry
         </Button>
       </Box>
@@ -79,7 +99,10 @@ function Maintenance() {
       </Box>
 
       <Box className={classes.addMaintenanceButton}>
-        <Button variant="contained" color="primary">
+        <Button variant="contained" 
+        color="primary"
+        component={Link}
+        to="/add-log-entry">
           Add your Maintenance Log Entry
         </Button>
       </Box>

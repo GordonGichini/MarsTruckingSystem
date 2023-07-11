@@ -6,7 +6,7 @@ import ListCategories from './ListCategories';
 
 export {
   AddCategoryForm,
-  ListCategories
+  ListCategories,
 }
 
 const useStyles = makeStyles((theme) => ({

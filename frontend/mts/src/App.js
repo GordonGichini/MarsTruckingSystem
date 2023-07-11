@@ -2,6 +2,7 @@ import {HomePage, SignInSide, SignUpSide, ErrorPage, Dashboard} from "./pages";
 import {Trips, Expenses, Invoices, Maintenance, Drivers, Addresses, Units} from "./features";
 import { EmptyMove, DetailedList } from "./features/Dispatches";
 import { AddCategoryForm, ListCategories } from "./features/Expenses";
+import { MaintenancePlans, NewCalendarPlan, NewMilePlan } from "./features/Maintenances";
 import { InNavBar, OutNavBar } from "./common";
 import {Route, Routes} from 'react-router-dom';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -35,6 +36,10 @@ function App() {
         <Route path="/add-unit" element={<UnitFormPage/>} />
         <Route path="/add-address" element={<AddressFormPage/>} />
         <Route path="/maintenance_logs" element={<Maintenance/>} />
+        <Route path="/maintenance-plans" element={<MaintenancePlans/>} />
+
+        <Route path="/new-calendar-plan" element={<NewCalendarPlan/>} />
+        <Route path="/new-mile-plan" element={<NewMilePlan/>} />
         <Route path="/reports" element={<ReportsFormPage/>} />
         <Route path="/detailedlist" element={<DetailedList/>} />
         <Route path="/empty-move" element={<EmptyMove/>} />
