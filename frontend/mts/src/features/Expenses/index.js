@@ -56,7 +56,10 @@ function Expenses() {
     </AppBar>
 
     <Box className={classes.buttonContainer}>
-      <Button variant="contained" className={classes.button}>
+      <Button variant="contained"
+       className={classes.button}
+       component={Link}
+       to="/add-expense">
         Add Expense
       </Button>
       <Button variant="contained" className={classes.button}>
@@ -88,7 +91,10 @@ function Expenses() {
     </Box>
 
     <Box className={classes.addExpenseButton}>
-      <Button variant="contained" color="primary">
+      <Button variant="contained"
+       color="primary"
+       component={Link}
+       to="/add-expense">
         Add First Expense
       </Button>
     </Box>

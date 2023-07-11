@@ -1,5 +1,6 @@
 import {HomePage, SignInSide, SignUpSide, ErrorPage, Dashboard} from "./pages";
 import {Trips, Expenses, Invoices, Maintenance, Drivers, Addresses, Units} from "./features";
+import { EmptyMove, DetailedList } from "./features/Dispatches";
 import { InNavBar, OutNavBar } from "./common";
 import {Route, Routes} from 'react-router-dom';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -31,7 +32,8 @@ function App() {
         <Route path="/add-address" element={<AddressFormPage/>} />
         <Route path="/maintenance_logs" element={<Maintenance/>} />
         <Route path="/reports" element={<ReportsFormPage/>} />
-
+        <Route path="/detailedlist" element={<DetailedList/>} />
+        <Route path="/empty-move" element={<EmptyMove/>} />
         <Route path="/addresses" element={<Addresses/>} />
         <Route path="/units" element={<Units/>} />
         <Route path="/drivers" element={<Drivers/>} />

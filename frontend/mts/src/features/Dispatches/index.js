@@ -1,6 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { AppBar, Toolbar, Typography, makeStyles, Button, TextField, Box } from '@material-ui/core';
+import EmptyMove from './EmptyMove';
+import DetailedList from  './DetailedList';
+
+export {
+  DetailedList,
+  EmptyMove
+}
+
 
 const useStyles = makeStyles((theme) => ({
   appBar: {
@@ -53,18 +61,22 @@ function Trips() {
     </AppBar>
 
     <Box className={classes.buttonContainer}>
-      <Button variant="contained" className={classes.button}>
+      <Button variant="contained" className={classes.button} component={Link} to="/DetailedList">
         Detailed List
       </Button>
       <Button
        variant="contained"
        color="primary"
-       component={Link}
+       component={<DetailedList/>}
        to="/add-dispatch"
        >
         Add Dispatch
       </Button>
-      <Button variant="contained" className={classes.button}>
+      <Button 
+      variant="contained" 
+      className={classes.button}
+      component={<EmptyMove/>}
+      to="/emptymove">
         Add Empty Move
       </Button>
       <Button variant="contained" className={classes.button}>
@@ -89,7 +101,10 @@ function Trips() {
     </Box>
 
     <Box className={classes.addDispatchButton}>
-      <Button variant="contained" color="primary">
+      <Button variant="contained"
+      color="primary"
+      component={Link}
+      to="/add-dispatch">
         Add Dispatch
       </Button>
     </Box>
