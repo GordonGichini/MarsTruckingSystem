@@ -1,12 +1,17 @@
 import React from 'react';
 import { Typography, TextField, Button, Table, TableHead, TableRow, TableCell, TableBody } from '@material-ui/core';
 
-export default function FuelExpensesReport() {
+export default function SettlementReport() {
   // Define state variables for capturing form inputs
+  const [driver, setDriver] = React.useState('');
   const [startDate, setStartDate] = React.useState('');
   const [endDate, setEndDate] = React.useState('');
 
   // Define event handlers for form inputs
+  const handleDriverChange = (event) => {
+    setDriver(event.target.value);
+  };
+
   const handleStartDateChange = (event) => {
     setStartDate(event.target.value);
   };
@@ -25,7 +30,13 @@ export default function FuelExpensesReport() {
 
   return (
     <div>
-      <Typography variant="h6">Fuel Expenses Report</Typography>
+      <Typography variant="h6">Settlement Report</Typography>
+
+      <TextField
+        label="Driver"
+        value={driver}
+        onChange={handleDriverChange}
+      />
 
       <TextField
         label="Start Date"
@@ -55,9 +66,17 @@ export default function FuelExpensesReport() {
         <TableHead>
           <TableRow>
             <TableCell>Date</TableCell>
-            <TableCell>State</TableCell>
-            <TableCell>Gallons</TableCell>
-            <TableCell>Cost</TableCell>
+            <TableCell>Load#</TableCell>
+            <TableCell>Delivery</TableCell>
+            <TableCell>Driver</TableCell>
+            <TableCell>From</TableCell>
+            <TableCell>To</TableCell>
+            <TableCell>Base Pay</TableCell>
+            <TableCell>Driver Accessory Pay</TableCell>
+            <TableCell>Total Pay</TableCell>
+            <TableCell>Advance</TableCell>
+            <TableCell>Net Pay</TableCell>
+            <TableCell>Load Pay Percent</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
