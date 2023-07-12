@@ -1,20 +1,33 @@
-import {HomePage, SignInSide, SignUpSide, ErrorPage, Dashboard} from "./pages";
+import {HomePage, SignInSide, SignUpSide, ErrorPage, Dashboard, ProfilePage} from "./pages";
 import {Trips, Expenses, Invoices, Maintenance, Drivers, Addresses, Units} from "./features";
 import { EmptyMove, DetailedList } from "./features/Dispatches";
 import { AddCategoryForm, ListCategories } from "./features/Expenses";
 import { MaintenancePlans, NewCalendarPlan, NewMilePlan } from "./features/Maintenances";
+import { EditPage } from "./pages/ProfilePage";
 import { InNavBar, OutNavBar } from "./common";
 import {Route, Routes} from 'react-router-dom';
+import { ThemeProvider, createTheme, makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import ScopedCssBaseline from '@mui/material/ScopedCssBaseline';
 //remember to add routes
 import { DispatchFormPage, ExpenseFormPage, MaintenanceLogEntryFormPage, DriverFormPage, UnitFormPage, AddressFormPage, ReportsFormPage } from './components';
 
+const theme = createTheme({
+  // Custom theme configuration
+  palette: {
+    // custom color palette
 
+  },
+  typography: {
+    // custom typography
+
+  }
+})
 
 function App() {
   return (
     <div className="App">
+      <ThemeProvider theme={theme}>
         <ScopedCssBaseline>
         <CssBaseline />
       <Routes> 
@@ -22,12 +35,15 @@ function App() {
         <Route path="/login" element={<SignInSide/>} />
         <Route path="/signup" element={<SignUpSide/>} />
         <Route path="/Dashboard" element={<Dashboard/>} />
+
+        <Route path="/company-profile" element={<ProfilePage/>} />
         <Route path="*" element={<ErrorPage/>} />
         <Route path="/trips" element={<Trips/>} />
         <Route path="/expenses" element={<Expenses/>} />
         <Route path="/invoices" element={<Invoices/>} />
         <Route path="/add-dispatch" element={<DispatchFormPage/>} />
         <Route path="/add-expense" element={<ExpenseFormPage/>} />
+        <Route path="/editpage" element={<EditPage/>} />
 
         <Route path="/list-categories" element={<ListCategories/>} />
         <Route path="/add-category" element={<AddCategoryForm/>} />
@@ -48,6 +64,7 @@ function App() {
         <Route path="/drivers" element={<Drivers/>} />
       </Routes>
       </ScopedCssBaseline>
+      </ThemeProvider>
     </div>
   );
 }

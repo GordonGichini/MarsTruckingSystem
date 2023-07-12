@@ -45,7 +45,7 @@ function MaintenancePlans() {
         <Button variant="contained"
          className={classes.button}
          component={Link}
-         to="/maintenance-logs">
+         to="/maintenance_logs">
           View Log
         </Button>
         <Button variant="contained" 

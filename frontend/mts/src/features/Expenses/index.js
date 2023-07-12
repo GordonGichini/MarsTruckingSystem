@@ -90,7 +90,7 @@ function Expenses() {
       <Button variant="contained"
        className={classes.button}
        component={Link}
-       to="list-categories">
+       to="/list-categories">
         List Categories
       </Button>
       <Button variant="contained"

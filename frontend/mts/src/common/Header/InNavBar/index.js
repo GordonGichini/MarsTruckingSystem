@@ -9,8 +9,11 @@ import { ExpandMore as ExpandMoreIcon } from '@material-ui/icons';
 
 const useStyles = makeStyles((theme) => ({
   appBar: {
+    position: 'fixed',
+    top: 0,
+    zIndex: theme.zIndex.drawer + 1,
     backgroundColor: 'black',
-    marginBottom: theme.spacing(2),
+    marginBottom: theme.spacing(0, 2),
   },
   title: {
     flexGrow: 1,
@@ -54,13 +57,14 @@ export default function InNavBar() {
   };
   
   return (
-    <AppBar position="static" className={classes.appBar}> 
+    <AppBar className={classes.appBar}> 
     <Toolbar>
     <Typography variant="h6" component={Link} to="/" >
   <img src="common/assets/brand/logoIcon.png" alt="Logo" style={{ marginRight: '10px', height: '30px' }} />
   MTS
     </Typography> 
     <Box sx={{display:"flex",
+    flexGrow: 1,
     justifyContent:"space-between",
     alignItems:"center",
     width:"100%"
@@ -262,7 +266,7 @@ export default function InNavBar() {
         <Button
            colour="inherit"
            component={NavLink}
-           to="/profile"
+           to="/company-profile"
            exact
            activeClassName={classes.active}
            className={classes.navLink}

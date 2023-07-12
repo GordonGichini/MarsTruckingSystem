@@ -6,7 +6,7 @@ import DetailedList from  './DetailedList';
 
 export {
   DetailedList,
-  EmptyMove
+  EmptyMove,
 }
 
 
@@ -67,7 +67,7 @@ function Trips() {
       <Button
        variant="contained"
        color="primary"
-       component={<DetailedList/>}
+       component={Link}
        to="/add-dispatch"
        >
         Add Dispatch
@@ -75,8 +75,8 @@ function Trips() {
       <Button 
       variant="contained" 
       className={classes.button}
-      component={<EmptyMove/>}
-      to="/emptymove">
+      component={Link}
+      to="/empty-move">
         Add Empty Move
       </Button>
       <Button variant="contained" className={classes.button}>

@@ -1,5 +1,10 @@
 import React from 'react';
+import EditPage from './EditPage';
+import { Link } from 'react-router-dom';
 import { AppBar, Toolbar, Typography, makeStyles, Button, Box, TableContainer, Table, TableBody, TableRow, TableCell, TextField } from '@material-ui/core';
+
+
+export { EditPage }
 
 const useStyles = makeStyles((theme) => ({
   appBar: {
@@ -47,7 +52,10 @@ function ProfilePage() {
           <Typography variant="h6" className={classes.title}>
             Company Name Profile
           </Typography>
-          <Button color="inherit">Edit Options</Button>
+          <Button color="inherit"
+          component={Link}
+          to="./editpage"
+          >Edit Options</Button>
           <Button color="inherit">Subscription</Button>
           <Button color="inherit">Notifications</Button>
         </Toolbar>

@@ -1,8 +1,32 @@
 import React from 'react';
 import { Typography, TextField, Button, Box } from '@material-ui/core';
 import { Link } from 'react-router-dom';
+import { makeStyles } from '@mui/styles';
+
+const useStyles = makeStyles((theme) => ({
+    formContainer: {
+      maxWidth: 600,
+      margin: 'auto',
+      padding: theme.spacing(2),
+    },
+    sectionTitle: {
+      marginBottom: theme.spacing(2),
+    },
+    sectionSubtitle: {
+      marginBottom: theme.spacing(1),
+    },
+    inputField: {
+      marginBottom: theme.spacing(2),
+    },
+    button: {
+        marginRight: theme.spacing(2),
+      },
+    }));
+
+
 
 export default function DispatchFormPage() {
+    const classes = useStyles();
     // Defining state variables for capturing form inputs
     const [customTripNumber, setCustomTripNumber] = React.useState('');
     const [driverName, setDriverName] = React.useState('');
@@ -197,21 +221,25 @@ export default function DispatchFormPage() {
 
     return (
         <div>
-        <Typography variant="h6">Add Dispatch</Typography>
+        <Typography variant="h6" className={classes.sectionTitle}>Add Dispatch</Typography>
 
         <form onSubmit={handleFormSubmit}>
-            <Box my={2}>
+            <Box mb={4}>
                 <Typography variant="subtitle1">Basic Details</Typography>
             <TextField
             label="Custom Trip Number"
             value={customTripNumber}
             onChange={handleCustomTripNumberChange}
+            fullWidth
+            className={classes.inputField}
             /> 
 
             <TextField
             label="Driver Name"
             value={driverName}
             onChange={handleDriverNameChange}
+            fullWidth
+            className={classes.inputField}
             /> 
 
             <Button variant="contained" color="primary" onClick={handleDriverNameChange}>
@@ -222,12 +250,16 @@ export default function DispatchFormPage() {
             label="Driver Pay"
             value={driverPay}
             onChange={handleDriverPayChange}
+            fullWidth
+            className={classes.inputField}
             /> 
 
             <TextField
             label="Driver Advance"
             value={driverAdvance}
             onChange={handleDriverAdvanceChange}
+            fullWidth
+            className={classes.inputField}
             />
 
             <Button variant="contained" color="primary" onClick={handleAddDriverClick}>
@@ -238,6 +270,8 @@ export default function DispatchFormPage() {
             label="Truck"
             value={truck}
             onChange={handleTruckChange} 
+            fullWidth
+            className={classes.inputField}
             /> 
 
             <Button variant="contained" color="primary" onClick={handleTruckChange}>
@@ -248,6 +282,8 @@ export default function DispatchFormPage() {
             label="Trailer"
             value={trailer}
             onChange={handleTrailerChange}
+            fullWidth
+            className={classes.inputField}
             />
 
             <Button variant="contained" color="primary" onClick={handleTrailerChange}>
@@ -258,12 +294,16 @@ export default function DispatchFormPage() {
             label="Odometer"
             value={odometer}
             onChange={handleOdometerChange} 
+            fullWidth
+            className={classes.inputField}
             />
 
             <TextField
             label="Customer"
             value={customer}
             onChange={handleCustomerChange}
+            fullWidth
+            className={classes.inputField}
             /> 
 
             <Button variant="contained" color="primary" onClick={handleCustomerChange}>
@@ -271,9 +311,9 @@ export default function DispatchFormPage() {
             </Button> 
             </Box> 
 
-            <Box my={2}>
-                <Typography variant="subtitle1">Stops</Typography>
-                <Box display="flex">
+            <Box mb={4}>
+                <Typography variant="subtitle1" className={classes.sectionSubtitle}>Stops</Typography>
+                <Box display="flex" mb={2}>
                     <Box flex={1} mr={2}>
                         <Typography variant="subtitle2">Pickup</Typography>
                         <TextField
@@ -382,9 +422,9 @@ export default function DispatchFormPage() {
             {/* Including other input fields and forms here */}
             </Box>
                 
-                <Box display="flex">
+                <Box display="flex" mb={4}>
                     <Box flex={1} mr={2}>
-                    <Typography variant="subtitle2">Fees/Charges</Typography>
+                    <Typography variant="subtitle2" className={classes.sectionSubtitle}>Fees/Charges</Typography>
                 <TextField
                 label="Primary Fee"
                 value={primaryFee}

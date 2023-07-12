@@ -3,6 +3,7 @@ import SignInSide from "./login";
 import SignUpSide from "./signup";
 import ErrorPage from "./ErrorPage";
 import Dashboard from "./Dashboard";
+import ProfilePage from "./ProfilePage";
 
 export {
     HomePage,
@@ -10,5 +11,6 @@ export {
     SignUpSide,
     ErrorPage,
     Dashboard,
+    ProfilePage,
 
 }
