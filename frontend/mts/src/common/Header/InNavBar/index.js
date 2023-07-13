@@ -12,7 +12,7 @@ const useStyles = makeStyles((theme) => ({
     position: 'fixed',
     top: 0,
     zIndex: theme.zIndex.drawer + 1,
-    backgroundColor: 'black',
+    backgroundColor: '#212121',
     marginBottom: theme.spacing(0, 2),
   },
   title: {

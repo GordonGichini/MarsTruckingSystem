@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { Typography, Button, Box, Table, TableHead, TableRow, TableCell, TableBody, FormControl, Select, MenuItem } from '@material-ui/core';
 
-const CompanyOverviewReport = () => {
+function CompanyOverview() {
   const [dateRange, setDateRange] = useState('');
   const [reportData, setReportData] = useState([]);
 
@@ -79,5 +80,5 @@ const CompanyOverviewReport = () => {
   );
 };
 
-export default CompanyOverviewReport;
+export default CompanyOverview;
 

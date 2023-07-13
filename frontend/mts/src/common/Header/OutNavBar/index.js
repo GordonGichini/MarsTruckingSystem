@@ -6,6 +6,7 @@ import { AccountCircle } from '@material-ui/icons'
 import { Box, colors } from '@mui/material';
 import { NavLink, Link } from 'react-router-dom';
 import Divider from '@mui/material/Divider'; 
+import { ExpandMore as ExpandMoreIcon } from '@material-ui/icons';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -27,12 +28,34 @@ const useStyles = makeStyles((theme) => ({
   active: {
     fontWeight: 'bold',
   },
+  arrowIcon: {
+    marginRight: theme.spacing(0.2)
+  },
 }));
 
 
 
 export default function Navbar() {
   const classes = useStyles();
+  const [mtsAnchorEl, setMtsAnchorEl] = React.useState(null);
+  const [eldAnchorEl, setEldAnchorEl] = React.useState(null);
+
+  const handleMtsMenuOpen = (event) => {
+    setMtsAnchorEl(event.currentTarget);
+  };
+
+  const handleMtsMenuClose = () => {
+    setMtsAnchorEl(null);
+  }; 
+
+  const handleEldMenuOpen = () => {
+    setEldAnchorE1(event.currentTarget);
+  };
+
+  const handleEldMenuClose = () => {
+    setEldAnchorEl(null);
+  };
+
   return ( 
     <AppBar position="static" className={classes.appBar}>
       <Toolbar>
@@ -70,7 +93,39 @@ export default function Navbar() {
           activeClassName={classes.active}
           className={classes.navLink}
           >MTS</Button>
-          <Divider orientation="vertical" flexItem />
+          <div>
+            <IconButton
+            edge="end"
+            color="inherit"
+            aria-label="mts"
+            aria-controls="mts-menu"
+            aria-haspopup="true"
+            onClick={handleMtsMenuOpen}
+            > 
+            <ExpandMoreIcon className={classes.arrowIcon} />
+            </IconButton>
+
+            <Menu
+            id="mts-menu"
+            anchorEl={mtsAnchorEl}
+            keepMounted
+            open={Boolean(mtsAnchorEl)}
+            onClose={handleMtsMenuClose}
+            >
+              <MenuItem onClick={handleMtsMenuClose} component={NavLink} to="/">
+                MTS
+              </MenuItem>
+              <MenuItem onClick={handleMtsMenuClose} component={NavLink} to="/">
+                Features
+              </MenuItem>
+              <MenuItem onClick={handleMtsMenuClose} component={NavLink} to="/">
+                Tour
+              </MenuItem>
+              <MenuItem onClick={handleMtsMenuClose} component={NavLink} to="/">
+                Pricing
+              </MenuItem>
+            </Menu>
+            </div>
           <Button
           color="inherit"
           component={NavLink}
@@ -78,7 +133,38 @@ export default function Navbar() {
           exact
           activeClassName={classes.active}
           className={classes.navLink}
-          >ELD</Button>
+          >ELD</Button> 
+
+          <div>
+            <IconButton
+            edge="end"
+            color="inherit"
+            aria-label="eld"
+            aria-controls="eld-menu"
+            aria-haspopup="true"
+            onClick={handleEldMenuOpen}
+            >
+            <ExpandMoreIcon className={classes.arrowIcon} />
+            </IconButton>
+
+            <Menu 
+            id="eld-menu"
+            anchorEl={eldAnchorEl}
+            keepMounted
+            open={Boolean(eldAnchorEl)}
+            onClose={handleEldMenuClose}
+            >
+              <MenuItem onClick={handleEldMenuClose} component={NavLink} to="/">
+                ELD
+              </MenuItem>
+              <MenuItem onClick={handleEldMenuClose} component={NavLink} to="/">
+                ELD features
+              </MenuItem>
+              <MenuItem onClick={handleEldMenuClose} component={NavLink} to="/">
+                ELD pricing
+              </MenuItem>
+            </Menu>
+            </div>
           <Divider orientation="vertical" flexItem />
           <Button
           color="inherit"
