@@ -11,31 +11,31 @@ export default function AddressFormPage() {
       <Typography variant="h6">Add Address</Typography>
 
       <Box my={2}>
-        <TextField label="Search" />
+        <TextField label="Search" variant=""  />
 
-        <TextField label="Company Name" />
-        <TextField label="Street" />
-        <TextField label="Apt/Suite/Other" />
-        <TextField label="City" />
-        <TextField label="State/Province" />
-        <TextField label="ZIP Code" />
-        <TextField label="Phone Number" />
-        <TextField label="Phone Extension Number" />
-        <TextField label="Alternate Phone" />
-        <TextField label="Alternate Phone Extension" />
-        <TextField label="Number" />
-        <TextField label="Fax" />
-        <TextField label="Email" />
-        <TextField label="Website" />
-        <TextField label="Contact" />
-        <TextField label="Notes" />
-        <TextField label="Motor Carrier Number" />
-        <TextField label="Tax ID (EIN#)" />
+        <TextField label="Company Name" variant="outlined" />
+        <TextField label="Street" variant="outlined" />
+        <TextField label="Apt/Suite/Other" variant="outlined" />
+        <TextField label="City" variant="outlined" />
+        <TextField label="State/Province" variant="outlined" />
+        <TextField label="ZIP Code" variant="outlined" />
+        <TextField label="Phone Number" variant="outlined" />
+        <TextField label="Phone Extension Number" variant="outlined" />
+        <TextField label="Alternate Phone" variant="outlined" />
+        <TextField label="Alternate Phone Extension" variant="outlined" />
+        <TextField label="Number" variant="outlined" />
+        <TextField label="Fax" variant="outlined" />
+        <TextField label="Email" variant="outlined" />
+        <TextField label="Website" variant="outlined" />
+        <TextField label="Contact" variant="outlined" />
+        <TextField label="Notes" variant="outlined" />
+        <TextField label="Motor Carrier Number" variant="outlined" />
+        <TextField label="Tax ID (EIN#)" variant="outlined" />
 
         <Button variant="contained" color="primary" onClick={handleSaveClick}>
           Save
         </Button>
-        <Button variant="contained" color="secondary">
+        <Button variant="text" color="secondary">
           Cancel
         </Button>
       </Box>

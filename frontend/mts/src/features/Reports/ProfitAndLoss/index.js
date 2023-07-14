@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { Typography, Button, Table, TableHead, TableRow, TableCell, TableBody, BarChart, Bar, XAxis, YAxis } from '@material-ui/core';
+import { Typography, Button, Table, TableHead, TableRow, TableCell, TableBody } from '@material-ui/core';
 import axios from 'axios';
+
+import { Bar, BarChart, XAxis, YAxis } from 'recharts';
 
 export default function ProfitAndLossReports() {
   const [companyData, setCompanyData] = useState({});

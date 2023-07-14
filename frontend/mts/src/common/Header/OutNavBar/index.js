@@ -1,7 +1,7 @@
 import * as React from 'react';
 import Button from '@mui/material/Button';
 import ButtonGroup from '@mui/material/ButtonGroup';
-import { AppBar, Toolbar, IconButton, Typography, makeStyles } from '@material-ui/core';
+import { AppBar, Toolbar, IconButton, Typography, makeStyles, Menu, MenuItem } from '@material-ui/core';
 import { AccountCircle } from '@material-ui/icons'
 import { Box, colors } from '@mui/material';
 import { NavLink, Link } from 'react-router-dom';
@@ -35,7 +35,7 @@ const useStyles = makeStyles((theme) => ({
 
 
 
-export default function Navbar() {
+export default function OutNavbar() {
   const classes = useStyles();
   const [mtsAnchorEl, setMtsAnchorEl] = React.useState(null);
   const [eldAnchorEl, setEldAnchorEl] = React.useState(null);
@@ -48,8 +48,8 @@ export default function Navbar() {
     setMtsAnchorEl(null);
   }; 
 
-  const handleEldMenuOpen = () => {
-    setEldAnchorE1(event.currentTarget);
+  const handleEldMenuOpen = (event) => {
+    setEldAnchorEl(event.currentTarget);
   };
 
   const handleEldMenuClose = () => {

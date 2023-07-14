@@ -2,32 +2,32 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Typography, Button, Box } from '@material-ui/core';
 import CompanyOverview from './CompanyOverview';
-import Expenses from './Expenses';
+import ExpensesReport from './ExpensesReport';
 import FuelExpenses from './FuelExpenses';
 import FuelVendor from './FuelVendor';
 import IRPStateMiles from './IRPStateMiles';
 import OverTheRoadDays from './OverTheRoadDays';
 import ProfitAndLoss from './ProfitAndLoss';
-import QuarterlyIfta from './QuarterlyIFTA';
-import QuarterlyMaintenance from './QuartelyMaintenance';
+import QuarterlyIFTA from './QuarterlyIFTA';
+import QuarterlyMaintenance from './QuarterlyMaintenance';
 import ReeferFuelExpenses from './ReeferFuelExpenses';
-import SettlementReport from './Settlement';
-import TaxReport from './Tax';
+import Settlement from './Settlement';
+import Tax from './Tax';
 import UnitOperatingIncome from './UnitOperatingIncome';
 
 export { 
   CompanyOverview, 
-  Expenses, 
+  ExpensesReport, 
   FuelExpenses, 
   FuelVendor, 
   IRPStateMiles, 
   OverTheRoadDays, 
   ProfitAndLoss, 
-  QuarterlyIfta, 
+  QuarterlyIFTA, 
   QuarterlyMaintenance, 
   ReeferFuelExpenses, 
-  SettlementReport, 
-  TaxReport, 
+  Settlement, 
+  Tax, 
   UnitOperatingIncome
 }
 

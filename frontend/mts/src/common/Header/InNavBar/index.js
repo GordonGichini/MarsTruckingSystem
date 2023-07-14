@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useState } from 'react';
 import { AppBar, Toolbar, Typography, IconButton, Button, makeStyles, Menu, MenuItem } from '@material-ui/core';
 import ButtonGroup from '@mui/material/ButtonGroup';
 import { Box, colors } from '@mui/material';
@@ -10,10 +11,15 @@ import { ExpandMore as ExpandMoreIcon } from '@material-ui/icons';
 const useStyles = makeStyles((theme) => ({
   appBar: {
     position: 'fixed',
-    top: 0,
     zIndex: theme.zIndex.drawer + 1,
+    top: 0,
     backgroundColor: '#212121',
-    marginBottom: theme.spacing(0, 2),
+    marginBottom: theme.spacing(2),
+  },
+  toolbar: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
   },
   title: {
     flexGrow: 1,
@@ -26,9 +32,18 @@ const useStyles = makeStyles((theme) => ({
       color: 'green',
     },
   },
+  activeNavLink: {
+    color: 'green',
+    fontWeight: 'bold',
+  },
   active: {
     fontWeight: 'bold',
   }, 
+  menuButton: {
+    [theme.breakpoints.up('md')]: {
+      display: 'none',
+    },
+  },
   arrowIcon: {
     marginRight: theme.spacing(0.2)
   },
@@ -39,6 +54,20 @@ export default function InNavBar() {
   const classes = useStyles(); 
   const [reportsAnchorEl, setReportsAnchorEl] = React.useState(null);
   const [settingsAnchorEl, setSettingsAnchorEl] = React.useState(null);
+  const [anchorEl, setAnchorEl] = useState(null);
+  const [activePage, setActivePage] = useState('');
+
+  const handleMenuClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleMenuClose = () => {
+    setAnchorEl(null);
+  };
+
+  const handleNavLinkClick = (pageName) => {
+    setActivePage(pageName);
+  };
 
   const handleReportsMenuOpen = (event) => {
     setReportsAnchorEl(event.currentTarget);

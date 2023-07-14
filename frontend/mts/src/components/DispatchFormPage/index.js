@@ -3,6 +3,7 @@ import { Typography, TextField, Button, Box } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import { makeStyles } from '@mui/styles';
 
+
 const useStyles = makeStyles((theme) => ({
     formContainer: {
       maxWidth: 600,
@@ -242,7 +243,13 @@ export default function DispatchFormPage() {
             className={classes.inputField}
             /> 
 
-            <Button variant="contained" color="primary" onClick={handleDriverNameChange}>
+            <Button 
+            variant="contained" 
+            color="primary" 
+            onClick={handleDriverNameChange}
+            component={Link}
+            to="/"
+            >
                 Create Driver
             </Button>
 

@@ -1,6 +1,9 @@
 import React from 'react';
 import { Button, Table, TableHead, TableRow, TableCell, TableBody } from '@material-ui/core';
 
+import { Link }from 'react-router-dom';
+
+
 export default function DetailedList() {
   // Sample data for the table
   const data = [
@@ -31,14 +34,23 @@ export default function DetailedList() {
   return (
     <div>
       <div>
-        <Button variant="contained" color="primary">
-          Button 1
+        <Button variant="outlined" 
+        color="primary"
+        component={Link}
+        to="/">
+          Add Dispatch
         </Button>
-        <Button variant="contained" color="primary">
-          Button 2
+        <Button variant="outlined" 
+        color="primary"
+        component={Link}
+        to="/">
+          Add Empty Move
         </Button>
-        <Button variant="contained" color="primary">
-          Button 3
+        <Button variant="outlined" 
+        color="primary"
+        component={Link}
+        to="/">
+          Driver Locations
         </Button>
       </div>
       <Table>

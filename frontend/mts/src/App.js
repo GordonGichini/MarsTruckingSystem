@@ -3,33 +3,20 @@ import {Trips, Expenses, Invoices, Maintenance, Drivers, Addresses, Units} from 
 import { EmptyMove, DetailedList } from "./features/Dispatches";
 import { AddCategoryForm, ListCategories } from "./features/Expenses";
 import { MaintenancePlans, NewCalendarPlan, NewMilePlan } from "./features/Maintenances";
-import { CompanyOverview, Expenses, FuelExpenses, FuelVendor, IRPStateMiles, OverTheRoadDays, ProfitAndLoss, QuarterlyIfta, QuarterlyMaintenance, ReeferFuelExpenses, Settlement, Tax, UnitOperatingIncome } from './features/Reports';
+import { CompanyOverview, ExpensesReport, FuelExpenses, FuelVendor, IRPStateMiles, OverTheRoadDays, ProfitAndLoss, QuarterlyIFTA, QuarterlyMaintenance, ReeferFuelExpenses, Settlement, Tax, UnitOperatingIncome } from './features/Reports';
 import { EditPage } from "./pages/ProfilePage";
 import { InNavBar, OutNavBar } from "./common";
 import {Route, Routes} from 'react-router-dom';
-import { ThemeProvider, createTheme, makeStyles } from '@material-ui/core/styles';
-import CssBaseline from '@mui/material/CssBaseline';
-import ScopedCssBaseline from '@mui/material/ScopedCssBaseline';
+import { CssBaseline, ThemeProvider, createTheme, makeStyles } from '@material-ui/core';
+import theme from './theme';
 //remember to add routes
 import { DispatchFormPage, ExpenseFormPage, MaintenanceLogEntryFormPage, DriverFormPage, UnitFormPage, AddressFormPage, ReportsFormPage } from './components';
 
-const theme = createTheme({
-  // Custom theme configuration
-  palette: {
-    // custom color palette
-
-  },
-  typography: {
-    // custom typography
-
-  }
-})
 
 function App() {
   return (
     <div className="App">
       <ThemeProvider theme={theme}>
-        <ScopedCssBaseline>
         <CssBaseline />
       <Routes> 
         <Route path="/" element={<HomePage/>} />
@@ -56,13 +43,13 @@ function App() {
         <Route path="/maintenance-plans" element={<MaintenancePlans/>} />
 
         <Route path="/company_overview" element={<CompanyOverview/>} />
-        <Route path="/expenses" element={<Expenses/>} />
+        <Route path="/expenses" element={<ExpensesReport/>} />
         <Route path="/fuel_expenses" element={<FuelExpenses/>} />
         <Route path="/fuel_vendor" element={<FuelVendor/>} />
         <Route path="/irp_statemiles" element={<IRPStateMiles/>} />
         <Route path="/over_the_road_days" element={<OverTheRoadDays/>} />
         <Route path="/profit_and_loss" element={<ProfitAndLoss/>} />
-        <Route path="/quarterly_ifta" element={<QuarterlyIfta/>} />
+        <Route path="/quarterly_ifta" element={<QuarterlyIFTA/>} />
         <Route path="/quarterly_maintenance" element={<QuarterlyMaintenance/>} />
         <Route path="/reefer_fuel_expenses" element={<ReeferFuelExpenses/>} />
         <Route path="/driver_pay" element={<Settlement/>} />
@@ -79,7 +66,6 @@ function App() {
         <Route path="/units" element={<Units/>} />
         <Route path="/drivers" element={<Drivers/>} />
       </Routes>
-      </ScopedCssBaseline>
       </ThemeProvider>
     </div>
   );

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Typography, Button, Table, TableHead, TableRow, TableCell, TableBody } from '@material-ui/core';
 import axios from 'axios';
 
-export default function QuarterlyIftaReports() {
+export default function QuarterlyIfta() {
   const [companyData, setCompanyData] = useState({});
   const [reportData, setReportData] = useState([]);
 
