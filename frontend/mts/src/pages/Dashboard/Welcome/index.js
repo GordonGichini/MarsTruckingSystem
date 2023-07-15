@@ -1,9 +1,14 @@
 import React from 'react'
+import { Box, Typography } from '@mui/material';
 
 const Welcome = () => {
   return (
     <div>
-      <h2>welcome</h2>
+      <Box mt={4} p={2} bgcolor="white">
+      <Typography variant="h6" gutterBottom>
+        Welcome
+      </Typography>
+      </Box>
     </div>
   )
 }

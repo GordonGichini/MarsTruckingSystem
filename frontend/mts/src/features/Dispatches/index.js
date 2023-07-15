@@ -1,8 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { AppBar, Toolbar, Typography, makeStyles, Button, TextField, Box } from '@material-ui/core';
+import { Toolbar, Typography, makeStyles, Button, TextField, Box } from '@material-ui/core';
 import EmptyMove from './EmptyMove';
 import DetailedList from  './DetailedList';
+//import InNavBar from '../common/Header';
 
 export {
   DetailedList,
@@ -52,15 +53,11 @@ function Trips() {
 
   return (
     <div>
-    <AppBar position="static" className={classes.appBar}>
-      <Toolbar>
-        <Typography variant="h6" className={classes.title}>
-          Dispatch Page
-        </Typography>
-      </Toolbar>
-    </AppBar>
-
+   
     <Box className={classes.buttonContainer}>
+     <Typography variant="h6" className={classes.title}>
+          Dispatch Page
+        </Typography> 
       <Button variant="contained" className={classes.button} component={Link} to="/DetailedList">
         Detailed List
       </Button>

@@ -2,6 +2,7 @@ import React from 'react';
 import { Typography, TextField, Button, Box } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import { makeStyles } from '@mui/styles';
+import { useTheme } from '@mui/material/styles';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -28,6 +29,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function DispatchFormPage() {
     const classes = useStyles();
+    const theme = useTheme();
     // Defining state variables for capturing form inputs
     const [customTripNumber, setCustomTripNumber] = React.useState('');
     const [driverName, setDriverName] = React.useState('');

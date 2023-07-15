@@ -1,5 +1,5 @@
 import React from 'react';
-import { Paper, Typography, List, ListItem, ListItemText } from '@material-ui/core';
+import { Box, Paper, Typography, List, ListItem, ListItemText } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
@@ -25,6 +25,7 @@ const ReleaseNotes = () => {
   ];
 
   return (
+    <Box mt={4} p={2} bgcolor="white">
     <Paper className={classes.paper}>
       <Typography variant="h6" gutterBottom>
         Release Notes
@@ -40,6 +41,7 @@ const ReleaseNotes = () => {
         ))}
       </List>
     </Paper>
+    </Box>
   );
 };
 

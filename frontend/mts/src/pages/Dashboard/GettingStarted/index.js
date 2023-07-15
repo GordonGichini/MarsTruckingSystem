@@ -11,8 +11,7 @@ const GettingStarted = () => {
   return (
     
     <Box>
-      <Box sx={{width:"500px", m:"20px", }}>
-
+      <Box mt={4} p={2} bgcolor="white" sx={{width:"500px", m:"20px", }}>
     <Typography>Getting Started</Typography>
     <Stack direction="column" spacing={1} >
       
