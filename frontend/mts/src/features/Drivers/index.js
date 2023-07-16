@@ -1,5 +1,5 @@
 import React from 'react';
-import { AppBar, Toolbar, Typography, makeStyles, Button, TextField, Box } from '@material-ui/core';
+import { Typography, makeStyles, Button, TextField, Box } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
   appBar: {
@@ -37,13 +37,9 @@ export default function Drivers() {
 
   return (
     <div>
-      <AppBar position="static" className={classes.appBar}>
-        <Toolbar>
           <Typography variant="h6" className={classes.title}>
             Drivers
           </Typography>
-        </Toolbar>
-      </AppBar>
 
       <Box className={classes.buttonContainer}>
         <Button variant="contained" className={classes.button}>

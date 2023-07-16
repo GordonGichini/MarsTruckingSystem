@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from "react-router-dom";
-import { AppBar, Toolbar, Typography, makeStyles, Button, TextField, Box } from '@material-ui/core';
+import { Typography, makeStyles, Button, TextField, Box } from '@material-ui/core';
 import AddCategoryForm from './AddCategoryForm';
 import ListCategories from './ListCategories';
 
@@ -72,13 +72,7 @@ function Expenses() {
   };
   return (
     <div>
-    <AppBar position="static" className={classes.appBar}>
-      <Toolbar>
-        <Typography variant="h6" className={classes.title}>
-          Expenses Page
-        </Typography>
-      </Toolbar>
-    </AppBar>
+  
 
     <Box className={classes.buttonContainer}>
       <Button variant="contained"

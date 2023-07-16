@@ -25,7 +25,7 @@ const ReleaseNotes = () => {
   ];
 
   return (
-    <Box mt={4} p={2} bgcolor="white">
+    <Box mt={4} mr={4} p={2} bgcolor="white" width="600px" height="800px">
     <Paper className={classes.paper}>
       <Typography variant="h6" gutterBottom>
         Release Notes

@@ -5,21 +5,41 @@ import MiddleNavBar from './MiddleNavBar'
 import GetStarted from './GettingStarted'
 import ReleaseNotes from './ReleaseNotes'
 import Welcome from './Welcome'
-import { Container } from '@material-ui/core';
+import { Grid } from '@material-ui/core';
 
 const Dashboard = () => {
-  return (
+  return ( 
     <div>
-      <Container maxWidth="md">      
-    <InNavBar/>
-      <MiddleNavBar/> 
+      <Grid container spacing={0.5}>
+        <Grid item xs={12}>
+          <InNavBar/>
+        </Grid>
+        <Grid item xs={12}>
+          <MiddleNavBar/> 
+        </Grid>
+         
+        <Grid item xs={12} md={6}>
+        <Grid container spacing={2}>
+          <Grid item xs={12}>
           <GetStarted/>
+          </Grid> 
+            <Grid item xs={12}>
+             <Welcome/>  
+             </Grid>   
+             </Grid>
+             </Grid>   
+          <Grid item xs={12} md={6}>
+            <Grid container spacing={2}>
+              <Grid item xs={12}>
           <ReleaseNotes/>
-             <Welcome/>
-      <Alerts/>
-      </Container>
-    </div>
-  )
-}
+          </Grid>
+           </Grid>
+           </Grid>
+          
+             </Grid>         
+        <Alerts/>
+        </div>    
+  );
+};
 
 export default Dashboard

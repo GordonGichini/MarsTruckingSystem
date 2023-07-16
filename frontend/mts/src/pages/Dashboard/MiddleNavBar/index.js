@@ -38,7 +38,7 @@ const MiddleNavBar = () => {
   };
   
   return (
-    <Box mt={4} mb={4} display="flex" justifyContent="center">
+    <Box mt={12} ml={1} display="flex" justifyContent="center">
   <Stack direction="row" spacing={0.5}>
       <Button variant="outlined"  startIcon={<AddTaskOutlinedIcon />} component ={Link} to="/add-dispatch" > 
       <Typography className='icon_btn'> Add Dispatch</Typography> 

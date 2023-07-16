@@ -11,9 +11,21 @@ const GettingStarted = () => {
   return (
     
     <Box>
-      <Box mt={4} p={2} bgcolor="white" sx={{width:"500px", m:"20px", }}>
+      <Box mt={4} p={2} bgcolor="white" sx={{width:"600px", m:"20px", }}>
     <Typography>Getting Started</Typography>
     <Stack direction="column" spacing={1} >
+
+    <Button variant="outlined" startIcon={<LocalShippingIcon sx={{ml:"3px"}} />} 
+      sx={{
+        m:'0',
+        justifyContent: 'flex-start'
+       }}
+       color = "primary"
+       component = {Link}
+       to = "/add-unit"
+      >
+      <Typography sx={{ml:"30px"}}> Complete Your Company Profile</Typography>
+      </Button>
       
       <Button variant="outlined" startIcon={<LocalShippingIcon sx={{ml:"3px"}} />} 
       sx={{

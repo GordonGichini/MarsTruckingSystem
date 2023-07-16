@@ -4,7 +4,7 @@ import { Box, Typography } from '@mui/material';
 const Welcome = () => {
   return (
     <div>
-      <Box mt={4} p={2} bgcolor="white">
+      <Box mt={2} ml={3} p={2} bgcolor="grey" position="relative" width="600px" height="325px">
       <Typography variant="h6" gutterBottom>
         Welcome
       </Typography>

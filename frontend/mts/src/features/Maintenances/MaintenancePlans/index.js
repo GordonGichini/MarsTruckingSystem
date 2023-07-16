@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { AppBar, Toolbar, Typography, Button, makeStyles, Box } from '@material-ui/core';
+import { Typography, Button, makeStyles, Box } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
   appBar: {
@@ -33,13 +33,9 @@ function MaintenancePlans() {
 
   return (
     <div>
-      <AppBar position="static" className={classes.appBar}>
-        <Toolbar>
           <Typography variant="h6" className={classes.title}>
             Maintenance Plans
           </Typography>
-        </Toolbar>
-      </AppBar>
 
       <Box className={classes.buttonContainer}>
         <Button variant="contained"

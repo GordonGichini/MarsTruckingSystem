@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { AppBar, Toolbar, Typography, makeStyles, Button, TextField, Box } from '@material-ui/core';
+import { Typography, makeStyles, Button, TextField, Box } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
   appBar: {
@@ -48,13 +48,9 @@ function Invoices() {
 
   return (
     <div>
-    <AppBar position="static" className={classes.appBar}>
-      <Toolbar>
         <Typography variant="h6" className={classes.title}>
           Invoice Page
         </Typography>
-      </Toolbar>
-    </AppBar>
 
     <Box className={classes.buttonContainer}>
       <Button variant="contained" className={classes.button}>

@@ -9,6 +9,7 @@ import { InNavBar, OutNavBar } from "./common";
 import {Route, Routes} from 'react-router-dom';
 import { CssBaseline, ThemeProvider, createTheme, makeStyles } from '@material-ui/core';
 import theme from './theme';
+import Layout from './Layout';
 //remember to add routes
 import { DispatchFormPage, ExpenseFormPage, MaintenanceLogEntryFormPage, DriverFormPage, UnitFormPage, AddressFormPage, ReportsFormPage } from './components';
 
@@ -19,6 +20,7 @@ function App() {
       <ThemeProvider theme={theme}>
         <CssBaseline />
       <Routes> 
+        <Layout>
         <Route path="/" element={<HomePage/>} />
         <Route path="/login" element={<SignInSide/>} />
         <Route path="/signup" element={<SignUpSide/>} />
@@ -65,6 +67,7 @@ function App() {
         <Route path="/addresses" element={<Addresses/>} />
         <Route path="/units" element={<Units/>} />
         <Route path="/drivers" element={<Drivers/>} />
+        </Layout>
       </Routes>
       </ThemeProvider>
     </div>

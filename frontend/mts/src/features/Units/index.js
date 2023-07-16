@@ -1,5 +1,5 @@
 import React from 'react';
-import { AppBar, Toolbar, Typography, makeStyles, ButtonGroup, Button, TextField, Box } from '@material-ui/core';
+import { Typography, makeStyles, ButtonGroup, Button, TextField, Box } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
   appBar: {
@@ -37,14 +37,9 @@ export default function Units() {
 
   return (
     <div>
-      <AppBar position="static" className={classes.appBar}>
-        <Toolbar>
           <Typography variant="h6" className={classes.title}>
             Units
           </Typography>
-        </Toolbar>
-      </AppBar>
-
       <Box className={classes.buttonGroupContainer}>
         <ButtonGroup variant="contained" aria-label="unit selection buttons">
           <Button className={classes.button}>Add unit</Button>
