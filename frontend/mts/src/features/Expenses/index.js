@@ -3,39 +3,23 @@ import { Link } from "react-router-dom";
 import { Typography, makeStyles, Button, TextField, Box } from '@material-ui/core';
 import AddCategoryForm from './AddCategoryForm';
 import ListCategories from './ListCategories';
+import Stack from '@mui/material/Stack';
 
-export {
-  AddCategoryForm,
-  ListCategories,
-}
+export { AddCategoryForm, ListCategories }
 
 const useStyles = makeStyles((theme) => ({
-  appBar: {
-    backgroundColor: '#212121',
-    marginBottom: theme.spacing(2),
-  },
-  title: {
-    flexGrow: 1,
-  },
   buttonContainer: {
     display: 'flex',
-    justifyContent: 'center',
+    justifyContent: 'flex-start', // Align buttons to the start
     marginTop: theme.spacing(2),
   },
   button: {
     margin: theme.spacing(1),
   },
-  searchContainer: {
-    display: 'flex',
-    justifyContent: 'center',
-    marginTop: theme.spacing(2),
-  },
-  searchInput: {
-    width: '400px',
-  },
-  expenseTitleContainer: {
-    display: 'flex',
-    justifyContent: 'center',
+  expenseContainer: {
+    border: '1px solid black', // Add a black border
+    borderRadius: theme.spacing(1), // Add some border radius
+    padding: theme.spacing(2), // Add some padding
     marginTop: theme.spacing(2),
   },
   videoContainer: {
@@ -50,10 +34,9 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-
 function Expenses() {
-    const classes = useStyles(); 
-    const [isAddCategoryOpen, setAddCategoryOpen] = useState(false);
+  const classes = useStyles();
+  const [isAddCategoryOpen, setAddCategoryOpen] = useState(false);
 
   const handleOpenAddCategory = () => {
     setAddCategoryOpen(true);
@@ -70,65 +53,55 @@ function Expenses() {
     // Close the form
     setAddCategoryOpen(false);
   };
+
   return (
     <div>
-  
+      <Box mt={4} ml={1} display="flex">
+        <Stack direction="row" spacing={0.5} />
+        <Button variant="contained" className={classes.button} component={Link} to="/add-expense">
+          Add Expense
+        </Button>
+        <Button variant="contained" className={classes.button} component={Link} to="/list-categories">
+          List Categories
+        </Button>
+        <Button variant="contained" className={classes.button} onClick={handleOpenAddCategory}>
+          Add Category
+        </Button>
+      </Box>
 
-    <Box className={classes.buttonContainer}>
-      <Button variant="contained"
-       className={classes.button}
-       component={Link}
-       to="/add-expense">
-        Add Expense
-      </Button>
-      <Button variant="contained"
-       className={classes.button}
-       component={Link}
-       to="/list-categories">
-        List Categories
-      </Button>
-      <Button variant="contained"
-       className={classes.button}
-       onClick={handleOpenAddCategory}>
-        Add Category
-      </Button> 
       <AddCategoryForm
-      open={isAddCategoryOpen}
-      onClose={handleCloseAddCategory}
-      onSave={handleSaveCategory}
+        open={isAddCategoryOpen}
+        onClose={handleCloseAddCategory}
+        onSave={handleSaveCategory}
       />
-    </Box>
 
-    <Box className={classes.searchContainer}>
-      <TextField
-        className={classes.searchInput}
-        variant="outlined"
-        placeholder="Search..."
-        InputLabelProps={{
-          shrink: true,
-        }}
-      />
-    </Box>
+        <Box className={classes.searchContainer}>
+          <TextField
+            className={classes.searchInput}
+            variant="outlined"
+            placeholder="Search..."
+            InputLabelProps={{
+              shrink: true,
+            }}
+          />
+        </Box>
 
-    <Box className={classes.expenseTitleContainer}>
-      <Typography variant="h4">Welcome to Expenses</Typography>
-    </Box>
+        <Box className={classes.expenseTitleContainer}>
+          <Typography variant="h4">Welcome to Expenses</Typography>
+        </Box>
 
-    <Box className={classes.videoContainer}>
-      {/* Add your expense video component here */}
-      {/* <ExpenseVideo /> */}
-    </Box>
+        <Box className={classes.videoContainer}>
+          {/* Add your expense video component here */}
+          {/* <ExpenseVideo /> */}
+        </Box>
 
-    <Box className={classes.addExpenseButton}>
-      <Button variant="contained"
-       color="primary"
-       component={Link}
-       to="/add-expense">
-        Add First Expense
-      </Button>
-    </Box>
-  </div>   
+        <Box className={classes.addExpenseButton}>
+          <Button variant="contained" color="primary" component={Link} to="/add-expense">
+            Add First Expense
+          </Button>
+      </Box>
+      </div>
   );
-}
+          }
 
 export default Expenses

@@ -13,7 +13,7 @@ const useStyles = makeStyles((theme) => ({
     position: 'fixed',
     zIndex: theme.zIndex.drawer + 1,
     top: 0,
-    backgroundColor: '#212121',
+    backgroundColor: 'black',
     marginBottom: theme.spacing(2),
   },
   toolbar: {
@@ -26,10 +26,10 @@ const useStyles = makeStyles((theme) => ({
   },
   navLink: {
     marginLeft: theme.spacing(0.1),
-    color: 'white',
+    color: 'green',
     textDecoration: 'none',
     '&:hover': {
-      color: 'green',
+      color: 'black',
     },
   },
   activeNavLink: {
@@ -89,7 +89,7 @@ export default function InNavBar() {
     <AppBar className={classes.appBar}> 
     <Toolbar>
     <Typography variant="h6" component={Link} to="/" >
-  <img src="common/assets/brand/logoIcon.png" alt="Logo" style={{ marginRight: '10px', height: '30px' }} />
+  <img src="" alt="Logo" style={{ marginRight: '10px', height: '30px' }} />
   MTS
     </Typography> 
     <Box sx={{display:"flex",

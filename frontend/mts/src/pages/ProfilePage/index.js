@@ -1,7 +1,7 @@
 import React from 'react';
 import EditPage from './EditPage';
 import { Link } from 'react-router-dom';
-import { AppBar, Toolbar, Typography, makeStyles, Button, Box, TableContainer, Table, TableBody, TableRow, TableCell, TextField } from '@material-ui/core';
+import { Typography, makeStyles, Button, Box, TableContainer, Table, TableBody, TableRow, TableCell, TextField } from '@material-ui/core';
 
 
 export { EditPage }
@@ -47,8 +47,6 @@ function ProfilePage() {
 
   return (
     <div>
-      <AppBar position="static" className={classes.appBar}>
-        <Toolbar>
           <Typography variant="h6" className={classes.title}>
             Company Name Profile
           </Typography>
@@ -58,8 +56,6 @@ function ProfilePage() {
           >Edit Options</Button>
           <Button color="inherit">Subscription</Button>
           <Button color="inherit">Notifications</Button>
-        </Toolbar>
-      </AppBar>
 
       <Typography variant="h4">Profile</Typography>
 
@@ -126,14 +122,7 @@ function ProfilePage() {
         <Table>
           <TableBody>
             <TableRow>
-              <TableCell>Name</TableCell>
-              <TableCell>Email</TableCell>
-              <TableCell>Roles</TableCell>
-              <TableCell>Actions</TableCell>
-            </TableRow>
-            <TableRow>
-              <TableCell>John Doe</TableCell>
-              <TableCell>johndoe@example.com</TableCell>
+              <TableCell>Roles</TableCell> 
               <TableCell>
                 <ul>
                   <li>Owner</li>
@@ -143,6 +132,17 @@ function ProfilePage() {
                   <li>ELD Driver</li>
                 </ul>
               </TableCell>
+              </TableRow>
+
+            <TableRow>
+              <TableCell>Name</TableCell>
+              <TableCell>Email</TableCell>              
+              <TableCell>Actions</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>John Doe</TableCell>
+              <TableCell>johndoe@example.com</TableCell>
+             
               <TableCell>
                 <Button>Edit</Button>
                 <Button>Deactivate</Button>

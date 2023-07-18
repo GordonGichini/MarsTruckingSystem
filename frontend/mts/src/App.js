@@ -18,9 +18,9 @@ function App() {
   return (
     <div className="App">
       <ThemeProvider theme={theme}>
+        <Layout>
         <CssBaseline />
       <Routes> 
-        <Layout>
         <Route path="/" element={<HomePage/>} />
         <Route path="/login" element={<SignInSide/>} />
         <Route path="/signup" element={<SignUpSide/>} />
@@ -67,8 +67,8 @@ function App() {
         <Route path="/addresses" element={<Addresses/>} />
         <Route path="/units" element={<Units/>} />
         <Route path="/drivers" element={<Drivers/>} />
-        </Layout>
       </Routes>
+      </Layout>
       </ThemeProvider>
     </div>
   );
