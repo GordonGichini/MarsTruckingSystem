@@ -1,5 +1,6 @@
 import * as React from 'react';
 import Button from '@mui/material/Button';
+import { useLocation } from 'react-router-dom';
 import ButtonGroup from '@mui/material/ButtonGroup';
 import { AppBar, Toolbar, IconButton, Typography, makeStyles, Menu, MenuItem } from '@material-ui/core';
 import { AccountCircle } from '@material-ui/icons'
@@ -37,6 +38,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function OutNavbar() {
   const classes = useStyles();
+  const location = useLocation();
   const [mtsAnchorEl, setMtsAnchorEl] = React.useState(null);
   const [eldAnchorEl, setEldAnchorEl] = React.useState(null);
 
@@ -56,7 +58,7 @@ export default function OutNavbar() {
     setEldAnchorEl(null);
   };
 
-  return ( 
+  return location.pathname === '/' ? null : ( 
     <AppBar position="static" className={classes.appBar}>
       <Toolbar>
         <Typography variant="h6" component={Link} to="/" >
