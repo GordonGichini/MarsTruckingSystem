@@ -7,6 +7,7 @@ import DriverFormPage from './DriverFormPage';
 import UnitFormPage from './UnitFormPage';
 import AddressFormPage from './AddressFormPage';
 import ReportsFormPage from './ReportsFormPage';
+import Search from './Search';
 
 export {
     DispatchFormPage,
@@ -15,5 +16,6 @@ export {
     DriverFormPage,
     UnitFormPage,
     AddressFormPage,
-    ReportsFormPage
+    ReportsFormPage,
+    Search,
 }
