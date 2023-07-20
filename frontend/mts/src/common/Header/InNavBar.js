@@ -50,7 +50,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-export default function InNavBar() { 
+function InNavBar() { 
   const classes = useStyles(); 
   const [reportsAnchorEl, setReportsAnchorEl] = React.useState(null);
   const [settingsAnchorEl, setSettingsAnchorEl] = React.useState(null);
@@ -327,4 +327,6 @@ export default function InNavBar() {
     </Toolbar>
     </AppBar>
   );
-}
+} 
+
+export default InNavBar;

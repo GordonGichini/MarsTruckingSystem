@@ -5,12 +5,13 @@ import { AddCategoryForm, ListCategories } from "./features/Expenses";
 import { MaintenancePlans, NewCalendarPlan, NewMilePlan } from "./features/Maintenances";
 import { CompanyOverview, ExpensesReport, FuelExpenses, FuelVendor, IRPStateMiles, OverTheRoadDays, ProfitAndLoss, QuarterlyIFTA, QuarterlyMaintenance, ReeferFuelExpenses, Settlement, Tax, UnitOperatingIncome } from './features/Reports';
 import { EditPage } from "./pages/ProfilePage";
-import { InNavBar } from "./common/Header/InNavBar";
-import { OutNavBar } from "./common/Header/OutNavBar";
+import InNavBar from "./common/Header/InNavBar";
+import OutNavBar from "./common/Header/OutNavBar";
 import {Route, Routes} from 'react-router-dom';
 import { CssBaseline, ThemeProvider, createTheme, makeStyles } from '@material-ui/core';
 import theme from './theme';
-import Layout from './Layout';
+import HomepageLayout from "./Layout/HomepageLayout";
+import DashboardLayout from "./Layout/DashboardLayout";
 //remember to add routes
 import { DispatchFormPage, ExpenseFormPage, MaintenanceLogEntryFormPage, DriverFormPage, UnitFormPage, AddressFormPage, ReportsFormPage } from './components';
 
@@ -19,13 +20,12 @@ function App() {
   return (
     <div className="App">
       <ThemeProvider theme={theme}>
-        <Layout>
         <CssBaseline />
       <Routes> 
-        <Route path="/" element={<HomePage/>} />
+        <Route path="/" element={<HomepageLayout><HomePage /></HomepageLayout>} />
         <Route path="/login" element={<SignInSide/>} />
         <Route path="/signup" element={<SignUpSide/>} />
-        <Route path="/Dashboard" element={<Dashboard/>} />
+        <Route path="/dashboard" element={<DashboardLayout><Dashboard /> </DashboardLayout>} /> 
 
         <Route path="/company-profile" element={<ProfilePage/>} />
         <Route path="*" element={<ErrorPage/>} />
@@ -69,7 +69,6 @@ function App() {
         <Route path="/units" element={<Units/>} />
         <Route path="/drivers" element={<Drivers/>} />
       </Routes>
-      </Layout>
       </ThemeProvider>
     </div>
   );

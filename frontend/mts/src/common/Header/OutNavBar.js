@@ -36,7 +36,7 @@ const useStyles = makeStyles((theme) => ({
 
 
 
-export default function OutNavBar() {
+function OutNavBar() {
   const classes = useStyles();
   const location = useLocation();
   const [mtsAnchorEl, setMtsAnchorEl] = React.useState(null);
@@ -210,3 +210,5 @@ export default function OutNavBar() {
     </AppBar>
   );
 }
+
+export default OutNavBar;
