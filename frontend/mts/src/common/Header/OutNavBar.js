@@ -36,7 +36,7 @@ const useStyles = makeStyles((theme) => ({
 
 
 
-export default function OutNavbar() {
+export default function OutNavBar() {
   const classes = useStyles();
   const location = useLocation();
   const [mtsAnchorEl, setMtsAnchorEl] = React.useState(null);

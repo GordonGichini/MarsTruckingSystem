@@ -1,9 +1,8 @@
 import React from 'react';
 import { AppBar, Toolbar, Typography, makeStyles } from '@material-ui/core';
 import { Link, NavLink, useLocation } from 'react-router-dom';
-import InNavBar from '../common/Header/InNavBar/index.js'; 
-import OutNavBar from '../common/Header/OutNavBar/index.js';
-
+import { InNavBar } from '../common/Header/InNavBar';
+import { OutNavBar } from '../common/Header/OutNavBar';
 
 const useStyles = makeStyles((theme) => ({
   appBar: {
