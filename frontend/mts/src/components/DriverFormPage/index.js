@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     flexDirection: 'column',
     '& > *': {
-      margin: theme.spacing(1),
+      margin: theme.spacing(0.1),
     },
   }
 })
@@ -43,28 +43,28 @@ export default function DriverFormPage() {
   return (
     <div>
       <Container maxWidth="xs" className={classes.root}>
-        <Paper elevation={3} className={classes.formContainer}>
+        <Paper elevation={1} className={classes.formContainer}>
       <Typography variant="h6">Add Driver</Typography>
       <form className={classes.formInputs}>
 
       <Box my={2}>
-        <TextField label="First Name" />
-        <TextField label="Last Name" />
-        <TextField label="Street" />
-        <TextField label="City" />
-        <TextField label="State/Province" />
-        <TextField label="ZIP Code" />
-        <TextField label="Phone" />
-        <TextField label="Alternate Phone" />
-        <TextField label="Fax" />
-        <TextField label="Email" />
-        <TextField label="Default Payment Type" />
-        <TextField label="License Number" />
-        <TextField label="License Expiration" />
-        <TextField label="License Issuing State/Jurisdiction" />
-        <TextField label="Medical Card Renewal" />
-        <TextField label="Hire Date" />
-        <TextField label="Termination Date" />
+        <TextField label="First Name" variant="outlined" margin='normal'/>
+        <TextField label="Last Name" variant="outlined" margin='normal' />
+        <TextField label="Street" variant="outlined" margin='normal' />
+        <TextField label="City" variant="outlined" margin='normal' />
+        <TextField label="State/Province" variant="outlined" margin='normal' />
+        <TextField label="ZIP Code" variant="outlined" margin='normal' />
+        <TextField label="Phone" variant="outlined" margin='normal' />
+        <TextField label="Alternate Phone" variant="outlined" margin='normal' />
+        <TextField label="Fax" variant="outlined" margin='normal' />
+        <TextField label="Email" margin='normal' variant="outlined" />
+        <TextField label="Default Payment Type" variant="outlined" margin='normal' />
+        <TextField label="License Number" variant="outlined" margin='normal' />
+        <TextField label="License Expiration" variant="outlined" margin='normal' />
+        <TextField label="License Issuing State/Jurisdiction" variant="outlined" margin='normal' />
+        <TextField label="Medical Card Renewal" variant="outlined" margin='normal' />
+        <TextField label="Hire Date" variant="outlined" margin='normal' />
+        <TextField label="Termination Date" variant="outlined" margin='normal' />
 
         <Button variant="contained" color="primary" onClick={handleEmergencyContactClick}>
           {showEmergencyContact ? 'Hide Emergency Contact' : 'Show Emergency Contact'}
@@ -72,12 +72,12 @@ export default function DriverFormPage() {
 
         {showEmergencyContact && (
           <div>
-            <TextField label="Contact Name" />
-            <TextField label="Contact Phone" />
-            <TextField label="Contact Street" />
-            <TextField label="Contact City" />
-            <TextField label="Contact State" />
-            <TextField label="Contact ZIP Code" />
+            <TextField label="Contact Name" variant="outlined" margin='normal' />
+            <TextField label="Contact Phone" variant="outlined" margin='normal' />
+            <TextField label="Contact Street" variant="outlined" margin='normal' />
+            <TextField label="Contact City" variant="outlined" margin='normal' />
+            <TextField label="Contact State" variant="outlined" margin='normal' />
+            <TextField label="Contact ZIP Code" variant="outlined" margin='normal' />
           </div>
         )}
 

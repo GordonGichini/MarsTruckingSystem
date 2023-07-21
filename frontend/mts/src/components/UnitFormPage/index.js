@@ -18,20 +18,20 @@ export default function UnitFormPage() {
 
       <Box my={2}>
         <Typography variant="subtitle1">Unit Type</Typography>
-        <TextField select label="Type">
+        <TextField select label="Type" variant="outlined">
           <MenuItem value="truck">Truck</MenuItem>
           <MenuItem value="trailer">Trailer</MenuItem>
           <MenuItem value="misc">Misc</MenuItem>
         </TextField>
 
         <Typography variant="subtitle1">Ownership Type</Typography>
-        <TextField select label="Ownership Type">
+        <TextField select label="Ownership Type" variant="outlined">
           <MenuItem value="companyOwned">Company Owned</MenuItem>
           <MenuItem value="ownerOperator">Owner Operator</MenuItem>
         </TextField>
 
         <Typography variant="subtitle1">Status</Typography>
-        <TextField select label="Status">
+        <TextField select label="Status" variant="outlined">
           <MenuItem value="active">Active</MenuItem>
           <MenuItem value="inactive">Inactive</MenuItem>
         </TextField>
@@ -42,17 +42,17 @@ export default function UnitFormPage() {
 
         {showOptionalFields && (
           <div>
-            <TextField label="VIN" />
-            <TextField label="Make" />
-            <TextField label="Model" />
-            <TextField label="Description" />
-            <TextField label="Year" />
-            <TextField label="Year Purchased" />
-            <TextField label="Purchase Price" />
-            <TextField label="License Plate Number" />
-            <TextField label="License Plate Expiration" />
-            <TextField label="Information Sticker Expiration" />
-            <TextField label="Insurance Expiration" />
+            <TextField label="VIN" variant="outlined" margin='normal' />
+            <TextField label="Make" variant="outlined" margin='normal' />
+            <TextField label="Model" variant="outlined" margin='normal' />
+            <TextField label="Description" variant="outlined" margin='normal' />
+            <TextField label="Year" variant="outlined" margin='normal' />
+            <TextField label="Year Purchased" variant="outlined" margin='normal' />
+            <TextField label="Purchase Price" variant="outlined" margin='normal' />
+            <TextField label="License Plate Number" variant="outlined" margin='normal' />
+            <TextField label="License Plate Expiration" variant="outlined" margin='normal' />
+            <TextField label="Information Sticker Expiration" variant="outlined" margin='normal' />
+            <TextField label="Insurance Expiration" variant="outlined" margin='normal' />
           </div>
         )}
 

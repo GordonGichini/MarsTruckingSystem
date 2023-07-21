@@ -1,6 +1,6 @@
 import React from 'react'
 import Footer from './components/Footer'
-import OutNavBar from '../../common/Header/OutNavBar'
+import Navbar from './components/Navbar'
 import SubHeading from './components/SubHeading'
 import Eld from './containers/Eld'
 import Features from './containers/Features'
@@ -14,7 +14,7 @@ import Testmonials from './containers/Testmonials'
 function index() {
   return (
     <div> 
-<OutNavBar/>
+<Navbar/>
 <SubHeading/>
 <IntroText/>
 <Intergration/>

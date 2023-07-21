@@ -5,8 +5,9 @@ import Stack from '@mui/material/Stack'
 function Alerts() {
   return (
     <div>
-    <Stack direction="column" spacing={0.5} />
+    
     <Grid container spacing={2}>
+      <Stack direction="row" spacing={0.5} />
       <Grid item xs={12} md={4}>
         <Box bgcolor="primary.main" height="100%" padding={2}>
           <Button variant="contained" style={{ backgroundColor: 'lightgreen', marginBottom: '10px' }}>ELD Signup</Button>

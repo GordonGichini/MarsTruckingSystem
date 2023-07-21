@@ -32,6 +32,7 @@ export default function EmptyMove() {
         <TextField
           label="Custom Trip Number"
           value={customTripNumber}
+          variant="outlined"
           onChange={(e) => setCustomTripNumber(e.target.value)}
           fullWidth
         />
@@ -41,6 +42,7 @@ export default function EmptyMove() {
         <TextField
           label="Accessory Driver Pay"
           value={accessoryDriverPay}
+          variant="outlined"
           onChange={(e) => setAccessoryDriverPay(e.target.value)}
           fullWidth
         />
@@ -50,6 +52,7 @@ export default function EmptyMove() {
         <TextField
           label="Truck"
           value={truck}
+          variant="outlined"
           onChange={(e) => setTruck(e.target.value)}
           fullWidth
         />
@@ -59,6 +62,7 @@ export default function EmptyMove() {
         <TextField
           label="Trailer"
           value={trailer}
+          variant="outlined"
           onChange={(e) => setTrailer(e.target.value)}
           fullWidth
         />
@@ -68,6 +72,7 @@ export default function EmptyMove() {
         <TextField
           label="Odometer"
           value={odometer}
+          variant="outlined"
           onChange={(e) => setOdometer(e.target.value)}
           fullWidth
         />
@@ -79,14 +84,15 @@ export default function EmptyMove() {
         <TextField
           label="Empty Move Title"
           value={emptyMoveTitle}
+          variant="outlined"
           onChange={(e) => setEmptyMoveTitle(e.target.value)}
           fullWidth
         /> 
         <TextField
           label="Empty Move Address"
           value={emptyMoveAddress}
+          variant="outlined"
           onChange={(e) => setEmptyMoveAddress(e.target.value)}
-          fullWidth
         />
         <Button variant="contained" color="primary">
           Create Empty Move Address
@@ -94,22 +100,23 @@ export default function EmptyMove() {
         <TextField
           label="Empty Move Date"
           value={emptyMoveDate}
+          variant="outlined"
           onChange={(e) => setEmptyMoveDate(e.target.value)}
-          fullWidth
         />
         <TextField
           label="Instructions"
           value={instructions}
+          variant="outlined"
           onChange={(e) => setInstructions(e.target.value)}
           multiline
-          fullWidth
+
         />
         <TextField
           label="Notes"
           value={notes}
+          variant="outlined"
           onChange={(e) => setNotes(e.target.value)}
           multiline
-          fullWidth
         />
       </Box>
 

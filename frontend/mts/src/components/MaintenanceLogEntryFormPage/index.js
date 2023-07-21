@@ -77,6 +77,8 @@ export default function MaintenanceLogEntryFormPage() {
           label="Short Description"
           value={shortDescription}
           onChange={handleShortDescriptionChange}
+          variant="outlined"
+          margin='normal'
         />
 
         <TextField
@@ -85,12 +87,16 @@ export default function MaintenanceLogEntryFormPage() {
           rows={5}
           value={description}
           onChange={handleDescriptionChange}
+          variant="outlined"
+          margin='normal'
         />
 
         <TextField
           label="Maintenance Vendor"
           value={maintenanceVendor}
           onChange={handleMaintenanceVendorChange}
+          variant="outlined"
+          margin='normal'
         />
 
         <Button variant="contained" color="primary" onClick={handleCreateMaintenanceVendorClick}>
@@ -101,6 +107,8 @@ export default function MaintenanceLogEntryFormPage() {
           label="Amount"
           value={amount}
           onChange={handleAmountChange}
+          variant="outlined"
+          margin='normal'
         />
 
         <Typography variant="subtitle1">Plan</Typography>
@@ -110,6 +118,8 @@ export default function MaintenanceLogEntryFormPage() {
           type="date"
           value={repairDate}
           onChange={handleRepairDateChange}
+          variant="outlined"
+          margin='normal'
           InputLabelProps={{
             shrink: true,
           }}
@@ -120,6 +130,8 @@ export default function MaintenanceLogEntryFormPage() {
           type="number"
           value={odometer}
           onChange={handleOdometerChange}
+          variant="outlined"
+          margin='normal'
         />
 
         <Button variant="contained" color="primary" onClick={handleSaveClick}>

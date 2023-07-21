@@ -1,5 +1,6 @@
 import React from 'react';
 import { Typography, Button, Box } from '@material-ui/core';
+import Stack from '@mui/material/Stack'
 
 export default function ReportsPage() {
   const handleButtonClick = (reportName) => {
@@ -10,8 +11,8 @@ export default function ReportsPage() {
   return (
     <div>
       <Typography variant="h6">Reports</Typography>
-
-      <Box my={2}>
+      <Box my={2}> 
+      <Stack direction="column" spacing={2} />
         <Button variant="contained" color="primary" onClick={() => handleButtonClick('Company Overview')}>
           Company Overview
         </Button>

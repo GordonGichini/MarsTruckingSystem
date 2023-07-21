@@ -28,10 +28,10 @@ function NewMilePlan() {
       </Typography>
 
       <div className={classes.formContainer}>
-        <TextField label="Title" fullWidth className={classes.formInput} />
-        <TextField label="Description" fullWidth className={classes.formInput} />
-        <TextField label="Mileage Interval" type="number" fullWidth className={classes.formInput} />
-        <TextField label="Units" fullWidth className={classes.formInput} />
+        <TextField label="Title" fullWidth className={classes.formInput} variant="outlined" />
+        <TextField label="Description" fullWidth className={classes.formInput} variant="outlined" />
+        <TextField label="Mileage Interval" type="number" fullWidth className={classes.formInput} variant="outlined" />
+        <TextField label="Units" fullWidth className={classes.formInput} variant="outlined" />
 
         <Button variant="contained" className={classes.button}>
           Select All

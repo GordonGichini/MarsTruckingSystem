@@ -28,12 +28,12 @@ function NewCalendarPlan() {
       </Typography>
 
       <div className={classes.formContainer}>
-        <TextField label="Title" fullWidth className={classes.formInput} />
-        <TextField label="Description" fullWidth className={classes.formInput} />
-        <TextField label="Start Date" type="date" fullWidth className={classes.formInput} />
-        <TextField label="End Date" type="date" fullWidth className={classes.formInput} />
-        <TextField label="Interval" type="number" fullWidth className={classes.formInput} />
-        <TextField label="Interval Period" select fullWidth className={classes.formInput}>
+        <TextField label="Title" fullWidth className={classes.formInput}variant="outlined" />
+        <TextField label="Description" fullWidth className={classes.formInput}variant="outlined" />
+        <TextField label="Start Date" type="date" fullWidth className={classes.formInput}variant="outlined" />
+        <TextField label="End Date" type="date" fullWidth className={classes.formInput}variant="outlined" />
+        <TextField label="Interval" type="number" fullWidth className={classes.formInput}variant="outlined" />
+        <TextField label="Interval Period" select fullWidth className={classes.formInput}variant="outlined">
           {/* Add options for interval periods */}
         </TextField>
 

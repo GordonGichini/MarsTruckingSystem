@@ -2,10 +2,11 @@ import React from 'react';
 import { Typography, TextField, Button, Box } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import { makeStyles } from '@mui/styles';
-import { useTheme } from '@mui/material/styles';
+import { useTheme, createTheme } from '@mui/material/styles';
 
-
-
+const theme = createTheme({
+    spacing: 4,
+});
 const useStyles = makeStyles((theme) => ({
     formContainer: {
       maxWidth: 600,

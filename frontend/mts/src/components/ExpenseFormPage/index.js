@@ -97,13 +97,17 @@ export default function ExpenseFormPage() {
           label="Amount"
           value={amount}
           onChange={handleAmountChange}
-        />
+          variant="outlined"
+          margin='normal'
+          />
 
         <TextField
           label="Description"
           value={description}
           onChange={handleDescriptionChange}
-        />
+          variant="outlined"
+          margin='normal'
+          />
 
         <FormControl>
           <InputLabel id="assign-to-trip-label">Assign to Trip</InputLabel>
@@ -122,6 +126,8 @@ export default function ExpenseFormPage() {
           type="date"
           value={expenseDate}
           onChange={handleExpenseDateChange}
+          variant="outlined"
+          margin='normal'
           InputLabelProps={{
             shrink: true,
           }}
@@ -131,30 +137,40 @@ export default function ExpenseFormPage() {
           label="Unit"
           value={unit}
           onChange={handleUnitChange}
+          variant="outlined"
+          margin='normal'
         />
 
         <TextField
           label="Gallons"
           value={gallons}
           onChange={handleGallonsChange}
+          variant="outlined"
+          margin='normal'
         />
 
         <TextField
           label="Odometer"
           value={odometer}
           onChange={handleOdometerChange}
+          variant="outlined"
+          margin='normal'
         />
 
         <TextField
           label="Fuel Vendor"
           value={fuelVendor}
           onChange={handleFuelVendorChange}
+          variant="outlined"
+          margin='normal'
         />
 
         <TextField
           label="State/Province"
           value={stateProvince}
           onChange={handleStateProvinceChange}
+          variant="outlined"
+          margin='normal'
         />
 
         <Button variant="contained" color="primary" onClick={handleCreateExpenseClick}>
