@@ -6,6 +6,7 @@ import { Box, colors } from '@mui/material';
 import { NavLink, Link } from 'react-router-dom';
 import Divider from '@mui/material/Divider'; 
 import { ExpandMore as ExpandMoreIcon } from '@material-ui/icons';
+import { logo } from '../assets';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -26,10 +27,10 @@ const useStyles = makeStyles((theme) => ({
   },
   navLink: {
     marginLeft: theme.spacing(0.1),
-    color: 'green',
+    color: '#76FF03',
     textDecoration: 'none',
     '&:hover': {
-      color: 'black',
+      color: 'green',
     },
   },
   activeNavLink: {
@@ -89,8 +90,7 @@ function InNavBar() {
     <AppBar className={classes.appBar}> 
     <Toolbar>
     <Typography variant="h6" component={Link} to="/" >
-  <img src="" alt="Logo" style={{ marginRight: '10px', height: '30px' }} />
-  MTS
+  <img src={logo} alt="Logo" style={{ marginRight: '10px', height: '50px' }} />
     </Typography> 
     <Box sx={{display:"flex",
     flexGrow: 1,

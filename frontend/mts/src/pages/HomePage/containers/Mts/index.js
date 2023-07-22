@@ -9,14 +9,10 @@ const Mts = () => {
        align="center"
        sx={{
        fontWeight:"bold"
-
        }}
        >
        Mars Trucking Software (MTS) 
-       </Typography>
-
-       
-        
+       </Typography>       
        <Stack 
           direction="row"         
           sx={{

@@ -2,7 +2,7 @@ import React from 'react'
 import CssBaseline from '@mui/material/CssBaseline';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
-import {Road} from '../../assets/';
+import {truckbackground} from '../../assets/';
 import {Typography ,Button,Grid,Stack  }from '@mui/material';
 import NavigateNextOutlinedIcon from '@mui/icons-material/NavigateNextOutlined';
 
@@ -16,7 +16,7 @@ const SubHeading = () => {
   direction="row"
   justifyContent="center"
   alignItems="center"
-sx={{backgroundImage:`url(${Road})`,
+sx={{backgroundImage:`url(${truckbackground})`,
 height:"300px",
 width:'100%',
 backgroundPosition: "center",
