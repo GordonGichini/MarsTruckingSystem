@@ -1,31 +1,38 @@
 import React from 'react';
 import EditPage from './EditPage';
+//import Footer from './HomePage/components/Footer'
+import InNavBar from '../../common/Header/InNavBar';
 import { Link } from 'react-router-dom';
+import Stack from '@mui/material/Stack';
 import { Typography, makeStyles, Button, Box, TableContainer, Table, TableBody, TableRow, TableCell, TextField } from '@material-ui/core';
 
 
 export { EditPage }
 
 const useStyles = makeStyles((theme) => ({
-  appBar: {
-    backgroundColor: '#212121',
-    marginBottom: theme.spacing(2),
-  },
   title: {
     flexGrow: 1,
+    marginTop: theme.spacing(2),
+    marginLeft: theme.spacing(2),
   },
   buttonContainer: {
     display: 'flex',
     justifyContent: 'space-between',
     marginBottom: theme.spacing(2),
+    marginTop: theme.spacing(2)
   },
   videoContainer: {
     display: 'flex',
     justifyContent: 'center',
+    borderStyle: 'solid',
+    borderColor: 'grey',
     alignItems: 'center',
     height: '300px',
+    width: '600px',
     backgroundColor: '#f5f5f5',
+    marginTop: theme.spacing(2),
     marginBottom: theme.spacing(2),
+    marginLeft: theme.spacing(2)
   },
   videoButton: {
     margin: theme.spacing(2),
@@ -47,17 +54,32 @@ function ProfilePage() {
 
   return (
     <div>
-          <Typography variant="h6" className={classes.title}>
-            Company Name Profile
-          </Typography>
+      <InNavBar />
+      <Box mt={12} ml={2} display="flex">
+        <Stack direction="row" spacing={2}>
           <Button color="inherit"
           component={Link}
           to="./editpage"
-          >Edit Options</Button>
-          <Button color="inherit">Subscription</Button>
-          <Button color="inherit">Notifications</Button>
-
-      <Typography variant="h4">Profile</Typography>
+          variant="outlined"
+          >Edit Options
+          </Button>
+          <Button color="inherit"
+          component={Link}
+          to='./subscription'
+          variant="outlined"
+          >Subscription
+          </Button>
+          <Button color="inherit"
+          component={Link}
+          to="./notifications"
+          variant="outlined"
+          >Notifications
+          </Button>
+          </Stack>
+        </Box>
+          <Typography variant="h4" className={classes.title}>
+            Chakra Logistics Limited
+          </Typography>
 
       <Box className={classes.buttonContainer}>
         <Box>

@@ -29,8 +29,17 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: 'bold',
   },
   arrowIcon: {
-    marginRight: theme.spacing(0.1),
+    marginLeft: theme.spacing(0.2),
+    marginRight: theme.spacing(0.2),
     color: 'grey'
+  },
+  buttonGroup: {
+    display: 'flex',
+    justifyContent: 'center',
+    flexGrow: 1,
+    '& > *': {
+      margin: theme.spacing(0.5),
+    },
   },
 }));
 
@@ -62,17 +71,7 @@ export default function Navbar() {
       <Typography variant="h6" component={Link} to="/" >
         <img src={logo} alt="Logo" style={{ marginRight: '10px', height: '50px' }} />
         </Typography>
-  <Box sx={{display:"flex",
-  justifyContent:"space-between",
-  alignItems:"center",
-  width:"100%"
-  }} >
-    <Box >
-    <ButtonGroup
-    variant="text"
-    aria-label="medium outlined primary button group" 
-    sx={{ width: "100%", justifyContent: 'space-between', paddingRight: '8px' }}
-    >
+  <Box className={classes.buttonGroup}>
         <Button
         color="inherit"
         component={NavLink}
@@ -80,7 +79,6 @@ export default function Navbar() {
         exact
         activeClassName={classes.active}
         className={classes.navLink}
-        sx={{ margin: '0 8px' }}
         >Home</Button>         
         <Button
         color="inherit"
@@ -98,6 +96,8 @@ export default function Navbar() {
           aria-controls="mts-menu"
           aria-haspopup="true"
           onClick={handleMtsMenuOpen}
+          disableRipple
+          disableFocusRipple
           > 
           <ExpandMoreIcon className={classes.arrowIcon} />
           </IconButton>
@@ -139,6 +139,8 @@ export default function Navbar() {
           aria-controls="eld-menu"
           aria-haspopup="true"
           onClick={handleEldMenuOpen}
+          disableRipple
+          disableFocusRipple
           >
           <ExpandMoreIcon className={classes.arrowIcon} />
           </IconButton>
@@ -177,7 +179,6 @@ export default function Navbar() {
         activeClassName={classes.active}
         className={classes.navLink}
         >Blog</Button>
-        </ButtonGroup>
         </Box>
         <Box sx={{ display: "flex", alignItems: "center" }}>
         <Button
@@ -199,7 +200,6 @@ export default function Navbar() {
         className={classes.navLink}
         >Login</Button>
   </Box>   
-  </Box>
   </Toolbar>
   </AppBar>
 );

@@ -7,7 +7,7 @@ function Alerts() {
     <div>
     
     <Grid container spacing={2}>
-      <Stack direction="row" spacing={0.5} />
+      <Stack direction="column" spacing={0.5}>
       <Grid item xs={12} md={4}>
         <Box bgcolor="primary.main" height="100%" padding={2}>
           <Button variant="contained" style={{ backgroundColor: 'lightgreen', marginBottom: '10px' }}>ELD Signup</Button>
@@ -23,6 +23,7 @@ function Alerts() {
                   <Button variant="contained" style={{ backgroundColor: 'lightred'}}>Loads</Button>
                 </Box>
         </Grid>
+        </Stack>
       </Grid>
       </div>
   );
