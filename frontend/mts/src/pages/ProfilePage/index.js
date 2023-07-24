@@ -4,7 +4,7 @@ import EditPage from './EditPage';
 import InNavBar from '../../common/Header/InNavBar';
 import { Link } from 'react-router-dom';
 import Stack from '@mui/material/Stack';
-import { Typography, makeStyles, Button, Box, TableContainer, Table, TableBody, TableRow, TableCell, TextField } from '@material-ui/core';
+import { Typography, makeStyles, Button, Box, Grid, TableContainer, Table, TableBody, TableRow, TableCell, TextField } from '@material-ui/core';
 
 
 export { EditPage }
@@ -34,6 +34,14 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: theme.spacing(2),
     marginLeft: theme.spacing(2)
   },
+  noteContainer: {
+    display: 'flex',
+    borderStyle: '1px solid green',
+    height: '150px',
+    width: '100%',
+    padding: theme.spacing(2),
+    alignItems: 'center',
+  },
   videoButton: {
     margin: theme.spacing(2),
   },
@@ -58,143 +66,162 @@ function ProfilePage() {
       <Box mt={12} ml={2} display="flex">
         <Stack direction="row" spacing={2}>
           <Button color="inherit"
-          component={Link}
-          to="./editpage"
-          variant="outlined"
+            component={Link}
+            to="./editpage"
+            variant="outlined"
           >Edit Options
           </Button>
           <Button color="inherit"
-          component={Link}
-          to='./subscription'
-          variant="outlined"
+            component={Link}
+            to='./subscription'
+            variant="outlined"
           >Subscription
           </Button>
           <Button color="inherit"
-          component={Link}
-          to="./notifications"
-          variant="outlined"
+            component={Link}
+            to="./notifications"
+            variant="outlined"
           >Notifications
           </Button>
-          </Stack>
-        </Box>
-          <Typography variant="h5" className={classes.title}>
-            Chakra Logistics Limited
-          </Typography>
-          <Box mt={2} p={2} bordercolor="green" bgcolor="white" sx={{width:"600px", m:"20px", alignItems: "center"}}>
-            
-            <Typography>
-              Notice: Company address updated successfully
-              </Typography>
-
-          </Box>
+        </Stack>
+      </Box>
+      <Typography variant="h5" className={classes.title}>
+        Chakra Logistics Limited
+      </Typography>
+      <Box mt={2} p={2} border="1px solid green" sx={{ m: "20px", alignItems: "center", display: 'flex', justifyContent: 'center' }}>
+        <Button variant="contained" color="success">
+          Green Button 
+        </Button>
+        <Typography>
+          Notice: Company address updated successfully
+        </Typography>
+      </Box>
 
       <Box className={classes.buttonContainer}>
         <Box mt={2} ml={2}>
           <Box mt={3} ml={3}>
-          <Typography variant="h6">Next Step: Add Your First Truck</Typography>
+            <Typography variant="h6">Next Step: Add Your First Truck</Typography>
           </Box>
           <Box className={classes.videoContainer}>
+            Next Step: Add your First Truck
             {/* Place your video component here */}
           </Box>
           <Button variant="contained" color="primary" className={classes.videoButton}>
             Click to Add Your First Truck
           </Button>
         </Box>
-
-        <Box>
-          <TableContainer className={classes.tableContainer}>
-            <Table>
-              <TableBody>
-                <TableRow>
-                  <TableCell>Trial Start:</TableCell>
-                  <TableCell>Start Date</TableCell>
-                </TableRow>
-                <TableRow>
-                  <TableCell>Trial End:</TableCell>
-                  <TableCell>End Date</TableCell>
-                </TableRow>
-                <TableRow>
-                  <TableCell>Days of Trial Remaining:</TableCell>
-                  <TableCell>11 days</TableCell>
-                </TableRow>
-              </TableBody>
-            </Table>
-          </TableContainer>
-
-          <Typography variant="body2" className={classes.notice}>
-            First bill will be at the end of the trial period in 11 days
-          </Typography>
+        <Box className={classes.noteContainer}>
+          <TextField
+            label="Notes"
+            variant="outlined"
+            multiline
+            fullWidth />
         </Box>
+      </Box>
+
+      <Box>
+        <TableContainer className={classes.tableContainer}>
+          <Table>
+            <TableHead>
+              <TableRow>
+                <TableCell>Trial Start:</TableCell>
+                <TableCell>Trial End:</TableCell>
+                <TableCell>Days of Trial Remaining:</TableCell>
+              </TableRow>
+              </TableHead>
+              <TableBody>
+              <TableRow>
+                <TableCell>Start Date</TableCell>
+                <TableCell>End Date</TableCell>
+                <TableCell>11 days</TableCell>
+              </TableRow>                
+            </TableBody>
+          </Table>
+        </TableContainer>
+
+        <Typography variant="body2" className={classes.notice}>
+          First bill will be at the end of the trial period in 11 days
+        </Typography>
       </Box>
 
       <Box className={classes.formContainer}>
-        <Box className={classes.form}>
+        <Grid item xs={12} md={6}>
+        <Box className={classes.form} border='1px solid black' p={2}>
           <Typography variant="h6">Company Details</Typography>
-          <TextField label="Address" fullWidth />
-          <TextField label="Primary Phone" fullWidth />
-          <TextField label="Alt" fullWidth />
-          <TextField label="Website" fullWidth />
+          <Button variant="outlined">Edit Profile</Button>
+          <Button variant="outlined">Upload Logo</Button>
+          <Typography variant="subtitle1" gutterBottom>Address:</Typography>
+          <Typography variant="body1">Company Address</Typography>
+          <Typography variant="subtitle1" gutterBottom>Primary:</Typography>
+          <Typography variant="body1">Primary Data</Typography>
+          <Typography variant="subtitle1"gutterBottom>Website:</Typography>
+          <Typography variant="body1">Website Data</Typography>
         </Box>
+        </Grid>
 
-        <Box className={classes.form}>
+        <Grid item xs={12} md={6}>
+        <Box className={classes.form} border="1px solid black" p={2}>
           <Typography variant="h6">Account Owner Details</Typography>
-          <TextField label="Name" fullWidth />
-          <TextField label="Email" fullWidth />
+          <Button variant="outlined">Edit</Button>
+          <Button variant="outlined">Change Account Owner</Button>
+          <Typography variant="subtitle1" gutterBottom>Name:</Typography>
+          <Typography variant="body1">Account Owner Name</Typography>
+          <Typography variant="subtitle1" gutterBottom>Email:</Typography>
+          <Typography variant="body1">Account Owner Email</Typography>
         </Box>
-      </Box>
+        </Grid>
+        </Box>
 
-      <Typography variant="h6">Users</Typography>
-      <Box className={classes.buttonContainer}>
-        <Button variant="contained" color="primary">Add User</Button>
-        <Button>Show Inactive Users</Button>
-      </Box>
-
-      <TableContainer className={classes.tableContainer}>
-        <Table>
-          <TableBody>
-            <TableRow>
-              <TableCell>Roles</TableCell> 
-              <TableCell>
-                <ul>
-                  <li>Owner</li>
-                  <li>Dispatch</li>
-                  <li>Accounting</li>
-                  <li>Mechanic</li>
-                  <li>ELD Driver</li>
-                </ul>
-              </TableCell>
-              </TableRow>
-
+        <Typography variant="h6">Users</Typography>
+        <TableContainer className={classes.tableContainer}>
+          <Table> 
+            <TableHead>
             <TableRow>
               <TableCell>Name</TableCell>
-              <TableCell>Email</TableCell>              
+              <TableCell>Email</TableCell>
+              <TableCell>Roles
+                <Table>
+              <TableHead>
+                <TableRow>
+              <TableCell>Owner</TableCell>
+              <TableCell>Dispatcher</TableCell>
+              <TableCell>Accounting</TableCell>
+              <TableCell>Mechanic</TableCell>
+              <TableCell>ELD Driver</TableCell>           
+            </TableRow>
+            </TableHead>
+            </Table>
+            </TableCell>
+              <TableCell>Active</TableCell>
               <TableCell>Actions</TableCell>
             </TableRow>
-            <TableRow>
+            </TableHead>
+            <TableBody>
+              <TableRow>
               <TableCell>John Doe</TableCell>
               <TableCell>johndoe@example.com</TableCell>
-             
+              <TableCell>
+                <Table>
+                  <TableBody>
+                    <TableRow>
+                    <TableCell>✓</TableCell>
+                      <TableCell>✓</TableCell>
+                      <TableCell>✓</TableCell>
+                      <TableCell>✓</TableCell>
+                      <TableCell>✓</TableCell>
+                    </TableRow>
+                  </TableBody>
+                </Table>
+              </TableCell>
+              <TableCell>
+                <Button variant="contained" color="success">Active</Button>
+              </TableCell>
               <TableCell>
                 <Button>Edit</Button>
                 <Button>Deactivate</Button>
                 <Button>Delete</Button>
               </TableCell>
             </TableRow>
-            <TableRow>
-              <TableCell>Jane Smith</TableCell>
-              <TableCell>janesmith@example.com</TableCell>
-              <TableCell>
-                <ul>
-                  <li>Accounting</li>
-                </ul>
-              </TableCell>
-              <TableCell>
-                <Button>Edit</Button>
-                <Button>Deactivate</Button>
-                <Button>Delete</Button>
-              </TableCell>
-            </TableRow>
-
           </TableBody>
         </Table>
       </TableContainer>
