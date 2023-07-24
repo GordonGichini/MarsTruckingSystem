@@ -9,17 +9,22 @@ function Alerts() {
     <Grid container spacing={2}>
       <Stack direction="column" spacing={0.5}>
       <Grid item xs={12} md={4}>
-        <Box bgcolor="primary.main" height="100%" padding={2}>
+        <Box ml={2} mt={2}>
+        <Typography variant="h6">
+          Alerts
+        </Typography>
+        </Box>
+        <Box bgcolor="white" p={2} sx={{width:"600px", m:"20px"}}>
           <Button variant="contained" style={{ backgroundColor: 'lightgreen', marginBottom: '10px' }}>ELD Signup</Button>
           </Box>
           </Grid>
           <Grid item xs={12} md={4}>
-            <Box bgcolor="secondary.main" height="100%" padding={2}>
+            <Box bgcolor="white" p={2} sx={{width:"600px", m:"20px"}}>
               <Button variant="contained" style={{ backgroundColor: 'lightgreen'}}>Edit Company</Button>
               </Box>
               </Grid>
               <Grid item xs={12} md={4}>
-                <Box bgcolor="info.main" height="100%" padding={2}>
+                <Box bgcolor="white" p={2} sx={{width:"600px", m:"20px"}}>
                   <Button variant="contained" style={{ backgroundColor: 'lightred'}}>Loads</Button>
                 </Box>
         </Grid>

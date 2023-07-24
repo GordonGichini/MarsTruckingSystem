@@ -2,6 +2,9 @@ import { createTheme } from '@material-ui/core/styles';
 
 const theme = createTheme({
   palette: {
+    background: {
+      default: '#fff',
+    },
     primary: {
       main: '#4CAF50', // Green color
     },

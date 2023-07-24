@@ -1,4 +1,5 @@
-import { Box, Typography } from '@mui/material'
+import { Box, Paper, Typography } from '@mui/material';
+import { makeStyles } from '@material-ui/core/styles';
 import React from 'react'
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
@@ -7,11 +8,20 @@ import LocalShippingIcon from '@mui/icons-material/LocalShipping';
 import './styles.css';
 import { Link } from "react-router-dom";
 
+const useStyles = makeStyles((theme) => ({
+  paper: {
+    padding: theme.spacing(2),
+    height: '100%',
+    overflow: 'auto',
+  },
+}));
+
 const GettingStarted = () => {
-  return (
-    
+  const classes = useStyles();
+  return (    
     <Box>
-      <Box mt={4} p={2} bgcolor="white" sx={{width:"600px", m:"20px", }}>
+      <Paper className={classes.paper}>
+      <Box mt={4} p={2} sx={{width:"600px", m:"20px", }}>
     <Typography>Getting Started</Typography>
     <Stack direction="column" spacing={1} >
 
@@ -107,6 +117,7 @@ const GettingStarted = () => {
       
     </Stack>
    </Box>
+   </Paper>
    </Box>
   )
 }

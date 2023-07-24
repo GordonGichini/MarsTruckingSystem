@@ -77,13 +77,22 @@ function ProfilePage() {
           </Button>
           </Stack>
         </Box>
-          <Typography variant="h4" className={classes.title}>
+          <Typography variant="h5" className={classes.title}>
             Chakra Logistics Limited
           </Typography>
+          <Box mt={2} p={2} bordercolor="green" bgcolor="white" sx={{width:"600px", m:"20px", alignItems: "center"}}>
+            
+            <Typography>
+              Notice: Company address updated successfully
+              </Typography>
+
+          </Box>
 
       <Box className={classes.buttonContainer}>
-        <Box>
-          <Typography variant="h6">Add Your First Truck</Typography>
+        <Box mt={2} ml={2}>
+          <Box mt={3} ml={3}>
+          <Typography variant="h6">Next Step: Add Your First Truck</Typography>
+          </Box>
           <Box className={classes.videoContainer}>
             {/* Place your video component here */}
           </Box>
