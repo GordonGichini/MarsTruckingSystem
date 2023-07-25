@@ -1,5 +1,5 @@
 import {HomePage, SignInSide, SignUpSide, ErrorPage, Dashboard, ProfilePage} from "./pages";
-import {Trips, Expenses, Invoices, Maintenance, Drivers, Addresses, Units} from "./features";
+import {Trips, Expenses, Invoices, Maintenance, Drivers, Addresses, Units, Subscription} from "./features";
 import { EmptyMove, DetailedList } from "./features/Dispatches";
 import { AddCategoryForm, ListCategories } from "./features/Expenses";
 import { MaintenancePlans, NewCalendarPlan, NewMilePlan } from "./features/Maintenances";
@@ -35,6 +35,7 @@ function App() {
         <Route path="/add-dispatch" element={<DispatchFormPage/>} />
         <Route path="/add-expense" element={<ExpenseFormPage/>} />
         <Route path="/editpage" element={<EditPage/>} />
+        <Route path="/subscription" element={<Subscription/>} />
 
         <Route path="/list-categories" element={<ListCategories/>} />
         <Route path="/add-category" element={<AddCategoryForm/>} />

@@ -75,7 +75,7 @@ function ProfilePage() {
           </Button>
           <Button color="inherit"
             component={Link}
-            to='./subscription'
+            to='/subscription'
             variant="outlined"
           >Subscription
           </Button>
