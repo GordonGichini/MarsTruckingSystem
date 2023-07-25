@@ -1,6 +1,6 @@
 import React from 'react';
 import InNavBar from '../../common/Header/InNavBar';
-//import Footer from './HomePage/components/Footer';
+import Footer from '../../pages/HomePage/components/Footer';
 import { Link } from 'react-router-dom';
 import Stack from '@mui/material/Stack';
 import { Typography, makeStyles, Box, Button, Grid } from '@material-ui/core';
@@ -11,6 +11,10 @@ const useStyles = makeStyles((theme) => ({
         marginTop: theme.spacing(2),
         marginLeft: theme.spacing(2),
     },
+    upgradeButton: {
+      width: 'fit-content',
+      color: 'green',
+    },
     proContainer: {
         display: 'flex',
         flexDirection: 'column',
@@ -20,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
         marginTop: theme.spacing(2),
         marginLeft: theme.spacing(2),
         marginRight: theme.spacing(2),
-        marginBottom: theme.spacing(2)
+        marginBottom: theme.spacing(4),
     },
     trialContainer: {
         display: 'flex',
@@ -34,20 +38,20 @@ const useStyles = makeStyles((theme) => ({
     },
     subscription: {
         display: 'flex',
-        alignItems: 'center',
         border: '1px solid black',
-        padding: theme.spacing(2),
+        padding: theme.spacing(1),
         marginTop: theme.spacing(2),
         marginLeft: theme.spacing(2),
         marginBottom: theme.spacing(2),
-        justifyContent: 'space-between',
+        justifyContent: 'space-evenly',
       },
     
       billing: {
         display: 'flex',
-        alignItems: 'center',
+        justifyContent: 'space-evenly',
         border: '1px solid black',
-        padding: theme.spacing(2),
+        padding: theme.spacing(1),
+        marginRight: theme.spacing(2),
       },
 }));
 
@@ -109,7 +113,7 @@ function Subscription() {
                     This lets you enter loads when you don't have all the information. It also gives you access to LTL trips. 
                     That means the system can track when there are loads from different customers on the same load.
                 </Typography> 
-                <Button variant="outlined" size="small">Upgrade to Pro</Button>               
+                <Button variant="contained" className={classes.upgradeButton}>Upgrade to Pro</Button>               
             </Box>
 
             <Grid container spacing={2}>
@@ -133,12 +137,13 @@ function Subscription() {
 </Grid>
 </Grid>
 
-<Box ml={2}>
+
+<Grid container spacing={2}>
   <Grid item xs={12} md={6}>
-    <Box className={classes.subscription} p={2}>
-      <Typography variant="h6" gutterBottom>
+    <Typography variant="h6" gutterBottom ml={2} mb={2}>
         Subscription
       </Typography>
+    <Box className={classes.subscription} p={2}>     
       <table>
         <tbody>
           <tr>
@@ -185,11 +190,16 @@ function Subscription() {
             <td>SubTotal</td>
             <td>$100.00</td>
           </tr>
+          <tr>
+            <td>Total</td>
+            <td>$100.00</td>
+          </tr>
         </tbody>
       </table>
     </Box>
   </Grid>
-  </Box>      
+  </Grid>      
+  <Footer />
         </div>
     )
 }
