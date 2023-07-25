@@ -4,7 +4,7 @@ import EditPage from './EditPage';
 import InNavBar from '../../common/Header/InNavBar';
 import { Link } from 'react-router-dom';
 import Stack from '@mui/material/Stack';
-import { Typography, makeStyles, Button, Box, Grid, TableContainer, Table, TableBody, TableRow, TableCell, TextField } from '@material-ui/core';
+import { Typography, makeStyles, Button, Box, Grid, TableContainer, Table, TableBody, TableHead, TableRow, TableCell, TextField } from '@material-ui/core';
 
 
 export { EditPage }
@@ -18,6 +18,7 @@ const useStyles = makeStyles((theme) => ({
   buttonContainer: {
     display: 'flex',
     justifyContent: 'space-between',
+    alignItems: 'center',
     marginBottom: theme.spacing(2),
     marginTop: theme.spacing(2)
   },
@@ -37,10 +38,11 @@ const useStyles = makeStyles((theme) => ({
   noteContainer: {
     display: 'flex',
     borderStyle: '1px solid green',
-    height: '150px',
+    height: '120px',
     width: '100%',
     padding: theme.spacing(2),
     alignItems: 'center',
+    justifyContent: 'space-between',
   },
   videoButton: {
     margin: theme.spacing(2),
@@ -88,7 +90,7 @@ function ProfilePage() {
       <Typography variant="h5" className={classes.title}>
         Chakra Logistics Limited
       </Typography>
-      <Box mt={2} p={2} border="1px solid green" sx={{ m: "20px", alignItems: "center", display: 'flex', justifyContent: 'center' }}>
+      <Box mt={2} p={1} border="1px solid green" sx={{ m: "20px", alignItems: "center", display: 'flex', justifyContent: 'center' }}>
         <Button variant="contained" color="success">
           Green Button 
         </Button>

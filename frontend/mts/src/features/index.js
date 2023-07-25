@@ -6,6 +6,7 @@ import Reports from "./Reports";
 import Addresses from "./Addresses";
 import Drivers from "./Drivers";
 import Units from "./Units";
+import Subscription from "./Subscription";
 
 export {
     Trips,
@@ -15,5 +16,6 @@ export {
     Reports,
     Addresses,
     Drivers,
-    Units
+    Units,
+    Subscription,
 }
