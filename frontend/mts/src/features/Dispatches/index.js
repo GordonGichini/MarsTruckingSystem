@@ -1,5 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import InNavBar from '../../common/Header/InNavBar';
+import Footer from '../../pages/HomePage/components/Footer';
 import { Toolbar, Typography, makeStyles, Button, TextField, Box } from '@material-ui/core';
 import EmptyMove from './EmptyMove';
 import DetailedList from  './DetailedList';
@@ -53,6 +55,7 @@ function Trips() {
 
   return (
     <div>
+      <InNavBar />
    
     <Box className={classes.buttonContainer}>
      <Typography variant="h6" className={classes.title}>
@@ -105,6 +108,7 @@ function Trips() {
         Add Dispatch
       </Button>
     </Box>
+    <Footer />
   </div>
   )
 }

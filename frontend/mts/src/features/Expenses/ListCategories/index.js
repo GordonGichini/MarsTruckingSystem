@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import InNavBar from '../../../common/Header/InNavBar';
+import Footer from '../../../pages/HomePage/components/Footer';
 import {
   AppBar,
   Toolbar,
@@ -43,6 +45,7 @@ function ListCategories() {
 
   return (
     <div>
+      <InNavBar />
       <AppBar position="static" className={classes.appBar}>
         <Toolbar>
           <Typography variant="h6" className={classes.title}>
@@ -101,6 +104,7 @@ function ListCategories() {
           </TableBody>
         </Table>
       </TableContainer>
+      <Footer />
     </div>
   );
 }

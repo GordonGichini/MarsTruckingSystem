@@ -1,5 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import InNavBar from '../../../common/Header/InNavBar';
+import Footer from '../../../pages/HomePage/components/Footer';
 import { Typography, Button, makeStyles, Box } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
@@ -33,6 +35,7 @@ function MaintenancePlans() {
 
   return (
     <div>
+      <InNavBar />
           <Typography variant="h6" className={classes.title}>
             Maintenance Plans
           </Typography>
@@ -81,6 +84,7 @@ function MaintenancePlans() {
           New Mile Plan
         </Button>
       </Box>
+      <Footer />
     </div>
   );
 }

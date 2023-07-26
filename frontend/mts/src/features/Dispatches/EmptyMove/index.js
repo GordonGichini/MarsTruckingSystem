@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import InNavBar from '../../../common/Header/InNavBar';
+import Footer from '../../../pages/HomePage/components/Footer';
 import { Button, TextField, Box, Typography } from '@material-ui/core';
 
 export default function EmptyMove() {
@@ -27,6 +29,7 @@ export default function EmptyMove() {
 
   return (
     <div>
+      <InNavBar />
       <Typography variant="h6">Basic Details</Typography>
       <Box>
         <TextField
@@ -128,6 +131,7 @@ export default function EmptyMove() {
           Cancel
         </Button>
       </Box>
+      <Footer />
     </div>
   );
 };

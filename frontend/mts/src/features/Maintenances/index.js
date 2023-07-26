@@ -1,5 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import InNavBar from '../../common/Header/InNavBar';
+import Footer from '../../pages/HomePage/components/Footer';
 import NewCalendarPlan from  './NewCalendarPlan';
 import NewMilePlan from './NewMilePlan';
 import MaintenancePlans from './MaintenancePlans';
@@ -53,6 +55,7 @@ function Maintenance() {
 
   return (
     <div>
+      <InNavBar />
           <Typography variant="h6" className={classes.title}>
             Maintenance Page
           </Typography>
@@ -102,6 +105,7 @@ function Maintenance() {
           Add your Maintenance Log Entry
         </Button>
       </Box>
+      <Footer />
     </div>
 
    

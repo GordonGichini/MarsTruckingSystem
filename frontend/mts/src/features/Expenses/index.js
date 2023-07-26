@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from "react-router-dom";
+import InNavBar from '../../common/Header/InNavBar';
+import Footer from '../../pages/HomePage/components/Footer';
 import { Typography, makeStyles, Button, TextField, Box } from '@material-ui/core';
 import AddCategoryForm from './AddCategoryForm';
 import ListCategories from './ListCategories';
@@ -56,6 +58,7 @@ function Expenses() {
 
   return (
     <div>
+      <InNavBar />
       <Box mt={4} ml={1} display="flex">
         <Stack direction="row" spacing={0.5} />
         <Button variant="contained" className={classes.button} component={Link} to="/add-expense">
@@ -100,6 +103,7 @@ function Expenses() {
             Add First Expense
           </Button>
       </Box>
+      <Footer />
       </div>
   );
           }

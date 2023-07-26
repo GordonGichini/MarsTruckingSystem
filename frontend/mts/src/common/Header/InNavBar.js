@@ -107,7 +107,7 @@ function InNavBar() {
           <Button
            colour="inherit"
            component={NavLink}
-           to="/"
+           to="/dashboard"
            exact
            activeClassName={classes.active}
            className={classes.navLink}

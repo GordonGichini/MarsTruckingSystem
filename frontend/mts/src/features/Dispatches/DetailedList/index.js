@@ -1,4 +1,6 @@
 import React from 'react';
+import InNavBar from '../../../common/Header/InNavBar';
+import Footer from '../../../pages/HomePage/components/Footer';
 import { Button, Table, TableHead, TableRow, TableCell, TableBody } from '@material-ui/core';
 
 import { Link }from 'react-router-dom';
@@ -33,6 +35,7 @@ export default function DetailedList() {
 
   return (
     <div>
+      <InNavBar />
       <div>
         <Button variant="outlined" 
         color="primary"
@@ -103,6 +106,7 @@ export default function DetailedList() {
           ))};
         </TableBody>
       </Table>
+      <Footer />
     </div>
   );
 };

@@ -44,6 +44,10 @@ const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
     justifyContent: 'space-between',
   },
+  btn: {
+    justifyContent: 'flex-start',
+
+  },
   videoButton: {
     margin: theme.spacing(2),
   },
@@ -69,7 +73,7 @@ function ProfilePage() {
         <Stack direction="row" spacing={2}>
           <Button color="inherit"
             component={Link}
-            to="./editpage"
+            to="/editpage"
             variant="outlined"
           >Edit Options
           </Button>
@@ -91,8 +95,8 @@ function ProfilePage() {
         Chakra Logistics Limited
       </Typography>
       <Box mt={2} p={1} border="1px solid green" sx={{ m: "20px", alignItems: "center", display: 'flex', justifyContent: 'center' }}>
-        <Button variant="contained" color="success">
-          Green Button 
+        <Button variant="contained" color="primary" className={classes.btn}>
+          Green
         </Button>
         <Typography>
           Notice: Company address updated successfully

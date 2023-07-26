@@ -1,4 +1,6 @@
 import React from 'react';
+import InNavBar from '../../../common/Header/InNavBar';
+import Footer from '../../../pages/HomePage/components/Footer';
 import { Typography, TextField, Button, makeStyles } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
@@ -23,6 +25,7 @@ function NewMilePlan() {
 
   return (
     <div>
+      <InNavBar />
       <Typography variant="h6" className={classes.formTitle}>
         New Mile Plan
       </Typography>
@@ -47,6 +50,7 @@ function NewMilePlan() {
           cancel
         </Button>
       </div>
+      <Footer />
     </div>
   );
 }

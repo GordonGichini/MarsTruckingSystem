@@ -1,5 +1,7 @@
 import React from 'react';
 import { Typography, TextField, Button, makeStyles } from '@material-ui/core';
+import InNavBar from '../../../common/Header/InNavBar';
+import Footer from '../../../pages/HomePage/components/Footer';
 
 const useStyles = makeStyles((theme) => ({
   formContainer: {
@@ -23,6 +25,7 @@ function NewCalendarPlan() {
 
   return (
     <div>
+      <InNavBar />
       <Typography variant="h6" className={classes.formTitle}>
         New Calendar Plan
       </Typography>
@@ -52,6 +55,7 @@ function NewCalendarPlan() {
           cancel
         </Button>
       </div>
+      <Footer />
     </div>
   );
 }

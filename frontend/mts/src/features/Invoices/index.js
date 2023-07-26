@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import InNavBar from '../../common/Header/InNavBar';
+import Footer from '../../pages/HomePage/components/Footer';
 import { Typography, makeStyles, Button, TextField, Box } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
@@ -48,6 +50,7 @@ function Invoices() {
 
   return (
     <div>
+      <InNavBar />
         <Typography variant="h6" className={classes.title}>
           Invoice Page
         </Typography>
@@ -78,6 +81,7 @@ function Invoices() {
     <Box className={classes.invoiceTitleContainer}>
       <Typography variant="h4">Invoice</Typography>
     </Box>
+    <Footer />
   </div>
 );
 }

@@ -1,4 +1,6 @@
 import React from 'react';
+import InNavBar from '../../common/Header/InNavBar';
+import Footer from '../../pages/HomePage/components/Footer';
 import { Typography, makeStyles, ButtonGroup, Button, TextField, Box } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
@@ -37,6 +39,7 @@ export default function Units() {
 
   return (
     <div>
+      <InNavBar />
           <Typography variant="h6" className={classes.title}>
             Units
           </Typography>
@@ -64,6 +67,7 @@ export default function Units() {
         {/* Add your units container video component here */}
         {/* <UnitsVideo /> */}
       </Box>
+      <Footer />
     </div>
   );
 }

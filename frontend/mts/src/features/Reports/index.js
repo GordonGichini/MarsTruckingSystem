@@ -1,5 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import InNavBar from '../../common/Header/InNavBar';
+import Footer from '../../pages/HomePage/components/Footer';
 import { Typography, Button, Box } from '@material-ui/core';
 import CompanyOverview from './CompanyOverview';
 import ExpensesReport from './ExpensesReport';
@@ -41,6 +43,7 @@ export default function ReportsPage() {
 
   return (
     <div>
+      <InNavBar />
       <Typography variant="h6">Reports</Typography>
 
       <Box my={2}>
@@ -157,6 +160,7 @@ export default function ReportsPage() {
           Over the Road Days
         </Button>
       </Box>
+      <Footer />
     </div>
   );
 }

@@ -1,4 +1,6 @@
 import React from 'react';
+import InNavBar from '../../common/Header/InNavBar';
+import Footer from '../../pages/HomePage/components/Footer';
 import { Typography, makeStyles, Button, TextField, Box } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
@@ -37,6 +39,7 @@ export default function Drivers() {
 
   return (
     <div>
+      <InNavBar />
           <Typography variant="h6" className={classes.title}>
             Drivers
           </Typography>
@@ -65,6 +68,7 @@ export default function Drivers() {
         {/* Add your All drivers video component here */}
         {/* <AllDriversVideo /> */}
       </Box>
+      <Footer />
     </div>
   );
 }

@@ -1,4 +1,6 @@
 import React from 'react';
+import InNavBar from '../../common/Header/InNavBar';
+import Footer from '../../pages/HomePage/components/Footer';
 import { Typography, makeStyles, Button, TextField, Box, ButtonGroup, TableContainer, Table, TableHead, TableRow, TableCell, TableBody } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
@@ -66,6 +68,7 @@ export default function Addresses() {
 
   return (
     <div>
+      <InNavBar />
           <Typography variant="h6" className={classes.title}>
             Addresses 
           </Typography>
@@ -141,6 +144,7 @@ export default function Addresses() {
           </TableBody>
         </Table>
       </TableContainer>
+      <Footer />
     </div>
   );
 }
