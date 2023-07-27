@@ -13,6 +13,7 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(2),
     height: '100%',
     overflow: 'auto',
+    border: '1 px solid black',
   },
 }));
 
@@ -21,8 +22,8 @@ const GettingStarted = () => {
   return (    
     <Box>
       <Paper className={classes.paper}>
-      <Box mt={4} p={2} sx={{width:"600px", m:"20px", }}>
-    <Typography>Getting Started</Typography>
+      <Box mt={4} p={2} sx={{width:"600px", m:"10px", }}>
+    <Typography sx={{mb: '10px'}} variant="h6">Getting Started</Typography>
     <Stack direction="column" spacing={1} >
 
     <Button variant="outlined" startIcon={<LocalShippingIcon sx={{ml:"3px"}} />} 

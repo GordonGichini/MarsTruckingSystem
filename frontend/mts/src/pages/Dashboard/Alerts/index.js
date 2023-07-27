@@ -6,26 +6,35 @@ function Alerts() {
   return (
     <div>
     
-    <Grid container spacing={2}>
-      <Stack direction="column" spacing={0.5}>
+    <Grid container spacing={0.2}>
+      <Stack direction="column" spacing={0.2}>
       <Grid item xs={12} md={4}>
         <Box ml={2} mt={2}>
         <Typography variant="h6">
           Alerts
         </Typography>
         </Box>
-        <Box bgcolor="white" p={2} sx={{width:"600px", m:"20px"}}>
-          <Button variant="contained" style={{ backgroundColor: 'lightgreen', marginBottom: '10px' }}>ELD Signup</Button>
+        <Box bgcolor="inherit" border="1px solid green" p={2} sx={{width:"600px", height: 'auto', m:"20px"}}>
+          <Box sx={{ display: 'flex', alignItems: 'center' }}>
+          <Button variant="contained" style={{ backgroundColor: 'green', marginRight: '10px' }}>ELD Signup</Button>
+          <Typography variant="body1">This is an alert for ELD Signup</Typography>
           </Box>
-          </Grid>
+          </Box>
+        </Grid>
           <Grid item xs={12} md={4}>
-            <Box bgcolor="white" p={2} sx={{width:"600px", m:"20px"}}>
-              <Button variant="contained" style={{ backgroundColor: 'lightgreen'}}>Edit Company</Button>
+            <Box bgcolor="inherit" border="1px solid green" p={2} sx={{width:"600px", height: 'auto', m:"20px"}}>
+              <Box sx={{ display: 'flex', alignItems: 'center' }}>
+              <Button variant="contained" style={{ backgroundColor: 'yellow', marginRight: '10px' }}>Edit Company</Button>
+              <Typography variant="body1">This is an alert for Edit Company</Typography>
+              </Box>
               </Box>
               </Grid>
               <Grid item xs={12} md={4}>
-                <Box bgcolor="white" p={2} sx={{width:"600px", m:"20px"}}>
-                  <Button variant="contained" style={{ backgroundColor: 'lightred'}}>Loads</Button>
+                <Box bgcolor="inherit" border="1px solid green" p={2} sx={{width:"600px", height: 'auto', m:"20px"}}>
+                  <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                  <Button variant="contained" style={{ backgroundColor: 'red', marginRight: '10px' }}>Loads</Button>
+                  <Typography variant="body1">This is an alert for Loads</Typography>
+                  </Box>
                 </Box>
         </Grid>
         </Stack>
