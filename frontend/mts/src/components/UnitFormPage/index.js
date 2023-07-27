@@ -1,7 +1,22 @@
 import React, { useState } from 'react';
+import { makeStyles } from '@mui/styles';
+import { useTheme } from '@mui/material/styles';
 import { Typography, TextField, Button, Box, MenuItem } from '@material-ui/core';
 
+
+const useStyles = makeStyles((theme) => ({
+  input: {
+    backgroundColor: '#f5f5f5',
+    borderRadius: theme.spacing(1),
+    padding: theme.spacing(2),
+
+  },
+}));
+
+
 export default function UnitFormPage() {
+  const theme = useTheme();
+  const classes = useStyles();
   const [showOptionalFields, setShowOptionalFields] = useState(false);
 
   const handleOptionalFieldsClick = () => {
@@ -18,20 +33,20 @@ export default function UnitFormPage() {
 
       <Box my={2}>
         <Typography variant="subtitle1">Unit Type</Typography>
-        <TextField select label="Type" variant="outlined">
+        <TextField select label="Type" variant="outlined" className={classes.input}>
           <MenuItem value="truck">Truck</MenuItem>
           <MenuItem value="trailer">Trailer</MenuItem>
           <MenuItem value="misc">Misc</MenuItem>
         </TextField>
 
         <Typography variant="subtitle1">Ownership Type</Typography>
-        <TextField select label="Ownership Type" variant="outlined">
+        <TextField select label="Ownership Type" variant="outlined" className={classes.input}>
           <MenuItem value="companyOwned">Company Owned</MenuItem>
           <MenuItem value="ownerOperator">Owner Operator</MenuItem>
         </TextField>
 
         <Typography variant="subtitle1">Status</Typography>
-        <TextField select label="Status" variant="outlined">
+        <TextField select label="Status" variant="outlined" className={classes.input}>
           <MenuItem value="active">Active</MenuItem>
           <MenuItem value="inactive">Inactive</MenuItem>
         </TextField>
@@ -67,7 +82,7 @@ export default function UnitFormPage() {
         <Button variant="contained" color="primary" onClick={handleSaveClick}>
           Save
         </Button>
-        <Button variant="contained" color="secondary">
+        <Button variant="text" color="secondary">
           Cancel
         </Button>
       </Box>

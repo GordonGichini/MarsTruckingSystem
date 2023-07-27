@@ -8,7 +8,7 @@ import { EditPage } from "./pages/ProfilePage";
 import InNavBar from "./common/Header/InNavBar";
 import OutNavBar from "./common/Header/OutNavBar";
 import {Route, Routes} from 'react-router-dom';
-import { CssBaseline, ThemeProvider, createTheme, makeStyles } from '@material-ui/core';
+import { CssBaseline, ThemeProvider } from '@mui/material';
 import theme from './theme';
 import HomepageLayout from "./Layout/HomepageLayout";
 import DashboardLayout from "./Layout/DashboardLayout";

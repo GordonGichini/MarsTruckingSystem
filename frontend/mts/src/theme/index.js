@@ -1,4 +1,4 @@
-import { createTheme } from '@material-ui/core/styles';
+import { createTheme } from '@mui/material/styles';
 
 const theme = createTheme({
   palette: {
@@ -15,6 +15,8 @@ const theme = createTheme({
       main: '#9E9E9E', // Grey color
     },
   },
+
+  spacing: 8,
 });
 
 export default theme;

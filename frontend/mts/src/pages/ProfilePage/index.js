@@ -96,8 +96,8 @@ function ProfilePage() {
       </Typography>
       <Box mt={2} p={1} border="1px solid green" sx={{ m: "20px", height: 'auto' }}>
         <Box sx={{ display: 'flex', alignItems: 'center' }}>
-        <Button variant="contained" sx={{ backgroundColor: 'green', marginRight: '10px'}}>
-          Green
+        <Button variant="contained" sx={{ backgroundColor: 'primary', marginRight: '10px'}}>
+          
         </Button>
         <Typography variant="body1">
           Notice: Company address updated successfully
