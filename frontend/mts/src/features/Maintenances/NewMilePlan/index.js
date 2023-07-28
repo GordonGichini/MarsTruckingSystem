@@ -50,7 +50,6 @@ function NewMilePlan() {
           cancel
         </Button>
       </div>
-      <Footer />
     </div>
   );
 }

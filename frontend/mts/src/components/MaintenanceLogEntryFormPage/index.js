@@ -56,7 +56,7 @@ export default function MaintenanceLogEntryFormPage() {
   };
 
   return (
-    <div>
+    <div style={{ flex: 1 }}>
       <Typography variant="h6">Maintenance Log Entry</Typography>
 
       <form>

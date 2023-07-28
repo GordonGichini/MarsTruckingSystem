@@ -199,7 +199,6 @@ function Subscription() {
     </Box>
   </Grid>
   </Grid>      
-  <Footer />
         </div>
     )
 }

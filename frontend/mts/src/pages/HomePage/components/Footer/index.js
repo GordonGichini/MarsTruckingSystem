@@ -4,6 +4,9 @@ import { Typography, makeStyles, Box } from '@material-ui/core';
 const useStyles = makeStyles((theme) => ({
   footer: {
     backgroundColor: 'black',
+    bottom: 0,
+    left: 0,
+    width: '100%',
     color: '#fff',
     padding: theme.spacing(2),
     textAlign: 'center',

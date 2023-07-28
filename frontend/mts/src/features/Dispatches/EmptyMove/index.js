@@ -131,7 +131,6 @@ export default function EmptyMove() {
           Cancel
         </Button>
       </Box>
-      <Footer />
     </div>
   );
 };

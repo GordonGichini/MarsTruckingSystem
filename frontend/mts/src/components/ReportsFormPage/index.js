@@ -9,7 +9,7 @@ export default function ReportsPage() {
   };
 
   return (
-    <div>
+    <div style={{ flex: 1 }}>
       <Typography variant="h6">Reports</Typography>
       <Box my={2}> 
       <Stack direction="column" spacing={2} />

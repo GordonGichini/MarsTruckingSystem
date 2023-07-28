@@ -68,7 +68,6 @@ export default function Drivers() {
         {/* Add your All drivers video component here */}
         {/* <AllDriversVideo /> */}
       </Box>
-      <Footer />
     </div>
   );
 }

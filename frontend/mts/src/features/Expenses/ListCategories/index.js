@@ -19,6 +19,8 @@ import {
 const useStyles = makeStyles((theme) => ({
   appBar: {
     backgroundColor: '#212121',
+    marginTop: theme.spacing(8),
+    marginLeft: theme.spacing(0),
     marginBottom: theme.spacing(2),
   },
   title: {
@@ -44,7 +46,7 @@ function ListCategories() {
   ]);
 
   return (
-    <div>
+    <div style={{ flex: 1 }}>
       <InNavBar />
       <AppBar position="static" className={classes.appBar}>
         <Toolbar>
@@ -104,7 +106,6 @@ function ListCategories() {
           </TableBody>
         </Table>
       </TableContainer>
-      <Footer />
     </div>
   );
 }

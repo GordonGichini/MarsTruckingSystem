@@ -7,6 +7,7 @@ import { CompanyOverview, ExpensesReport, FuelExpenses, FuelVendor, IRPStateMile
 import { EditPage } from "./pages/ProfilePage";
 import InNavBar from "./common/Header/InNavBar";
 import OutNavBar from "./common/Header/OutNavBar";
+import Footer from "./pages/HomePage/components/Footer";
 import {Route, Routes} from 'react-router-dom';
 import { CssBaseline, ThemeProvider } from '@mui/material';
 import theme from './theme';
@@ -21,6 +22,7 @@ function App() {
     <div className="App">
       <ThemeProvider theme={theme}>
         <CssBaseline />
+        <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
       <Routes> 
         <Route path="/" element={<HomepageLayout><HomePage /></HomepageLayout>} />
         <Route path="/login" element={<SignInSide/>} />
@@ -70,7 +72,10 @@ function App() {
         <Route path="/units" element={<Units/>} />
         <Route path="/drivers" element={<Drivers/>} />
       </Routes>
+      <Footer />
+      </div>
       </ThemeProvider>
+      
     </div>
   );
 }

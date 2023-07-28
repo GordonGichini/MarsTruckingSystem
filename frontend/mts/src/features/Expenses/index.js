@@ -10,29 +10,50 @@ import Stack from '@mui/material/Stack';
 export { AddCategoryForm, ListCategories }
 
 const useStyles = makeStyles((theme) => ({
+  title: {
+    flexGrow: 1,
+    marginTop: theme.spacing(2),
+    marginLeft: theme.spacing(2),
+  },
   buttonContainer: {
     display: 'flex',
     justifyContent: 'flex-start', // Align buttons to the start
-    marginTop: theme.spacing(2),
+    marginTop: theme.spacing(10),
+    marginLeft: theme.spacing(2),
   },
   button: {
     margin: theme.spacing(1),
   },
   expenseContainer: {
+    display: 'flex',
+    height: '450px',
+    width: '95%',
+    flexDirection: 'column',
     border: '1px solid black', // Add a black border
     borderRadius: theme.spacing(1), // Add some border radius
     padding: theme.spacing(2), // Add some padding
     marginTop: theme.spacing(2),
+    marginBottom: theme.spacing(2),
+    marginLeft: theme.spacing(2),
+    marginRight: theme.spacing(2),
   },
   videoContainer: {
     display: 'flex',
-    justifyContent: 'center',
+    height: '350px',
+    width: '50%',
+    border: '1px solid green',
     marginTop: theme.spacing(2),
+    marginBottom: theme.spacing(10),
+    marginLeft: theme.spacing(2),
+    padding: theme.spacing(2),
+    borderRadius: theme.spacing(2),
   },
   addExpenseButton: {
     display: 'flex',
-    justifyContent: 'center',
+    justifyContent: 'start-end',
     marginTop: theme.spacing(2),
+    marginLeft: theme.spacing(2),
+    marginBottom: theme.spacing(2),
   },
 }));
 
@@ -59,15 +80,15 @@ function Expenses() {
   return (
     <div>
       <InNavBar />
-      <Box mt={4} ml={1} display="flex">
+      <Box mt={4} ml={1} display="flex" className={classes.buttonContainer}>
         <Stack direction="row" spacing={0.5} />
-        <Button variant="contained" className={classes.button} component={Link} to="/add-expense">
+        <Button variant="outlined" className={classes.button} component={Link} to="/add-expense">
           Add Expense
         </Button>
-        <Button variant="contained" className={classes.button} component={Link} to="/list-categories">
+        <Button variant="outlined" className={classes.button} component={Link} to="/list-categories">
           List Categories
         </Button>
-        <Button variant="contained" className={classes.button} onClick={handleOpenAddCategory}>
+        <Button variant="outlined" className={classes.button} onClick={handleOpenAddCategory}>
           Add Category
         </Button>
       </Box>
@@ -77,33 +98,20 @@ function Expenses() {
         onClose={handleCloseAddCategory}
         onSave={handleSaveCategory}
       />
-
-        <Box className={classes.searchContainer}>
-          <TextField
-            className={classes.searchInput}
-            variant="outlined"
-            placeholder="Search..."
-            InputLabelProps={{
-              shrink: true,
-            }}
-          />
-        </Box>
-
-        <Box className={classes.expenseTitleContainer}>
-          <Typography variant="h4">Welcome to Expenses</Typography>
-        </Box>
-
+        <Box className={classes.expenseContainer}>
+          <Typography variant="h5" className={classes.title}>Welcome to Expenses</Typography>
         <Box className={classes.videoContainer}>
           {/* Add your expense video component here */}
           {/* <ExpenseVideo /> */}
         </Box>
+        
 
         <Box className={classes.addExpenseButton}>
           <Button variant="contained" color="primary" component={Link} to="/add-expense">
             Add First Expense
           </Button>
       </Box>
-      <Footer />
+      </Box>
       </div>
   );
           }

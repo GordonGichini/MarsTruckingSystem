@@ -42,7 +42,7 @@ export default function ReportsPage() {
   };
 
   return (
-    <div>
+    <div style={{ flex: 1 }}>
       <InNavBar />
       <Typography variant="h6">Reports</Typography>
 
@@ -160,7 +160,6 @@ export default function ReportsPage() {
           Over the Road Days
         </Button>
       </Box>
-      <Footer />
     </div>
   );
 }

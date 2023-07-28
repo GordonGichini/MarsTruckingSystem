@@ -15,10 +15,6 @@ export {
 }
 
 const useStyles = makeStyles((theme) => ({
-  appBar: {
-    backgroundColor: '#212121',
-    marginBottom: theme.spacing(2),
-  },
   title: {
     flexGrow: 1,
   },
@@ -29,14 +25,6 @@ const useStyles = makeStyles((theme) => ({
   },
   button: {
     margin: theme.spacing(1),
-  },
-  searchContainer: {
-    display: 'flex',
-    justifyContent: 'center',
-    marginTop: theme.spacing(2),
-  },
-  searchInput: {
-    width: '400px',
   },
   maintenanceVideoContainer: {
     display: 'flex',
@@ -54,7 +42,7 @@ function Maintenance() {
     const classes = useStyles();
 
   return (
-    <div>
+    <div style={{ flex: 1 }}>
       <InNavBar />
           <Typography variant="h6" className={classes.title}>
             Maintenance Page
@@ -80,18 +68,6 @@ function Maintenance() {
           Add Log Entry
         </Button>
       </Box>
-
-      <Box className={classes.searchContainer}>
-        <TextField
-          className={classes.searchInput}
-          variant="outlined"
-          placeholder="Search..."
-          InputLabelProps={{
-            shrink: true,
-          }}
-        />
-      </Box>
-
       <Box className={classes.maintenanceVideoContainer}>
         {/* Add your maintenance video component here */}
         {/* <MaintenanceVideo /> */}
@@ -105,7 +81,6 @@ function Maintenance() {
           Add your Maintenance Log Entry
         </Button>
       </Box>
-      <Footer />
     </div>
 
    

@@ -1,9 +1,36 @@
 import React, { useState } from 'react';
 import { Typography, TextField, Button, FormControl, Select, MenuItem, InputLabel, Box, Link } from '@material-ui/core';
+import { makeStyles } from '@mui/styles';
+import { useTheme } from '@mui/material/styles';
 import { useNavigate } from 'react-router-dom';
+
+
+const useStyles = makeStyles((theme) => ({
+  formContainer: {
+    padding: theme.spacing(2),
+  },
+  inputField: {
+    width: '60%',
+    margin: theme.spacing(1, 0),
+    '& .MuiOutlinedInput-root': {
+  '& fieldset': {
+    borderColor: 'green',
+  },
+  '&:hover fieldset': {
+    borderColor: 'green',
+  },
+  '&.Mui-focused fieldset': {
+    borderColor: 'green',
+  },
+ },
+  },
+
+}));
 
 export default function ExpenseFormPage() {
   const navigate = useNavigate();
+  const theme = useTheme();
+  const classes = useStyles();
 
   const [expenseCategory, setExpenseCategory] = useState('');
   const [amount, setAmount] = useState('');
@@ -74,10 +101,10 @@ export default function ExpenseFormPage() {
     <div>
       <Typography variant="h6">Add Expense</Typography>
 
-      <form>
+      <Box className={classes.formContainer}>
         <Box my={2}>
           <FormControl>
-            <InputLabel id="expense-category-label">Expense Category</InputLabel>
+            <InputLabel id="expense-category-label"className={classes.inputField}>Expense Category</InputLabel>
             <Select
               labelId="expense-category-label"
               value={expenseCategory}
@@ -99,6 +126,7 @@ export default function ExpenseFormPage() {
           onChange={handleAmountChange}
           variant="outlined"
           margin='normal'
+          className={classes.inputField}
           />
 
         <TextField
@@ -107,10 +135,11 @@ export default function ExpenseFormPage() {
           onChange={handleDescriptionChange}
           variant="outlined"
           margin='normal'
+          className={classes.inputField}
           />
 
         <FormControl>
-          <InputLabel id="assign-to-trip-label">Assign to Trip</InputLabel>
+          <InputLabel id="assign-to-trip-label"className={classes.inputField}>Assign to Trip</InputLabel>
           <Select
             labelId="assign-to-trip-label"
             value={assignToTrip}
@@ -128,6 +157,7 @@ export default function ExpenseFormPage() {
           onChange={handleExpenseDateChange}
           variant="outlined"
           margin='normal'
+          className={classes.inputField}
           InputLabelProps={{
             shrink: true,
           }}
@@ -139,6 +169,7 @@ export default function ExpenseFormPage() {
           onChange={handleUnitChange}
           variant="outlined"
           margin='normal'
+          className={classes.inputField}
         />
 
         <TextField
@@ -147,6 +178,7 @@ export default function ExpenseFormPage() {
           onChange={handleGallonsChange}
           variant="outlined"
           margin='normal'
+          className={classes.inputField}
         />
 
         <TextField
@@ -155,6 +187,7 @@ export default function ExpenseFormPage() {
           onChange={handleOdometerChange}
           variant="outlined"
           margin='normal'
+          className={classes.inputField}
         />
 
         <TextField
@@ -163,6 +196,7 @@ export default function ExpenseFormPage() {
           onChange={handleFuelVendorChange}
           variant="outlined"
           margin='normal'
+          className={classes.inputField}
         />
 
         <TextField
@@ -171,6 +205,7 @@ export default function ExpenseFormPage() {
           onChange={handleStateProvinceChange}
           variant="outlined"
           margin='normal'
+          className={classes.inputField}
         />
 
         <Button variant="contained" color="primary" onClick={handleCreateExpenseClick}>
@@ -180,7 +215,7 @@ export default function ExpenseFormPage() {
         <Link component="button" variant="body2" onClick={handleCancelClick}>
           Cancel
         </Link>
-      </form>
+      </Box>
     </div>
   );
 }

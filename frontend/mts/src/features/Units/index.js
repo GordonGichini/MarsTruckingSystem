@@ -67,7 +67,6 @@ export default function Units() {
         {/* Add your units container video component here */}
         {/* <UnitsVideo /> */}
       </Box>
-      <Footer />
     </div>
   );
 }

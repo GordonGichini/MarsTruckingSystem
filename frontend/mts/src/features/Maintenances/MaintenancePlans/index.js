@@ -34,7 +34,7 @@ function MaintenancePlans() {
   const classes = useStyles();
 
   return (
-    <div>
+    <div style={{ flex: 1 }}>
       <InNavBar />
           <Typography variant="h6" className={classes.title}>
             Maintenance Plans
@@ -84,7 +84,6 @@ function MaintenancePlans() {
           New Mile Plan
         </Button>
       </Box>
-      <Footer />
     </div>
   );
 }

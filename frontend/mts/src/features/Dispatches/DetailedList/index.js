@@ -34,7 +34,7 @@ export default function DetailedList() {
   ];
 
   return (
-    <div>
+    <div style={{ flex: 1 }}>
       <InNavBar />
       <div>
         <Button variant="outlined" 
@@ -106,7 +106,6 @@ export default function DetailedList() {
           ))};
         </TableBody>
       </Table>
-      <Footer />
     </div>
   );
 };

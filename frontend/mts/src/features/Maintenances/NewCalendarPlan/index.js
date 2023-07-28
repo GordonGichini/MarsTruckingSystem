@@ -24,7 +24,7 @@ function NewCalendarPlan() {
   const classes = useStyles();
 
   return (
-    <div>
+    <div style={{ flex: 1 }}>
       <InNavBar />
       <Typography variant="h6" className={classes.formTitle}>
         New Calendar Plan
@@ -55,7 +55,6 @@ function NewCalendarPlan() {
           cancel
         </Button>
       </div>
-      <Footer />
     </div>
   );
 }

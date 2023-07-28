@@ -7,9 +7,8 @@ import { useTheme } from '@mui/material/styles';
 
 const useStyles = makeStyles((theme) => ({
     formContainer: {
-      maxWidth: 600,
-      margin: 'auto',
       padding: theme.spacing(2),
+      marginLeft: theme.spacing(2),
     },
     sectionTitle: {
       marginBottom: theme.spacing(2),
@@ -18,8 +17,20 @@ const useStyles = makeStyles((theme) => ({
       marginBottom: theme.spacing(1),
     },
     inputField: {
-      marginBottom: theme.spacing(2),
-    },
+        width: '60%',
+        margin : theme.spacing(1, 0),
+        '& .MuiOutlinedInput-root': {
+      '& fieldset': {
+        borderColor: 'green',
+      },
+      '&:hover fieldset': {
+        borderColor: 'green',
+      },
+      '&.Mui-focused fieldset': {
+        borderColor: 'green',
+      },
+     },
+      },
     button: {
         marginRight: theme.spacing(2),
       },
@@ -228,22 +239,24 @@ export default function DispatchFormPage() {
         <div>
         <Typography variant="h6" className={classes.sectionTitle}>Add Dispatch</Typography>
 
-        <form onSubmit={handleFormSubmit}>
+        <Box classes={classes.formContainer} onSubmit={handleFormSubmit}>
             <Box mb={4}>
                 <Typography variant="subtitle1">Basic Details</Typography>
             <TextField
             label="Custom Trip Number"
             value={customTripNumber}
+            margin='normal'
             onChange={handleCustomTripNumberChange}
-            fullWidth
+            variant="outlined"
             className={classes.inputField}
             /> 
 
             <TextField
             label="Driver Name"
             value={driverName}
+            margin='normal'
             onChange={handleDriverNameChange}
-            fullWidth
+            variant="outlined"
             className={classes.inputField}
             /> 
 
@@ -260,16 +273,18 @@ export default function DispatchFormPage() {
             <TextField
             label="Driver Pay"
             value={driverPay}
+            margin='normal'
             onChange={handleDriverPayChange}
-            fullWidth
+            variant="outlined"
             className={classes.inputField}
             /> 
 
             <TextField
             label="Driver Advance"
             value={driverAdvance}
+            margin='normal'
             onChange={handleDriverAdvanceChange}
-            fullWidth
+            variant="outlined"
             className={classes.inputField}
             />
 
@@ -279,9 +294,10 @@ export default function DispatchFormPage() {
 
             <TextField
             label="Truck"
+            margin='normal'
             value={truck}
             onChange={handleTruckChange} 
-            fullWidth
+            variant="outlined"
             className={classes.inputField}
             /> 
 
@@ -292,8 +308,9 @@ export default function DispatchFormPage() {
             <TextField
             label="Trailer"
             value={trailer}
+            margin='normal'
             onChange={handleTrailerChange}
-            fullWidth
+            variant="outlined"
             className={classes.inputField}
             />
 
@@ -304,16 +321,18 @@ export default function DispatchFormPage() {
             <TextField
             label="Odometer"
             value={odometer}
+            margin='normal'
             onChange={handleOdometerChange} 
-            fullWidth
+            variant="outlined"
             className={classes.inputField}
             />
 
             <TextField
             label="Customer"
             value={customer}
+            margin='normal'
             onChange={handleCustomerChange}
-            fullWidth
+            variant="outlined"
             className={classes.inputField}
             /> 
 
@@ -330,7 +349,10 @@ export default function DispatchFormPage() {
                         <TextField
                         label="Shipper"
                         value={shipperName}
+                        margin='normal'
+                        className={classes.inputField}
                         onChange={handleShipperNameChange}
+                        variant="outlined"
                         /> 
                         <Button variant="contained" color="primary" onClick={handleShipperNameChange}>
                             Create Shipper
@@ -338,37 +360,55 @@ export default function DispatchFormPage() {
                         <TextField
                         label="Pickup date"
                         value={pickupDate}
+                        margin='normal'
+                        className={classes.inputField}
                         onChange={handlePickupDateChange}
+                        variant="outlined"
                         />
 
                         <TextField
                         label="Instructions"
                         value={instructions}
+                        margin='normal'
+                        className={classes.inputField}
                         onChange={handleInstructionsChange}
+                        variant="outlined"
                         />
 
                         <TextField
                         label="BOL"
                         value={bol}
+                        margin='normal'
+                        className={classes.inputField}
                         onChange={handleBolChange}
+                        variant="outlined"
                         />
 
                         <TextField
                         label="Customer Required Info (included on invoice)"
                         value={customerRequiredInfo}
+                        margin='normal'
+                        className={classes.inputField}
                         onChange={handleCustomerRequiredInfoChange}
+                        variant="outlined"
                         />
 
                         <TextField
                         label="Weight"
                         value={weight}
+                        margin='normal'
+                        className={classes.inputField}
                         onChange={handleWeightChange}
+                        variant="outlined"
                         />
 
                         <TextField
                         label="Quantity"
                         value={quantity}
+                        margin='normal'
+                        className={classes.inputField}
                         onChange={handleQuantityChange}
+                        variant="outlined"
                         />
             </Box>
 
@@ -377,7 +417,10 @@ export default function DispatchFormPage() {
                 <TextField
                 label="Routing Stop"
                 value={routingStopName}
+                margin='normal'
+                className={classes.inputField}
                 onChange={handleRoutingStopNameChange}
+                variant="outlined"
                 />
                 <Button variant="contained" color="primary" onClick={handleRoutingStopNameChange}>
                     Create Routing stop
@@ -386,19 +429,28 @@ export default function DispatchFormPage() {
                     <TextField
                     label="Routing Stop Date"
                     value={routingStopDate}
+                    margin='normal'
+                    className={classes.inputField}
                     onChange={handleRoutingStopDateChange}
+                    variant="outlined"
                     />
 
                     <TextField
                     label="Instructions"
                     value={instructions}
+                    margin='normal'
+                    className={classes.inputField}
                     onChange={handleInstructionsChange}
+                    variant="outlined"
                     />
 
                     <TextField
                     label="Notes"
                     value={notes}
+                    margin='normal'
+                    className={classes.inputField}
                     onChange={handleNotesChange}
+                    variant="outlined"
                     />
             </Box> 
             </Box> 
@@ -408,7 +460,10 @@ export default function DispatchFormPage() {
                 <TextField
                 label="Consignee Name"
                 value={consigneeName}
+                margin='normal'
+                className={classes.inputField}
                 onChange={handleConsigneeNameChange}
+                variant="outlined"
                 />
                 <Button variant="contained" color="primary" onClick={handleConsigneeNameChange}>
                     Create Consignee
@@ -416,13 +471,19 @@ export default function DispatchFormPage() {
                 <TextField
                 label="Delivery Date"
                 value={deliveryDate}
+                margin='normal'
+                className={classes.inputField}
                 onChange={handleDeliveryDateChange}
+                variant="outlined"
                 />
 
                 <TextField
                 label="Instructions"
                 value={instructions11}
+                margin='normal'
+                className={classes.inputField}
                 onChange={handleInstructions11Change}
+                variant="outlined"
                 />
 
                 <Button variant="contained" color="primary" onClick={handleAddAnotherDeliveryChange}>
@@ -439,25 +500,37 @@ export default function DispatchFormPage() {
                 <TextField
                 label="Primary Fee"
                 value={primaryFee}
+                margin='normal'
+                className={classes.inputField}
                 onChange={handlePrimaryFeeChange}
+                variant="outlined"
                 />
 
                 <TextField
                 label="Primary Fee Type"
                 value={primaryFeeType}
+                margin='normal'
+                className={classes.inputField}
                 onChange={handlePrimaryFeeTypeChange}
+                variant="outlined"
                 />
 
                 <TextField
                 label="Fuel Surcharge Fee"
                 value={fscAmount}
+                margin='normal'
+                className={classes.inputField}
                 onChange={handleFscAmountChange}
+                variant="outlined"
                 />
 
                 <TextField
                 label= "FSC amount Type"
                 value={fscAmountType}
+                margin='normal'
+                className={classes.inputField}
                 onChange={handleFscAmountTypeChange}
+                variant="outlined"
                 /> 
 
                 </Box>
@@ -466,31 +539,46 @@ export default function DispatchFormPage() {
                     <TextField
                     label="Detention"
                     value={detention}
+                    margin='normal'
+                    className={classes.inputField}
                     onChange={handleDetentionChange}
+                    variant="outlined"
                     />
 
                     <TextField
                     label="Lumper"
                     value={lumper}
+                    margin='normal'
+                    className={classes.inputField}
                     onChange={handleLumperChange}
+                    variant="outlined"
                     />
 
                     <TextField
                     label="Stop Off"
                     value={stopOff}
+                    margin='normal'
+                    className={classes.inputField}
                     onChange={handleStopOffChange}
+                    variant="outlined"
                     />
 
                     <TextField
                     label="Tarp Fee"
                     value={tarpFee}
+                    margin='normal'
+                    className={classes.inputField}
                     onChange={handleTarpFeeChange}
+                    variant="outlined"
                     />
 
                     <TextField
                     label="Additional"
                     value={additional}
+                    margin='normal'
+                    className={classes.inputField}
                     onChange={handleAdditionalChange}
+                    variant="outlined"
                     />
 
                     <Button variant="outlined" color="primary" onClick={handleAddAdditionalFeeChange}>
@@ -500,15 +588,17 @@ export default function DispatchFormPage() {
                     <TextField
                     label="Invoice Advance"
                     value={invoiceAdvance}
+                    margin='normal'
+                    className={classes.inputField}
                     onChange={handleInvoiceAdvanceChange}
+                    variant="outlined"
                     />
 
                 </Box>
 
 
             </Box>
-
-            </form> 
+            </Box> 
             </div> 
     );
 }
