@@ -26,7 +26,6 @@ function index() {
 <Eld/>
 <OrderEld/>
 <Features/>
-<Footer/>
     </div>
   )
 }

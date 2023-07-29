@@ -53,7 +53,6 @@ const useStyles = makeStyles((theme) => ({
 
 function InNavBar() { 
   const classes = useStyles(); 
-  const [reportsAnchorEl, setReportsAnchorEl] = React.useState(null);
   const [settingsAnchorEl, setSettingsAnchorEl] = React.useState(null);
   const [anchorEl, setAnchorEl] = useState(null);
   const [activePage, setActivePage] = useState('');
@@ -69,14 +68,6 @@ function InNavBar() {
   const handleNavLinkClick = (pageName) => {
     setActivePage(pageName);
   };
-
-  const handleReportsMenuOpen = (event) => {
-    setReportsAnchorEl(event.currentTarget);
-  };
-
-  const handleReportsMenuClose = () => {
-    setReportsAnchorEl(null);
-  }; 
 
   const handleSettingsMenuOpen = (event) => {
     setSettingsAnchorEl(event.currentTarget);
@@ -159,76 +150,6 @@ function InNavBar() {
            activeClassName={classes.active}
            className={classes.navLink}
           >Reports</Button> 
-          <div>
-            <IconButton
-        edge="end"
-        color="inherit"
-        aria-label="reports"
-        aria-controls="reports-menu"
-        aria-haspopup="true"
-        onClick={handleReportsMenuOpen}
-      >
-        <ExpandMoreIcon className={classes.arrowIcon} />
-      </IconButton> 
-
-      <Menu
-        id="reports-menu"
-        anchorEl={reportsAnchorEl}
-        keepMounted
-        open={Boolean(reportsAnchorEl)}
-        onClose={handleReportsMenuClose}
-      >
-        <MenuItem onClick={handleReportsMenuClose} component={NavLink} to="/reports/get-company-overview">
-          Company Overview
-        </MenuItem>
-        <MenuItem onClick={handleReportsMenuClose} component={NavLink} to="/reports/get-profit-loss">
-          Profit and Loss
-        </MenuItem>
-        <MenuItem onClick={handleReportsMenuClose} component={NavLink} to="/reports/get-driver-pay">
-          Driver Settlement
-        </MenuItem> 
-        <MenuItem onClick={handleReportsMenuClose} component={NavLink} to="/reports/get-tax">
-          Tax
-        </MenuItem>
-        <MenuItem onClick={handleReportsMenuClose} component={NavLink} to="/reports/get-expenses">
-          Expenses
-        </MenuItem>
-        <MenuItem onClick={handleReportsMenuClose} component={NavLink} to="/reports/get-state-miles">
-          IRP - State Miles
-        </MenuItem>
-        <MenuItem onClick={handleReportsMenuClose} component={NavLink} to="/reports/get-fuel-reports">
-          Fuel Expenses
-        </MenuItem>
-        <MenuItem onClick={handleReportsMenuClose} component={NavLink} to="/reports/get-reefer-fuel-expenses">
-          Reefer Fuel Expenses
-        </MenuItem>
-        <MenuItem onClick={handleReportsMenuClose} component={NavLink} to="/reports/get-fuel-vendor-requests">
-          Fuel Vendor
-        </MenuItem>
-        <MenuItem onClick={handleReportsMenuClose} component={NavLink} to="/reports/get-ifta">
-          Quartely IFTA
-        </MenuItem>
-        <MenuItem onClick={handleReportsMenuClose} component={NavLink} to="/reports/get-quartely-maintenance">
-          Quartely Maintenance
-        </MenuItem>
-        <MenuItem onClick={handleReportsMenuClose} component={NavLink} to="/reports/get-unit-revenue-per-mile">
-          Unit Revenue
-        </MenuItem>
-        <MenuItem onClick={handleReportsMenuClose} component={NavLink} to="/reports/get-unit-operating-income">
-          Unit Operating Income
-        </MenuItem>
-        <MenuItem onClick={handleReportsMenuClose} component={NavLink} to="/reports/get-miles-per-gallon">
-          Miles Per Gallon
-        </MenuItem>
-        <MenuItem onClick={handleReportsMenuClose} component={NavLink} to="/reports/get-unit-miles">
-          Unit Miles
-        </MenuItem>
-        <MenuItem onClick={handleReportsMenuClose} component={NavLink} to="/reports/get-over-road-days">
-          Over the Road Days
-        </MenuItem>
-        </Menu>
-        </div>
-
           <Divider orientation="vertical" flexItem />
           <Button
            colour="inherit"

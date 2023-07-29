@@ -39,7 +39,7 @@ const useStyles = makeStyles((theme) => ({
   },
   videoContainer: {
     display: 'flex',
-    height: '350px',
+    height: '450px',
     width: '50%',
     border: '1px solid green',
     marginTop: theme.spacing(2),

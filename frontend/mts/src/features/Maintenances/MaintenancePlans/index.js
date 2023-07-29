@@ -14,16 +14,27 @@ const useStyles = makeStyles((theme) => ({
   },
   buttonContainer: {
     display: 'flex',
-    justifyContent: 'center',
-    marginTop: theme.spacing(2),
+    marginTop: theme.spacing(6),
+    marginLeft: theme.spacing(2),
+  },
+  btnContainer: {
+    display: 'flex',
+    marginBottom: theme.spacing(6)
+
   },
   button: {
     margin: theme.spacing(1),
   },
   planContainer: {
+    display: 'flex',
+    height: '250px',
+    width: '95%',
     marginTop: theme.spacing(4),
+    marginLeft: theme.spacing(2),
+    flexDirection: 'column',
     padding: theme.spacing(2),
-    backgroundColor: '#f5f5f5',
+    border: '1px solid black',
+    borderRadius: theme.spacing(2),
   },
   planTitle: {
     marginBottom: theme.spacing(2),
@@ -61,16 +72,15 @@ function MaintenancePlans() {
         </Button>
       </Box>
 
-      <div className={classes.planContainer}>
+      <Box className={classes.planContainer}>
         <Typography variant="h6" className={classes.planTitle}>
           Maintenance Plans List
           <p> Welcome to Maintenance Plans, Once you have added some plans they will appear here</p>
+          <p>You can add Calendar plans and Mileage plans  </p>
         </Typography>
         {/* Render the list of maintenance plans here */}
         {/* Each plan should have relevant information */}
-      </div>
-
-      <Box className={classes.buttonContainer}>
+      <Box className={classes.btnContainer}>
         <Button variant="contained"
          className={classes.button}
          component={Link}
@@ -83,6 +93,7 @@ function MaintenancePlans() {
          to="./new-mile-plan">
           New Mile Plan
         </Button>
+      </Box>
       </Box>
     </div>
   );

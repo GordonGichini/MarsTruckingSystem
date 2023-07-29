@@ -1,5 +1,5 @@
 import React from 'react';
-import { Typography, TextField, Button, Box } from '@material-ui/core';
+import { Typography, TextField, Button, Box, Grid } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import { makeStyles } from '@mui/styles';
 import { useTheme } from '@mui/material/styles';
@@ -7,7 +7,7 @@ import { useTheme } from '@mui/material/styles';
 
 const useStyles = makeStyles((theme) => ({
     formContainer: {
-      padding: theme.spacing(2),
+      marginTop: theme.spacing(2),
       marginLeft: theme.spacing(2),
     },
     sectionTitle: {
@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
       marginBottom: theme.spacing(1),
     },
     inputField: {
-        width: '60%',
+        width: '90%',
         margin : theme.spacing(1, 0),
         '& .MuiOutlinedInput-root': {
       '& fieldset': {
@@ -33,6 +33,7 @@ const useStyles = makeStyles((theme) => ({
       },
     button: {
         marginRight: theme.spacing(2),
+        marginBottom: theme.spacing(2),
       },
     }));
 
@@ -237,10 +238,11 @@ export default function DispatchFormPage() {
 
     return (
         <div>
+            <Box>
         <Typography variant="h6" className={classes.sectionTitle}>Add Dispatch</Typography>
-
-        <Box classes={classes.formContainer} onSubmit={handleFormSubmit}>
-            <Box mb={4}>
+        <form>
+            <Grid container spacing={6} className={classes.formContainer}>
+                <Grid item xs={6}>
                 <Typography variant="subtitle1">Basic Details</Typography>
             <TextField
             label="Custom Trip Number"
@@ -250,7 +252,6 @@ export default function DispatchFormPage() {
             variant="outlined"
             className={classes.inputField}
             /> 
-
             <TextField
             label="Driver Name"
             value={driverName}
@@ -266,10 +267,10 @@ export default function DispatchFormPage() {
             onClick={handleDriverNameChange}
             component={Link}
             to="/"
+            className={classes.button}
             >
                 Create Driver
             </Button>
-
             <TextField
             label="Driver Pay"
             value={driverPay}
@@ -277,8 +278,8 @@ export default function DispatchFormPage() {
             onChange={handleDriverPayChange}
             variant="outlined"
             className={classes.inputField}
-            /> 
-
+            />
+            
             <TextField
             label="Driver Advance"
             value={driverAdvance}
@@ -288,10 +289,13 @@ export default function DispatchFormPage() {
             className={classes.inputField}
             />
 
-            <Button variant="contained" color="primary" onClick={handleAddDriverClick}>
+            <Button variant="contained" color="primary" onClick={handleAddDriverClick}
+            className={classes.button}>
                 Add Team Driver
             </Button> 
-
+            </Grid>
+            
+            <Grid item xs={6}>
             <TextField
             label="Truck"
             margin='normal'
@@ -299,12 +303,14 @@ export default function DispatchFormPage() {
             onChange={handleTruckChange} 
             variant="outlined"
             className={classes.inputField}
-            /> 
-
-            <Button variant="contained" color="primary" onClick={handleTruckChange}>
+            />
+        
+            <Button variant="contained" color="primary" onClick={handleTruckChange}
+            className={classes.button}>
                 Create Truck 
             </Button>
-
+            
+            
             <TextField
             label="Trailer"
             value={trailer}
@@ -313,10 +319,11 @@ export default function DispatchFormPage() {
             variant="outlined"
             className={classes.inputField}
             />
-
-            <Button variant="contained" color="primary" onClick={handleTrailerChange}>
+            <Button variant="contained" color="primary" onClick={handleTrailerChange}
+            className={classes.button}>
                     Create Trailer
             </Button> 
+            
             
             <TextField
             label="Odometer"
@@ -326,7 +333,7 @@ export default function DispatchFormPage() {
             variant="outlined"
             className={classes.inputField}
             />
-
+            
             <TextField
             label="Customer"
             value={customer}
@@ -334,12 +341,18 @@ export default function DispatchFormPage() {
             onChange={handleCustomerChange}
             variant="outlined"
             className={classes.inputField}
-            /> 
-
-            <Button variant="contained" color="primary" onClick={handleCustomerChange}>
+            />  
+                      
+            <Button variant="contained" color="primary" onClick={handleCustomerChange}
+            className={classes.button}>
                 Create customer
-            </Button> 
-            </Box> 
+            </Button>
+            </Grid>
+            </Grid>
+            </form>
+            </Box>
+            
+            
 
             <Box mb={4}>
                 <Typography variant="subtitle1" className={classes.sectionSubtitle}>Stops</Typography>
@@ -595,10 +608,7 @@ export default function DispatchFormPage() {
                     />
 
                 </Box>
-
-
             </Box>
-            </Box> 
             </div> 
     );
 }

@@ -20,21 +20,27 @@ const useStyles = makeStyles((theme) => ({
   },
   buttonContainer: {
     display: 'flex',
-    justifyContent: 'center',
-    marginTop: theme.spacing(2),
+    marginTop: theme.spacing(6),
+    marginLeft: theme.spacing(2),
   },
   button: {
     margin: theme.spacing(1),
   },
   maintenanceVideoContainer: {
     display: 'flex',
-    justifyContent: 'center',
+    height: '250px',
+    width: '95%',
     marginTop: theme.spacing(2),
+    marginLeft: theme.spacing(2),
+    flexDirection: 'column',
+    padding: theme.spacing(2),
+    border: '1px solid black',
+    borderRadius: theme.spacing(2),
   },
   addMaintenanceButton: {
     display: 'flex',
-    justifyContent: 'center',
     marginTop: theme.spacing(2),
+    marginLeft: theme.spacing(2),
   },
 }));
 
@@ -69,10 +75,14 @@ function Maintenance() {
         </Button>
       </Box>
       <Box className={classes.maintenanceVideoContainer}>
+        <Typography variant="h6">
+          Welcome to Maintenance!
+        <p> Once you have some Maintenance Plans they will show up here.</p>
+         <p>Click Here to Add your Maintenance Log Entry</p>
+
+        </Typography>
         {/* Add your maintenance video component here */}
         {/* <MaintenanceVideo /> */}
-      </Box>
-
       <Box className={classes.addMaintenanceButton}>
         <Button variant="contained" 
         color="primary"
@@ -80,6 +90,7 @@ function Maintenance() {
         to="/add-log-entry">
           Add your Maintenance Log Entry
         </Button>
+      </Box>
       </Box>
     </div>
 
