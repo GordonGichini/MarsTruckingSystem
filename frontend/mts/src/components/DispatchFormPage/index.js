@@ -1,5 +1,6 @@
 import React from 'react';
 import { Typography, TextField, Button, Box, Grid } from '@material-ui/core';
+import InNavBar from '../../common/Header/InNavBar';
 import { Link } from 'react-router-dom';
 import { makeStyles } from '@mui/styles';
 import { useTheme } from '@mui/material/styles';
@@ -7,17 +8,27 @@ import { useTheme } from '@mui/material/styles';
 
 const useStyles = makeStyles((theme) => ({
     formContainer: {
-      marginTop: theme.spacing(2),
-      marginLeft: theme.spacing(2),
+      marginTop: theme.spacing(8),
+      marginLeft: theme.spacing(4),
+      borderRadius: theme.spacing(2),
+    },
+    expenseContainer: {
+        marginTop: theme.spacing(2),
+        marginLeft: theme.spacing(2),
+        marginBottom: theme.spacing(2),
+        padding: theme.spacing(2),
+
     },
     sectionTitle: {
       marginBottom: theme.spacing(2),
+      marginTop: theme.spacing(10),
+      marginLeft: theme.spacing(2),
     },
     sectionSubtitle: {
       marginBottom: theme.spacing(1),
     },
     inputField: {
-        width: '90%',
+        width: '98%',
         margin : theme.spacing(1, 0),
         '& .MuiOutlinedInput-root': {
       '& fieldset': {
@@ -34,6 +45,14 @@ const useStyles = makeStyles((theme) => ({
     button: {
         marginRight: theme.spacing(2),
         marginBottom: theme.spacing(2),
+        '& .MuiButton-outlined': {
+            borderColor: '#00C853', // Green color for button lines
+            color: '#00C853', // Green color for button text
+          },
+          '& .MuiButton-outlined:hover': {
+            backgroundColor: '#00C853', // Green color when hovered
+            color: '#FFFFFF', // White text color when hovered
+          },
       },
     }));
 
@@ -176,6 +195,7 @@ export default function DispatchFormPage() {
     const [primaryFeeType, setPrimaryFeeType] = React.useState('');
     const [fscAmount, setFscAmount] = React.useState('');
     const [fscAmountType, setFscAmountType] = React.useState('');
+    const [taxID, setTaxID] = React.useState('');
     const [detention, setDetention] = React.useState('');
     const [lumper, setLumper] = React.useState('');
     const [stopOff, setStopOff] = React.useState('');
@@ -199,6 +219,9 @@ export default function DispatchFormPage() {
 
     const handleFscAmountTypeChange = (event) => {
         setFscAmountType(event.target.value);
+    };
+    const handleTaxIDChange = (event) => {
+        setTaxID(event.target.value);
     };
 
     const handleDetentionChange = (event) => {
@@ -238,10 +261,11 @@ export default function DispatchFormPage() {
 
     return (
         <div>
-            <Box>
-        <Typography variant="h6" className={classes.sectionTitle}>Add Dispatch</Typography>
+            <InNavBar />
+            <Box className={classes.formContainer}>
+        <Typography variant="h6" className={classes.sectionTitle}>Add a Dispatch</Typography>
         <form>
-            <Grid container spacing={6} className={classes.formContainer}>
+            <Grid container spacing={6}>
                 <Grid item xs={6}>
                 <Typography variant="subtitle1">Basic Details</Typography>
             <TextField
@@ -252,6 +276,9 @@ export default function DispatchFormPage() {
             variant="outlined"
             className={classes.inputField}
             /> 
+            <Typography variant="caption">
+                Optional Custom Trip number that will override the system generated trip number
+            </Typography>
             <TextField
             label="Driver Name"
             value={driverName}
@@ -262,10 +289,10 @@ export default function DispatchFormPage() {
             /> 
 
             <Button 
-            variant="contained" 
-            color="primary" 
+            variant="outlined"  
             onClick={handleDriverNameChange}
             component={Link}
+            color="primary"
             to="/"
             className={classes.button}
             >
@@ -289,7 +316,7 @@ export default function DispatchFormPage() {
             className={classes.inputField}
             />
 
-            <Button variant="contained" color="primary" onClick={handleAddDriverClick}
+            <Button variant="outlined" color="primary" onClick={handleAddDriverClick}
             className={classes.button}>
                 Add Team Driver
             </Button> 
@@ -305,7 +332,7 @@ export default function DispatchFormPage() {
             className={classes.inputField}
             />
         
-            <Button variant="contained" color="primary" onClick={handleTruckChange}
+            <Button variant="outlined" color="primary" onClick={handleTruckChange}
             className={classes.button}>
                 Create Truck 
             </Button>
@@ -319,7 +346,7 @@ export default function DispatchFormPage() {
             variant="outlined"
             className={classes.inputField}
             />
-            <Button variant="contained" color="primary" onClick={handleTrailerChange}
+            <Button variant="outlined" color="primary" onClick={handleTrailerChange}
             className={classes.button}>
                     Create Trailer
             </Button> 
@@ -343,7 +370,7 @@ export default function DispatchFormPage() {
             className={classes.inputField}
             />  
                       
-            <Button variant="contained" color="primary" onClick={handleCustomerChange}
+            <Button variant="outlined" color="primary" onClick={handleCustomerChange}
             className={classes.button}>
                 Create customer
             </Button>
@@ -354,11 +381,11 @@ export default function DispatchFormPage() {
             
             
 
-            <Box mb={4}>
-                <Typography variant="subtitle1" className={classes.sectionSubtitle}>Stops</Typography>
+            <Box className={classes.formContainer}>
+                <Typography variant="h6" className={classes.sectionSubtitle}>Stops</Typography>
                 <Box display="flex" mb={2}>
                     <Box flex={1} mr={2}>
-                        <Typography variant="subtitle2">Pickup</Typography>
+                        <Typography variant="subtitle1">Pickup</Typography>
                         <TextField
                         label="Shipper"
                         value={shipperName}
@@ -367,7 +394,7 @@ export default function DispatchFormPage() {
                         onChange={handleShipperNameChange}
                         variant="outlined"
                         /> 
-                        <Button variant="contained" color="primary" onClick={handleShipperNameChange}>
+                        <Button variant="outlined" color="primary" onClick={handleShipperNameChange}>
                             Create Shipper
                             </Button>
                         <TextField
@@ -385,6 +412,7 @@ export default function DispatchFormPage() {
                         margin='normal'
                         className={classes.inputField}
                         onChange={handleInstructionsChange}
+                        multiline
                         variant="outlined"
                         />
 
@@ -396,6 +424,7 @@ export default function DispatchFormPage() {
                         onChange={handleBolChange}
                         variant="outlined"
                         />
+                        <Typography variant="caption">ELD driver can view, enter and edit BOL in mobile app</Typography>
 
                         <TextField
                         label="Customer Required Info (included on invoice)"
@@ -403,8 +432,10 @@ export default function DispatchFormPage() {
                         margin='normal'
                         className={classes.inputField}
                         onChange={handleCustomerRequiredInfoChange}
+                        multiline
                         variant="outlined"
                         />
+                        <Typography variant="caption">Included on invoice(rate con number, customer tracking number, PO* etc)</Typography>
 
                         <TextField
                         label="Weight"
@@ -414,6 +445,7 @@ export default function DispatchFormPage() {
                         onChange={handleWeightChange}
                         variant="outlined"
                         />
+                        <Typography variant="caption">Used to calculate per weight fees. Enter total weight,not tonnes, cwt etc</Typography>
 
                         <TextField
                         label="Quantity"
@@ -435,7 +467,7 @@ export default function DispatchFormPage() {
                 onChange={handleRoutingStopNameChange}
                 variant="outlined"
                 />
-                <Button variant="contained" color="primary" onClick={handleRoutingStopNameChange}>
+                <Button variant="outlined" color="primary" onClick={handleRoutingStopNameChange}>
                     Create Routing stop
                     </Button>
 
@@ -468,7 +500,7 @@ export default function DispatchFormPage() {
             </Box> 
             </Box> 
 
-            <Box my={2}>
+            <Box flex={1}>
                 <Typography variant="subtitle2">Delivery</Typography>
                 <TextField
                 label="Consignee Name"
@@ -478,7 +510,7 @@ export default function DispatchFormPage() {
                 onChange={handleConsigneeNameChange}
                 variant="outlined"
                 />
-                <Button variant="contained" color="primary" onClick={handleConsigneeNameChange}>
+                <Button variant="outlined" color="primary" onClick={handleConsigneeNameChange}>
                     Create Consignee
                     </Button> 
                 <TextField
@@ -499,7 +531,7 @@ export default function DispatchFormPage() {
                 variant="outlined"
                 />
 
-                <Button variant="contained" color="primary" onClick={handleAddAnotherDeliveryChange}>
+                <Button variant="outlined" color="primary" onClick={handleAddAnotherDeliveryChange}>
                     Add Another Delivery
                 </Button>
             </Box>
@@ -507,7 +539,7 @@ export default function DispatchFormPage() {
             {/* Including other input fields and forms here */}
             </Box>
                 
-                <Box display="flex" mb={4}>
+                <Box className={classes.formContainer} display="flex" mb={4}>
                     <Box flex={1} mr={2}>
                     <Typography variant="subtitle2" className={classes.sectionSubtitle}>Fees/Charges</Typography>
                 <TextField
@@ -518,6 +550,7 @@ export default function DispatchFormPage() {
                 onChange={handlePrimaryFeeChange}
                 variant="outlined"
                 />
+                <Typography variant="caption">Enter Primary Fee, then select Fee Type below</Typography>
 
                 <TextField
                 label="Primary Fee Type"
@@ -536,6 +569,7 @@ export default function DispatchFormPage() {
                 onChange={handleFscAmountChange}
                 variant="outlined"
                 />
+                <Typography variant="caption">Enter an amount then select an FSC Amount Type below</Typography>
 
                 <TextField
                 label= "FSC amount Type"
@@ -545,6 +579,16 @@ export default function DispatchFormPage() {
                 onChange={handleFscAmountTypeChange}
                 variant="outlined"
                 /> 
+
+                <TextField
+                label= "Tax ID (EIN#)"
+                value={taxID}
+                margin="normal"
+                className={classes.inputField}
+                onChange={handleTaxIDChange}
+                variant="outlined"
+                />
+
 
                 </Box>
                 <Box flex={1}>
@@ -597,7 +641,7 @@ export default function DispatchFormPage() {
                     <Button variant="outlined" color="primary" onClick={handleAddAdditionalFeeChange}>
                         Add Additional Fee
                         </Button>
-
+                        <Typography variant="h6">Invoice Advance</Typography>
                     <TextField
                     label="Invoice Advance"
                     value={invoiceAdvance}
@@ -609,6 +653,17 @@ export default function DispatchFormPage() {
 
                 </Box>
             </Box>
+            <Box className={classes.expenseContainer}>
+            <Typography variant="h6">Fuel Expenses</Typography>
+            <Button variant="contained" color="primary">Add Fuel Expenses</Button>
+
+            <Typography variant="h6">Truck Expenses</Typography>
+            <Button variant="contained" color="primary">Add Truck EXpenses</Button>
+
+            <Typography variant="h6">Reefer Fuel Expenses</Typography>
+            <Button variant="contained" color="primary">Add Reefer Fuel Expenses</Button>
+            </Box>
+
             </div> 
     );
 }

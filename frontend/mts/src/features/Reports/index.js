@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import InNavBar from '../../common/Header/InNavBar';
 import Footer from '../../pages/HomePage/components/Footer';
 import { Typography, Button, Box } from '@material-ui/core';
+import Stack from '@mui/material/Stack';
 import CompanyOverview from './CompanyOverview';
 import ExpensesReport from './ExpensesReport';
 import FuelExpenses from './FuelExpenses';
@@ -45,6 +46,7 @@ export default function ReportsPage() {
     <div style={{ flex: 1 }}>
       <InNavBar />
       <Typography variant="h6">Reports</Typography>
+      <Stack direction="column" spacing={2}>
 
       <Box my={2}>
         <Button variant="contained" 
@@ -160,6 +162,7 @@ export default function ReportsPage() {
           Over the Road Days
         </Button>
       </Box>
+      </Stack>
     </div>
   );
 }
