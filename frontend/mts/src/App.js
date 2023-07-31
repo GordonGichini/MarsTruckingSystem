@@ -1,5 +1,5 @@
 import {HomePage, SignInSide, SignUpSide, ErrorPage, Dashboard, ProfilePage} from "./pages";
-import {Trips, Expenses, Invoices, Maintenance, Drivers, Addresses, Units, Subscription} from "./features";
+import {Trips, Expenses, Invoices, Maintenance, Drivers, Addresses, Units, Subscription, Reports} from "./features";
 import { EmptyMove, DetailedList } from "./features/Dispatches";
 import { AddCategoryForm, ListCategories } from "./features/Expenses";
 import { MaintenancePlans, NewCalendarPlan, NewMilePlan } from "./features/Maintenances";
@@ -14,7 +14,7 @@ import theme from './theme';
 import HomepageLayout from "./Layout/HomepageLayout";
 import DashboardLayout from "./Layout/DashboardLayout";
 //remember to add routes
-import { DispatchFormPage, ExpenseFormPage, MaintenanceLogEntryFormPage, DriverFormPage, UnitFormPage, AddressFormPage, ReportsFormPage } from './components';
+import { DispatchFormPage, ExpenseFormPage, MaintenanceLogEntryFormPage, DriverFormPage, UnitFormPage, AddressFormPage } from './components';
 
 
 function App() {
@@ -65,7 +65,7 @@ function App() {
 
         <Route path="/new-calendar-plan" element={<NewCalendarPlan/>} />
         <Route path="/new-mile-plan" element={<NewMilePlan/>} />
-        <Route path="/reports" element={<ReportsFormPage/>} />
+        <Route path="/reports" element={<Reports/>} />
         <Route path="/detailedlist" element={<DetailedList/>} />
         <Route path="/empty-move" element={<EmptyMove/>} />
         <Route path="/addresses" element={<Addresses/>} />
