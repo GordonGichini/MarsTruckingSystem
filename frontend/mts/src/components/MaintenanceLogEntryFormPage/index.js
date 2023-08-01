@@ -1,9 +1,62 @@
 import React, { useState } from 'react';
-import { Typography, TextField, Button, FormControl, InputLabel, Select, MenuItem, Box, Link } from '@material-ui/core';
+import { Typography, Grid, TextField, Button, FormControl, InputLabel, Select, MenuItem, Box, Link } from '@material-ui/core';
 import { useNavigate } from 'react-router-dom';
+import { makeStyles } from '@mui/styles';
+import InNavBar from '../../common/Header/InNavBar';
+import { useTheme } from '@mui/material/styles';
+
+const useStyles = makeStyles((theme) => ({
+  formContainer: {
+    padding: theme.spacing(2),
+    marginTop: theme.spacing(2),
+    marginLeft: theme.spacing(4),
+  },
+  radioGroup: {
+    color: 'green', // Set the color of the radio button to green
+    '& .MuiFormControlLabel-label': {
+      color: 'green', // Set the color of the label text to green
+    },
+  },
+  sectionTitle: {
+    marginBottom: theme.spacing(2),
+    marginTop: theme.spacing(12),
+    marginLeft: theme.spacing(2),
+  },
+  button: {
+    marginRight: theme.spacing(2),
+    marginBottom: theme.spacing(2),
+    '& .MuiButton-outlined': {
+        borderColor: '#00C853', // Green color for button lines
+        color: '#00C853', // Green color for button text
+      },
+      '& .MuiButton-outlined:hover': {
+        backgroundColor: '#00C853', // Green color when hovered
+        color: '#FFFFFF', // White text color when hovered
+      },
+  },
+  inputField: {
+    width: '60%',
+    margin: theme.spacing(1, 0),
+    '& .MuiOutlinedInput-root': {
+  '& fieldset': {
+    borderColor: 'green',
+  },
+  '&:hover fieldset': {
+    borderColor: 'green',
+  },
+  '&.Mui-focused fieldset': {
+    borderColor: 'green',
+  },
+ },
+  },
+
+}));
+
 
 export default function MaintenanceLogEntryFormPage() {
   const navigate = useNavigate();
+  const theme = useTheme();
+  const classes = useStyles();
 
   const [unit, setUnit] = useState('');
   const [shortDescription, setShortDescription] = useState('');
@@ -57,11 +110,14 @@ export default function MaintenanceLogEntryFormPage() {
 
   return (
     <div style={{ flex: 1 }}>
-      <Typography variant="h6">Maintenance Log Entry</Typography>
+      <InNavBar />
+      <Typography variant="h6" className={classes.sectionTitle}>Maintenance Log Entry</Typography>
 
-      <form>
-        <Box my={2}>
-          <FormControl>
+      <form className={classes.formContainer}>
+        <Box className={classes.formContainer}>
+          <Grid container spacing={2}>
+            <Grid item xs={6}>
+          <FormControl className={classes.inputField}>
             <InputLabel id="unit-label">Unit</InputLabel>
             <Select
               labelId="unit-label"
@@ -71,7 +127,6 @@ export default function MaintenanceLogEntryFormPage() {
               <MenuItem value="general">General</MenuItem>
             </Select>
           </FormControl>
-        </Box>
 
         <TextField
           label="Short Description"
@@ -79,6 +134,7 @@ export default function MaintenanceLogEntryFormPage() {
           onChange={handleShortDescriptionChange}
           variant="outlined"
           margin='normal'
+          className={classes.inputField}
         />
 
         <TextField
@@ -89,6 +145,7 @@ export default function MaintenanceLogEntryFormPage() {
           onChange={handleDescriptionChange}
           variant="outlined"
           margin='normal'
+          className={classes.inputField}
         />
 
         <TextField
@@ -97,11 +154,14 @@ export default function MaintenanceLogEntryFormPage() {
           onChange={handleMaintenanceVendorChange}
           variant="outlined"
           margin='normal'
+          className={classes.inputField}
         />
 
-        <Button variant="contained" color="primary" onClick={handleCreateMaintenanceVendorClick}>
+        <Button variant="outlined" className={classes.button} color="primary" onClick={handleCreateMaintenanceVendorClick}>
           Create Maintenance Vendor
         </Button>
+        </Grid>
+        <Grid item xs={6}>
 
         <TextField
           label="Amount"
@@ -109,6 +169,7 @@ export default function MaintenanceLogEntryFormPage() {
           onChange={handleAmountChange}
           variant="outlined"
           margin='normal'
+          className={classes.inputField}
         />
 
         <Typography variant="subtitle1">Plan</Typography>
@@ -120,6 +181,7 @@ export default function MaintenanceLogEntryFormPage() {
           onChange={handleRepairDateChange}
           variant="outlined"
           margin='normal'
+          className={classes.inputField}
           InputLabelProps={{
             shrink: true,
           }}
@@ -132,15 +194,19 @@ export default function MaintenanceLogEntryFormPage() {
           onChange={handleOdometerChange}
           variant="outlined"
           margin='normal'
+          className={classes.inputField}
         />
 
-        <Button variant="contained" color="primary" onClick={handleSaveClick}>
+        <Button variant="outlined" className={classes.button} color="primary" onClick={handleSaveClick}>
           Save
         </Button>
 
         <Link component="button" variant="body2" onClick={handleCancelClick}>
           Cancel
         </Link>
+        </Grid>
+        </Grid>
+        </Box>
       </form>
     </div>
   );

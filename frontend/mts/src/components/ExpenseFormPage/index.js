@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { Typography, TextField, Button, FormControl, Select, MenuItem, InputLabel, Box, Link } from '@material-ui/core';
+import { Typography, Radio, Grid, RadioGroup, TextField, Button, FormControl, Select, MenuItem, InputLabel, Box, Link, FormControlLabel } from '@material-ui/core';
 import { makeStyles } from '@mui/styles';
+import InNavBar from '../../common/Header/InNavBar';
 import { useTheme } from '@mui/material/styles';
 import { useNavigate } from 'react-router-dom';
 
@@ -8,6 +9,44 @@ import { useNavigate } from 'react-router-dom';
 const useStyles = makeStyles((theme) => ({
   formContainer: {
     padding: theme.spacing(2),
+    marginTop: theme.spacing(4),
+    marginLeft: theme.spacing(4),
+  },
+  radioGroup: {
+    color: 'green', // Set the color of the radio button to green
+    '& .MuiFormControlLabel-label': {
+      color: 'green', // Set the color of the label text to green
+    },
+  },
+  sectionTitle: {
+    marginBottom: theme.spacing(2),
+    marginTop: theme.spacing(10),
+    marginLeft: theme.spacing(2),
+  },
+  btn: {
+    marginTop: theme.spacing(12),
+    marginRight: theme.spacing(6),
+  },
+  noteContainer: {
+    display: 'flex',
+    borderStyle: '1px solid green',
+    height: '120px',
+    width: '100%',
+    padding: theme.spacing(0),
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
+  button: {
+    marginRight: theme.spacing(2),
+    marginBottom: theme.spacing(2),
+    '& .MuiButton-outlined': {
+        borderColor: '#00C853', // Green color for button lines
+        color: '#00C853', // Green color for button text
+      },
+      '& .MuiButton-outlined:hover': {
+        backgroundColor: '#00C853', // Green color when hovered
+        color: '#FFFFFF', // White text color when hovered
+      },
   },
   inputField: {
     width: '60%',
@@ -99,12 +138,15 @@ export default function ExpenseFormPage() {
 
   return (
     <div>
-      <Typography variant="h6">Add Expense</Typography>
+      <InNavBar />
+      <Typography variant="h6" className={classes.sectionTitle}>Add Expense</Typography>
 
       <Box className={classes.formContainer}>
+        <Grid container spacing={2}>
+          <Grid item xs={6}>
         <Box my={2}>
-          <FormControl>
-            <InputLabel id="expense-category-label"className={classes.inputField}>Expense Category</InputLabel>
+          <FormControl className={classes.inputField}>
+            <InputLabel id="expense-category-label" variant="outlined">Expense Category</InputLabel>
             <Select
               labelId="expense-category-label"
               value={expenseCategory}
@@ -115,7 +157,7 @@ export default function ExpenseFormPage() {
             </Select>
           </FormControl>
 
-          <Button variant="contained" color="primary" onClick={handleAddCategoryClick}>
+          <Button variant="outlined" color="primary" className={classes.button} onClick={handleAddCategoryClick}>
             Add Category
           </Button>
         </Box>
@@ -138,17 +180,12 @@ export default function ExpenseFormPage() {
           className={classes.inputField}
           />
 
-        <FormControl>
-          <InputLabel id="assign-to-trip-label"className={classes.inputField}>Assign to Trip</InputLabel>
-          <Select
-            labelId="assign-to-trip-label"
-            value={assignToTrip}
-            onChange={handleAssignToTripChange}
-          >
-            <MenuItem value="yes">Yes</MenuItem>
-            <MenuItem value="no">No</MenuItem>
-          </Select>
-        </FormControl>
+          <Typography variant="subtitle1">Assign to Trip</Typography>
+          <RadioGroup className={classes.radioGroup} aria-label="assign to trip" name="type" variant="outlined">
+            <FormControlLabel value="yes" control={<Radio />} label="Yes" />
+            <FormControlLabel value="no" control={<Radio />} label="No" />
+
+          </RadioGroup>
 
         <TextField
           label="Expense Date"
@@ -162,6 +199,16 @@ export default function ExpenseFormPage() {
             shrink: true,
           }}
         />
+        <Box className={classes.noteContainer}>
+        <TextField
+        label="Notes"
+        variant="outlined"
+        multiline
+        fullWidth />
+        </Box>
+
+        </Grid>
+        <Grid item xs={6}>
 
         <TextField
           label="Unit"
@@ -198,6 +245,9 @@ export default function ExpenseFormPage() {
           margin='normal'
           className={classes.inputField}
         />
+         <Button variant="outlined" className={classes.button} color="primary" onClick={handleAddCategoryClick}>
+            Add Fuel Vendor
+          </Button>
 
         <TextField
           label="State/Province"
@@ -208,13 +258,15 @@ export default function ExpenseFormPage() {
           className={classes.inputField}
         />
 
-        <Button variant="contained" color="primary" onClick={handleCreateExpenseClick}>
+        <Button variant="outlined" color="primary" className={classes.button} onClick={handleCreateExpenseClick}>
           Create Expense
         </Button>
 
         <Link component="button" variant="body2" onClick={handleCancelClick}>
           Cancel
         </Link>
+        </Grid>
+        </Grid>
       </Box>
     </div>
   );

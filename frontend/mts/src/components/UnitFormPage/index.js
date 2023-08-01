@@ -70,7 +70,7 @@ export default function UnitFormPage() {
         </TextField>
 
         <Typography variant="subtitle1">Status</Typography>
-        <RadioGroup className={classes.radioGroup} row aria-label="status" name="type" variant="outlined">
+        <RadioGroup className={classes.radioGroup} aria-label="status" name="type" variant="outlined">
           <FormControlLabel value="active" control={<Radio />} label="Active" />
           <FormControlLabel value="inactive" control={<Radio />} label="Inactive" />
         </RadioGroup>
