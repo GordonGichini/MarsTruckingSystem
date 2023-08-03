@@ -47,10 +47,10 @@ router.post('/logout', (req, res) => {
   });
 
 // Protected route - only accessible to authenticated users
-router.get('/profile', authenticateUser, (req, res) => {
+router.get('/profile', authenticateToken, (req, res) => {
   // Access the authenticated user's data from req.user
-  const { userId, role } = req.user;
-  return res.status(200).json({ userId, role });
+  const user = req.user;
+  res.json({ username: user.username, email: user.email });
 });
 
 // Other protected routes can be defined here
