@@ -1,4 +1,22 @@
 const jwt = require('jsonwebtoken');
+const config = require('./config');
+
+//Middleware to verify JWT token
+function authenticateToken(req, res, next) {
+    const token = req.header('Authorization');
+
+    if (!token) {
+        return res.sendStatus(401);
+    }
+
+    jwt.verify(token, config.jwtSecret, (err, user) => {
+        if (err) {
+            return res.sendStatus(403);
+        }
+        req.user = user;
+        next();
+    });
+} 
 
 const authenticateUser = (req, res, next) => {
   const token = req.header('Authorization')?.replace('Bearer ', '');
@@ -17,4 +35,7 @@ const authenticateUser = (req, res, next) => {
   }
 };
 
-module.exports = authenticateUser;
+module.exports = {
+    authenticateUser,
+    authenticateToken,
+};
