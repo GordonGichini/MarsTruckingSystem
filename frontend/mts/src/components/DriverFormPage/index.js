@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
+import InNavBar from '../../common/Header/InNavBar';
 import { Paper, TextField, Typography, Button, Box } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
  
   formContainer: {
-    padding: theme.spacing(4),
+    padding: theme.spacing(2),
   },
-  formTitle: {
+  title: {
+    marginTop: theme.spacing(8),
     marginBottom: theme.spacing(2),
   },
   inputField: {
@@ -41,8 +43,9 @@ export default function DriverFormPage() {
 
   return (
     <div>
+      <InNavBar />
         <Paper elevation={1} className={classes.formContainer}>
-      <Typography variant="h6">Add Driver</Typography>
+      <Typography variant="h6" className={classes.title}>Add Driver</Typography>
       <form className={classes.formContainer}>
 
       <Box my={2}>

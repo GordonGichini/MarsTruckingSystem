@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import { makeStyles } from '@mui/styles';
+import InNavBar from '../../common/Header/InNavBar';
 import { useTheme } from '@mui/material/styles';
 import { FormControlLabel, Radio, RadioGroup, Typography, TextField, Button, Box, MenuItem } from '@material-ui/core';
 
 
 const useStyles = makeStyles((theme) => ({
+
   title: {
-    flexGrow: 1,
-    marginTop: theme.spacing(2),
+    marginTop: theme.spacing(10),
     marginLeft: theme.spacing(4),
   },
   formContainer: {
@@ -53,6 +54,7 @@ export default function UnitFormPage() {
 
   return (
     <div>
+      <InNavBar />
       <Typography variant="h5" className={classes.title}>Add a Unit</Typography>
       <Box className={classes.formContainer}>
       <Box my={2}>

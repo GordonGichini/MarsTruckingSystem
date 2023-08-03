@@ -33,7 +33,7 @@ const GettingStarted = () => {
        }}
        color = "primary"
        component = {Link}
-       to = "/add-unit"
+       to = "/edit_company_profile"
       >
       <Typography sx={{ml:"30px"}}> Complete Your Company Profile</Typography>
       </Button>

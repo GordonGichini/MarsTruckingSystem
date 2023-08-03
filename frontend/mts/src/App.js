@@ -14,7 +14,7 @@ import theme from './theme';
 import HomepageLayout from "./Layout/HomepageLayout";
 import DashboardLayout from "./Layout/DashboardLayout";
 //remember to add routes
-import { DispatchFormPage, ExpenseFormPage, MaintenanceLogEntryFormPage, DriverFormPage, UnitFormPage, AddressFormPage } from './components';
+import { DispatchFormPage, ExpenseFormPage, MaintenanceLogEntryFormPage, DriverFormPage, ProfileForm, UnitFormPage, AddressFormPage } from './components';
 
 
 function App() {
@@ -38,6 +38,7 @@ function App() {
         <Route path="/add-expense" element={<ExpenseFormPage/>} />
         <Route path="/editpage" element={<EditPage/>} />
         <Route path="/subscription" element={<Subscription/>} />
+        <Route path="/edit_company_profile" element={<ProfileForm/>} />
 
         <Route path="/list-categories" element={<ListCategories/>} />
         <Route path="/add-category" element={<AddCategoryForm/>} />
