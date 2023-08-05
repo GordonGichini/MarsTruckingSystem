@@ -89,9 +89,9 @@ function Trips() {
        variant="outlined"
        className={classes.button}
        component={Link}
-       to="/add-dispatch"
+       to="/add-trip"
        >
-        Add Dispatch
+        Add Trip
       </Button>
       <Button 
       variant="outlined" 

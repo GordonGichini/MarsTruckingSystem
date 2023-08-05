@@ -15,7 +15,7 @@ const useStyles = makeStyles((theme) => ({
     zIndex: theme.zIndex.drawer + 1,
     top: 0,
     backgroundColor: 'black',
-    marginBottom: theme.spacing(2),
+    marginBottom: theme.spacing(1),
   },
   toolbar: {
     display: 'flex',
@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
   },
   navLink: {
-    marginLeft: theme.spacing(0.1),
+    marginLeft: theme.spacing(-1),
     color: '#76FF03',
     textDecoration: 'none',
     '&:hover': {
@@ -46,7 +46,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   arrowIcon: {
-    marginRight: theme.spacing(0.2)
+    marginLeft: theme.spacing(-2.5)
   },
 }));
 
@@ -103,7 +103,15 @@ function InNavBar() {
            activeClassName={classes.active}
            className={classes.navLink}
           >Dashboard</Button>  
-
+          <Divider orientation="vertical" flexItem />
+          <Button
+           colour="inherit"
+           component={NavLink}
+           to="/loadplanner"
+           exact
+           activeClassName={classes.active}
+           className={classes.navLink}
+          >Load Planner</Button>
           <Divider orientation="vertical" flexItem />
           <Button
            colour="inherit"
@@ -112,8 +120,16 @@ function InNavBar() {
            exact
            activeClassName={classes.active}
            className={classes.navLink}
-          >Dispatch</Button>
-
+          >Trips</Button>
+          <Divider orientation="vertical" flexItem />
+          <Button
+           colour="inherit"
+           component={NavLink}
+           to="/loads"
+           exact
+           activeClassName={classes.active}
+           className={classes.navLink}
+          >Loads</Button>
           <Divider orientation="vertical" flexItem />
           <Button
            colour="inherit"
@@ -132,15 +148,6 @@ function InNavBar() {
            activeClassName={classes.active}
            className={classes.navLink}
           >Expenses</Button>
-          <Divider orientation="vertical" flexItem />
-          <Button
-           colour="inherit"
-           component={NavLink}
-           to="/maintenance_logs"
-           exact
-           activeClassName={classes.active}
-           className={classes.navLink}
-          >Maintenances</Button>
           <Divider orientation="vertical" flexItem />
           <Button
            colour="inherit"
@@ -167,8 +174,9 @@ function InNavBar() {
         aria-controls="settings-menu"
         aria-haspopup="true"
         onClick={handleSettingsMenuOpen}
+        className={classes.arrowIcon}
       >
-        <ExpandMoreIcon className={classes.arrowIcon} />
+        <ExpandMoreIcon />
       </IconButton> 
 
       <Menu
@@ -178,6 +186,9 @@ function InNavBar() {
         open={Boolean(settingsAnchorEl)}
         onClose={handleSettingsMenuClose}
       >
+        <MenuItem onClick={handleSettingsMenuClose} component={NavLink} to="/maintenance_logs">
+          Maintenances
+        </MenuItem>
         <MenuItem onClick={handleSettingsMenuClose} component={NavLink} to="/settings/addresses">
           Addresses
         </MenuItem>
@@ -222,6 +233,14 @@ function InNavBar() {
            className={classes.navLink}
           >Profile</Button>
           <Divider orientation="vertical" flexItem />
+          <Button
+           colour="inherit"
+           component={NavLink}
+           to="/chat"
+           exact
+           activeClassName={classes.active}
+           className={classes.navLink}
+          >Chat</Button>
           <Divider orientation="vertical" flexItem />
           <Button
            colour="inherit"

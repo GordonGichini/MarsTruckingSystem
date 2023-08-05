@@ -12,13 +12,6 @@ const useStyles = makeStyles((theme) => ({
       marginLeft: theme.spacing(4),
       borderRadius: theme.spacing(2),
     },
-    expenseContainer: {
-        marginTop: theme.spacing(2),
-        marginLeft: theme.spacing(2),
-        marginBottom: theme.spacing(2),
-        padding: theme.spacing(2),
-
-    },
     sectionTitle: {
       marginBottom: theme.spacing(2),
       marginTop: theme.spacing(10),
@@ -58,51 +51,16 @@ const useStyles = makeStyles((theme) => ({
 
 
 
-export default function DispatchFormPage() {
+export default function PlannedLoad() {
     const classes = useStyles();
     const theme = useTheme();
     // Defining state variables for capturing form inputs
     const [customTripNumber, setCustomTripNumber] = React.useState('');
-    const [driverName, setDriverName] = React.useState('');
-    const [driverPay, setDriverPay] = React.useState('');
-    const [driverAdvance, setDriverAdvance] = React.useState('');
-    const [truck, setTruck] = React.useState('');
-    const [trailer, setTrailer] = React.useState('');
-    const [odometer, setOdometer] = React.useState('');
     const [customer, setCustomer] = React.useState('');
 
      // Basic details form state
     const handleCustomTripNumberChange = (event) => {
         setCustomTripNumber(event.target.value);
-    };
-
-    const handleDriverNameChange = (event) => {
-        setDriverName(event.target.value);
-    };
-
-    const handleDriverPayChange = (event) => {
-        setDriverPay(event.target.value);
-    }; 
-
-    const handleDriverAdvanceChange = (event) => {
-        setDriverAdvance(event.target.value);
-    };
-
-    const handleAddDriverClick = () => {
-        // Perform logic for adding a driver
-        // can access the captured input values here
-    };
-
-    const handleTruckChange = (event) => {
-        setTruck(event.target.value);
-    };
-
-    const handleTrailerChange = (event) => {
-        setTrailer(event.target.value);
-    };
-
-    const handleOdometerChange = (event) => {
-        setOdometer(event.target.value);
     };
 
     const handleCustomerChange = (event) => {
@@ -151,28 +109,6 @@ export default function DispatchFormPage() {
         setQuantity(event.target.value);
     }; 
 
-    // Routing Stop form state
-    const [routingStopName, setRoutingStopName] = React.useState('');
-    const [routingStopDate, setRoutingStopDate] = React.useState('');
-    const [instructions1, setInstructions1] = React.useState('');
-    const [notes, setNotes] = React.useState('');
-
-    const handleRoutingStopNameChange = (event) => {
-        setRoutingStopName(event.target.value);
-    };
-
-    const handleRoutingStopDateChange = (event) => {
-        setRoutingStopDate(event.target.value);
-    };
-
-    const handleInstructions1Change = (event) => {
-        setInstructions1(event.target.value);
-    };
-
-    const handleNotesChange = (event) => {
-        setNotes(event.target.value);
-    }; 
-
     //Delivery state
     const [consigneeName, setConsigneeName] = React.useState('');
     const [deliveryDate, setDeliveryDate] = React.useState('');
@@ -195,7 +131,6 @@ export default function DispatchFormPage() {
     const [primaryFeeType, setPrimaryFeeType] = React.useState('');
     const [fscAmount, setFscAmount] = React.useState('');
     const [fscAmountType, setFscAmountType] = React.useState('');
-    const [taxID, setTaxID] = React.useState('');
     const [detention, setDetention] = React.useState('');
     const [lumper, setLumper] = React.useState('');
     const [stopOff, setStopOff] = React.useState('');
@@ -219,9 +154,6 @@ export default function DispatchFormPage() {
 
     const handleFscAmountTypeChange = (event) => {
         setFscAmountType(event.target.value);
-    };
-    const handleTaxIDChange = (event) => {
-        setTaxID(event.target.value);
     };
 
     const handleDetentionChange = (event) => {
@@ -263,7 +195,7 @@ export default function DispatchFormPage() {
         <div>
             <InNavBar />
             <Box className={classes.formContainer}>
-        <Typography variant="h6" className={classes.sectionTitle}>Add a Dispatch</Typography>
+        <Typography variant="h6" className={classes.sectionTitle}>Add a Planned Load</Typography>
         <form>
             <Grid container spacing={6}>
                 <Grid item xs={6}>
@@ -278,89 +210,7 @@ export default function DispatchFormPage() {
             /> 
             <Typography variant="caption">
                 Optional Custom Trip number that will override the system generated trip number
-            </Typography>
-            <TextField
-            label="Driver Name"
-            value={driverName}
-            margin='normal'
-            onChange={handleDriverNameChange}
-            variant="outlined"
-            className={classes.inputField}
-            /> 
-
-            <Button 
-            variant="outlined"  
-            onClick={handleDriverNameChange}
-            component={Link}
-            color="primary"
-            to="/"
-            className={classes.button}
-            >
-                Create Driver
-            </Button>
-            <TextField
-            label="Driver Pay"
-            value={driverPay}
-            margin='normal'
-            onChange={handleDriverPayChange}
-            variant="outlined"
-            className={classes.inputField}
-            />
-            
-            <TextField
-            label="Driver Advance"
-            value={driverAdvance}
-            margin='normal'
-            onChange={handleDriverAdvanceChange}
-            variant="outlined"
-            className={classes.inputField}
-            />
-
-            <Button variant="outlined" color="primary" onClick={handleAddDriverClick}
-            className={classes.button}>
-                Add Team Driver
-            </Button> 
-            </Grid>
-            
-            <Grid item xs={6}>
-            <TextField
-            label="Truck"
-            margin='normal'
-            value={truck}
-            onChange={handleTruckChange} 
-            variant="outlined"
-            className={classes.inputField}
-            />
-        
-            <Button variant="outlined" color="primary" onClick={handleTruckChange}
-            className={classes.button}>
-                Create Truck 
-            </Button>
-            
-            
-            <TextField
-            label="Trailer"
-            value={trailer}
-            margin='normal'
-            onChange={handleTrailerChange}
-            variant="outlined"
-            className={classes.inputField}
-            />
-            <Button variant="outlined" color="primary" onClick={handleTrailerChange}
-            className={classes.button}>
-                    Create Trailer
-            </Button> 
-            
-            
-            <TextField
-            label="Odometer"
-            value={odometer}
-            margin='normal'
-            onChange={handleOdometerChange} 
-            variant="outlined"
-            className={classes.inputField}
-            />
-            
+            </Typography>            
             <TextField
             label="Customer"
             value={customer}
@@ -579,17 +429,6 @@ export default function DispatchFormPage() {
                 onChange={handleFscAmountTypeChange}
                 variant="outlined"
                 /> 
-
-                <TextField
-                label= "Tax ID (EIN#)"
-                value={taxID}
-                margin="normal"
-                className={classes.inputField}
-                onChange={handleTaxIDChange}
-                variant="outlined"
-                />
-
-
                 </Box>
                 <Box flex={1}>
                     <Typography variant="subtitle2">Accessory Fees</Typography>
@@ -650,20 +489,8 @@ export default function DispatchFormPage() {
                     onChange={handleInvoiceAdvanceChange}
                     variant="outlined"
                     />
-
                 </Box>
             </Box>
-            <Box className={classes.expenseContainer}>
-            <Typography variant="h6">Fuel Expenses</Typography>
-            <Button variant="contained" color="primary">Add Fuel Expenses</Button>
-
-            <Typography variant="h6">Truck Expenses</Typography>
-            <Button variant="contained" color="primary">Add Truck EXpenses</Button>
-
-            <Typography variant="h6">Reefer Fuel Expenses</Typography>
-            <Button variant="contained" color="primary">Add Reefer Fuel Expenses</Button>
-            </Box>
-
             </div> 
     );
 }

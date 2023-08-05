@@ -1,6 +1,6 @@
 import {HomePage, SignInSide, SignUpSide, ErrorPage, Dashboard, ProfilePage} from "./pages";
-import {Trips, Expenses, Invoices, Maintenance, Drivers, Addresses, Units, Subscription, Reports} from "./features";
-import { EmptyMove, DetailedList } from "./features/Dispatches";
+import {Trips, Loads, LoadPlanner, Expenses, Invoices, Maintenance, Drivers, Addresses, Units, Subscription, Reports} from "./features";
+import { EmptyMove, DetailedList } from "./features/Trips";
 import { AddCategoryForm, ListCategories } from "./features/Expenses";
 import { MaintenancePlans, NewCalendarPlan, NewMilePlan } from "./features/Maintenances";
 import { CompanyOverview, ExpensesReport, FuelExpenses, FuelVendor, IRPStateMiles, OverTheRoadDays, ProfitAndLoss, QuarterlyIFTA, QuarterlyMaintenance, ReeferFuelExpenses, Settlement, Tax, UnitOperatingIncome } from './features/Reports';
@@ -14,7 +14,7 @@ import theme from './theme';
 import HomepageLayout from "./Layout/HomepageLayout";
 import DashboardLayout from "./Layout/DashboardLayout";
 //remember to add routes
-import { DispatchFormPage, ExpenseFormPage, MaintenanceLogEntryFormPage, DriverFormPage, ProfileForm, UnitFormPage, AddressFormPage } from './components';
+import { TripForm, PlannedLoad, ExpenseFormPage, MaintenanceLogEntryFormPage, DriverFormPage, ProfileForm, UnitFormPage, AddressFormPage } from './components';
 
 
 function App() {
@@ -32,9 +32,12 @@ function App() {
         <Route path="/company-profile" element={<ProfilePage/>} />
         <Route path="*" element={<ErrorPage/>} />
         <Route path="/trips" element={<Trips/>} />
+        <Route path="/loads" element={<Loads/>} />
+        <Route path="/loadplanner" element={<LoadPlanner/>} />
         <Route path="/expenses" element={<Expenses/>} />
         <Route path="/invoices" element={<Invoices/>} />
-        <Route path="/add-dispatch" element={<DispatchFormPage/>} />
+        <Route path="/add-trip" element={<TripForm/>} />
+        <Route path="/add-planned-load" element={<PlannedLoad/>} />
         <Route path="/add-expense" element={<ExpenseFormPage/>} />
         <Route path="/editpage" element={<EditPage/>} />
         <Route path="/subscription" element={<Subscription/>} />

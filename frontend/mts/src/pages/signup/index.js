@@ -5,6 +5,7 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
+import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import Link from '@mui/material/Link';
 import Paper from '@mui/material/Paper';
@@ -22,8 +23,6 @@ const theme = createTheme();
 export default function SignUpSide() { 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
-
   const [error, setError] = useState('');
 
 
@@ -31,7 +30,7 @@ export default function SignUpSide() {
     event.preventDefault();
     
     try {
-      const response = await axios.post('', { 
+      const response = await axios.post('/login', { 
         email,
         password,
       }); 
@@ -74,24 +73,22 @@ export default function SignUpSide() {
               alignItems: 'center',
             }}
           >
-            <Typography component="h1" variant="h6">
-              Trucking Made successful
-            </Typography>
             <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
               <LockOutlinedIcon />
             </Avatar>
             <Typography component="h1" variant="h5">
-              Sign up
+              Sign Up
             </Typography>
             <Box component="form" noValidate onSubmit={handleFormSubmit} sx={{ mt: 1 }}>
-            <TextField
+              <TextField
                 margin="normal"
                 required
                 fullWidth
-                name="name"
-                label="Name"
-                type="name"
                 id="name"
+                label="Name"
+                name="name"
+                autoComplete="name"
+                autoFocus
               />
               <TextField
                 margin="normal"
@@ -117,11 +114,11 @@ export default function SignUpSide() {
                 margin="normal"
                 required
                 fullWidth
-                name="confirm-password"
+                name="confirmpassword"
                 label="Confirm Password"
                 type="password"
-                id="confirm_password"
-                autoComplete="current-password"
+                id="password"
+                autoComplete="confirm-password"
               />
               <Button
                 type="submit"
@@ -132,15 +129,9 @@ export default function SignUpSide() {
               >
                 Sign Up
               </Button>
-              <Button
-                type="submit"
-                fullWidth
-                variant="contained"
-                sx={{ mt: 3, mb: 2 }}
-                
-              >
-                Sign Up with Google
-              </Button>
+                  <Link href="/login" variant="body2">
+                    {"Already have an account? Login"}
+                  </Link>
             </Box>
           </Box>
         </Grid>
