@@ -8,9 +8,14 @@ import { useTheme } from '@mui/material/styles';
 
 const useStyles = makeStyles((theme) => ({
     formContainer: {
-      marginTop: theme.spacing(8),
-      marginLeft: theme.spacing(4),
-      borderRadius: theme.spacing(2),
+     maxWidth: 700,
+     margin: '0 auto',
+    },
+    formSection: {
+        border: `1px solid ${theme.palette.primary.main}`,
+        borderRadius: theme.shape.borderRadius,
+        padding: theme.spacing(2),
+        margin: theme.spacing(2, 0),
     },
     sectionTitle: {
       marginBottom: theme.spacing(2),
@@ -55,12 +60,12 @@ export default function PlannedLoad() {
     const classes = useStyles();
     const theme = useTheme();
     // Defining state variables for capturing form inputs
-    const [customTripNumber, setCustomTripNumber] = React.useState('');
+    const [customLoadNumber, setCustomLoadNumber] = React.useState('');
     const [customer, setCustomer] = React.useState('');
 
      // Basic details form state
-    const handleCustomTripNumberChange = (event) => {
-        setCustomTripNumber(event.target.value);
+    const handleCustomLoadNumberChange = (event) => {
+        setCustomLoadNumber(event.target.value);
     };
 
     const handleCustomerChange = (event) => {
@@ -80,6 +85,8 @@ export default function PlannedLoad() {
     const [customerRequiredInfo, setCustomerRequiredInfo] = React.useState('');
     const [weight, setWeight] = React.useState('');
     const [quantity, setQuantity] = React.useState('');
+    const [notes, setNotes] = React.useState('');
+    const [commodity, setCommodity] = React.useState('');
 
     const handleShipperNameChange = (event) => {
         setShipperName(event.target.value); 
@@ -108,6 +115,14 @@ export default function PlannedLoad() {
     const handleQuantityChange = (event) => {
         setQuantity(event.target.value);
     }; 
+
+    const handleNotesChange = (event) => {
+        setNotes(event.target.value);
+    };
+
+    const handleCommodityChange = (event) => {
+        setCommodity(event.target.value);
+    };
 
     //Delivery state
     const [consigneeName, setConsigneeName] = React.useState('');
@@ -195,21 +210,22 @@ export default function PlannedLoad() {
         <div>
             <InNavBar />
             <Box className={classes.formContainer}>
-        <Typography variant="h6" className={classes.sectionTitle}>Add a Planned Load</Typography>
-        <form>
+        <Typography variant="h6" className={classes.sectionTitle}>Add Planned Load</Typography>
+        <Box className={classes.formSection}>
+        
             <Grid container spacing={6}>
                 <Grid item xs={6}>
                 <Typography variant="subtitle1">Basic Details</Typography>
             <TextField
-            label="Custom Trip Number"
-            value={customTripNumber}
+            label="Custom Load Number"
+            value={customLoadNumber}
             margin='normal'
-            onChange={handleCustomTripNumberChange}
+            onChange={handleCustomLoadNumberChange}
             variant="outlined"
             className={classes.inputField}
             /> 
             <Typography variant="caption">
-                Optional Custom Trip number that will override the system generated trip number
+                Optional Custom Load number that will override the system generated trip number
             </Typography>            
             <TextField
             label="Customer"
@@ -226,15 +242,16 @@ export default function PlannedLoad() {
             </Button>
             </Grid>
             </Grid>
-            </form>
+            </Box>
             </Box>
             
             
 
             <Box className={classes.formContainer}>
                 <Typography variant="h6" className={classes.sectionSubtitle}>Stops</Typography>
-                <Box display="flex" mb={2}>
-                    <Box flex={1} mr={2}>
+                <Box className={classes.formSection}>
+                        <Grid container spacing={6}>
+                            <Grid item xs={6}>
                         <Typography variant="subtitle1">Pickup</Typography>
                         <TextField
                         label="Shipper"
@@ -265,6 +282,7 @@ export default function PlannedLoad() {
                         multiline
                         variant="outlined"
                         />
+                        <Typography variant="caption">ELD drivers can view in mobile app and trip report. (Pick up number, Apt. time, etc.)</Typography>
 
                         <TextField
                         label="BOL"
@@ -305,52 +323,28 @@ export default function PlannedLoad() {
                         onChange={handleQuantityChange}
                         variant="outlined"
                         />
-            </Box>
 
-            <Box flex={1}>
-                <Typography variant="subtitle2">Routing Stop (Optional)</Typography>
-                <TextField
-                label="Routing Stop"
-                value={routingStopName}
-                margin='normal'
-                className={classes.inputField}
-                onChange={handleRoutingStopNameChange}
-                variant="outlined"
-                />
-                <Button variant="outlined" color="primary" onClick={handleRoutingStopNameChange}>
-                    Create Routing stop
-                    </Button>
+                        <TextField
+                        label="Notes"
+                        value={notes}
+                        margin="normal"
+                        className={classes.inputField}
+                        onChange={handleNotesChange}
+                        variant="outlined"
+                        />
 
-                    <TextField
-                    label="Routing Stop Date"
-                    value={routingStopDate}
-                    margin='normal'
-                    className={classes.inputField}
-                    onChange={handleRoutingStopDateChange}
-                    variant="outlined"
-                    />
+                        <TextField
+                        label="Commodity"
+                        value={commodity}
+                        margin="normal"
+                        className={classes.inputField}
+                        onChange={handleCommodityChange}
+                        variant="outlined"
+                        />
+                        <Button variant="outlined">Add Another Pickup</Button>
+                        </Grid>
 
-                    <TextField
-                    label="Instructions"
-                    value={instructions}
-                    margin='normal'
-                    className={classes.inputField}
-                    onChange={handleInstructionsChange}
-                    variant="outlined"
-                    />
-
-                    <TextField
-                    label="Notes"
-                    value={notes}
-                    margin='normal'
-                    className={classes.inputField}
-                    onChange={handleNotesChange}
-                    variant="outlined"
-                    />
-            </Box> 
-            </Box> 
-
-            <Box flex={1}>
+                <Grid item xs={6}>
                 <Typography variant="subtitle2">Delivery</Typography>
                 <TextField
                 label="Consignee Name"
@@ -384,13 +378,15 @@ export default function PlannedLoad() {
                 <Button variant="outlined" color="primary" onClick={handleAddAnotherDeliveryChange}>
                     Add Another Delivery
                 </Button>
-            </Box>
-
+                </Grid>
+                </Grid>
+                </Box>               
             {/* Including other input fields and forms here */}
             </Box>
+
                 
-                <Box className={classes.formContainer} display="flex" mb={4}>
-                    <Box flex={1} mr={2}>
+                <Box className={classes.formContainer}>
+                    <Box className={classes.formSection}>
                     <Typography variant="subtitle2" className={classes.sectionSubtitle}>Fees/Charges</Typography>
                 <TextField
                 label="Primary Fee"
@@ -429,8 +425,6 @@ export default function PlannedLoad() {
                 onChange={handleFscAmountTypeChange}
                 variant="outlined"
                 /> 
-                </Box>
-                <Box flex={1}>
                     <Typography variant="subtitle2">Accessory Fees</Typography>
                     <TextField
                     label="Detention"
@@ -489,8 +483,11 @@ export default function PlannedLoad() {
                     onChange={handleInvoiceAdvanceChange}
                     variant="outlined"
                     />
-                </Box>
-            </Box>
+                    </Box>
+                    </Box>
+                    <Button variant="outlined">Save </Button>
+                <Button variant="text">cancel</Button>
+                
             </div> 
     );
 }

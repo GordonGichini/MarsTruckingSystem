@@ -54,13 +54,13 @@ function Loads() {
         <Button variant="contained"
          className={classes.button}
          component={Link}
-         to="add-planned-load">
+         to="/add-planned-load">
           Add Planned Load
         </Button>
         <Button variant="contained" 
         className={classes.button}
         component={Link}
-        to="./add-trip">
+        to="/add-trip">
           Add Trip
         </Button>
       </Box>

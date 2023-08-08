@@ -2,8 +2,63 @@ import React, { useState } from 'react';
 import InNavBar from '../../../common/Header/InNavBar';
 import Footer from '../../../pages/HomePage/components/Footer';
 import { Button, TextField, Box, Typography } from '@material-ui/core';
+import { Link } from 'react-router-dom';
+import { makeStyles } from '@mui/styles';
+import { useTheme } from '@mui/material/styles';
+
+const useStyles = makeStyles((theme) => ({
+  formContainer: {
+    marginTop: theme.spacing(8),
+    marginLeft: theme.spacing(4),
+    borderRadius: theme.spacing(2),
+  },
+  expenseContainer: {
+      marginTop: theme.spacing(2),
+      marginLeft: theme.spacing(2),
+      marginBottom: theme.spacing(2),
+      padding: theme.spacing(2),
+
+  },
+  sectionTitle: {
+    marginBottom: theme.spacing(2),
+    marginTop: theme.spacing(10),
+    marginLeft: theme.spacing(2),
+  },
+  sectionSubtitle: {
+    marginBottom: theme.spacing(1),
+  },
+  inputField: {
+      width: '98%',
+      margin : theme.spacing(1, 0),
+      '& .MuiOutlinedInput-root': {
+    '& fieldset': {
+      borderColor: 'green',
+    },
+    '&:hover fieldset': {
+      borderColor: 'green',
+    },
+    '&.Mui-focused fieldset': {
+      borderColor: 'green',
+    },
+   },
+    },
+  button: {
+      marginRight: theme.spacing(2),
+      marginBottom: theme.spacing(2),
+      '& .MuiButton-outlined': {
+          borderColor: '#00C853', // Green color for button lines
+          color: '#00C853', // Green color for button text
+        },
+        '& .MuiButton-outlined:hover': {
+          backgroundColor: '#00C853', // Green color when hovered
+          color: '#FFFFFF', // White text color when hovered
+        },
+    },
+  }));
 
 export default function EmptyMove() {
+  const classes = useStyles();
+  const theme = useTheme();
   // State for form fields
   const [customTripNumber, setCustomTripNumber] = React.useState('');
   const [accessoryDriverPay, setAccessoryDriverPay] = React.useState('');
@@ -30,14 +85,17 @@ export default function EmptyMove() {
   return (
     <div>
       <InNavBar />
+      <Box className={classes.formContainer}>
       <Typography variant="h6">Basic Details</Typography>
       <Box>
         <TextField
           label="Custom Trip Number"
           value={customTripNumber}
           variant="outlined"
+          margin='normal'
           onChange={(e) => setCustomTripNumber(e.target.value)}
           fullWidth
+          className={classes.inputField}
         />
         <Button variant="contained" color="primary">
           Create Driver
@@ -46,8 +104,10 @@ export default function EmptyMove() {
           label="Accessory Driver Pay"
           value={accessoryDriverPay}
           variant="outlined"
+          margin='normal'
           onChange={(e) => setAccessoryDriverPay(e.target.value)}
           fullWidth
+          className={classes.inputField}
         />
         <Button variant="contained" color="primary">
           Add Team Driver
@@ -56,8 +116,10 @@ export default function EmptyMove() {
           label="Truck"
           value={truck}
           variant="outlined"
+          margin='normal'
           onChange={(e) => setTruck(e.target.value)}
           fullWidth
+          className={classes.inputField}
         />
         <Button variant="contained" color="primary">
           Create Truck
@@ -66,8 +128,10 @@ export default function EmptyMove() {
           label="Trailer"
           value={trailer}
           variant="outlined"
+          margin='normal'
           onChange={(e) => setTrailer(e.target.value)}
           fullWidth
+          className={classes.inputField}
         />
         <Button variant="contained" color="primary">
           Create Trailer
@@ -76,8 +140,10 @@ export default function EmptyMove() {
           label="Odometer"
           value={odometer}
           variant="outlined"
+          margin='normal'
           onChange={(e) => setOdometer(e.target.value)}
           fullWidth
+          className={classes.inputField}
         />
       </Box>
 
@@ -88,13 +154,17 @@ export default function EmptyMove() {
           label="Empty Move Title"
           value={emptyMoveTitle}
           variant="outlined"
+          margin='normal'
           onChange={(e) => setEmptyMoveTitle(e.target.value)}
           fullWidth
+          className={classes.inputField}
         /> 
         <TextField
           label="Empty Move Address"
           value={emptyMoveAddress}
           variant="outlined"
+          margin='normal'
+          className={classes.inputField}
           onChange={(e) => setEmptyMoveAddress(e.target.value)}
         />
         <Button variant="contained" color="primary">
@@ -104,22 +174,28 @@ export default function EmptyMove() {
           label="Empty Move Date"
           value={emptyMoveDate}
           variant="outlined"
+          margin='normal'
+          className={classes.inputField}
           onChange={(e) => setEmptyMoveDate(e.target.value)}
         />
         <TextField
           label="Instructions"
           value={instructions}
           variant="outlined"
+          margin='normal'
           onChange={(e) => setInstructions(e.target.value)}
           multiline
+          className={classes.inputField}
 
         />
         <TextField
           label="Notes"
           value={notes}
           variant="outlined"
+          margin='normal'
           onChange={(e) => setNotes(e.target.value)}
           multiline
+          className={classes.inputField}
         />
       </Box>
 
@@ -130,6 +206,7 @@ export default function EmptyMove() {
         <Button variant="contained" color="secondary" onClick={handleCancel}>
           Cancel
         </Button>
+      </Box>
       </Box>
     </div>
   );

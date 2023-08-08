@@ -45,22 +45,22 @@ function LoadPlanner() {
           </Typography>
 
       <Box className={classes.buttonContainer}>
-        <Button variant="contained"
+        <Button variant="outlined"
          className={classes.button}
          component={Link}
-         to="./loads">
+         to="/loads">
           Loads List
         </Button>
-        <Button variant="contained"
+        <Button variant="outlined"
          className={classes.button}
          component={Link}
-         to="./add-planned-load">
+         to="/add-planned-load">
           Add Planned Load
         </Button>
-        <Button variant="contained" 
+        <Button variant="outlined" 
         className={classes.button}
         component={Link}
-        to="./add-trip">
+        to="/add-trip">
           Add Trip 
         </Button>
       </Box>
@@ -74,7 +74,7 @@ function LoadPlanner() {
         {/* Add your maintenance video component here */}
         {/* <MaintenanceVideo /> */}
       <Box className={classes.addMaintenanceButton}>
-        <Button variant="contained" 
+        <Button variant="outlined" 
         color="primary"
         component={Link}
         to="/add-planned-load">

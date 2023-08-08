@@ -1,5 +1,5 @@
 import React from 'react';
-import { Typography, TextField, Button, Box, Grid } from '@material-ui/core';
+import { Typography, Table, TableHead, TableRow, TableCell, TextField, Button, Box, Grid } from '@material-ui/core';
 import InNavBar from '../../common/Header/InNavBar';
 import { Link } from 'react-router-dom';
 import { makeStyles } from '@mui/styles';
@@ -8,9 +8,14 @@ import { useTheme } from '@mui/material/styles';
 
 const useStyles = makeStyles((theme) => ({
     formContainer: {
-      marginTop: theme.spacing(8),
-      marginLeft: theme.spacing(4),
-      borderRadius: theme.spacing(2),
+      maxWidth: 600,
+      margin: '0 auto',
+    },
+    formSection: {
+        border: `1px solid ${theme.palette.primary.main}`,
+        borderRadius: theme.shape.borderRadius,
+        padding: theme.spacing(2),
+        margin: theme.spacing(2, 0),
     },
     expenseContainer: {
         marginTop: theme.spacing(2),
@@ -26,6 +31,17 @@ const useStyles = makeStyles((theme) => ({
     },
     sectionSubtitle: {
       marginBottom: theme.spacing(1),
+    },
+    table: {
+        borderCollapse: 'collapse',
+    },
+    tableHeaderCell: {
+        border: `1px solid ${theme.palette.grey[400]}`,
+        padding: theme.spacing(1),
+    },
+    tableCell: {
+        border: `1px solid ${theme.palette.grey[400]}`,
+        padding: theme.spacing(1),
     },
     inputField: {
         width: '98%',
@@ -113,7 +129,7 @@ export default function DispatchFormPage() {
     // Routing Stop form state
     const [routingStopName, setRoutingStopName] = React.useState('');
     const [routingStopDate, setRoutingStopDate] = React.useState('');
-    const [instructions1, setInstructions1] = React.useState('');
+    const [instructions, setInstructions] = React.useState('');
     const [notes, setNotes] = React.useState('');
 
     const handleRoutingStopNameChange = (event) => {
@@ -124,8 +140,8 @@ export default function DispatchFormPage() {
         setRoutingStopDate(event.target.value);
     };
 
-    const handleInstructions1Change = (event) => {
-        setInstructions1(event.target.value);
+    const handleInstructionsChange = (event) => {
+        setInstructions(event.target.value);
     };
 
     const handleNotesChange = (event) => {
@@ -137,10 +153,9 @@ export default function DispatchFormPage() {
         <div>
             <InNavBar />
             <Box className={classes.formContainer}>
-        <Typography variant="h6" className={classes.sectionTitle}>Add a Dispatch</Typography>
+        <Typography variant="h6" className={classes.sectionTitle}>Add Trip</Typography>
         <form>
-            <Grid container spacing={6}>
-                <Grid item xs={6}>
+            <Box className={classes.formSection}>
                 <Typography variant="subtitle1">Basic Details</Typography>
             <TextField
             label="Custom Trip Number"
@@ -193,10 +208,8 @@ export default function DispatchFormPage() {
             <Button variant="outlined" color="primary" onClick={handleAddDriverClick}
             className={classes.button}>
                 Add Team Driver
-            </Button> 
-            </Grid>
-            
-            <Grid item xs={6}>
+            </Button>
+
             <TextField
             label="Truck"
             margin='normal'
@@ -234,15 +247,27 @@ export default function DispatchFormPage() {
             variant="outlined"
             className={classes.inputField}
             />
-
-            // Loads table
-            </Grid>
-            </Grid>
+            </Box>
+            <Typography variant="h6">Load</Typography>
+            <Table className={classes.table}>
+                <TableHead>
+                    <TableRow>
+                        <TableCell className={classes.tableHeaderCell}>Custom Load Number</TableCell>
+                        <TableCell className={classes.tableHeaderCell}>Customer</TableCell>
+                        <TableCell className={classes.tableHeaderCell}>Pickup</TableCell>
+                        <TableCell className={classes.tableHeaderCell}>Delivery</TableCell>
+                        <TableCell className={classes.tableHeaderCell}>From</TableCell>
+                        <TableCell className={classes.tableHeaderCell}>To</TableCell>
+                        <TableCell className={classes.tableHeaderCell}>BOL</TableCell>
+                        <TableCell className={classes.tableHeaderCell}>Actions</TableCell>
+                    </TableRow>
+                </TableHead>
+            </Table>
             </form>
             </Box>
             
             <Box className={classes.formContainer}>
-            <Box flex={1}>
+            <Box className={classes.formSection}>
                 <Typography variant="subtitle2">Routing Stop (Optional)</Typography>
                 <TextField
                 label="Routing Stop"
@@ -282,17 +307,22 @@ export default function DispatchFormPage() {
                     onChange={handleNotesChange}
                     variant="outlined"
                     />
+                    
             </Box> 
             </Box> 
-            <Box className={classes.expenseContainer}>
+            <Box className={classes.formContainer}>
+            <Box className={classes.formSection}>
             <Typography variant="h6">Fuel Expenses</Typography>
-            <Button variant="contained" color="primary">Add Fuel Expenses</Button>
-
+            <Button variant="outlined" color="primary">Add Fuel Expenses</Button>
+            </Box>
+            <Box className={classes.formSection}>
             <Typography variant="h6">Truck Expenses</Typography>
-            <Button variant="contained" color="primary">Add Truck EXpenses</Button>
-
+            <Button variant="outlined" color="primary">Add Truck EXpenses</Button>
+            </Box>
+            <Box className={classes.formSection}>
             <Typography variant="h6">Reefer Fuel Expenses</Typography>
-            <Button variant="contained" color="primary">Add Reefer Fuel Expenses</Button>
+            <Button variant="outlined" color="primary">Add Reefer Fuel Expenses</Button>
+            </Box>
             </Box>
 
             </div> 
