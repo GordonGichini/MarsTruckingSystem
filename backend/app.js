@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
-const routes = require('./routes');
+const config = require('./config');
+const routes = require('./routes/routes');
 const errorMiddleware = require('./errorMiddleware');
 const mongoose = require('mongoose');
 // Other imports and configurations

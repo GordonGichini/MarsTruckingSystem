@@ -1,11 +1,10 @@
 const express = require('express');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
-const config = require('./config');
+const config = require('../config');
 const router = express.Router();
-const authenticateToken = require("./authMiddleware");
-const authenticateUser = require('../middlewares/authMiddleware');
-const User = require('./models/user');
+const { authenticateToken, authenticateUser } = require("../authMiddleware");
+const User = require('../models/user');
 
 
 // Register a new user
@@ -47,7 +46,7 @@ router.post('/logout', (req, res) => {
   });
 
 // Protected route - only accessible to authenticated users
-router.get('/profile', authenticateToken, (req, res) => {
+router.get('/dashboard', authenticateToken, (req, res) => {
   // Access the authenticated user's data from req.user
   const user = req.user;
   res.json({ username: user.username, email: user.email });
