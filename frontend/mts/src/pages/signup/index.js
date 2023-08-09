@@ -1,11 +1,11 @@
 import * as React from 'react';
-import  { useState } from 'react';
+import { useFormik } from 'formik';
+import * as Yup from 'yup';
 import axios from 'axios';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import Link from '@mui/material/Link';
 import Paper from '@mui/material/Paper';
@@ -17,34 +17,51 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 
 const theme = createTheme(); 
-
+const api = axios.create({
+  baseURL: 'http://localhost:5000',
+});
 
 
 export default function SignUpSide() { 
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
 
+const formik = useFormik({
+  initialValues: {
+    username: '',
+    email: '',
+    password: '',
+    confirmPassword: '',
+  },
+  validationSchema: Yup.object({
+    username: Yup.string().required('Required'),
+    email: Yup.string().email('Invalid email address').required('Required'),
+    password: Yup.string().required('Required'),
+    confirmPassword: Yup.string()
+      .oneOf([Yup.ref('password'), null], 'Passwords must match')
+      .required('Required'),
+  }),
 
-  const handleFormSubmit = async (event) => {
-    event.preventDefault();
-    
+  onSubmit: async (values) => {
     try {
-      const response = await axios.post('/login', { 
-        email,
-        password,
-      }); 
+      const response = await api.post('/register', {
+        username: values.username,
+        email: values.email,
+        password: values.password,
+        confirmpassword: values.confirmPassword,
+      });
 
       if (response.status === 200) {
         window.location.href = '/dashboard';
       } else {
-        setError('Invalid credentials. Please try again.');
+        formik.setFieldError('confirmPassword', 'Invalid credentials. Please try again.');
       }
     } catch (error) {
       console.error('Error submitting form:', error);
-      setError('An error occurred. Please try again later.');
+      formik.setFieldError('confirmPassword', 'An error occurred. Please try again later.');
     }
-  };
+  },
+});
+
+
 
   return (
     <ThemeProvider theme={theme}>
@@ -79,16 +96,21 @@ export default function SignUpSide() {
             <Typography component="h1" variant="h5">
               Sign Up
             </Typography>
-            <Box component="form" noValidate onSubmit={handleFormSubmit} sx={{ mt: 1 }}>
+            <Box component="form" noValidate sx={{ mt: 1 }}>
               <TextField
                 margin="normal"
                 required
                 fullWidth
-                id="name"
-                label="Name"
-                name="name"
-                autoComplete="name"
+                id="username"
+                label="Username"
+                name="username"
+                autoComplete="username"
                 autoFocus
+                value={formik.values.username}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                error={formik.touched.username && Boolean(formik.errors.username)}
+                helperText={formik.touched.username && formik.errors.username}
               />
               <TextField
                 margin="normal"
@@ -98,7 +120,12 @@ export default function SignUpSide() {
                 label="Email Address"
                 name="email"
                 autoComplete="email"
-                autoFocus
+                value={formik.values.email}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                error={formik.touched.email && Boolean(formik.errors.email)}
+                helperText={formik.touched.email && formik.errors.email}
+                
               />
               <TextField
                 margin="normal"
@@ -108,7 +135,12 @@ export default function SignUpSide() {
                 label="Password"
                 type="password"
                 id="password"
-                autoComplete="current-password"
+                autoComplete="new-password"
+                value={formik.values.password}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                error={formik.touched.password && Boolean(formik.errors.password)}
+                helperText={formik.touched.password && formik.errors.password}
               />
               <TextField
                 margin="normal"
@@ -119,13 +151,18 @@ export default function SignUpSide() {
                 type="password"
                 id="password"
                 autoComplete="confirm-password"
+                value={formik.values.password}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                error={formik.touched.password && Boolean(formik.errors.password)}
+                helperText={formik.touched.password && formik.errors.password}
               />
               <Button
                 type="submit"
                 fullWidth
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
-                
+                onClick={formik.handleSubmit}   
               >
                 Sign Up
               </Button>

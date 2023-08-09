@@ -1,5 +1,6 @@
 import * as React from 'react';
-import  { useState } from 'react';
+import { useFormik } from 'formik';
+import * as Yup from 'yup';
 import axios from 'axios';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
@@ -17,34 +18,39 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 
 const theme = createTheme(); 
-
+const api = axios.create({
+  baseURL: 'http://localhost:5000',
+});
 
 
 export default function SignInSide() { 
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
-
-
-  const handleFormSubmit = async (event) => {
-    event.preventDefault();
-    
+  const formik = useFormik({
+  initialValues: {
+    email: '',
+    password: '',
+  },
+  validationSchema: Yup.object({
+    email: Yup.string().email('Invalid email address').required('Required'),
+    password: Yup.string().required('Required'),
+  }),
+  onSubmit: async (values) => {
     try {
-      const response = await axios.post('/login', { 
-        email,
-        password,
-      }); 
+      const response = await api.post('/login', {
+        email: values.email,
+        password: values.password,
+      });
 
       if (response.status === 200) {
         window.location.href = '/dashboard';
       } else {
-        setError('Invalid credentials. Please try again.');
+        formik.setFieldError('password', 'Invalid credentials. Please try again.');
       }
     } catch (error) {
       console.error('Error submitting form:', error);
-      setError('An error occurred. Please try again later.');
+      formik.setFieldError('password', 'An error occurred. Please try again later.');
     }
-  };
+  },
+}); 
 
   return (
     <ThemeProvider theme={theme}>
@@ -79,7 +85,7 @@ export default function SignInSide() {
             <Typography component="h1" variant="h5">
               Sign in
             </Typography>
-            <Box component="form" noValidate onSubmit={handleFormSubmit} sx={{ mt: 1 }}>
+            <Box component="form" noValidate sx={{ mt: 1 }}>
               <TextField
                 margin="normal"
                 required
@@ -89,7 +95,13 @@ export default function SignInSide() {
                 name="email"
                 autoComplete="email"
                 autoFocus
+                value={formik.values.email}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                error={formik.touched.email && Boolean(formik.errors.email)}
+                helperText={formik.touched.email && formik.errors.email}
               />
+          
               <TextField
                 margin="normal"
                 required
@@ -99,6 +111,12 @@ export default function SignInSide() {
                 type="password"
                 id="password"
                 autoComplete="current-password"
+                value={formik.values.password}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                error={formik.touched.password && Boolean(formik.errors.password)}
+                helperText={formik.touched.password && formik.errors.password}
+
               />
               <FormControlLabel
                 control={<Checkbox value="remember" color="primary" />}
@@ -109,9 +127,9 @@ export default function SignInSide() {
                 fullWidth
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
-                
+                onClick={formik.handleSubmit}               
               >
-                Sign In
+                Log in
               </Button>
               <Grid container>
                 <Grid item xs>
@@ -125,7 +143,6 @@ export default function SignInSide() {
                   </Link>
                 </Grid>
               </Grid>
-
             </Box>
           </Box>
         </Grid>
