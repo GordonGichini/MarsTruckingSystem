@@ -10,20 +10,21 @@ const User = require('../models/user');
 // Register a new user
 router.post('/register', async (req, res) => {
     try {
-    const { username, password } = req.body;
+    const { username, email, password } = req.body;
     const hashedPassword = await bcrypt.hash(password, 10);
-    const user = new User({ username, password: hashedPassword });
+    const user = new User({ username, email, password: hashedPassword });
     await user.save();
     res.sendStatus(201);
 } catch (err) {
+  console.error('Error while registering user:', err);
     res.sendStatus(500);
     }
 });
 
 //Login and generate a JWT token
 router.post('/login', async (req, res) => {
-    const { username, password } = req.body;
-    const user = await User.findOne({ username });
+    const { email, password } = req.body;
+    const user = await User.findOne({ email });
   
     if (!user) {
       return res.sendStatus(401);

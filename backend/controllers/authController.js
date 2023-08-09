@@ -1,30 +1,22 @@
 const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcrypt');
+const config = require('../config');
 const jwt = require('jsonwebtoken');
-const User = require('../models/User');
+const { authenticateToken } = require('../authMiddleware');
+const User = require('../models/user');
 
 // Endpoint for user registration
 router.post('/register', async (req, res) => {
   try {
-    const { email, password } = req.body;
-
-    // Check if the email is already registered
-    const existingUser = await User.findOne({ email });
-    if (existingUser) {
-      return res.status(400).json({ message: 'Email is already registered.' });
-    }
-
-    // Hash the password before saving to the database
-    const hashedPassword = await bcrypt.hash(password, 10);
-
-    // Create a new user in the database
-    const newUser = await User.create({ email, password: hashedPassword });
-
-    return res.status(201).json({ message: 'User registered successfully.' });
-  } catch (error) {
-    console.error('Error registering user:', error);
-    return res.status(500).json({ message: 'Something went wrong.' });
+      const { username, email, password } = req.body;
+      const hashedPassword = await bcrypt.hash(password, 10);
+      const user = new User({ username, email, password: hashedPassword });
+      await user.save();
+      res.sendStatus(201);
+  } catch (err) {
+      console.error('Error while registering user:', err);
+      res.sendStatus(500);
   }
 });
 
@@ -46,7 +38,7 @@ router.post('/login', async (req, res) => {
     }
 
     // Generate a JWT token and send it in the response
-    const token = jwt.sign({ userId: user._id, role: user.role }, 'YOUR_SECRET_KEY');
+    const token = jwt.sign({ id: user._id, email: user.email }, config.jwtSecret);
     return res.status(200).json({ token });
   } catch (error) {
     console.error('Error logging in:', error);
