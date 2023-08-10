@@ -46,7 +46,7 @@ const formik = useFormik({
         username: values.username,
         email: values.email,
         password: values.password,
-        confirmpassword: values.confirmPassword,
+        confirmPassword: values.confirmPassword
       });
 
       if (response.status === 200) {
@@ -149,13 +149,13 @@ const formik = useFormik({
                 name="confirmpassword"
                 label="Confirm Password"
                 type="password"
-                id="password"
+                id="confirmPassword"
                 autoComplete="confirm-password"
-                value={formik.values.password}
+                value={formik.values.confirmPassword}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
-                error={formik.touched.password && Boolean(formik.errors.password)}
-                helperText={formik.touched.password && formik.errors.password}
+                error={formik.touched.confirmPassword && Boolean(formik.errors.confirmPassword)}
+                helperText={formik.touched.confirmPassword && formik.errors.confirmPassword}
               />
               <Button
                 type="submit"

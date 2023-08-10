@@ -1,16 +1,18 @@
-import React, { useState } from 'react';
-import { Typography, Radio, Grid, RadioGroup, TextField, Button, FormControl, Select, MenuItem, InputLabel, Box, Link, FormControlLabel } from '@material-ui/core';
+import React from 'react';
+import { Typography, Radio, RadioGroup, TextField, Button, FormControl, Select, MenuItem, InputLabel, Box, Link, FormControlLabel } from '@material-ui/core';
 import { makeStyles } from '@mui/styles';
 import InNavBar from '../../common/Header/InNavBar';
 import { useTheme } from '@mui/material/styles';
 import { useNavigate } from 'react-router-dom';
+import { Formik, Form, Field, ErrorMessage } from 'formik';
+import * as Yup from 'yup';
+import axios from 'axios';
 
 
 const useStyles = makeStyles((theme) => ({
   formContainer: {
-    padding: theme.spacing(2),
-    marginTop: theme.spacing(4),
-    marginLeft: theme.spacing(4),
+    maxWidth: 700,
+    margin: '0 auto'
   },
   radioGroup: {
     color: 'green', // Set the color of the radio button to green
@@ -49,7 +51,7 @@ const useStyles = makeStyles((theme) => ({
       },
   },
   inputField: {
-    width: '60%',
+    width: '78%',
     margin: theme.spacing(1, 0),
     '& .MuiOutlinedInput-root': {
   '& fieldset': {
@@ -70,113 +72,84 @@ export default function ExpenseFormPage() {
   const navigate = useNavigate();
   const theme = useTheme();
   const classes = useStyles();
-
-  const [expenseCategory, setExpenseCategory] = useState('');
-  const [amount, setAmount] = useState('');
-  const [description, setDescription] = useState('');
-  const [assignToTrip, setAssignToTrip] = useState('');
-  const [expenseDate, setExpenseDate] = useState('');
-  const [unit, setUnit] = useState('');
-  const [gallons, setGallons] = useState('');
-  const [odometer, setOdometer] = useState('');
-  const [fuelVendor, setFuelVendor] = useState('');
-  const [stateProvince, setStateProvince] = useState('');
-
-  const handleExpenseCategoryChange = (event) => {
-    setExpenseCategory(event.target.value);
+  const handleCreateExpense = async (values) => {
+    try {
+      await axios.post('/api/expenses', values);
+      navigate('/expenses');
+    } catch (error) {
+      console.error('Error creating expense:', error);
+      // Handle error
+    }
   };
 
-  const handleAmountChange = (event) => {
-    setAmount(event.target.value);
-  };
 
-  const handleDescriptionChange = (event) => {
-    setDescription(event.target.value);
-  };
-
-  const handleAssignToTripChange = (event) => {
-    setAssignToTrip(event.target.value);
-  };
-
-  const handleExpenseDateChange = (event) => {
-    setExpenseDate(event.target.value);
-  };
-
-  const handleUnitChange = (event) => {
-    setUnit(event.target.value);
-  };
-
-  const handleGallonsChange = (event) => {
-    setGallons(event.target.value);
-  };
-
-  const handleOdometerChange = (event) => {
-    setOdometer(event.target.value);
-  };
-
-  const handleFuelVendorChange = (event) => {
-    setFuelVendor(event.target.value);
-  };
-
-  const handleStateProvinceChange = (event) => {
-    setStateProvince(event.target.value);
-  };
-
-  const handleAddCategoryClick = () => {
-    // Perform logic for adding an expense category
-    // You can access the captured input values here
-  };
-
-  const handleCreateExpenseClick = () => {
-    // Perform logic for creating an expense
-    // You can access the captured input values here
-  };
-
-  const handleCancelClick = () => {
-    navigate.push('/expenses');
-  };
 
   return (
     <div>
       <InNavBar />
-      <Typography variant="h6" className={classes.sectionTitle}>Add Expense</Typography>
+      
 
       <Box className={classes.formContainer}>
-        <Grid container spacing={2}>
-          <Grid item xs={6}>
-        <Box my={2}>
-          <FormControl className={classes.inputField}>
-            <InputLabel id="expense-category-label" variant="outlined">Expense Category</InputLabel>
-            <Select
-              labelId="expense-category-label"
-              value={expenseCategory}
-              onChange={handleExpenseCategoryChange}
-            >
+        <Typography variant="h6" className={classes.sectionTitle}>Add Expense</Typography>
+        <Formik
+        initialValues={{
+          expenseCategory: '',
+          amount: '',
+          description: '',
+          assignToTrip: '',
+          expenseDate: '',
+          unit: '',
+          gallons: '',
+          odometer: '',
+          fuelVendor: '',
+          stateProvince: '',
+        }}
+        validationSchema={Yup.object({
+          expenseCategory: Yup.string().required('Required'),
+          amount: Yup.number().required('required'),
+          description: Yup.string().required('Required'),
+          // other validations
+        })}
+        onSubmit={handleCreateExpense}
+        >
+          <Form>
+          <Field
+            name="expenseCategory"
+            as={FormControl}
+            halfWidth
+            variant="outlined"
+            className={classes.inputField}
+          >
+            <InputLabel>Expense Category</InputLabel>
+            <Select>
               <MenuItem value="fuel">Fuel</MenuItem>
               <MenuItem value="reeferFuel">Reefer Fuel</MenuItem>
+                {/* ... other options ... */}
             </Select>
-          </FormControl>
+            <ErrorMessage name="expenseCategory" component="div" />
+          </Field>
 
-          <Button variant="outlined" color="primary" className={classes.button} onClick={handleAddCategoryClick}>
+          <Button variant="outlined" color="primary" className={classes.button} >
             Add Category
           </Button>
-        </Box>
 
-        <TextField
+        <Field
+          name="Amount"
+          as={TextField}
           label="Amount"
-          value={amount}
-          onChange={handleAmountChange}
           variant="outlined"
           margin='normal'
+        
           className={classes.inputField}
           />
 
-        <TextField
+        <Field
+          name="Description"
+          as={TextField}
           label="Description"
-          value={description}
-          onChange={handleDescriptionChange}
           variant="outlined"
           margin='normal'
+        
           className={classes.inputField}
           />
 
@@ -187,87 +160,92 @@ export default function ExpenseFormPage() {
 
           </RadioGroup>
 
-        <TextField
+        <Field
+          name="Expense Date"
+          as={TextField}
           label="Expense Date"
-          type="date"
-          value={expenseDate}
-          onChange={handleExpenseDateChange}
           variant="outlined"
           margin='normal'
+        
           className={classes.inputField}
           InputLabelProps={{
             shrink: true,
           }}
         />
         <Box className={classes.noteContainer}>
-        <TextField
+        <Field
+        name="Notes"
+        as={TextField}
         label="Notes"
         variant="outlined"
+        margin="normal"
         multiline
-        fullWidth />
+        />
         </Box>
 
-        </Grid>
-        <Grid item xs={6}>
-
-        <TextField
-          label="Unit"
-          value={unit}
-          onChange={handleUnitChange}
+        <Field
+          name="Unit"
+          as={TextField}
+          label='unit'
           variant="outlined"
           margin='normal'
+        
           className={classes.inputField}
         />
 
-        <TextField
-          label="Gallons"
-          value={gallons}
-          onChange={handleGallonsChange}
+        <Field
+          name="Gallons"
+          as={TextField}
+          label='gallons'
           variant="outlined"
           margin='normal'
+        
           className={classes.inputField}
         />
 
-        <TextField
-          label="Odometer"
-          value={odometer}
-          onChange={handleOdometerChange}
+        <Field
+          name="Odometer"
+          as={TextField}
+          label='odometer'
           variant="outlined"
           margin='normal'
+        
           className={classes.inputField}
         />
 
-        <TextField
-          label="Fuel Vendor"
-          value={fuelVendor}
-          onChange={handleFuelVendorChange}
+        <Field
+          name="Fuel Vendor"
+          as={TextField}
+          label='fuelVendor'
           variant="outlined"
           margin='normal'
+        
           className={classes.inputField}
         />
-         <Button variant="outlined" className={classes.button} color="primary" onClick={handleAddCategoryClick}>
+         <Button variant="outlined" className={classes.button} color="primary">
             Add Fuel Vendor
           </Button>
 
-        <TextField
-          label="State/Province"
-          value={stateProvince}
-          onChange={handleStateProvinceChange}
+        <Field
+          name="State/Province"
+          as={TextField}
+          label='State/Province'
           variant="outlined"
           margin='normal'
+        
           className={classes.inputField}
         />
 
-        <Button variant="outlined" color="primary" className={classes.button} onClick={handleCreateExpenseClick}>
+        <Button variant="outlined" color="primary" className={classes.button}>
           Create Expense
         </Button>
 
-        <Link component="button" variant="body2" onClick={handleCancelClick}>
+        <Link component="button" variant="body2">
           Cancel
         </Link>
-        </Grid>
-        </Grid>
-      </Box>
+        </Form>
+        </Formik>
+        </Box>
     </div>
   );
 }
