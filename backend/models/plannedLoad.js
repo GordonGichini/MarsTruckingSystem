@@ -49,7 +49,7 @@ const plannedLoadSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  deliverDate: {
+  deliveryDate: {
     type: Date,
     required: true,
   },
@@ -93,8 +93,6 @@ const plannedLoadSchema = new mongoose.Schema({
     type: Number,
     required: true
   }
-
-
 });
 
 const PlannedLoad = mongoose.model('PlannedLoad', plannedLoadSchema);
