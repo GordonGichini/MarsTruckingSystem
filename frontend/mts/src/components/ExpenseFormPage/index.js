@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Typography, Radio, RadioGroup, TextField, Button, FormControl, Select, MenuItem, InputLabel, Box, Link, FormControlLabel } from '@material-ui/core';
 import { makeStyles } from '@mui/styles';
 import InNavBar from '../../common/Header/InNavBar';
@@ -28,15 +28,6 @@ const useStyles = makeStyles((theme) => ({
   btn: {
     marginTop: theme.spacing(12),
     marginRight: theme.spacing(6),
-  },
-  noteContainer: {
-    display: 'flex',
-    borderStyle: '1px solid green',
-    height: '120px',
-    width: '100%',
-    padding: theme.spacing(0),
-    alignItems: 'center',
-    justifyContent: 'space-between',
   },
   button: {
     marginRight: theme.spacing(2),
@@ -72,12 +63,17 @@ export default function ExpenseFormPage() {
   const navigate = useNavigate();
   const theme = useTheme();
   const classes = useStyles();
+
+  //state for handling API responses and errors
+  const [apiError, setApiError] = useState(null);
+
   const handleCreateExpense = async (values) => {
     try {
-      await axios.post('/api/expenses', values);
+      await axios.post('/api/expenses/create', values);
       navigate('/expenses');
     } catch (error) {
       console.error('Error creating expense:', error);
+      setApiError('An error occurred while creating the expense.');
       // Handle error
     }
   };
@@ -87,8 +83,6 @@ export default function ExpenseFormPage() {
   return (
     <div>
       <InNavBar />
-      
-
       <Box className={classes.formContainer}>
         <Typography variant="h6" className={classes.sectionTitle}>Add Expense</Typography>
         <Formik
@@ -108,26 +102,41 @@ export default function ExpenseFormPage() {
           expenseCategory: Yup.string().required('Required'),
           amount: Yup.number().required('required'),
           description: Yup.string().required('Required'),
+          assignToTrip: Yup.boolean().required('required'),
+          expenseDate: Yup.date().required('required'),
+          unit: Yup.string().required('required'),
+          gallons: Yup.number().required('required'),
+          odometer: Yup.number().required('required'),
+          fuelVendor: Yup.string().required('required'),
+          stateProvince: Yup.string().required('required')
+
           // other validations
         })}
         onSubmit={handleCreateExpense}
         >
+          {({ isSubmitting }) => (
           <Form>
-          <Field
-            name="expenseCategory"
-            as={FormControl}
-            halfWidth
-            variant="outlined"
-            className={classes.inputField}
-          >
-            <InputLabel>Expense Category</InputLabel>
-            <Select>
-              <MenuItem value="fuel">Fuel</MenuItem>
-              <MenuItem value="reeferFuel">Reefer Fuel</MenuItem>
-                {/* ... other options ... */}
-            </Select>
-            <ErrorMessage name="expenseCategory" component="div" />
-          </Field>
+            <Field name="expenseCategory">
+             {({ field, form }) => (
+               <FormControl
+                 halfWidth
+                 variant="outlined"
+                 className={classes.inputField}
+               >
+                 <InputLabel>Expense Category</InputLabel>
+                 <Select
+                   {...field}
+                   value={field.value || ''}
+                   onChange={(event) => form.setFieldValue(field.name, event.target.value)}
+                 >
+                   <MenuItem value="fuel">Fuel</MenuItem>
+                   <MenuItem value="reeferFuel">Reefer Fuel</MenuItem>
+                   {/* ... other options ... */}
+                 </Select>
+                 <ErrorMessage name="expenseCategory" component="div" />
+               </FormControl>
+             )}
+           </Field>
 
           <Button variant="outlined" color="primary" className={classes.button} >
             Add Category
@@ -138,8 +147,7 @@ export default function ExpenseFormPage() {
           as={TextField}
           label="Amount"
           variant="outlined"
-          margin='normal'
-        
+          margin='normal'       
           className={classes.inputField}
           />
 
@@ -148,8 +156,7 @@ export default function ExpenseFormPage() {
           as={TextField}
           label="Description"
           variant="outlined"
-          margin='normal'
-        
+          margin='normal'        
           className={classes.inputField}
           />
 
@@ -157,7 +164,6 @@ export default function ExpenseFormPage() {
           <RadioGroup className={classes.radioGroup} aria-label="assign to trip" name="type" variant="outlined">
             <FormControlLabel value="yes" control={<Radio />} label="Yes" />
             <FormControlLabel value="no" control={<Radio />} label="No" />
-
           </RadioGroup>
 
         <Field
@@ -165,31 +171,19 @@ export default function ExpenseFormPage() {
           as={TextField}
           label="Expense Date"
           variant="outlined"
-          margin='normal'
-        
+          margin='normal'        
           className={classes.inputField}
           InputLabelProps={{
             shrink: true,
           }}
         />
-        <Box className={classes.noteContainer}>
-        <Field
-        name="Notes"
-        as={TextField}
-        label="Notes"
-        variant="outlined"
-        margin="normal"
-        multiline
-        />
-        </Box>
 
         <Field
           name="Unit"
           as={TextField}
           label='unit'
           variant="outlined"
-          margin='normal'
-        
+          margin='normal'        
           className={classes.inputField}
         />
 
@@ -198,8 +192,7 @@ export default function ExpenseFormPage() {
           as={TextField}
           label='gallons'
           variant="outlined"
-          margin='normal'
-        
+          margin='normal'        
           className={classes.inputField}
         />
 
@@ -208,8 +201,7 @@ export default function ExpenseFormPage() {
           as={TextField}
           label='odometer'
           variant="outlined"
-          margin='normal'
-        
+          margin='normal'       
           className={classes.inputField}
         />
 
@@ -218,8 +210,7 @@ export default function ExpenseFormPage() {
           as={TextField}
           label='fuelVendor'
           variant="outlined"
-          margin='normal'
-        
+          margin='normal'        
           className={classes.inputField}
         />
          <Button variant="outlined" className={classes.button} color="primary">
@@ -231,12 +222,19 @@ export default function ExpenseFormPage() {
           as={TextField}
           label='State/Province'
           variant="outlined"
-          margin='normal'
-        
+          margin='normal'        
           className={classes.inputField}
         />
 
-        <Button variant="outlined" color="primary" className={classes.button}>
+        {apiError && <div className={classes.error}>{apiError}</div>}
+
+        <Button
+         variant="outlined"
+          color="primary" 
+          className={classes.button}
+          type="submit"
+          disabled={isSubmitting}
+          >
           Create Expense
         </Button>
 
@@ -244,6 +242,7 @@ export default function ExpenseFormPage() {
           Cancel
         </Link>
         </Form>
+          )}
         </Formik>
         </Box>
     </div>

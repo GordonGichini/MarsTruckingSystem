@@ -8,6 +8,7 @@ const errorMiddleware = require('./errorMiddleware');
 const mongoose = require('mongoose');
 const expenseRoutes = require('./routes/expenseRoutes');
 const expenseCategoryRoutes = require('./routes/expenseCategoryRoutes');
+const plannedLoadRoutes = require('./routes/plannedLoadRoutes');
 // Other imports and configurations
 
 //use bodyParser middleware to parse request bodies
@@ -28,6 +29,8 @@ const protectedRoutes = require('./routes/routes');
 app.use('/api', protectedRoutes);
 app.use('/api/expenses', expenseRoutes);
 app.use('/api/expenseCategories', expenseCategoryRoutes);
+app.use('/api/plannedLoads', plannedLoadRoutes);
+
 
 app.use(routes);
 

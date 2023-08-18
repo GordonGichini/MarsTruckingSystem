@@ -63,7 +63,7 @@ exports.createPlannedLoad = async (req, res) => {
     }
 };
 
-exports.getAllPlannedLoad = async (req, res) => {
+exports.getAllPlannedLoads = async (req, res) => {
     try {
         const plannedLoads = await PlannedLoad.find();
         res.status(200).json(plannedLoads);
@@ -73,7 +73,7 @@ exports.getAllPlannedLoad = async (req, res) => {
     }
 };
 
-exports.getPlannedLoadById = asyc (req, res) => {
+exports.getPlannedLoadById = async (req, res) => {
     try {
         const plannedLoadId = req.params.id;
         const plannedLoad = await PlannedLoad.findById(plannedLoadId);
@@ -88,39 +88,39 @@ exports.getPlannedLoadById = asyc (req, res) => {
     }
 };
 
-exports.updateExpense = async (req, res) => {
+exports.updatePlannedLoad = async (req, res) => {
     try {
-      const expenseId = req.params.id;
+      const plannedLoadId = req.params.id;
       const updatedData = req.body;
       
-      const updatedExpense = await Expense.findByIdAndUpdate(expenseId, updatedData, { new: true });
+      const updatedPlannedLoad = await PlannedLoad.findByIdAndUpdate(plannedLoadId, updatedData, { new: true });
   
-      if (!updatedExpense) {
-        return res.status(404).json({ error: 'Expense not found' });
+      if (!updatedPlannedLoad) {
+        return res.status(404).json({ error: 'Planned Load not found' });
       }
   
-      res.status(200).json(updatedExpense);
+      res.status(200).json(updatedPlannedLoad);
     } catch (error) {
-      console.error('Error updating expense:', error);
-      res.status(500).json({ error: 'An error occurred while updating the expense' });
+      console.error('Error updating plannedLoad:', error);
+      res.status(500).json({ error: 'An error occurred while updating the planned load' });
     }
   };
   
 
-  exports.deleteExpense = async (req, res) => {
+  exports.deletePlannedLoad = async (req, res) => {
     try {
-      const expenseId = req.params.id;
+      const plannedLoadId = req.params.id;
       
-      const deletedExpense = await Expense.findByIdAndDelete(expenseId);
+      const deletedPlannedLoad = await PlannedLoad.findByIdAndDelete(plannedLoadId);
   
-      if (!deletedExpense) {
-        return res.status(404).json({ error: 'Expense not found' });
+      if (!deletedPlannedLoad) {
+        return res.status(404).json({ error: 'Planned Load not found' });
       }
   
-      res.status(200).json({ message: 'Expense deleted successfully' });
+      res.status(200).json({ message: 'Planned Load deleted successfully' });
     } catch (error) {
-      console.error('Error deleting expense:', error);
-      res.status(500).json({ error: 'An error occurred while deleting the expense' });
+      console.error('Error deleting planned Load:', error);
+      res.status(500).json({ error: 'An error occurred while deleting the planned load' });
     }
   };
   

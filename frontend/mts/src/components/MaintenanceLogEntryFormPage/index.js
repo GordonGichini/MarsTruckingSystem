@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Typography, Grid, TextField, Button, FormControl, InputLabel, Select, MenuItem, Box, Link } from '@material-ui/core';
+import { Typography, TextField, Button, FormControl, InputLabel, Select, MenuItem, Box, Link } from '@material-ui/core';
 import { useNavigate } from 'react-router-dom';
 import { makeStyles } from '@mui/styles';
 import InNavBar from '../../common/Header/InNavBar';
@@ -8,8 +8,7 @@ import { useTheme } from '@mui/material/styles';
 const useStyles = makeStyles((theme) => ({
   formContainer: {
     padding: theme.spacing(2),
-    marginTop: theme.spacing(2),
-    marginLeft: theme.spacing(4),
+    marginLeft: theme.spacing(2),
   },
   radioGroup: {
     color: 'green', // Set the color of the radio button to green
@@ -115,8 +114,6 @@ export default function MaintenanceLogEntryFormPage() {
 
       <form className={classes.formContainer}>
         <Box className={classes.formContainer}>
-          <Grid container spacing={2}>
-            <Grid item xs={6}>
           <FormControl className={classes.inputField}>
             <InputLabel id="unit-label">Unit</InputLabel>
             <Select
@@ -160,8 +157,6 @@ export default function MaintenanceLogEntryFormPage() {
         <Button variant="outlined" className={classes.button} color="primary" onClick={handleCreateMaintenanceVendorClick}>
           Create Maintenance Vendor
         </Button>
-        </Grid>
-        <Grid item xs={6}>
 
         <TextField
           label="Amount"
@@ -204,8 +199,6 @@ export default function MaintenanceLogEntryFormPage() {
         <Link component="button" variant="body2" onClick={handleCancelClick}>
           Cancel
         </Link>
-        </Grid>
-        </Grid>
         </Box>
       </form>
     </div>

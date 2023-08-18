@@ -19,7 +19,7 @@ const plannedLoadSchema = new mongoose.Schema({
   },
   driverInstructions: {
     type: String,
-    required: true,
+    required: false,
   },
   bol: {
     type: String,

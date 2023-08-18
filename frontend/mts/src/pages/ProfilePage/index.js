@@ -25,8 +25,7 @@ const useStyles = makeStyles((theme) => ({
   videoContainer: {
     display: 'flex',
     justifyContent: 'center',
-    borderStyle: 'solid',
-    borderColor: 'grey',
+    borderStyle: '1px solid grey',
     alignItems: 'center',
     height: '300px',
     width: '600px',
