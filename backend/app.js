@@ -9,6 +9,17 @@ const mongoose = require('mongoose');
 const expenseRoutes = require('./routes/expenseRoutes');
 const expenseCategoryRoutes = require('./routes/expenseCategoryRoutes');
 const plannedLoadRoutes = require('./routes/plannedLoadRoutes');
+const calendarPlanRoutes = require('./routes/calendarPlanRoutes');
+const companyProfileRoutes = require('./routes/companyProfileRoutes');
+const driverRoutes = require('./routes/driverRoutes');
+const getMilesRoutes = require('./routes/getMilesRoutes');
+const invoiceRoutes = require('./routes/invoiceRoutes');
+const loadRoutes = require('./routes/loadRoutes');
+const maintenanceLogEntryRoutes = require('./routes/maintenanceLogEntryRoutes');
+const milePlanRoutes = require('./routes/milePlanRoutes');
+const tripRoutes = require('./routes/tripRoutes');
+const unitRoutes = require('./routes/unitRoutes');
+
 // Other imports and configurations
 
 //use bodyParser middleware to parse request bodies
@@ -30,6 +41,16 @@ app.use('/api', protectedRoutes);
 app.use('/api/expenses', expenseRoutes);
 app.use('/api/expenseCategories', expenseCategoryRoutes);
 app.use('/api/plannedLoads', plannedLoadRoutes);
+app.use('api/calendarPlans', calendarPlanRoutes);
+app.use('api/companyProfiles', companyProfileRoutes);
+app.use('api/drivers', driverRoutes);
+app.use('api/getMiles', getMilesRoutes);
+app.use('api/invoices', invoiceRoutes);
+app.use('api/maintenanceLogEntries', maintenanceLogEntryRoutes);
+app.use('api/milePlans', milePlanRoutes);
+app.use('api/trips', tripRoutes);
+app.use('api/units', unitRoutes);
+app.use('api/laods', loadRoutes);
 
 
 app.use(routes);
