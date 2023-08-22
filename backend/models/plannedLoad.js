@@ -1,6 +1,11 @@
 const mongoose = require('mongoose');
 
 const plannedLoadSchema = new mongoose.Schema({
+  load: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Load',
+    required: true
+  },
   customLoadNumber: {
     type: Number,
     required: false,

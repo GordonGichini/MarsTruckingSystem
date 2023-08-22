@@ -1,6 +1,10 @@
 const mongoose = require('mongoose');
 
 const tripSchema = new mongoose.Schema({
+    plannedLoads: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'PlannedLoad'
+    }],
     customTripNumber: {
       type: Number,
       required: false  
@@ -27,10 +31,6 @@ const tripSchema = new mongoose.Schema({
     },
     odometer: {
         type: Number,
-        required: true
-    },
-    load: {
-        type: String,
         required: true
     },
     routingStop: {

@@ -1,4 +1,5 @@
 const Trip = require('../models/trip');
+const PlannedLoad = require('../models/plannedLoad');
 
 // Create a new trip
 exports.createTrip = async (req, res) => {
@@ -11,7 +12,7 @@ exports.createTrip = async (req, res) => {
       truck,
       trailer,
       odometer,
-      load,
+      selectedLoadId,
       routingStop,
       routingStopDate,
       instructions,
@@ -23,7 +24,10 @@ exports.createTrip = async (req, res) => {
     } = req.body;
     console.log('Received Data:', req.body);
 
+    const selectedLoad = await PlannedLoad.findById(selectedLoadId);
+
     const newTrip = new Trip({
+      plannedLoads: [selectedLoad],
       customTripNumber,
       driverName,
       driverPay,
