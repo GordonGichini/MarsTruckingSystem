@@ -14,7 +14,7 @@ exports.createCalendarPlan = async (req, res) => {
         } = req.body;
         console.log('Received Data:', req.body);
 
-        const newCalendaPlan = new CalendarPlan({
+        const newCalendarPlan = new CalendarPlan({
             title,
             description,
             startDate,
@@ -24,7 +24,7 @@ exports.createCalendarPlan = async (req, res) => {
             unit
         });
 
-        const savedCalendarPlan = await newCalendaPlan.save();
+        const savedCalendarPlan = await newCalendarPlan.save();
         res.status(201).json(savedCalendarPlan);
     } catch (error) {
         console.error('Error creating a calendar plan:', error);
@@ -38,8 +38,8 @@ exports.getAllCalendarPlans = async (req, res) => {
         const calendarPlans = await CalendarPlan.find();
         res.status(200).json(calendarPlans);
     } catch (error) {
-        console.error('Error fetching calendarplans:', error);
-        res.status(500).json({ error: 'An error occurred while fetching calendarPlans' });
+        console.error('Error fetching calendar plans:', error);
+        res.status(500).json({ error: 'An error occurred while fetching calendar plans' });
     }
 };
 
@@ -50,12 +50,12 @@ exports.getCalendarPlanById = async (req, res) => {
       const calendarPlan = await CalendarPlan.findById(calendarPlanId);
       
       if (!calendarPlan) {
-        return res.status(404).json({ error: 'CalendarPlan not found' });
+        return res.status(404).json({ error: 'Calendar Plan not found' });
       }
   
       res.status(200).json(calendarPlan);
     } catch (error) {
-      console.error('Error fetching calendarPlan:', error);
+      console.error('Error fetching calendar plan:', error);
       res.status(500).json({ error: 'An error occurred while fetching calendar plan' });
     }
   };
@@ -97,8 +97,6 @@ exports.getCalendarPlanById = async (req, res) => {
     }
   };
   
-  
-
 
 
 

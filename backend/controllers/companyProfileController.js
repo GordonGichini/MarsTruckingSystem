@@ -4,24 +4,46 @@ const CompanyProfile = require('../models/companyProfile');
 exports.createCompanyProfile = async (req, res) => {
     try {
         const {
-            title,
-            description,
-            startDate,
-            endDate,
-            interval,
-            intervalPeriod,
-            unit
+            companyName,
+            street,
+            apt,
+            city,
+            state,
+            zipCode,
+            phoneNumber,
+            phoneNumberExtension,
+            alternatePhone,
+            alternatePhoneExtension,
+            number,
+            fax,
+            email,
+            website,
+            contact,
+            notes,
+            motorCarrierNumber,
+            taxId
         } = req.body;
         console.log('Received Data:', req.body);
 
         const newCompanyProfile = new CompanyProfile({
-            title,
-            description,
-            startDate,
-            endDate,
-            interval,
-            intervalPeriod,
-            unit
+            companyName,
+            street,
+            apt,
+            city,
+            state,
+            zipCode,
+            phoneNumber,
+            phoneNumberExtension,
+            alternatePhone,
+            alternatePhoneExtension,
+            number,
+            fax,
+            email,
+            website,
+            contact,
+            notes,
+            motorCarrierNumber,
+            taxId
         });
 
         const savedCompanyProfile = await newCompanyProfile.save();
@@ -43,7 +65,7 @@ exports.getCompanyProfile = async (req, res) => {
     }
 };
 
-//Fetch a single calendarPlan by ID
+//Fetch a company profile by ID
 exports.getCompanyProfileById = async (req, res) => {
     try {
       const companyProfileId = req.params.id;
@@ -60,7 +82,7 @@ exports.getCompanyProfileById = async (req, res) => {
     }
   };
   
-  // Update a calendarPlan by ID
+  // Update a company profile by ID
   exports.updateCompanyProfile = async (req, res) => {
     try {
       const companyProfileId = req.params.id;
@@ -79,7 +101,7 @@ exports.getCompanyProfileById = async (req, res) => {
     }
   };
   
-  // Delete a calendar plan  by ID
+  // Delete a company profile by ID
   exports.deleteCompanyProfile = async (req, res) => {
     try {
       const companyProfileId = req.params.id;
