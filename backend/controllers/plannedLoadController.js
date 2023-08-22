@@ -1,8 +1,10 @@
 const PlannedLoad = require('../models/plannedLoad');
+const Load = require('../models/load');
 
 exports.createPlannedLoad = async (req, res) => {
     try {
         const {
+            loadId,
             customLoadNumber,
             customer,
             shipper,
@@ -27,9 +29,15 @@ exports.createPlannedLoad = async (req, res) => {
             tarpFee,
             invoiceAdvance
         } = req.body;
+        // Check if the loadId exists
+        const existingLoad = await Load.findById(loadId);
+        if (!existingLoad) {
+          return res.status(404).json({ message: 'Load not found' });
+        }
 
-        const newPlannedLoad = new PlannedLoad({
-            customLoadNumber,
+        const newPlannedLoad = await PlannedLoad.create({
+          load: loadId,
+          customLoadNumber,
             customer,
             shipper,
             pickupDate,
@@ -54,9 +62,7 @@ exports.createPlannedLoad = async (req, res) => {
             invoiceAdvance
 
         });
-
-        const savedPlannedLoad = await newPlannedLoad.save();
-        res.status(201).json(savedPlannedLoad);
+        res.status(201).json(newPlannedLoad);
     } catch (error) {
         console.error('Error creating a planned Load:', error);
         res.status(500).json({ error: 'An error occurred while creating planned Load'})
@@ -65,7 +71,7 @@ exports.createPlannedLoad = async (req, res) => {
 
 exports.getAllPlannedLoads = async (req, res) => {
     try {
-        const plannedLoads = await PlannedLoad.find();
+        const plannedLoads = await PlannedLoad.find().populate('load');
         res.status(200).json(plannedLoads);
     } catch (error) {
         console.error('Error fetching plannedLoads:', error);
