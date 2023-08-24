@@ -3,6 +3,7 @@ import { Typography, TextField, Button, Box, Grid } from '@material-ui/core';
 import InNavBar from '../../common/Header/InNavBar';
 import { Link } from 'react-router-dom';
 import { makeStyles } from '@mui/styles';
+import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { useTheme } from '@mui/material/styles';
 
 
@@ -59,156 +60,45 @@ const useStyles = makeStyles((theme) => ({
 export default function PlannedLoad() {
     const classes = useStyles();
     const theme = useTheme();
-    // Defining state variables for capturing form inputs
-    const [customLoadNumber, setCustomLoadNumber] = React.useState('');
-    const [customer, setCustomer] = React.useState('');
 
-     // Basic details form state
-    const handleCustomLoadNumberChange = (event) => {
-        setCustomLoadNumber(event.target.value);
+    const initialValues = {
+        customLoadNumber: '',
+        customer: '',
+        shipper: '',
+        pickupDate: '',
+        driverInstructions: '',
+        bol: '',
+        customerRequiredInfo: '',
+        weight: '',
+        quantity: '',
+        notes: '',
+        commodity: '',
+        consignee: '',
+        deliveryDate: '',
+        instructions: '',
+        primaryFee: '',
+        primaryFeeType: '',
+        fscAmount: '',
+        fscAmountType: '',
+        detention: '',
+        lumper: '',
+        stopOff: '',
+        tarpFee: '',
+        invoiceAdvance: ''
+
     };
 
-    const handleCustomerChange = (event) => {
-        setCustomer(event.target.value);
+    const handleSubmit = (values) => {
+        // handle form submission
+        console.log(values);
     };
-
-    const handleFormSubmit = (event) => {
-        event.preventDefault();
-        // Perform form submission logic here
-    }; 
-
-    // Pickup form state
-    const [shipperName, setShipperName] = React.useState('');
-    const [pickupDate, setPickupDate] = React.useState('');
-    const [instructions, setInstructions] = React.useState('');
-    const [bol, setBol] = React.useState('');
-    const [customerRequiredInfo, setCustomerRequiredInfo] = React.useState('');
-    const [weight, setWeight] = React.useState('');
-    const [quantity, setQuantity] = React.useState('');
-    const [notes, setNotes] = React.useState('');
-    const [commodity, setCommodity] = React.useState('');
-
-    const handleShipperNameChange = (event) => {
-        setShipperName(event.target.value); 
-    };
-
-    const handlePickupDateChange = (event) => {
-        setPickupDate(event.target.value);
-    };
-
-    const handleInstructionsChange = (event) => {
-      setInstructions(event.target.value); 
-};
-
-    const handleBolChange = (event) => {
-        setBol(event.target.value);
-    };
-
-    const handleCustomerRequiredInfoChange = (event) => {
-        setCustomerRequiredInfo(event.target.value);
-    };
-
-    const handleWeightChange = (event) => {
-        setWeight(event.target.value);
-    };
-
-    const handleQuantityChange = (event) => {
-        setQuantity(event.target.value);
-    }; 
-
-    const handleNotesChange = (event) => {
-        setNotes(event.target.value);
-    };
-
-    const handleCommodityChange = (event) => {
-        setCommodity(event.target.value);
-    };
-
-    //Delivery state
-    const [consigneeName, setConsigneeName] = React.useState('');
-    const [deliveryDate, setDeliveryDate] = React.useState('');
-    const [instructions11, setInstructions11] = React.useState('');
-
-    const handleConsigneeNameChange = (event) => {
-        setConsigneeName(event.target.value);
-    };
-
-    const handleDeliveryDateChange = (event) => {
-        setDeliveryDate(event.target.value);
-    };
-
-    const handleInstructions11Change = (event) => {
-        setInstructions11(event.target.value);
-    }; 
-
-    //Fee/Charge state
-    const [primaryFee, setPrimaryFee] = React.useState('');
-    const [primaryFeeType, setPrimaryFeeType] = React.useState('');
-    const [fscAmount, setFscAmount] = React.useState('');
-    const [fscAmountType, setFscAmountType] = React.useState('');
-    const [detention, setDetention] = React.useState('');
-    const [lumper, setLumper] = React.useState('');
-    const [stopOff, setStopOff] = React.useState('');
-    const [tarpFee, setTarpFee] = React.useState('');
-    const [additional, setAdditional] = React.useState('');
-    const [invoiceAdvance, setInvoiceAdvance] = React.useState('');
-    const [addAnotherDelivery, setAddAnotherDelivery] = React.useState('');
-    const [addAdditionalFee, setAddAdditionalFee] = React.useState('');
-
-    const handlePrimaryFeeChange = (event) => {
-        setPrimaryFee(event.target.value);
-    };
-
-    const handlePrimaryFeeTypeChange = (event) => {
-        setPrimaryFeeType(event.target.value);
-    };
-
-    const handleFscAmountChange = (event) => {
-        setFscAmount(event.target.value);
-    }; 
-
-    const handleFscAmountTypeChange = (event) => {
-        setFscAmountType(event.target.value);
-    };
-
-    const handleDetentionChange = (event) => {
-        setDetention(event.target.value);
-    };
-
-    const handleLumperChange = (event) => {
-        setLumper(event.target.value);
-    };
-
-    const handleStopOffChange = (event) => {
-        setStopOff(event.target.value);
-    };
-
-    const handleTarpFeeChange = (event) => {
-        setTarpFee(event.target.value);
-    };
-
-    const handleAdditionalChange = (event) => {
-        setAdditional(event.target.value);
-    };
-
-    const handleInvoiceAdvanceChange = (event) => {
-        setInvoiceAdvance(event.target.value);
-    };
-
-    const handleAddAnotherDeliveryChange = (event) => {
-        setAddAnotherDelivery(event.target.value);
-   
-   
-    };
-
-    const handleAddAdditionalFeeChange = (event) => {
-        setAddAdditionalFee(event.target.value);
-    };
-
 
     return (
         <div>
             <InNavBar />
+            <Formik initialValues={initialValues} onSubmit={handleSubmit}>
+                {({ isSubmitting }) => (
+                    <Form>
             <Box className={classes.formContainer}>
         <Typography variant="h6" className={classes.sectionTitle}>Add Planned Load</Typography>
         <Box className={classes.formSection}>
@@ -216,129 +106,152 @@ export default function PlannedLoad() {
             <Grid container spacing={6}>
                 <Grid item xs={6}>
                 <Typography variant="subtitle1">Basic Details</Typography>
-            <TextField
+            <Field
+            type="text"
             label="Custom Load Number"
-            value={customLoadNumber}
+            name="customLoadNumber"
+            component={TextField}
             margin='normal'
-            onChange={handleCustomLoadNumberChange}
             variant="outlined"
             className={classes.inputField}
             /> 
             <Typography variant="caption">
                 Optional Custom Load number that will override the system generated trip number
             </Typography>            
-            <TextField
+            <Field
+            type="text"
             label="Customer"
-            value={customer}
+            name="customer"
+            component={TextField}
             margin='normal'
-            onChange={handleCustomerChange}
             variant="outlined"
             className={classes.inputField}
-            />  
+            validate={(value) => {
+                let error;
+                if (!value) {
+                    error = 'Customer is required';
+                }
+                return error;
+            }}
+            /> 
+            <ErrorMessage name="customer" component="div" /> 
                       
-            <Button variant="outlined" color="primary" onClick={handleCustomerChange}
-            className={classes.button}>
+            <Button variant="outlined" color="primary" className={classes.button}>
                 Create customer
             </Button>
             </Grid>
             </Grid>
             </Box>
             </Box>
-            
-            
-
             <Box className={classes.formContainer}>
                 <Typography variant="h6" className={classes.sectionSubtitle}>Stops</Typography>
                 <Box className={classes.formSection}>
                         <Grid container spacing={6}>
                             <Grid item xs={6}>
                         <Typography variant="subtitle1">Pickup</Typography>
-                        <TextField
+                        <Field
+                        type="text"
                         label="Shipper"
-                        value={shipperName}
+                        name="shipper"
+                        component={TextField}
                         margin='normal'
                         className={classes.inputField}
-                        onChange={handleShipperNameChange}
                         variant="outlined"
+                        validate={(value) => {
+                            let error;
+                            if (!value) {
+                                error = 'Shipper is required'
+                            }
+                            return error;
+                        }}
                         /> 
-                        <Button variant="outlined" color="primary" onClick={handleShipperNameChange}>
+                        <ErrorMessage name="shipper" component="div" />
+                        <Button variant="outlined" color="primary">
                             Create Shipper
                             </Button>
-                        <TextField
+                        <Field
+                        type="date"
                         label="Pickup date"
-                        value={pickupDate}
+                        name="pickupDate"
+                        component={TextField}
                         margin='normal'
                         className={classes.inputField}
-                        onChange={handlePickupDateChange}
                         variant="outlined"
                         />
 
-                        <TextField
+                        <Field
+                        type="text"
                         label="Instructions"
-                        value={instructions}
+                        name="instructions"
+                        component={TextField}
                         margin='normal'
                         className={classes.inputField}
-                        onChange={handleInstructionsChange}
                         multiline
                         variant="outlined"
                         />
                         <Typography variant="caption">ELD drivers can view in mobile app and trip report. (Pick up number, Apt. time, etc.)</Typography>
 
-                        <TextField
+                        <Field
+                        type="text"
                         label="BOL"
-                        value={bol}
+                        name="bol"
+                        component={TextField}
                         margin='normal'
                         className={classes.inputField}
-                        onChange={handleBolChange}
                         variant="outlined"
                         />
                         <Typography variant="caption">ELD driver can view, enter and edit BOL in mobile app</Typography>
 
-                        <TextField
+                        <Field
+                        type="text"
                         label="Customer Required Info (included on invoice)"
-                        value={customerRequiredInfo}
+                        name="customerRequiredInfo"
+                        component={TextField}
                         margin='normal'
                         className={classes.inputField}
-                        onChange={handleCustomerRequiredInfoChange}
                         multiline
                         variant="outlined"
                         />
                         <Typography variant="caption">Included on invoice(rate con number, customer tracking number, PO* etc)</Typography>
 
-                        <TextField
+                        <Field
+                        type="number"
                         label="Weight"
-                        value={weight}
+                        name="weight"
+                        component={TextField}
                         margin='normal'
                         className={classes.inputField}
-                        onChange={handleWeightChange}
                         variant="outlined"
                         />
                         <Typography variant="caption">Used to calculate per weight fees. Enter total weight,not tonnes, cwt etc</Typography>
 
-                        <TextField
+                        <Field
+                        type="number"
                         label="Quantity"
-                        value={quantity}
+                        name="quantity"
+                        component={TextField}
                         margin='normal'
                         className={classes.inputField}
-                        onChange={handleQuantityChange}
                         variant="outlined"
                         />
 
-                        <TextField
+                        <Field
+                        type="text"
                         label="Notes"
-                        value={notes}
+                        name="notes"
+                        component={TextField}
                         margin="normal"
                         className={classes.inputField}
-                        onChange={handleNotesChange}
                         variant="outlined"
                         />
 
-                        <TextField
+                        <Field
+                        type="text"
                         label="Commodity"
-                        value={commodity}
+                        name="commodity"
+                        component={TextField}
                         margin="normal"
                         className={classes.inputField}
-                        onChange={handleCommodityChange}
                         variant="outlined"
                         />
                         <Button variant="outlined">Add Another Pickup</Button>
@@ -346,36 +259,39 @@ export default function PlannedLoad() {
 
                 <Grid item xs={6}>
                 <Typography variant="subtitle2">Delivery</Typography>
-                <TextField
+                <Field
+                type="text"
                 label="Consignee Name"
-                value={consigneeName}
+                name="consigneeName"
+                component={TextField}
                 margin='normal'
                 className={classes.inputField}
-                onChange={handleConsigneeNameChange}
                 variant="outlined"
                 />
-                <Button variant="outlined" color="primary" onClick={handleConsigneeNameChange}>
+                <Button variant="outlined" color="primary">
                     Create Consignee
                     </Button> 
-                <TextField
+                <Field
+                type="date"
                 label="Delivery Date"
-                value={deliveryDate}
+                name="deliveryDate"
+                component={TextField}
                 margin='normal'
                 className={classes.inputField}
-                onChange={handleDeliveryDateChange}
                 variant="outlined"
                 />
 
-                <TextField
+                <Field
+                type="text"
                 label="Instructions"
-                value={instructions11}
+                name="instructions"
+                component={TextField}
                 margin='normal'
                 className={classes.inputField}
-                onChange={handleInstructions11Change}
                 variant="outlined"
                 />
 
-                <Button variant="outlined" color="primary" onClick={handleAddAnotherDeliveryChange}>
+                <Button variant="outlined" color="primary">
                     Add Another Delivery
                 </Button>
                 </Grid>
@@ -388,106 +304,118 @@ export default function PlannedLoad() {
                 <Box className={classes.formContainer}>
                     <Box className={classes.formSection}>
                     <Typography variant="subtitle2" className={classes.sectionSubtitle}>Fees/Charges</Typography>
-                <TextField
+                <Field
+                type="number"
                 label="Primary Fee"
-                value={primaryFee}
+                name="primaryFee"
+                component={TextField}
                 margin='normal'
                 className={classes.inputField}
-                onChange={handlePrimaryFeeChange}
                 variant="outlined"
                 />
                 <Typography variant="caption">Enter Primary Fee, then select Fee Type below</Typography>
 
-                <TextField
+                <Field
+                type="text"
                 label="Primary Fee Type"
-                value={primaryFeeType}
+                name="primaryFeeType"
+                component={TextField}
                 margin='normal'
                 className={classes.inputField}
-                onChange={handlePrimaryFeeTypeChange}
                 variant="outlined"
                 />
 
-                <TextField
+                <Field
+                type="number"
                 label="Fuel Surcharge Fee"
-                value={fscAmount}
+                name="fscAmount"
+                component={TextField}
                 margin='normal'
                 className={classes.inputField}
-                onChange={handleFscAmountChange}
                 variant="outlined"
                 />
                 <Typography variant="caption">Enter an amount then select an FSC Amount Type below</Typography>
 
-                <TextField
+                <Field
+                type="text"
                 label= "FSC amount Type"
-                value={fscAmountType}
+                name="fscAmountType"
+                component={TextField}
                 margin='normal'
                 className={classes.inputField}
-                onChange={handleFscAmountTypeChange}
                 variant="outlined"
                 /> 
                     <Typography variant="subtitle2">Accessory Fees</Typography>
-                    <TextField
+                    <Field
+                    type="text"
                     label="Detention"
-                    value={detention}
+                    name="detention"
+                    component={TextField}
                     margin='normal'
                     className={classes.inputField}
-                    onChange={handleDetentionChange}
                     variant="outlined"
                     />
 
-                    <TextField
+                    <Field
+                    type="text"
                     label="Lumper"
-                    value={lumper}
+                    name="lumper"
+                    component={TextField}
                     margin='normal'
                     className={classes.inputField}
-                    onChange={handleLumperChange}
                     variant="outlined"
                     />
 
-                    <TextField
+                    <Field
+                    type="text"
                     label="Stop Off"
-                    value={stopOff}
+                    name="stopOff"
+                    component={TextField}
                     margin='normal'
                     className={classes.inputField}
-                    onChange={handleStopOffChange}
                     variant="outlined"
                     />
 
-                    <TextField
+                    <Field
+                    type="text"
                     label="Tarp Fee"
-                    value={tarpFee}
+                    name="tarpFee"
+                    component={TextField}
                     margin='normal'
                     className={classes.inputField}
-                    onChange={handleTarpFeeChange}
                     variant="outlined"
                     />
 
-                    <TextField
+                    <Field
+                    type="text"
                     label="Additional"
-                    value={additional}
+                    name="additional"
+                    component={TextField}
                     margin='normal'
                     className={classes.inputField}
-                    onChange={handleAdditionalChange}
                     variant="outlined"
                     />
 
-                    <Button variant="outlined" color="primary" onClick={handleAddAdditionalFeeChange}>
+                    <Button variant="outlined" color="primary">
                         Add Additional Fee
                         </Button>
                         <Typography variant="h6">Invoice Advance</Typography>
-                    <TextField
+                    <Field
+                    type="number"
                     label="Invoice Advance"
-                    value={invoiceAdvance}
+                    name="invoiceAdvance"
+                    component={TextField}
                     margin='normal'
                     className={classes.inputField}
-                    onChange={handleInvoiceAdvanceChange}
                     variant="outlined"
                     />
                     </Box>
                     </Box>
                     <Button variant="outlined">Save </Button>
                 <Button variant="text">cancel</Button>
-                
+               </Form>
+    )}
+               </Formik> 
             </div> 
     );
 }

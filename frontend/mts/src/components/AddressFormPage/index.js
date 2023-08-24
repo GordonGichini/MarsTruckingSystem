@@ -1,5 +1,5 @@
 import React from 'react';
-import { Typography, TextField, Button, Box, Grid } from '@material-ui/core';
+import { Typography, TextField, Button, Box } from '@material-ui/core';
 import InNavBar from '../../common/Header/InNavBar';
 import { makeStyles } from '@mui/styles';
 import { useTheme } from '@mui/material/styles';
@@ -27,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: theme.spacing(1),
   },
   search: {
-    width: '98%',
+    width: '68%',
       marginTop: theme.spacing(2),
       marginBottom: theme.spacing(4),
       marginLeft: theme.spacing(2),
@@ -45,7 +45,7 @@ const useStyles = makeStyles((theme) => ({
 
   },
   inputField: {
-      width: '98%',
+      width: '68%',
       margin : theme.spacing(1, 0),
       '& .MuiOutlinedInput-root': {
     '& fieldset': {
@@ -95,10 +95,6 @@ export default function AddressFormPage() {
       <Box className={classes.formContainer}> 
         <TextField label="Search" variant="outlined" className={classes.search} />
         <Typography variant="caption">Select an address to autofill this form</Typography>
-        <Grid container spacing={3}>
-          <Grid item xs={6}>
-       
-
         <TextField label="Company Name" margin='normal' variant="outlined" className={classes.inputField} />
         <TextField label="Street" margin='normal' variant="outlined" className={classes.inputField} />
         <TextField label="Apt/Suite/Other" margin='normal' variant="outlined" className={classes.inputField} />
@@ -108,8 +104,7 @@ export default function AddressFormPage() {
         <TextField label="Phone Number" margin='normal' variant="outlined" className={classes.inputField} />
         <TextField label="Phone Extension Number" margin='normal' variant="outlined" className={classes.inputField} />
         <TextField label="Alternate Phone" margin='normal' variant="outlined" className={classes.inputField} />
-        </Grid>
-        <Grid item xs={6}>
+
         <TextField label="Alternate Phone Extension" margin='normal' variant="outlined" className={classes.inputField} />
         
         <TextField label="Number" margin='normal' variant="outlined" className={classes.inputField} />
@@ -127,7 +122,6 @@ export default function AddressFormPage() {
         <Button variant="text" color="secondary">
           Cancel
         </Button>
-        </Grid></Grid>
       </Box>
     </div>
   );
