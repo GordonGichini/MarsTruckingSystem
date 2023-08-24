@@ -3,17 +3,18 @@ const loadController = require('../controllers/loadController');
 const router = express.Router();
 
 
+router.post('/loads', loadController.createLoad);
 // Fetch all loads
-router.get('/get', loadController.getAllLoads);
+router.get('/loads', loadController.getAllLoads);
 
 // Fetch a single expense by ID
-router.get('/:id', loadController.getLoadById);
+router.get('/loads/:id', loadController.getLoadById);
 
 // Update an expense by ID
-router.put('/:id', loadController.updateLoad);
+router.put('/loads/:id', loadController.updateLoad);
 
 // Delete an expense by ID
-router.delete('/:id', loadController.deleteLoad);
+router.delete('/loads/:id', loadController.deleteLoad);
 
 
 module.exports = router;

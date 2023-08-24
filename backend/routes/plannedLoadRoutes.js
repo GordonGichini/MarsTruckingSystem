@@ -3,15 +3,15 @@ const router = express.Router();
 const plannedLoadController = require('../controllers/plannedLoadController');
 
 
-router.post('/create', plannedLoadController.createPlannedLoad);
+router.post('/plannedloads', plannedLoadController.createPlannedLoad);
 
-router.get('/get', plannedLoadController.getAllPlannedLoads);
+router.get('/plannedloads', plannedLoadController.getAllPlannedLoads);
 
-router.get('/:id', plannedLoadController.getPlannedLoadById);
+router.get('/plannedloads/:id', plannedLoadController.getPlannedLoadById);
 
-router.put('/:id', plannedLoadController.updatePlannedLoad);
+router.put('/plannedloads/:id', plannedLoadController.updatePlannedLoad);
 
-router.delete('/:id', plannedLoadController.deletePlannedLoad);
+router.delete('/plannedloads/:id', plannedLoadController.deletePlannedLoad);
 
 
 
