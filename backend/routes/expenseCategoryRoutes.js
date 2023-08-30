@@ -6,16 +6,16 @@ const router = express.Router();
 // Create a new expense category
 router.post('/create', expenseCategoryController.createExpenseCategory);
 
-// Fetch all expenses
+// Fetch all expense categories
 router.get('/get', expenseCategoryController.getAllExpenseCategories);
 
-// Fetch a single expense by ID
+// Fetch a single expense category by ID
 router.get('/:id', expenseCategoryController.getExpenseCategoryById);
 
-// Update an expense by ID
+// Update an expense category by ID
 router.put('/:id', expenseCategoryController.updateExpenseCategory);
 
-// Delete an expense by ID
+// Delete an expense category by ID
 router.delete('/:id', expenseCategoryController.deleteExpenseCategory);
 
 

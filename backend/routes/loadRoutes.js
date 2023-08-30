@@ -2,7 +2,7 @@ const express = require('express');
 const loadController = require('../controllers/loadController');
 const router = express.Router();
 
-
+// create a load
 router.post('/loads', loadController.createLoad);
 // Fetch all loads
 router.get('/loads', loadController.getAllLoads);

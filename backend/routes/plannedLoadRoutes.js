@@ -3,7 +3,7 @@ const router = express.Router();
 const plannedLoadController = require('../controllers/plannedLoadController');
 
 
-router.post('/plannedloads', plannedLoadController.createPlannedLoad);
+router.post('/new', plannedLoadController.createPlannedLoad);
 
 router.get('/plannedloads', plannedLoadController.getAllPlannedLoads);
 
