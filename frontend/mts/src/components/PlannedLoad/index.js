@@ -4,6 +4,7 @@ import InNavBar from '../../common/Header/InNavBar';
 import { Link } from 'react-router-dom';
 import { makeStyles } from '@mui/styles';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
+import * as Yup from 'yup';
 import { useTheme } from '@mui/material/styles';
 
 
@@ -88,6 +89,32 @@ export default function PlannedLoad() {
 
     };
 
+   /* const validationSchema = Yup.object({
+       // customLoadNumber: Yup.string().customLoadNumber().required('Required'),
+        customer: Yup.string().customer().required('Required'),
+        shipper: Yup.string().shipper().required('Required'),
+        pickupDate: Yup.date().pickupDate().required('Required'),
+        driverInstructions: Yup.string().driverInstructions().required('Required'),
+        bol: Yup.string().bol().required('Required'),
+        customerRequiredInfo: Yup.string().customerRequiredInfo().required('Required'),
+        weight: Yup.number().weight().required('Required'),
+        quantity: Yup.number().quantity().required('Required'),
+        notes: Yup.string().notes().required('Required'),
+        commodity: Yup.string().commodity().required('Required'),
+        consignee: Yup.string().consignee().required('Required'),
+        deliveryDate: Yup.date().deliveryDate().required('Required'),
+        instructions: Yup.string().instructions().required('Required'),
+        primaryFee: Yup.number().primaryFee().required('Required'),
+        primaryFeeType: Yup.string().primaryFeeType().required('Required'),
+        fscAmount: Yup.number().fscAmount().required('Required'),
+        fscAmountType: Yup.string().fscAmountType().required('Required'),
+        detention: Yup.number().detention().required('Required'),
+        lumper: Yup.number().lumper().required('Required'),
+        stopOff: Yup.number().stopOff().required('Required'),
+        tarpFee: Yup.number().tarpFee().required('Required'),
+        invoiceAdvance: Yup.number().invoiceAdvance().required('Required')
+    })*/
+
     const handleSubmit = (values) => {
         // handle form submission
         console.log(values);
@@ -96,7 +123,7 @@ export default function PlannedLoad() {
     return (
         <div>
             <InNavBar />
-            <Formik initialValues={initialValues} onSubmit={handleSubmit}>
+            <Formik initialValues={initialValues} onSubmit={handleSubmit} >
                 {({ isSubmitting }) => (
                     <Form>
             <Box className={classes.formContainer}>
@@ -126,13 +153,6 @@ export default function PlannedLoad() {
             margin='normal'
             variant="outlined"
             className={classes.inputField}
-            validate={(value) => {
-                let error;
-                if (!value) {
-                    error = 'Customer is required';
-                }
-                return error;
-            }}
             /> 
             <ErrorMessage name="customer" component="div" /> 
                       
@@ -411,7 +431,7 @@ export default function PlannedLoad() {
                     />
                     </Box>
                     </Box>
-                    <Button variant="outlined">Save </Button>
+                    <Button variant="outlined" type="submit" disabled={isSubmitting}>Save </Button>
                 <Button variant="text">cancel</Button>
                </Form>
     )}

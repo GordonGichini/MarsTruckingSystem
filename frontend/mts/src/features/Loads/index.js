@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import InNavBar from '../../common/Header/InNavBar';
-import { Typography, makeStyles, Button, TextField, Box } from '@material-ui/core';
+import { Typography, makeStyles, Button, Box } from '@material-ui/core';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -45,19 +45,19 @@ function Loads() {
           </Typography>
 
       <Box className={classes.buttonContainer}>
-        <Button variant="contained"
+        <Button variant="outlined"
          className={classes.button}
          component={Link}
          to="/loadplanner">
           Planned Loads
         </Button>
-        <Button variant="contained"
+        <Button variant="outlined"
          className={classes.button}
          component={Link}
          to="/add-planned-load">
           Add Planned Load
         </Button>
-        <Button variant="contained" 
+        <Button variant="outlined" 
         className={classes.button}
         component={Link}
         to="/add-trip">
@@ -74,7 +74,7 @@ function Loads() {
         {/* Add your maintenance video component here */}
         {/* <MaintenanceVideo /> */}
       <Box className={classes.addMaintenanceButton}>
-        <Button variant="contained" 
+        <Button variant="outlined" 
         color="primary"
         component={Link}
         to="/add-planned-load">
