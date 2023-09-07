@@ -7,9 +7,10 @@ const expenseCategorySchema = new mongoose.Schema({
     },
     status: {
         type: String,
-        required: true,
-    }
-})
+        enum: ['Active', 'Inactive'],
+        default: 'Active',
+    },
+});
 
 const ExpenseCategory = mongoose.model('ExpenseCategory', expenseCategorySchema);
 

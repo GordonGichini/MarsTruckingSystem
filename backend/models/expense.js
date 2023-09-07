@@ -37,10 +37,14 @@ const expenseSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  stateProvince: {
+  state: {
     type: String,
     required: true,
-  }
+  },
+  category: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'ExpenseCategory',
+  },
 });
 
 expenseSchema.index({ someField: 1 }, { unique: true });
