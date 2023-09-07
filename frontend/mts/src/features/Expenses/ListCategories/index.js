@@ -1,20 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import InNavBar from '../../../common/Header/InNavBar';
-import Footer from '../../../pages/HomePage/components/Footer';
-import {
-  AppBar,
-  Toolbar,
-  Typography,
-  Button,
-  makeStyles,
-  ButtonGroup,
-  Table,
-  TableContainer,
-  TableHead,
-  TableRow,
-  TableCell,
-  TableBody,
-} from '@material-ui/core';
+//import Footer from '../../../pages/HomePage/components/Footer';
+import AddCategoryForm from '../AddCategoryForm';
+import { AppBar, Toolbar, Typography, Button, makeStyles, ButtonGroup, Table, TableContainer, TableHead, TableRow, TableCell, TableBody } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
   appBar: {
@@ -38,12 +27,44 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function ListCategories() {
+  const api = axios.create({
+    baseURL: 'http://localhost:5001',
+  });
   const classes = useStyles();
-  const [categoryList, setCategoryList] = useState([
-    { name: 'Category 1', status: 'Active' },
-    { name: 'Category 2', status: 'Inactive' },
-    // Add more category objects as needed
-  ]);
+  const [expenseCategories, setExpenseCategories] = useState([]);
+  const [isAddExpenseCategoryOpen, setIsAddExpenseCategoryOpen] = useState(false);
+
+  const handleAddExpenseCategory = () => {
+    setIsAddExpenseCategoryOpen(true);
+  };
+
+  const handleCloseAddExpenseCategory = () => {
+    setIsAddExpenseCategoryOpen(false);
+  }; 
+
+  const createExpenseCategory = async (newExpenseCategoryData) => {
+    try {
+      const response = await api.post('/api/categories', newExpenseCategoryData);
+      const newExpenseCategory = response.data;
+      setExpenseCategories([...expenseCategories, newExpenseCategory]);
+      handleCloseAddExpenseCategory();
+    } catch (error) {
+      console.error('Error creating category:', error);
+      //error message to user
+
+    }
+  };
+
+  useEffect(() => {
+    //fetching expense categories from backend
+    api.get('/api/categories')
+    .then((response) => {
+      setExpenseCategories(response.data);
+    })
+    .catch((error) => {
+      console.error('Error fetching categories:', error);
+    });
+  });
 
   return (
     <div style={{ flex: 1 }}>
@@ -66,9 +87,15 @@ function ListCategories() {
             variant="contained"
             color="primary"
             className={classes.addButton}
+            onClick={handleAddExpenseCategory}
           >
             Add Category
           </Button>
+          <AddCategoryForm
+          open={isAddExpenseCategoryOpen}
+          onClose={handleCloseAddExpenseCategory}
+          onSave={createExpenseCategory}
+          />
           <Button variant="contained" className={classes.addButton}>
             List Expenses
           </Button>
@@ -92,10 +119,10 @@ function ListCategories() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {categoryList.map((category, index) => (
+            {expenseCategories.map((expenseCategory, index) => (
               <TableRow key={index}>
-                <TableCell>{category.name}</TableCell>
-                <TableCell>{category.status}</TableCell>
+                <TableCell>{expenseCategory.name}</TableCell>
+                <TableCell>{expenseCategory.status}</TableCell>
                 <TableCell>
                   <Button variant="outlined" color="primary">
                     View Category

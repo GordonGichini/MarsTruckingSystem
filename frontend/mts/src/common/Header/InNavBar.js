@@ -189,13 +189,13 @@ function InNavBar() {
         <MenuItem onClick={handleSettingsMenuClose} component={NavLink} to="/maintenance_logs">
           Maintenances
         </MenuItem>
-        <MenuItem onClick={handleSettingsMenuClose} component={NavLink} to="/settings/addresses">
+        <MenuItem onClick={handleSettingsMenuClose} component={NavLink} to="/addresses">
           Addresses
         </MenuItem>
-        <MenuItem onClick={handleSettingsMenuClose} component={NavLink} to="/settings/drivers">
+        <MenuItem onClick={handleSettingsMenuClose} component={NavLink} to="/drivers">
           Drivers
         </MenuItem>
-        <MenuItem onClick={handleSettingsMenuClose} component={NavLink} to="/settings/units">
+        <MenuItem onClick={handleSettingsMenuClose} component={NavLink} to="/units">
           Units
         </MenuItem>
         <MenuItem onClick={handleSettingsMenuClose} component={NavLink} to="/settings/user-guide">

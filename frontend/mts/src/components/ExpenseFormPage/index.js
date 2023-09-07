@@ -64,6 +64,8 @@ export default function ExpenseFormPage() {
   const theme = useTheme();
   const classes = useStyles();
 
+  const state = [ 'Alabama','Alaska','Arizona','Arkansas','California','Colorado','Connecticut','Delaware','Florida','Georgia','Hawaii','Idaho','Illinois','Indiana','Iowa','Kansas','Kentucky','Louisiana','Maine','Maryland','Massachusetts','Michigan','Minnesota','Mississippi','Missouri','Montana','Nebraska','Nevada','New Hampshire','New Jersey','New Mexico','New York','North Carolina','North Dakota','Ohio','Oklahoma','Oregon','Pennsylvania','Rhode Island','South Carolina','South Dakota','Tennessee','Texas','Utah','Vermont','Virginia','Washington','West Virginia','Wisconsin','Wyoming' ]
+
   //state for handling API responses and errors
   const [apiError, setApiError] = useState(null);
 
@@ -77,7 +79,6 @@ export default function ExpenseFormPage() {
       // Handle error
     }
   };
-
 
 
   return (
@@ -96,7 +97,7 @@ export default function ExpenseFormPage() {
           gallons: '',
           odometer: '',
           fuelVendor: '',
-          stateProvince: '',
+          state: '',
         }}
         validationSchema={Yup.object({
           expenseCategory: Yup.string().required('Required'),
@@ -108,7 +109,7 @@ export default function ExpenseFormPage() {
           gallons: Yup.number().required('required'),
           odometer: Yup.number().required('required'),
           fuelVendor: Yup.string().required('required'),
-          stateProvince: Yup.string().required('required')
+          state: Yup.string().required('Please select a state'),
 
           // other validations
         })}
@@ -145,6 +146,7 @@ export default function ExpenseFormPage() {
         <Field
           name="Amount"
           as={TextField}
+          type="number"
           label="Amount"
           variant="outlined"
           margin='normal'       
@@ -168,6 +170,7 @@ export default function ExpenseFormPage() {
 
         <Field
           name="Expense Date"
+          type="date"
           as={TextField}
           label="Expense Date"
           variant="outlined"
@@ -189,6 +192,7 @@ export default function ExpenseFormPage() {
 
         <Field
           name="Gallons"
+          type="number"
           as={TextField}
           label='gallons'
           variant="outlined"
@@ -198,6 +202,7 @@ export default function ExpenseFormPage() {
 
         <Field
           name="Odometer"
+          type="number"
           as={TextField}
           label='odometer'
           variant="outlined"
@@ -218,13 +223,24 @@ export default function ExpenseFormPage() {
           </Button>
 
         <Field
-          name="State/Province"
-          as={TextField}
-          label='State/Province'
+          name="State"
+          as='select'
+          id="state"
+          label='State'
           variant="outlined"
           margin='normal'        
           className={classes.inputField}
-        />
+        >
+          <option value="" disabled>
+            Select state
+          </option>
+          {state.map((state) => (
+            <option key={state} value={state}>
+              {state}
+            </option>
+          ))}
+        </Field>
+        <ErrorMessage name="state" component="div" className="error-message" />
 
         {apiError && <div className={classes.error}>{apiError}</div>}
 
