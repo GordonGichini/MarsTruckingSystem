@@ -11,7 +11,7 @@ function authenticateToken(req, res, next) {
 
     jwt.verify(token, config.jwtSecret, (err, user) => {
         if (err) {
-            return res.sendStatus(403);
+            return res.sendStatus(401);
         }
         req.user = user;
         next();
@@ -26,7 +26,7 @@ const authenticateUser = (req, res, next) => {
   }
 
   try {
-    const decodedToken = jwt.verify(token, 'YOUR_SECRET_KEY');
+    const decodedToken = jwt.verify(token, config.jwtSecret);
     req.user = decodedToken; // Store the user data in the request object
     next(); // Proceed to the next middleware or route handler
   } catch (error) {

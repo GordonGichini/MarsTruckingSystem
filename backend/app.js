@@ -6,6 +6,7 @@ const config = require('./config');
 const routes = require('./routes/routes');
 const errorMiddleware = require('./errorMiddleware');
 const mongoose = require('mongoose');
+//const authRoutes = require('./routes/authRoutes');
 const expenseRoutes = require('./routes/expenseRoutes');
 const expenseCategoryRoutes = require('./routes/expenseCategoryRoutes');
 const plannedLoadRoutes = require('./routes/plannedLoadRoutes');
@@ -38,6 +39,9 @@ mongoose.connect('mongodb+srv://gordongichini1:mUDzJ064sNgne1ss@cluster0.xm6xl0n
 // Use the routes defined in routes.js for /api endpoints
 const protectedRoutes = require('./routes/routes');
 app.use('/api', protectedRoutes);
+//app.use('/api/register', authRoutes);
+//app.use('/api/login', authRoutes);
+//app.use('/api/logout', authRoutes);
 app.use('/api/expenses', expenseRoutes);
 app.use('/api/expenseCategories', expenseCategoryRoutes);
 app.use('/api/plannedLoads', plannedLoadRoutes);

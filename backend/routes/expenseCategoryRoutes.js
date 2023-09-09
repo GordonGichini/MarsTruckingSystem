@@ -5,7 +5,7 @@ const router = express.Router();
 const { body, param } = require('express-validator');
 
 // Create a new expense category
-router.post('/api/categories', expenseCategoryController.createExpenseCategory);
+router.post('/', expenseCategoryController.createExpenseCategory);
 
 // Fetch all expense categories
 router.get('/api/categories', expenseCategoryController.getAllExpenseCategories);

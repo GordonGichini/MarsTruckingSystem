@@ -1,4 +1,4 @@
-const ExpenseCategory = require('../models/expenseCategories');
+const ExpenseCategory = require('../models/expenseCategory');
 
 // create a new expense category
 exports.createExpenseCategory = async (req, res) => {
@@ -8,8 +8,8 @@ exports.createExpenseCategory = async (req, res) => {
     const newExpenseCategory = new ExpenseCategory({
         name, status
     });
-    const savedExpenseCategory = await newExpenseCategory.save();
-    res.status(201).json(savedExpenseCategory);
+    await newExpenseCategory.save();
+    res.status(201).json(newExpenseCategory);
 } catch (error) {
     console.error('Error creating expensecategory:', error);
     res.status(500).json({ error: 'An error occurred while creating the expense category' });
