@@ -7,6 +7,8 @@ import { CompanyOverview, ExpensesReport, FuelExpenses, FuelVendor, IRPStateMile
 import { EditPage } from "./pages/ProfilePage";
 import InNavBar from "./common/Header/InNavBar";
 import OutNavBar from "./common/Header/OutNavBar";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import Footer from "./pages/HomePage/components/Footer";
 import {Route, Routes} from 'react-router-dom';
 import { CssBaseline, ThemeProvider } from '@mui/material';
@@ -76,6 +78,7 @@ function App() {
         <Route path="/units" element={<Units/>} />
         <Route path="/drivers" element={<Drivers/>} />
       </Routes>
+      <ToastContainer />
       <Footer />
       </div>
       </ThemeProvider>

@@ -71,7 +71,7 @@ export default function ExpenseFormPage() {
 
   const handleCreateExpense = async (values) => {
     try {
-      await axios.post('/api/expenses/create', values);
+      await axios.post('/api/expenses', values);
       navigate('/expenses');
     } catch (error) {
       console.error('Error creating expense:', error);

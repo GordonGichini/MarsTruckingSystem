@@ -44,7 +44,7 @@ function ListCategories() {
 
   const createExpenseCategory = async (newExpenseCategoryData) => {
     try {
-      const response = await api.post('/api/categories', newExpenseCategoryData);
+      const response = await api.post('/api/expenseCategories', newExpenseCategoryData);
       const newExpenseCategory = response.data;
       setExpenseCategories([...expenseCategories, newExpenseCategory]);
       handleCloseAddExpenseCategory();
@@ -57,7 +57,7 @@ function ListCategories() {
 
   useEffect(() => {
     //fetching expense categories from backend
-    api.get('/api/categories')
+    api.get('/api/expenseCategories')
     .then((response) => {
       setExpenseCategories(response.data);
     })

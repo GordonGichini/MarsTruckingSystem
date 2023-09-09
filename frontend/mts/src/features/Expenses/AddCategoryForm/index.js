@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 import { Dialog, DialogTitle, DialogContent, DialogActions, Button, TextField, FormControl, InputLabel, Select, MenuItem, makeStyles } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
@@ -8,45 +9,52 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function AddCategoryForm({ open, onClose, onSave }) {
+function AddCategoryForm({ open, onClose }) {
   const classes = useStyles();
-  const [categoryName, setCategoryName] = useState('');
-  const [categoryStatus, setCategoryStatus] = useState('Active');
+  const [name, setName] = useState('');
+  const [status, setStatus] = useState('Active');
+  const [loading, setLoading] = useState('');
+  const [message, setMessage] = useState('');
 
-  const handleCategoryNameChange = (event) => {
-    setCategoryName(event.target.value);
-  };
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
 
-  const handleCategoryStatusChange = (event) => {
-    setCategoryStatus(event.target.value);
-  };
-
-  const handleSave = () => {
-    onSave({
-      name: categoryName,
-      status: categoryStatus,
-    });
-  };
+  try {
+    const response = await axios.post('/api/expenseCategories', { name, status });
+    if (response.status === 201) {
+      setMessage('Expense category created successfully.');
+      setName('');
+      setStatus('Active');
+    }
+  } catch (error) {
+    setMessage('Error creating expense category. Please try again.');
+    console.error('Error creating expense category:', error);
+  } finally {
+    setLoading(false);
+  }
+};
 
   return (
-    <Dialog open={open} onClose={onClose} aria-labelledby="form-dialog-title">
+    <Dialog open={open} onClose={onClose} onSubmit={handleSubmit} aria-labelledby="form-dialog-title">
       <DialogTitle id="form-dialog-title">New Expense Category</DialogTitle>
+      {message && <p>{message}</p>}
       <DialogContent>
         <TextField
           autoFocus
           margin="dense"
           label="Name of the Category"
+          value={name}
           fullWidth
-          value={categoryName}
-          onChange={handleCategoryNameChange}
+          onChange={(e) => setName(e.target.value)}
         />
         <FormControl className={classes.formControl} fullWidth>
           <InputLabel id="category-status-label">Status</InputLabel>
           <Select
             labelId="category-status-label"
             id="category-status"
-            value={categoryStatus}
-            onChange={handleCategoryStatusChange}
+            value={status}
+            onChange={(e) => setStatus(e.target.value)}
           >
             <MenuItem value="Active">Active</MenuItem>
             <MenuItem value="Inactive">Inactive</MenuItem>
@@ -57,12 +65,12 @@ function AddCategoryForm({ open, onClose, onSave }) {
         <Button onClick={onClose} color="secondary">
           Cancel
         </Button>
-        <Button onClick={handleSave} color="primary">
-          Save
+        <Button type="submit" disabled={loading} color="primary">
+          {loading ? 'Creating...' : 'Create category'}
         </Button>
       </DialogActions>
     </Dialog>
   );
-}
+};
 
 export default AddCategoryForm;

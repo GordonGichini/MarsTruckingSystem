@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import axios from 'axios';
@@ -23,6 +23,7 @@ const api = axios.create({
 
 
 export default function SignUpSide() { 
+const [isLoading, setIsLoading] = useState(false);
 
 const formik = useFormik({
   initialValues: {
@@ -42,7 +43,9 @@ const formik = useFormik({
 
   onSubmit: async (values) => {
     try {
-      const response = await api.post('/register', {
+      setIsLoading(true);
+
+      const response = await api.post('/api/register', {
         username: values.username,
         email: values.email,
         password: values.password,
@@ -50,18 +53,24 @@ const formik = useFormik({
       });
 
       if (response.status === 200) {
-        window.location.href = '/dashboard';
+        window.location.href = '/welcome';
       } else {
         formik.setFieldError('confirmPassword', 'Invalid credentials. Please try again.');
       }
     } catch (error) {
       console.error('Error submitting form:', error);
       formik.setFieldError('confirmPassword', 'An error occurred. Please try again later.');
+    } finally {
+      setIsLoading(false);
     }
   },
 });
 
-
+const handlePasswordChange = (event) => {
+  const newPassword = event.target.value;
+  formik.setFieldValue('password', newPassword);
+  formik.setFieldValue('confirmPassword', newPassword);
+};
 
   return (
     <ThemeProvider theme={theme}>
@@ -116,6 +125,7 @@ const formik = useFormik({
                 onBlur={formik.handleBlur}
                 error={formik.touched.username && Boolean(formik.errors.username)}
                 helperText={formik.touched.username && formik.errors.username}
+                disabled={isLoading}
               />
               <TextField
                 margin="normal"
@@ -130,7 +140,7 @@ const formik = useFormik({
                 onBlur={formik.handleBlur}
                 error={formik.touched.email && Boolean(formik.errors.email)}
                 helperText={formik.touched.email && formik.errors.email}
-                
+                disabled={isLoading}  
               />
               <TextField
                 margin="normal"
@@ -142,25 +152,30 @@ const formik = useFormik({
                 id="password"
                 autoComplete="new-password"
                 value={formik.values.password}
-                onChange={formik.handleChange}
+                onChange={(e) => {
+                  formik.handleChange(e);
+                  handlePasswordChange(e);
+                }}
                 onBlur={formik.handleBlur}
                 error={formik.touched.password && Boolean(formik.errors.password)}
                 helperText={formik.touched.password && formik.errors.password}
+                disabled={isLoading}
               />
               <TextField
                 margin="normal"
                 required
                 fullWidth
-                name="confirmpassword"
+                name="confirmPassword"
                 label="Confirm Password"
                 type="password"
-                id="password"
+                id="confirmPassword"
                 autoComplete="confirm-password"
-                value={formik.values.password}
+                value={formik.values.confirmPassword}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
-                error={formik.touched.password && Boolean(formik.errors.password)}
-                helperText={formik.touched.password && formik.errors.password}
+                error={formik.touched.confirmPassword && Boolean(formik.errors.confirmPassword)}
+                helperText={formik.touched.confirmPassword && formik.errors.confirmPassword}
+                disabled={isLoading}
               />
               <Button
                 type="submit"
@@ -168,8 +183,9 @@ const formik = useFormik({
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
                 onClick={formik.handleSubmit}   
-              >
-                Sign Up
+                disabled={isLoading}
+                >
+                {isLoading ? 'Registering...' : 'Sign up'}
               </Button>
                   <Link href="/login" variant="body2">
                     {"Already have an account? Login"}

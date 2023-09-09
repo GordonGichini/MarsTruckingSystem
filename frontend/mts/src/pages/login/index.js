@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useState } from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import axios from 'axios';
@@ -24,6 +24,7 @@ const api = axios.create({
 
 
 export default function SignInSide() { 
+  const [isLoading, setIsLoading] = useState(false);
   const formik = useFormik({
   initialValues: {
     email: '',
@@ -35,7 +36,9 @@ export default function SignInSide() {
   }),
   onSubmit: async (values) => {
     try {
-      const response = await api.post('/login', {
+      setIsLoading(true);
+
+      const response = await api.post('/api/login', {
         email: values.email,
         password: values.password,
       });
@@ -48,6 +51,8 @@ export default function SignInSide() {
     } catch (error) {
       console.error('Error submitting form:', error);
       formik.setFieldError('password', 'An error occurred. Please try again later.');
+    } finally {
+      setIsLoading(false);
     }
   },
 }); 
@@ -105,6 +110,7 @@ export default function SignInSide() {
                 onBlur={formik.handleBlur}
                 error={formik.touched.email && Boolean(formik.errors.email)}
                 helperText={formik.touched.email && formik.errors.email}
+                disabled={isLoading}
               />
           
               <TextField
@@ -121,7 +127,7 @@ export default function SignInSide() {
                 onBlur={formik.handleBlur}
                 error={formik.touched.password && Boolean(formik.errors.password)}
                 helperText={formik.touched.password && formik.errors.password}
-
+                disabled={isLoading}
               />
               <FormControlLabel
                 control={<Checkbox value="remember" color="primary" />}
@@ -132,9 +138,10 @@ export default function SignInSide() {
                 fullWidth
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
-                onClick={formik.handleSubmit}               
+                onClick={formik.handleSubmit}   
+                disabled={isLoading}            
               >
-                Log in
+                {isLoading ? 'Logging In...' : 'Log in'}
               </Button>
               <Grid container>
                 <Grid item xs>
