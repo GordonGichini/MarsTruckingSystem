@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import axios from 'axios';
+import { toast } from 'react-toastify';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -68,15 +69,34 @@ export default function ExpenseFormPage() {
 
   //state for handling API responses and errors
   const [apiError, setApiError] = useState(null);
+  const [availableTrips, setAvailableTrips] = useState([]);
+
+  useEffect(() => {
+    //fetching available trips when the component mounts
+    const fetchAvailableTrips = async () => {
+      try {
+        const response = await axios.get('/api/trips');
+        if (response.status === 200) {
+          setAvailableTrips(response.data);
+        }
+      } catch (error) {
+        console.error('Error fetching available trips:', error);
+      }
+    };
+
+    fetchAvailableTrips();
+  }, []); //empty dependency array ensures this effect runs only once on mount
 
   const handleCreateExpense = async (values) => {
     try {
       await axios.post('/api/expenses', values);
+      if (Response.status === 201) {
+        toast.success('Expense created successfully.');
       navigate('/expenses');
+      }
     } catch (error) {
       console.error('Error creating expense:', error);
-      setApiError('An error occurred while creating the expense.');
-      // Handle error
+      toast.error('An error occurred while creating the expense. Please try again.');
     }
   };
 
@@ -92,6 +112,7 @@ export default function ExpenseFormPage() {
           amount: '',
           description: '',
           assignToTrip: '',
+          selectedTrip: '',
           expenseDate: '',
           unit: '',
           gallons: '',
@@ -115,29 +136,21 @@ export default function ExpenseFormPage() {
         })}
         onSubmit={handleCreateExpense}
         >
-          {({ isSubmitting }) => (
+          {({ isSubmitting, values, setFieldValue }) => (
           <Form>
-            <Field name="expenseCategory">
-             {({ field, form }) => (
-               <FormControl
-                 halfWidth
-                 variant="outlined"
-                 className={classes.inputField}
-               >
+               <FormControl halfWidth variant="outlined" className={classes.inputField}>
                  <InputLabel>Expense Category</InputLabel>
                  <Select
-                   {...field}
-                   value={field.value || ''}
-                   onChange={(event) => form.setFieldValue(field.name, event.target.value)}
+                   name="expenseCategory"
+                   value={values.expenseCategory}
+                   onChange={(event) => setFieldValue('expenseCategory', event.target.value)}
                  >
                    <MenuItem value="fuel">Fuel</MenuItem>
                    <MenuItem value="reeferFuel">Reefer Fuel</MenuItem>
                    {/* ... other options ... */}
                  </Select>
-                 <ErrorMessage name="expenseCategory" component="div" />
+                 <ErrorMessage name="expenseCategory" component="div" className="error-message" />
                </FormControl>
-             )}
-           </Field>
 
           <Button variant="outlined" color="primary" className={classes.button} >
             Add Category
@@ -163,10 +176,29 @@ export default function ExpenseFormPage() {
           />
 
           <Typography variant="subtitle1">Assign to Trip</Typography>
-          <RadioGroup className={classes.radioGroup} aria-label="assign to trip" name="type" variant="outlined">
-            <FormControlLabel value="yes" control={<Radio />} label="Yes" />
-            <FormControlLabel value="no" control={<Radio />} label="No" />
-          </RadioGroup>
+          <RadioGroup className={classes.radioGroup} aria-label="assign to trip" name="assignToTrip" variant="outlined">
+            <FormControlLabel value="yes" control={<Radio />} label="Yes" onClick={() => setFieldValue('assignToTrip', 'yes')} />
+            <FormControlLabel value="no" control={<Radio />} label="No" onClick={() => setFieldValue('assignToTrip', 'no')} />
+          </RadioGroup> 
+
+          {values.assignToTrip === 'yes' && (
+            <FormControl halfWidth variant="outlined" className={classes.inputField}>
+              <InputLabel>Select Trip</InputLabel>
+              <Select
+              name="selectedTrip"
+              value={values.selectedTrip}
+              onChange={(event) => setFieldValue('selectedTrip', event.target.value)}
+              >
+                <MenuItem value="">Select a Trip</MenuItem>
+                {availableTrips.map((trip) => (
+                  <MenuItem key={trip.id} value={trip.id}>
+                    {trip.name}
+                  </MenuItem>
+                ))}
+              </Select>
+              <ErrorMessage name="selectedTrip" component="div" className="error-message" />
+            </FormControl>
+          )}
 
         <Field
           name="Expense Date"
