@@ -47,7 +47,7 @@ const expenseSchema = new mongoose.Schema({
   },
 });
 
-expenseSchema.index({ someField: 1 }, { unique: true });
+/*expenseSchema.index({ someField: 1 }, { unique: true });*/
 
 const Expense = mongoose.model('Expense', expenseSchema);
 
