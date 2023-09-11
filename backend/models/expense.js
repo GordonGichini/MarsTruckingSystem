@@ -17,6 +17,10 @@ const expenseSchema = new mongoose.Schema({
     type: Boolean,
     required: true,
   },
+  trip: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Trip',
+  },
   expenseDate: {
     type: Date,
     required: true,

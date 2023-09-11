@@ -9,7 +9,7 @@ exports.createPlannedLoad = async (req, res) => {
             customer,
             shipper,
             pickupDate,
-            driverInstrucions,
+            driverInstructions,
             bol,
             customerRequiredInfo,
             weight,
@@ -41,7 +41,7 @@ exports.createPlannedLoad = async (req, res) => {
             customer,
             shipper,
             pickupDate,
-            driverInstrucions,
+            driverInstructions,
             bol,
             customerRequiredInfo,
             weight,
@@ -127,6 +127,40 @@ exports.updatePlannedLoad = async (req, res) => {
     } catch (error) {
       console.error('Error deleting planned Load:', error);
       res.status(500).json({ error: 'An error occurred while deleting the planned load' });
+    }
+  };
+
+  exports.convertToActualLoad = async (req, res) => {
+    try {
+      const plannedLoadId = req.params.id;
+
+      //find planned load
+      const plannedLoad = await PlannedLoad.findById(plannedLoadId);
+
+      if (!plannedLoad) {
+        return res.status(404).json({ error: 'Planned Load not found' });
+      }
+
+      //create a new actual load
+      const newActualLoad = new Load({
+      customLoadNumber: plannedLoad.customLoadNumber,
+      customer: plannedLoad.customer,
+      shipper: plannedLoad.shipper,
+      pickupDate: plannedLoad.pickupDate,
+      deliveryDate: plannedLoad.deliveryDate,
+      bol: plannedLoad.bol
+      });
+
+      //save the actual load
+      const savedActualLoad = await newActualLoad.save();
+
+      // delete the planned load
+      await PlannedLoad.findByIdAndDelete(plannedLoadId);
+
+      res.status(201).json(savedActualLoad);
+    } catch (error) {
+      console.error('Error converting planned load to actual load:', error);
+      res.status(500).json({ error: 'An error occurred while converting the planned load' });
     }
   };
   

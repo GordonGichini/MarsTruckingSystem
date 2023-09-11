@@ -5,6 +5,15 @@ const plannedLoadSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Load',
   },
+  status: {
+    type: String,
+    enum: ['Planned', 'Active'],
+    default: 'Planned',
+  },
+  associatedTrip: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Trip',
+  },
   customLoadNumber: {
     type: Number,
     required: false,
@@ -96,7 +105,8 @@ const plannedLoadSchema = new mongoose.Schema({
   invoiceAdvance: {
     type: Number,
     required: true
-  }
+  },
+
 });
 
 const PlannedLoad = mongoose.model('PlannedLoad', plannedLoadSchema);

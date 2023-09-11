@@ -1,4 +1,3 @@
-// controllers/expenseController.js
 const Expense = require('../models/expense');
 
 // Create a new expense
@@ -9,12 +8,13 @@ exports.createExpense = async (req, res) => {
       amount,
       description,
       assignToTrip,
+      tripId,
       expenseDate,
       unit,
       gallons,
       odometer,
       fuelVendor,
-      stateProvince,
+      state,
       // Add other fields as needed
     } = req.body;
     console.log('Received Data:', req.body);
@@ -24,12 +24,13 @@ exports.createExpense = async (req, res) => {
       amount,
       description,
       assignToTrip,
+      trip: tripId,
       expenseDate,
       unit,
       gallons,
       odometer,
       fuelVendor,
-      stateProvince,
+      state,
       // Add other fields as needed
     });
 

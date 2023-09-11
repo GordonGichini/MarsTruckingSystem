@@ -2,26 +2,26 @@
 const express = require('express');
 const expenseCategoryController = require('../controllers/expenseCategoryController');
 const router = express.Router();
-const { body, param } = require('express-validator');
+const { check, param } = require('express-validator');
 
 // Create a new expense category
-router.post('/expenseCategories', expenseCategoryController.createExpenseCategory);
+router.post('/', expenseCategoryController.createExpenseCategory);
 
 // Fetch all expense categories
-router.get('/expenseCategories', expenseCategoryController.getAllExpenseCategories);
+router.get('/', expenseCategoryController.getAllExpenseCategories);
 
 // Fetch a single expense category by ID
-router.get('/expenseCategories/:id', expenseCategoryController.getExpenseCategoryById);
+router.get('/:id', expenseCategoryController.getExpenseCategoryById);
 
 // Update an expense category by ID
-router.put('/expenseCategories/:id', [
-    param('expenseCategoryId').isMongoId(),
-    body('name').notEmpty(),
+router.put('/:id', [
+    param('id').isMongoId(),
+    check('name').notEmpty(),
 ], expenseCategoryController.updateExpenseCategory);
 
 // Delete an expense category by ID
-router.delete('/expenseCategories/:id', [
-    param('expenseCategoryId').isMongoId(), //validate the category ID
+router.delete('/:id', [
+    param('id').isMongoId(), 
 ], expenseCategoryController.deleteExpenseCategory);
 
 

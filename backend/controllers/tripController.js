@@ -1,4 +1,6 @@
 const Trip = require('../models/trip');
+const mongoose = require('mongoose');
+const Load = require('../models/load');
 const PlannedLoad = require('../models/plannedLoad');
 
 // Create a new trip
@@ -26,6 +28,10 @@ exports.createTrip = async (req, res) => {
 
     const selectedLoad = await PlannedLoad.findById(selectedLoadId);
 
+    if (!selectedLoad) {
+      return res.status(404).json({ error: 'Selected Load not found' });
+    }
+
     const newTrip = new Trip({
       plannedLoads: [selectedLoad],
       customTripNumber,
@@ -35,7 +41,7 @@ exports.createTrip = async (req, res) => {
       truck,
       trailer,
       odometer,
-      load,
+      selectedLoad: mongoose.Types.ObjectId(selectedLoadId),
       routingStop,
       routingStopDate,
       instructions,
