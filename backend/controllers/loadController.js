@@ -4,6 +4,7 @@ const Load = require('../models/load');
 exports.createLoad = async (req, res) => {
     try {
         const {
+          type,
           loadNo,
           tripNo,
           status,
@@ -20,6 +21,7 @@ exports.createLoad = async (req, res) => {
         console.log('Received Data:', req.body);
 
         const newLoad = new Load({
+          type,
           loadNo,
           tripNo,
           status,

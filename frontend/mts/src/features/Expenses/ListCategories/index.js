@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import api from '../../../api';
 import InNavBar from '../../../common/Header/InNavBar';
 //import Footer from '../../../pages/HomePage/components/Footer';
 import AddCategoryForm from '../AddCategoryForm';
@@ -27,9 +28,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function ListCategories() {
-  const api = axios.create({
-    baseURL: 'http://localhost:5001',
-  });
   const classes = useStyles();
   const [expenseCategories, setExpenseCategories] = useState([]);
   const [isAddExpenseCategoryOpen, setIsAddExpenseCategoryOpen] = useState(false);

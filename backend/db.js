@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const DB_URL = 'mongodb+srv://gordongichini1:mUDzJ064sNgne1ss@cluster0.xm6xl0n.mongodb.net/'; // Replace with your MongoDB URL
+const DB_URL = process.env.MONGODB_URI; // Replace with your MongoDB URL
 
 mongoose
   .connect(DB_URL, {

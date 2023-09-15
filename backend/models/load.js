@@ -1,10 +1,15 @@
 const mongoose = require('mongoose');
 
 const loadSchema = new mongoose.Schema({
-
+    type: {
+        type: String,
+        enum: ['planned', 'actual'],
+        required: true,
+    },
     loadNo: {
         type: Number,
         required: true,
+        unique: true,
     },
     tripNo: {
         type: Number,

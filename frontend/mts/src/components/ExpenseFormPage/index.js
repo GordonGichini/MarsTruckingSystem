@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Typography, Radio, RadioGroup, TextField, Button, FormControl, Select, MenuItem, InputLabel, Box, Link, FormControlLabel } from '@material-ui/core';
 import { makeStyles } from '@mui/styles';
 import InNavBar from '../../common/Header/InNavBar';
@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import axios from 'axios';
+import api from '../../api';
 import { toast } from 'react-toastify';
 
 
@@ -65,7 +66,7 @@ export default function ExpenseFormPage() {
   const theme = useTheme();
   const classes = useStyles();
 
-  const state = [ 'Alabama','Alaska','Arizona','Arkansas','California','Colorado','Connecticut','Delaware','Florida','Georgia','Hawaii','Idaho','Illinois','Indiana','Iowa','Kansas','Kentucky','Louisiana','Maine','Maryland','Massachusetts','Michigan','Minnesota','Mississippi','Missouri','Montana','Nebraska','Nevada','New Hampshire','New Jersey','New Mexico','New York','North Carolina','North Dakota','Ohio','Oklahoma','Oregon','Pennsylvania','Rhode Island','South Carolina','South Dakota','Tennessee','Texas','Utah','Vermont','Virginia','Washington','West Virginia','Wisconsin','Wyoming' ]
+  const state = ['Alabama','Alaska','Arizona','Arkansas','California','Colorado','Connecticut','Delaware','Florida','Georgia','Hawaii','Idaho','Illinois','Indiana','Iowa','Kansas','Kentucky','Louisiana','Maine','Maryland','Massachusetts','Michigan','Minnesota','Mississippi','Missouri','Montana','Nebraska','Nevada','New Hampshire','New Jersey','New Mexico','New York','North Carolina','North Dakota','Ohio','Oklahoma','Oregon','Pennsylvania','Rhode Island','South Carolina','South Dakota','Tennessee','Texas','Utah','Vermont','Virginia','Washington','West Virginia','Wisconsin','Wyoming']
 
   //state for handling API responses and errors
   const [apiError, setApiError] = useState(null);
@@ -75,7 +76,7 @@ export default function ExpenseFormPage() {
     //fetching available trips when the component mounts
     const fetchAvailableTrips = async () => {
       try {
-        const response = await axios.get('/api/trips');
+        const response = await axios.get('/trips');
         if (response.status === 200) {
           setAvailableTrips(response.data);
         }
@@ -89,8 +90,8 @@ export default function ExpenseFormPage() {
 
   const handleCreateExpense = async (values) => {
     try {
-      await axios.post('/api/expenses', values);
-      if (Response.status === 201) {
+      const response = await axios.post('/expenses', values);
+      if (response.status === 201) {
         toast.success('Expense created successfully.');
       navigate('/expenses');
       }
@@ -157,7 +158,7 @@ export default function ExpenseFormPage() {
           </Button>
 
         <Field
-          name="Amount"
+          name="amount"
           as={TextField}
           type="number"
           label="Amount"
@@ -167,7 +168,7 @@ export default function ExpenseFormPage() {
           />
 
         <Field
-          name="Description"
+          name="description"
           as={TextField}
           label="Description"
           variant="outlined"

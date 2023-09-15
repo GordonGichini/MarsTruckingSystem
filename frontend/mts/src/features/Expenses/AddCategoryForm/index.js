@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import api from '../../../api';
 import { Dialog, DialogTitle, DialogContent, DialogActions, Button, TextField, FormControl, InputLabel, Select, MenuItem, makeStyles } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
@@ -21,7 +22,7 @@ function AddCategoryForm({ open, onClose }) {
     setLoading(true);
 
   try {
-    const response = await axios.post('/api/expenseCategories', { name, status });
+    const response = await api.post('/api/expenseCategories', { name, status });
     if (response.status === 201) {
       setMessage('Expense category created successfully.');
       setName('');

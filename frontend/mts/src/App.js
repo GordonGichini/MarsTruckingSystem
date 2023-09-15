@@ -13,6 +13,7 @@ import Footer from "./pages/HomePage/components/Footer";
 import {Route, Routes} from 'react-router-dom';
 import { CssBaseline, ThemeProvider } from '@mui/material';
 import theme from './theme';
+import api from './api';
 import HomepageLayout from "./Layout/HomepageLayout";
 import DashboardLayout from "./Layout/DashboardLayout";
 //remember to add routes

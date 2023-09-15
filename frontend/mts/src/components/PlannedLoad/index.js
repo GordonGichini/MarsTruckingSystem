@@ -78,9 +78,9 @@ export default function PlannedLoad() {
         deliveryDate: '',
         instructions: '',
         primaryFee: '',
-        primaryFeeType: '',
+        primaryFeeType: 'mileage', // Default to mileage
         fscAmount: '',
-        fscAmountType: '',
+        fscAmountType: 'percentage', // Default to percentage
         detention: '',
         lumper: '',
         stopOff: '',
@@ -89,31 +89,31 @@ export default function PlannedLoad() {
 
     };
 
-   /* const validationSchema = Yup.object({
-       // customLoadNumber: Yup.string().customLoadNumber().required('Required'),
-        customer: Yup.string().customer().required('Required'),
-        shipper: Yup.string().shipper().required('Required'),
-        pickupDate: Yup.date().pickupDate().required('Required'),
-        driverInstructions: Yup.string().driverInstructions().required('Required'),
-        bol: Yup.string().bol().required('Required'),
-        customerRequiredInfo: Yup.string().customerRequiredInfo().required('Required'),
-        weight: Yup.number().weight().required('Required'),
-        quantity: Yup.number().quantity().required('Required'),
-        notes: Yup.string().notes().required('Required'),
-        commodity: Yup.string().commodity().required('Required'),
-        consignee: Yup.string().consignee().required('Required'),
-        deliveryDate: Yup.date().deliveryDate().required('Required'),
-        instructions: Yup.string().instructions().required('Required'),
-        primaryFee: Yup.number().primaryFee().required('Required'),
-        primaryFeeType: Yup.string().primaryFeeType().required('Required'),
-        fscAmount: Yup.number().fscAmount().required('Required'),
-        fscAmountType: Yup.string().fscAmountType().required('Required'),
-        detention: Yup.number().detention().required('Required'),
-        lumper: Yup.number().lumper().required('Required'),
-        stopOff: Yup.number().stopOff().required('Required'),
-        tarpFee: Yup.number().tarpFee().required('Required'),
-        invoiceAdvance: Yup.number().invoiceAdvance().required('Required')
-    })*/
+     const validationSchema = Yup.object({
+        customLoadNumber: Yup.string(),
+        customer: Yup.string().required('Customer is required'),
+        shipper: Yup.string().required('Required'),
+        pickupDate: Yup.date().required('Required'),
+        driverInstructions: Yup.string().required('Required'),
+        bol: Yup.string().required('Required'),
+        customerRequiredInfo: Yup.string().required('Required'),
+        weight: Yup.number().required('Required'),
+        quantity: Yup.number().required('Required'),
+        notes: Yup.string().required('Required'),
+        commodity: Yup.string().required('Required'),
+        consignee: Yup.string().required('Required'),
+        deliveryDate: Yup.date().required('Required'),
+        instructions: Yup.string().required('Required'),
+        primaryFee: Yup.number().required('Required'),
+        primaryFeeType: Yup.string().required('Required'),
+        fscAmount: Yup.number().required('Required'),
+        fscAmountType: Yup.string().required('Required'),
+        detention: Yup.number().required('Required'),
+        lumper: Yup.number().required('Required'),
+        stopOff: Yup.number().required('Required'),
+        tarpFee: Yup.number().required('Required'),
+        invoiceAdvance: Yup.number().required('Required')
+    });
 
     const handleSubmit = (values) => {
         // handle form submission
@@ -123,7 +123,7 @@ export default function PlannedLoad() {
     return (
         <div>
             <InNavBar />
-            <Formik initialValues={initialValues} onSubmit={handleSubmit} >
+            <Formik initialValues={initialValues} onSubmit={handleSubmit} validationSchema={validationSchema} >
                 {({ isSubmitting }) => (
                     <Form>
             <Box className={classes.formContainer}>
@@ -339,11 +339,14 @@ export default function PlannedLoad() {
                 type="text"
                 label="Primary Fee Type"
                 name="primaryFeeType"
-                component={TextField}
+                as="select"
                 margin='normal'
                 className={classes.inputField}
                 variant="outlined"
-                />
+                >
+                <option value="mileage">Mileage</option>
+                <option value="flat_rate">Flat Rate</option> 
+                </Field>
 
                 <Field
                 type="number"
@@ -360,14 +363,18 @@ export default function PlannedLoad() {
                 type="text"
                 label= "FSC amount Type"
                 name="fscAmountType"
-                component={TextField}
+                as="select"
                 margin='normal'
                 className={classes.inputField}
                 variant="outlined"
-                /> 
+                >
+                    <option value="percentage">Percentage of Base Rate</option>
+                    <option value="cents_per_mile">Cents Per Mile</option>
+                    <option value="percentage_of_fuel_cost">Percentage of Fuel cost</option>
+                </Field>
                     <Typography variant="subtitle2">Accessory Fees</Typography>
                     <Field
-                    type="text"
+                    type="number"
                     label="Detention"
                     name="detention"
                     component={TextField}
@@ -377,7 +384,7 @@ export default function PlannedLoad() {
                     />
 
                     <Field
-                    type="text"
+                    type="number"
                     label="Lumper"
                     name="lumper"
                     component={TextField}
@@ -387,7 +394,7 @@ export default function PlannedLoad() {
                     />
 
                     <Field
-                    type="text"
+                    type="number"
                     label="Stop Off"
                     name="stopOff"
                     component={TextField}
@@ -397,7 +404,7 @@ export default function PlannedLoad() {
                     />
 
                     <Field
-                    type="text"
+                    type="number"
                     label="Tarp Fee"
                     name="tarpFee"
                     component={TextField}
@@ -407,7 +414,7 @@ export default function PlannedLoad() {
                     />
 
                     <Field
-                    type="text"
+                    type="number"
                     label="Additional"
                     name="additional"
                     component={TextField}

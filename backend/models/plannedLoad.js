@@ -16,7 +16,8 @@ const plannedLoadSchema = new mongoose.Schema({
   },
   customLoadNumber: {
     type: Number,
-    required: false,
+    required: true,
+    unique: true,
   },
   customer: {
     type: String,

@@ -2,8 +2,12 @@ const express = require('express');
 const loadController = require('../controllers/loadController');
 const router = express.Router();
 
-// create a load
-router.post('/loads', loadController.createLoad);
+// create a planned load
+router.post('/loads/planned', loadController.createLoad);
+
+// create an actual load
+router.post('/loads/actual', loadController.createLoad);
+
 // Fetch all loads
 router.get('/loads', loadController.getAllLoads);
 

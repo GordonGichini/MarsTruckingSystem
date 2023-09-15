@@ -29,6 +29,10 @@ exports.createPlannedLoad = async (req, res) => {
             tarpFee,
             invoiceAdvance
         } = req.body;
+        const loadNumber = customLoadNumber || generateCustomLoadNumber();
+
+
+
         // Check if the loadId exists
         const existingLoad = await Load.findById(loadId);
         if (!existingLoad) {
@@ -37,7 +41,7 @@ exports.createPlannedLoad = async (req, res) => {
 
         const newPlannedLoad = await PlannedLoad.create({
           load: loadId,
-          customLoadNumber,
+          loadNumber,
             customer,
             shipper,
             pickupDate,
@@ -60,7 +64,6 @@ exports.createPlannedLoad = async (req, res) => {
             stopOff,
             tarpFee,
             invoiceAdvance
-
         });
         res.status(201).json(newPlannedLoad);
     } catch (error) {
@@ -68,6 +71,16 @@ exports.createPlannedLoad = async (req, res) => {
         res.status(500).json({ error: 'An error occurred while creating planned Load'})
     }
 };
+
+//function to generate a custom load number
+function generateCustomLoadNumber() {
+  const currentYear = new Date().getFullYear();
+  const currentMonth = new Date().getMonth();
+  const formattedMonth = currentMonth.toString().padStart(2, '0');
+  const loadNumber = `${currentYear}${formattedMonth}${plannedLoads.length + 1}`;
+
+  return loadNumber;
+}
 
 exports.getAllPlannedLoads = async (req, res) => {
     try {
