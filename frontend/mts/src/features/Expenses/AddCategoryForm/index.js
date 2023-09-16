@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import axios from 'axios';
 import api from '../../../api';
+import { toast } from 'react-toastify';
 import { Dialog, DialogTitle, DialogContent, DialogActions, Button, TextField, FormControl, InputLabel, Select, MenuItem, makeStyles } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
@@ -10,11 +10,11 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function AddCategoryForm({ open, onClose }) {
+function AddCategoryForm({ open, onClose, onSave }) {
   const classes = useStyles();
   const [name, setName] = useState('');
   const [status, setStatus] = useState('Active');
-  const [loading, setLoading] = useState('');
+  const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState('');
 
   const handleSubmit = async (e) => {
@@ -24,20 +24,29 @@ function AddCategoryForm({ open, onClose }) {
   try {
     const response = await api.post('/api/expenseCategories', { name, status });
     if (response.status === 201) {
-      setMessage('Expense category created successfully.');
+      setMessage('');
       setName('');
       setStatus('Active');
+      onSave(response.data);
+      onClose();
+      toast.success('Expense category created successfully', {
+        position: toast.POSITION.TOP_CENTER,
+      });
     }
   } catch (error) {
     setMessage('Error creating expense category. Please try again.');
     console.error('Error creating expense category:', error);
+    toast.error('Error creating expense category. Please try again', {
+      position: toast.POSITION.TOP_CENTER,
+    });
   } finally {
     setLoading(false);
   }
 };
 
   return (
-    <Dialog open={open} onClose={onClose} onSubmit={handleSubmit} aria-labelledby="form-dialog-title">
+    <Dialog open={open} onClose={onClose} aria-labelledby="form-dialog-title">
+      <form onSubmit={handleSubmit}>
       <DialogTitle id="form-dialog-title">New Expense Category</DialogTitle>
       {message && <p>{message}</p>}
       <DialogContent>
@@ -70,8 +79,9 @@ function AddCategoryForm({ open, onClose }) {
           {loading ? 'Creating...' : 'Create category'}
         </Button>
       </DialogActions>
+      </form>
     </Dialog>
   );
-};
+}
 
 export default AddCategoryForm;

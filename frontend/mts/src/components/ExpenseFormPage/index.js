@@ -76,7 +76,7 @@ export default function ExpenseFormPage() {
     //fetching available trips when the component mounts
     const fetchAvailableTrips = async () => {
       try {
-        const response = await axios.get('/trips');
+        const response = await axios.get('/api/trips');
         if (response.status === 200) {
           setAvailableTrips(response.data);
         }
@@ -90,10 +90,11 @@ export default function ExpenseFormPage() {
 
   const handleCreateExpense = async (values) => {
     try {
-      const response = await axios.post('/expenses', values);
+      const response = await axios.post('/api/expenses', values);
       if (response.status === 201) {
         toast.success('Expense created successfully.');
-      navigate('/expenses');
+        const newExpenseId = response.data._id;
+      navigate(`/expenses/${newExpenseId}`);
       }
     } catch (error) {
       console.error('Error creating expense:', error);
@@ -112,7 +113,7 @@ export default function ExpenseFormPage() {
           expenseCategory: '',
           amount: '',
           description: '',
-          assignToTrip: '',
+          assignToTrip: 'no',
           selectedTrip: '',
           expenseDate: '',
           unit: '',
@@ -175,12 +176,24 @@ export default function ExpenseFormPage() {
           margin='normal'        
           className={classes.inputField}
           />
-
-          <Typography variant="subtitle1">Assign to Trip</Typography>
-          <RadioGroup className={classes.radioGroup} aria-label="assign to trip" name="assignToTrip" variant="outlined">
-            <FormControlLabel value="yes" control={<Radio />} label="Yes" onClick={() => setFieldValue('assignToTrip', 'yes')} />
-            <FormControlLabel value="no" control={<Radio />} label="No" onClick={() => setFieldValue('assignToTrip', 'no')} />
-          </RadioGroup> 
+          <Field
+          name="assignToTrip"
+          as={RadioGroup}
+          className={classes.radioGroup}
+          aria-label="assign to trip"
+          variant="outlined"
+          >
+            <FormControlLabel
+            value="yes"
+            control={<Radio />}
+            label="Yes"
+            />
+            <FormControlLabel
+            value="no"
+            control={<Radio />}
+            label="No"
+            />
+          </Field>
 
           {values.assignToTrip === 'yes' && (
             <FormControl halfWidth variant="outlined" className={classes.inputField}>
@@ -202,10 +215,10 @@ export default function ExpenseFormPage() {
           )}
 
         <Field
-          name="Expense Date"
+          name="expenseDate"
           type="date"
           as={TextField}
-          label="Expense Date"
+          label="expenseDate"
           variant="outlined"
           margin='normal'        
           className={classes.inputField}

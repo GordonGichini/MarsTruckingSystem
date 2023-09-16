@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import { Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import api from '../../../api';
 import InNavBar from '../../../common/Header/InNavBar';
 //import Footer from '../../../pages/HomePage/components/Footer';
@@ -31,6 +33,7 @@ function ListCategories() {
   const classes = useStyles();
   const [expenseCategories, setExpenseCategories] = useState([]);
   const [isAddExpenseCategoryOpen, setIsAddExpenseCategoryOpen] = useState(false);
+  const [filterStatus, setFilterStatus] = useState('All');
 
   const handleAddExpenseCategory = () => {
     setIsAddExpenseCategoryOpen(true);
@@ -44,12 +47,24 @@ function ListCategories() {
     try {
       const response = await api.post('/api/expenseCategories', newExpenseCategoryData);
       const newExpenseCategory = response.data;
-      setExpenseCategories([...expenseCategories, newExpenseCategory]);
+
+      if (response.status === 201) {
+      setExpenseCategories((prevCategories) => [...prevCategories, newExpenseCategory]);
       handleCloseAddExpenseCategory();
+
+      toast.success('Expense category created successfully', {
+        position: toast.POSITION.TOP_CENTER,
+      });
+    } else {
+
+      console.error('Unexpected response status:', response.status);
+    }
     } catch (error) {
       console.error('Error creating category:', error);
-      //error message to user
-
+      
+      toast.error('Error creating expense category. Please try again', {
+        position: toast.POSITION.TOP_CENTER,
+      });
     }
   };
 
@@ -61,8 +76,19 @@ function ListCategories() {
     })
     .catch((error) => {
       console.error('Error fetching categories:', error);
+      toast.error('Error fetching categories. Please try again', {
+        position: toast.POSITION.TOP_CENTER,
+      });
     });
-  });
+  }, []);
+
+  const filterCategories = () => {
+    if (filterStatus === 'All') {
+      return expenseCategories;
+    } else {
+      return expenseCategories.filter((category) => category.status === filterStatus);
+    }
+  };
 
   return (
     <div style={{ flex: 1 }}>
@@ -77,9 +103,9 @@ function ListCategories() {
             className={classes.buttonGroup}
             aria-label="category status"
           >
-            <Button>All</Button>
-            <Button>Active</Button>
-            <Button>Inactive</Button>
+            <Button onClick={() => setFilterStatus('All')}>All</Button>
+            <Button onClick={() => setFilterStatus('Active')}>Active</Button>
+            <Button onClick={() => setFilterStatus('Inactive')}>Inactive</Button>
           </ButtonGroup>
           <Button
             variant="contained"
@@ -94,10 +120,10 @@ function ListCategories() {
           onClose={handleCloseAddExpenseCategory}
           onSave={createExpenseCategory}
           />
-          <Button variant="contained" className={classes.addButton}>
+          <Button variant="contained" className={classes.addButton} component={Link} to="/expenses">
             List Expenses
           </Button>
-          <Button variant="contained" className={classes.addButton}>
+          <Button variant="contained" className={classes.addButton} component={Link} to="/add-expense">
             Add Expense
           </Button>
         </Toolbar>
@@ -117,7 +143,7 @@ function ListCategories() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {expenseCategories.map((expenseCategory, index) => (
+            {filterCategories().map((expenseCategory, index) => (
               <TableRow key={index}>
                 <TableCell>{expenseCategory.name}</TableCell>
                 <TableCell>{expenseCategory.status}</TableCell>

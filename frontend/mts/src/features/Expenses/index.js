@@ -72,9 +72,7 @@ function Expenses() {
   const handleSaveCategory = (category) => {
     // Save the category data here
     console.log(category);
-
-    // Close the form
-    setAddCategoryOpen(false);
+    
   };
 
   return (
