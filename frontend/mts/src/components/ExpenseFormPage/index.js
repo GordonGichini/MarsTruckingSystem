@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Typography, Radio, RadioGroup, TextField, Button, FormControl, Select, MenuItem, InputLabel, Box, Link, FormControlLabel } from '@material-ui/core';
+import { Typography, Radio, RadioGroup, TextField, Button, FormControl, Select, MenuItem, InputLabel, Box, FormControlLabel } from '@material-ui/core';
 import { makeStyles } from '@mui/styles';
 import InNavBar from '../../common/Header/InNavBar';
 import { useTheme } from '@mui/material/styles';
@@ -102,7 +102,6 @@ export default function ExpenseFormPage() {
     }
   };
 
-
   return (
     <div>
       <InNavBar />
@@ -140,7 +139,7 @@ export default function ExpenseFormPage() {
         >
           {({ isSubmitting, values, setFieldValue }) => (
           <Form>
-               <FormControl halfWidth variant="outlined" className={classes.inputField}>
+               <FormControl variant="outlined" className={classes.inputField}>
                  <InputLabel>Expense Category</InputLabel>
                  <Select
                    name="expenseCategory"
@@ -269,9 +268,8 @@ export default function ExpenseFormPage() {
           </Button>
 
         <Field
-          name="State"
+          name="state"
           as='select'
-          id="state"
           label='State'
           variant="outlined"
           margin='normal'        
@@ -300,9 +298,9 @@ export default function ExpenseFormPage() {
           Create Expense
         </Button>
 
-        <Link component="button" variant="body2">
+        <Button type="button" variant="text">
           Cancel
-        </Link>
+        </Button>
         </Form>
           )}
         </Formik>

@@ -66,7 +66,7 @@ const GettingStarted = () => {
        }}
        color = "primary"
        component = {Link}
-       to = "/invoice/customer"
+       to = "/add-address"
       >
       <Typography sx={{ml:"30px"}}>  Add Your First Customer</Typography>
       </Button>
@@ -99,7 +99,7 @@ const GettingStarted = () => {
        }}
        color = "primary"
        component = {Link}
-       to = "/add-dispatch"
+       to = "/add-trip"
       >
       <Typography sx={{ml:"30px"}}>  Add Your First Trip</Typography>
       </Button>
