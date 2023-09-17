@@ -3,10 +3,10 @@ const tripController = require('../controllers/tripController');
 const router = express.Router();
 
 // Create a new trip
-router.post('/create', tripController.createTrip);
+router.post('/', tripController.createTrip);
 
 // Fetch all trips
-router.get('/get', tripController.getAllTrips);
+router.get('/', tripController.getAllTrips);
 
 // Fetch a single trip by ID
 router.get('/:id', tripController.getTripById);
