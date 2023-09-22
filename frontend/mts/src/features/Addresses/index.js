@@ -60,6 +60,42 @@ const addressesData = [
     phone: '987-654-3210',
     location: 'Los Angeles',
   },
+{
+  name: 'John Doe',
+  email: 'johndoe@example.com',
+  phone: '123-456-7890',
+  location: 'New York',
+},
+{
+name: 'John Doe',
+email: 'johndoe@example.com',
+phone: '123-456-7890',
+location: 'New York',
+},
+{
+name: 'John Doe',
+email: 'johndoe@example.com',
+phone: '123-456-7890',
+location: 'New York',
+},
+{
+name: 'John Doe',
+email: 'johndoe@example.com',
+phone: '123-456-7890',
+location: 'New York',
+},
+{
+name: 'John Doe',
+email: 'johndoe@example.com',
+phone: '123-456-7890',
+location: 'New York',
+},
+{
+name: 'John Doe',
+email: 'johndoe@example.com',
+phone: '123-456-7890',
+location: 'New York',
+},
   // Add more address data objects as needed
 ];
 
@@ -113,6 +149,7 @@ export default function Addresses() {
           <Button>Shippers</Button>
           <Button>Drivers</Button>
           <Button>Maintenance vendors</Button>
+          <Button>Fuel vendors</Button>
         </ButtonGroup>
       </Box>
 
