@@ -1,9 +1,10 @@
 const mongoose = require('mongoose');
 
-const contactSchema = new mongoose.Schema({
-  contactType: {
+const addressBookSchema = new mongoose.Schema({
+  type: {
     type: String,
     required: true,
+    enum: ['customer', 'shipper', 'consignee', 'maintenance_vendor', 'fuel_vendor', 'driver' ],
   },
   companyName: {
     type: String,
@@ -29,6 +30,6 @@ const contactSchema = new mongoose.Schema({
   // Add more fields as needed
 });
 
-const Contact = mongoose.model('Contact', contactSchema);
+const AddressBook = mongoose.model('AddressBook', addressBookSchema);
 
-module.exports = Contact;
+module.exports = AddressBook;

@@ -12,7 +12,7 @@ const {
   filterContacts,
   bulkDeleteContacts,
   exportContacts,
-} = require('../controllers/contactController');
+} = require('../controllers/addressBookController');
 
 // Define routes for CRUD operations
 router.route('/contacts').post(createContact).get(getAllContacts);
