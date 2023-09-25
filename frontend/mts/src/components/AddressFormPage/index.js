@@ -3,6 +3,8 @@ import { Typography, TextField, Button, Box } from '@material-ui/core';
 import InNavBar from '../../common/Header/InNavBar';
 import { makeStyles } from '@mui/styles';
 import { useTheme } from '@mui/material/styles';
+import { useDispatch } from './addressSlice';
+import { addAddress } from './addressSlice';
 
 const useStyles = makeStyles((theme) => ({
   formContainer: {
@@ -82,9 +84,11 @@ const useStyles = makeStyles((theme) => ({
 
 export default function AddressFormPage() {
   const classes = useStyles();
+  const dispatch = useDispatch();
   const theme = useTheme();
-  const handleSaveClick = () => {
+  const handleSubmit = (addressData) => {
     // Logic for saving address details
+    dispatch(addAddress(addressData));
   };
 
   return (
@@ -116,7 +120,7 @@ export default function AddressFormPage() {
         <TextField label="Motor Carrier Number" margin='normal' variant="outlined" className={classes.inputField} />
         <TextField label="Tax ID (EIN#)" margin='normal' variant="outlined" className={classes.inputField} />
 
-        <Button variant="contained" color="primary" onClick={handleSaveClick}>
+        <Button variant="contained" color="primary" onClick={handleSubmit}>
           Save
         </Button>
         <Button variant="text" color="secondary">

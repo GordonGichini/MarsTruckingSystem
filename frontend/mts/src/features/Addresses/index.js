@@ -1,4 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { fetchAddressesAsync } from '../../redux/slices/addressSlice';
+import { fetchAddresses } from '../../redux/actions/addressActions';
 import InNavBar from '../../common/Header/InNavBar';
 import Footer from '../../pages/HomePage/components/Footer';
 import { Typography, makeStyles, Button, TextField, Box, ButtonGroup, TableContainer, Table, TableHead, TableRow, TableCell, TableBody } from '@material-ui/core';
@@ -99,8 +102,27 @@ location: 'New York',
   // Add more address data objects as needed
 ];
 
-export default function Addresses() {
+function Addresses() {
   const classes = useStyles();
+  const addresses = useSelector((state) => state.addresses.addresses);
+  const status = useSelector((state) => state.addresses.status);
+  const error = useSelector((state) => state.addresses.error);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    // Dispatch the fetch action when the component mounts
+    dispatch(fetchAddressesAsync());
+  }, [dispatch]);
+
+  if (status === 'loading') {
+    // render a loading indicator
+    return <div>Loading...</div>;
+  } 
+
+  if (status === 'failed') {
+    // render an error message
+    return <div>Error: {error}</div>;
+  }
 
   return (
     <div>
@@ -165,8 +187,8 @@ export default function Addresses() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {addressesData.map((address, index) => (
-              <TableRow key={index}>
+            {addresses.map((address) => (
+              <TableRow key={address.id}>
                 <TableCell>{address.name}</TableCell>
                 <TableCell>{address.email}</TableCell>
                 <TableCell>{address.phone}</TableCell>
@@ -185,3 +207,9 @@ export default function Addresses() {
     </div>
   );
 }
+
+const mapStateToProps = (state) => ({
+  addresses: state.addresses, // Get addresses from Redux state
+});
+
+export default connect(mapStateToProps, { fetchAddresses })(Addresses);
