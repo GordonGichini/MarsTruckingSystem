@@ -1,8 +1,10 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import * as api from './api';
+import * as api from '../../api';
 
 const initialState = {
-  addresses: [], status: 'idle', error: null
+  addresses: [], 
+  status: 'idle', 
+  error: null,
 };
 
 const addressSlice = createSlice({
@@ -36,11 +38,29 @@ const addressSlice = createSlice({
     .addCase(fetchAddressesAsync.fulfilled, (state, action) => {
       state.status = 'succeeded';
       state.addresses = action.payload;
+      state.error = null;
     })
     .addCase(fetchAddressesAsync.rejected, (state, action) => {
       state.status = 'failed';
       state.error = action.error.message;
-    });
+    })
+    .addMatcher(
+      (action) =>
+      action.type.endsWith('AddressAsync/pending') ||
+      action.type.endsWith('AddressAsync/rejected'),
+      (state) => {
+        state.status = 'loading';
+        state.error = null;
+      }
+    )
+    .addMatcher(
+      (action) => 
+      action.type.endsWith('AddressesAsync/fulfilled'),
+      (state) => {
+        state.status = 'succeeded';
+        state.error = null;
+      }
+    );
   },
 });
 
@@ -49,6 +69,30 @@ export const fetchAddressesAsync = createAsyncThunk(
   async () => {
     const data = await api.fetchAddresses();
     return data;
+  }
+);
+
+export const createAddressAsync = createAsyncThunk(
+  'address/create',
+  async (newAddress) => {
+    const response = await api.createAddress(newAddress); // Replace with your API call
+    return response.data;
+  }
+);
+
+export const updateAddressAsync = createAsyncThunk(
+  'address/update',
+  async (updatedAddress) => {
+    const response = await api.updateAddress(updatedAddress);
+    return response.data;
+  }
+);
+
+export const deleteAddressAsync = createAsyncThunk(
+  'address/delete',
+  async (idToDelete) => {
+    await api.deleteAddress(idToDelete);
+    return idToDelete;
   }
 );
 

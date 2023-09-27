@@ -3,8 +3,8 @@ import { Typography, TextField, Button, Box } from '@material-ui/core';
 import InNavBar from '../../common/Header/InNavBar';
 import { makeStyles } from '@mui/styles';
 import { useTheme } from '@mui/material/styles';
-import { useDispatch } from './addressSlice';
-import { addAddress } from './addressSlice';
+import { useDispatch } from 'react-redux';
+import { addAddress } from '../../redux/slices/addressSlice';
 
 const useStyles = makeStyles((theme) => ({
   formContainer: {
@@ -74,13 +74,6 @@ const useStyles = makeStyles((theme) => ({
         },
     },
   }));
-
-
-
-
-
-
-
 
 export default function AddressFormPage() {
   const classes = useStyles();

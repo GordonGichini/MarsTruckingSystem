@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchAddressesAsync } from '../../redux/slices/addressSlice';
-import { fetchAddresses } from '../../redux/actions/addressActions';
+import { fetchAddressesAsync, createAddressAsync, updateAddressAsync, deleteAddressAsync } from '../../redux/slices/addressSlice';
 import InNavBar from '../../common/Header/InNavBar';
 import Footer from '../../pages/HomePage/components/Footer';
 import { Typography, makeStyles, Button, TextField, Box, ButtonGroup, TableContainer, Table, TableHead, TableRow, TableCell, TableBody } from '@material-ui/core';
@@ -50,58 +49,6 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const addressesData = [
-  {
-    name: 'John Doe',
-    email: 'johndoe@example.com',
-    phone: '123-456-7890',
-    location: 'New York',
-  },
-  {
-    name: 'Jane Smith',
-    email: 'janesmith@example.com',
-    phone: '987-654-3210',
-    location: 'Los Angeles',
-  },
-{
-  name: 'John Doe',
-  email: 'johndoe@example.com',
-  phone: '123-456-7890',
-  location: 'New York',
-},
-{
-name: 'John Doe',
-email: 'johndoe@example.com',
-phone: '123-456-7890',
-location: 'New York',
-},
-{
-name: 'John Doe',
-email: 'johndoe@example.com',
-phone: '123-456-7890',
-location: 'New York',
-},
-{
-name: 'John Doe',
-email: 'johndoe@example.com',
-phone: '123-456-7890',
-location: 'New York',
-},
-{
-name: 'John Doe',
-email: 'johndoe@example.com',
-phone: '123-456-7890',
-location: 'New York',
-},
-{
-name: 'John Doe',
-email: 'johndoe@example.com',
-phone: '123-456-7890',
-location: 'New York',
-},
-  // Add more address data objects as needed
-];
-
 function Addresses() {
   const classes = useStyles();
   const addresses = useSelector((state) => state.addresses.addresses);
@@ -122,6 +69,32 @@ function Addresses() {
   if (status === 'failed') {
     // render an error message
     return <div>Error: {error}</div>;
+  }
+
+  const handleCreateAddress = async (newAddress) => {
+    //Dispatch the create action and await the result
+    const resultAction = await dispatch(createAddressAsync(newAddress));
+    //Check if the action was successful
+    if (createAddressAsync.fulfilled.match(resultAction)) {
+      // Address was successfully created
+    }
+  };
+
+  const handleUpdateAddress = async (updatedAddress) => {
+    // Dispatch the update action and await the result
+    const resultAction = await dispatch(updateAddressAsync(updatedAddress))
+    // Check if the action was successful
+    if (updateAddressAsync.fulfilled.match(resultAction)) {
+      // Address was successfully updated
+    }
+  }
+
+  const handleDeleteAddress = async (idToDelete) => {
+    const resultAction = await dispatch(deleteAddressAsync(idToDelete));
+
+    if (deleteAddressAsync.fulfilled.match(resultAction)) {
+
+    }
   }
 
   return (
@@ -195,8 +168,8 @@ function Addresses() {
                 <TableCell>{address.location}</TableCell>
                 <TableCell>
                   {/* Add actions buttons or components here */}
-                  <Button>Edit</Button>
-                  <Button>Delete</Button>
+                  <Button onClick={() => handleUpdateAddress(address)}>Edit</Button>
+                  <Button onClick={() => handleDeleteAddress(address.id)}>Delete</Button>
                 </TableCell>
               </TableRow>
             ))}
@@ -208,8 +181,5 @@ function Addresses() {
   );
 }
 
-const mapStateToProps = (state) => ({
-  addresses: state.addresses, // Get addresses from Redux state
-});
 
-export default connect(mapStateToProps, { fetchAddresses })(Addresses);
+export default Addresses;

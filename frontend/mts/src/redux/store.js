@@ -1,10 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit';
-import addressReducer from '../slices/addressSlice.js'
+import  addressSlice from './slices/addressSlice';
 
 // Create the Redux store
 const store = configureStore({
     reducer: {
-        addresses: addressReducer,
+        addresses: addressSlice.reducer,
     },
 });
 

@@ -5,16 +5,22 @@ const api = axios.create({
 });
 
 export const fetchAddresses = async () => {
-    try {
-        const response = await fetch(`${baseURL}/addresses`);
-        if(!response.ok) {
-            throw new Error('Failed to fetch data');
-        }
-        const data = await response.json();
-        return data;
-    } catch (error) {
-        throw error;
-    }
+    const responses = await api.get('/addresses');
+    return responses.data;
+};
+
+export const createAddress = async (address) => {
+    const response = await api.post('/addresses', address);
+    return response.data;
+};
+export const updateAddress = async (id, updatedAddress) => {
+    const response = await api.put(`/addresses/${id}`, updatedAddress);
+    return response.data;
+}
+
+export const deleteAddress = async (id) => {
+    const response = await api.delete(`/addresses/${id}`);
+    return response.data;
 };
 
 export default api;
