@@ -156,7 +156,7 @@ export default function PlannedLoad() {
             /> 
             <ErrorMessage name="customer" component="div" /> 
                       
-            <Button variant="outlined" color="primary" className={classes.button}>
+            <Button variant="outlined" component={Link} to = "/add-address" color="primary" className={classes.button}>
                 Create customer
             </Button>
             </Grid>
@@ -186,7 +186,7 @@ export default function PlannedLoad() {
                         }}
                         /> 
                         <ErrorMessage name="shipper" component="div" />
-                        <Button variant="outlined" color="primary">
+                        <Button variant="outlined" component={Link} to="/add-address" color="primary">
                             Create Shipper
                             </Button>
                         <Field
@@ -288,7 +288,7 @@ export default function PlannedLoad() {
                 className={classes.inputField}
                 variant="outlined"
                 />
-                <Button variant="outlined" color="primary">
+                <Button variant="outlined" component={Link} to="/add-address" color="primary">
                     Create Consignee
                     </Button> 
                 <Field
