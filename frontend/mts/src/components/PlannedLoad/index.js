@@ -6,7 +6,7 @@ import { makeStyles } from '@mui/styles';
 import { useDispatch } from 'react-redux';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
-import { useTheme } from '@mui/material/styles';
+//import { useTheme } from '@mui/material/styles';
 import { createPlannedLoadAsync } from '../../redux/slices/plannedLoadsSlice';
 
 
@@ -56,14 +56,7 @@ const useStyles = makeStyles((theme) => ({
             color: '#FFFFFF', // White text color when hovered
           },
       },
-    }));
-
-
-
-export default function PlannedLoad() {
-    const classes = useStyles();
-    const theme = useTheme();
-    const dispatch = useDispatch();
+    })); 
 
     const initialValues = {
         customLoadNumber: '',
@@ -118,15 +111,35 @@ export default function PlannedLoad() {
         invoiceAdvance: Yup.number().required('Required')
     });
 
-    const handleSubmit = (values) => {
-        // handle form submission
-        dispatch(createPlannedLoadAsync(values));
+
+
+export default function PlannedLoad() {
+    const classes = useStyles();
+    const dispatch = useDispatch();
+
+
+    const handleSubmit = (values, { setSubmitting }) => {
+        // dispatch the action to create a planned load
+        dispatch(createPlannedLoadAsync(values))
+        .then(() => {
+            alert('Planned load created successfully!');
+        })
+        .catch((error) => {
+            alert('Error creating planned load. Please try again.');
+        })
+        .finally(() => {
+            setSubmitting(false);
+        });
     };
 
     return (
         <div>
             <InNavBar />
-            <Formik initialValues={initialValues} onSubmit={handleSubmit} validationSchema={validationSchema} >
+            <Formik
+             initialValues={initialValues} 
+             onSubmit={handleSubmit} 
+             validationSchema={validationSchema} 
+             >
                 {({ isSubmitting }) => (
                     <Form>
             <Box className={classes.formContainer}>
@@ -443,10 +456,10 @@ export default function PlannedLoad() {
                     </Box>
                     <Button variant="outlined" type="submit" disabled={isSubmitting}>Save </Button>
                 <Button variant="text">cancel</Button>
-               </Form>
+            </Form>
     )}
-               </Formik> 
+            </Formik> 
             </div> 
     );
-}
+    }
 

@@ -4,16 +4,24 @@ import * as api from '../../api';
 export const fetchPlannedLoadsAsync = createAsyncThunk(
     'plannedLoads/fetchPlannedLoads',
     async () => {
-        const response = await api.fetchPlannedLoads();
-        return response.data;
+        try {
+        const data = await api.fetchPlannedLoads();
+        return data;
+    } catch (error) {
+        throw new Error('Failed to fetch planned loads');
     }
+  }
 );
 
 export const createPlannedLoadAsync = createAsyncThunk(
     'plannedLoads/createPlannedLoad',
     async (newPlannedLoad) => {
-        const response = await api.createPlannedLoad(newPlannedLoad);
-        return response.data;
+        try {
+        const data = await api.createPlannedLoad(newPlannedLoad);
+        return data;
+        } catch (error) {
+            throw new Error('Failed to create a new planned load');
+        }
     }
 );
 
