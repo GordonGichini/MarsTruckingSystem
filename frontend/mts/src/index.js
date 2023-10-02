@@ -1,9 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux';
-import store from './redux/store';
+import { configureStore } from '@reduxjs/toolkit';
+import plannedLoadsReducer from './redux/slices/plannedLoadsSlice';
 import { BrowserRouter } from 'react-router-dom';
 import App from './App';
+
+const store = configureStore({
+  reducer: {
+    plannedLoads: plannedLoadsReducer,
+    // Add other reducers
+  },
+});
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

@@ -3,9 +3,11 @@ import { Typography, TextField, Button, Box, Grid } from '@material-ui/core';
 import InNavBar from '../../common/Header/InNavBar';
 import { Link } from 'react-router-dom';
 import { makeStyles } from '@mui/styles';
+import { useDispatch } from 'react-redux';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { useTheme } from '@mui/material/styles';
+import { createPlannedLoadAsync } from '../../redux/slices/plannedLoadsSlice';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -61,6 +63,7 @@ const useStyles = makeStyles((theme) => ({
 export default function PlannedLoad() {
     const classes = useStyles();
     const theme = useTheme();
+    const dispatch = useDispatch();
 
     const initialValues = {
         customLoadNumber: '',
@@ -117,7 +120,7 @@ export default function PlannedLoad() {
 
     const handleSubmit = (values) => {
         // handle form submission
-        console.log(values);
+        dispatch(createPlannedLoadAsync(values));
     };
 
     return (

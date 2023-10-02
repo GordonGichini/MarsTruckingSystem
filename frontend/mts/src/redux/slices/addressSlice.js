@@ -1,15 +1,46 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import * as api from '../../api';
 
-const initialState = {
-  addresses: [], 
-  status: 'idle', 
-  error: null,
-};
+
+export const fetchAddressesAsync = createAsyncThunk(
+  'address/fetchAddresses',
+  async () => {
+    const data = await api.fetchAddresses();
+    return data;
+  }
+);
+
+export const createAddressAsync = createAsyncThunk(
+  'address/create',
+  async (newAddress) => {
+    const response = await api.createAddress(newAddress); // Replace with your API call
+    return response.data;
+  }
+);
+
+export const updateAddressAsync = createAsyncThunk(
+  'address/update',
+  async (updatedAddress) => {
+    const response = await api.updateAddress(updatedAddress);
+    return response.data;
+  }
+);
+
+export const deleteAddressAsync = createAsyncThunk(
+  'address/delete',
+  async (idToDelete) => {
+    await api.deleteAddress(idToDelete);
+    return idToDelete;
+  }
+);
 
 const addressSlice = createSlice({
   name: 'address',
-  initialState,
+  initialState: {
+    addresses: [],
+    status: 'idle',
+    error: null,
+  },
   reducers: {
     addAddress: (state, action) => {
      // Add a new address to the state
@@ -64,37 +95,6 @@ const addressSlice = createSlice({
   },
 });
 
-export const fetchAddressesAsync = createAsyncThunk(
-  'address/fetchAddresses',
-  async () => {
-    const data = await api.fetchAddresses();
-    return data;
-  }
-);
-
-export const createAddressAsync = createAsyncThunk(
-  'address/create',
-  async (newAddress) => {
-    const response = await api.createAddress(newAddress); // Replace with your API call
-    return response.data;
-  }
-);
-
-export const updateAddressAsync = createAsyncThunk(
-  'address/update',
-  async (updatedAddress) => {
-    const response = await api.updateAddress(updatedAddress);
-    return response.data;
-  }
-);
-
-export const deleteAddressAsync = createAsyncThunk(
-  'address/delete',
-  async (idToDelete) => {
-    await api.deleteAddress(idToDelete);
-    return idToDelete;
-  }
-);
 
 export const { addAddress, updateAddress, deleteAddress } = addressSlice.actions;
 export default addressSlice.reducer;
