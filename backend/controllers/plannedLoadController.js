@@ -29,9 +29,8 @@ exports.createPlannedLoad = async (req, res) => {
             tarpFee,
             invoiceAdvance
         } = req.body;
-        const loadNumber = customLoadNumber || generateCustomLoadNumber();
 
-
+        const loadNumber = customLoadNumber || (await generateCustomLoadNumber());
 
         // Check if the loadId exists
         const existingLoad = await Load.findById(loadId);
@@ -41,7 +40,7 @@ exports.createPlannedLoad = async (req, res) => {
 
         const newPlannedLoad = await PlannedLoad.create({
           load: loadId,
-          loadNumber,
+          customLoadNumber: loadNumber,
             customer,
             shipper,
             pickupDate,
@@ -73,14 +72,28 @@ exports.createPlannedLoad = async (req, res) => {
 };
 
 //function to generate a custom load number
-function generateCustomLoadNumber() {
+const generateCustomLoadNumber = async () => {
   const currentYear = new Date().getFullYear();
-  const currentMonth = new Date().getMonth();
+  const currentMonth = new Date().getMonth() + 1;
   const formattedMonth = currentMonth.toString().padStart(2, '0');
-  const loadNumber = `${currentYear}${formattedMonth}${plannedLoads.length + 1}`;
 
-  return loadNumber;
-}
+  // Query the database to find the latest custom load number for the current year and month
+  const latestCustomLoad = await PlannedLoad.findOne({
+    customLoadNumber: {
+      $regex: `^${currentYear}${formattedMonth}`,
+    },
+  })
+  .sort({ customLoadNumber: -1 })
+  .limit(1);
+
+  if (latestCustomLoad) {
+    const lastNumber = parseInt(latestCustomLoad.customLoadNumber.substr(6)); // Extract the numeric part
+    return `${currentYear}${formattedMonth}${lastNumber + 1}`;
+  } else {
+
+    return `${currentYear}${formattedMonth}1`;
+  }
+};
 
 exports.getAllPlannedLoads = async (req, res) => {
     try {
@@ -176,5 +189,20 @@ exports.updatePlannedLoad = async (req, res) => {
       res.status(500).json({ error: 'An error occurred while converting the planned load' });
     }
   };
+
+  // Controller function to get planned loads associated with a specific load or trip
+   exports.getPlannedLoadsByParent = async (req, res) => {
+  try {
+    const parentId = req.params.parentId;
+
+    // Query the PlannedLoad collection to find planned loads associated with the parent ID
+    const plannedLoads = await PlannedLoad.find({ load: parentId }).populate('load');
+
+    res.status(200).json(plannedLoads);
+  } catch (error) {
+    console.error('Error fetching planned loads by parent:', error);
+    res.status(500).json({ error: 'An error occurred while fetching planned loads by parent' });
+  }
+};
   
   

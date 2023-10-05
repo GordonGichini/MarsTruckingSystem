@@ -15,7 +15,7 @@ const plannedLoadSchema = new mongoose.Schema({
     ref: 'Trip',
   },
   customLoadNumber: {
-    type: Number,
+    type: String,
     required: true,
     unique: true,
   },
@@ -30,6 +30,13 @@ const plannedLoadSchema = new mongoose.Schema({
   pickupDate: {
     type: Date,
     required: true,
+    validate: {
+      validator: function (value) {
+        
+        return value > new Date();
+      },
+      message: 'Pickup date must be a future date',
+    },
   },
   driverInstructions: {
     type: String,
@@ -40,7 +47,7 @@ const plannedLoadSchema = new mongoose.Schema({
     required: true,
   },
   customerRequiredInfo: {
-    type: Number,
+    type: String,
     required: true,
   },
   weight: {

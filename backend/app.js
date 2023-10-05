@@ -62,7 +62,7 @@ app.use('/api/maintenanceLogEntries', maintenanceLogEntryRoutes);
 app.use('/api/milePlans', milePlanRoutes);
 app.use('/api/trips', tripRoutes);
 app.use('/api/units', unitRoutes);
-app.use('/api', loadRoutes);
+app.use('/api/loads', loadRoutes);
 
 
 app.use(routes);
