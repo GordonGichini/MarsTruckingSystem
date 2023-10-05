@@ -6,7 +6,6 @@ import { makeStyles } from '@mui/styles';
 import { useDispatch } from 'react-redux';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
-//import { useTheme } from '@mui/material/styles';
 import { createPlannedLoadAsync } from '../../redux/slices/plannedLoadsSlice';
 
 
@@ -81,6 +80,7 @@ const useStyles = makeStyles((theme) => ({
         lumper: '',
         stopOff: '',
         tarpFee: '',
+        additional: '',
         invoiceAdvance: ''
 
     };
@@ -170,7 +170,6 @@ export default function PlannedLoad() {
             variant="outlined"
             className={classes.inputField}
             /> 
-            <ErrorMessage name="customer" component="div" /> 
                       
             <Button variant="outlined" component={Link} to = "/add-address" color="primary" className={classes.button}>
                 Create customer
@@ -193,15 +192,7 @@ export default function PlannedLoad() {
                         margin='normal'
                         className={classes.inputField}
                         variant="outlined"
-                        validate={(value) => {
-                            let error;
-                            if (!value) {
-                                error = 'Shipper is required'
-                            }
-                            return error;
-                        }}
                         /> 
-                        <ErrorMessage name="shipper" component="div" />
                         <Button variant="outlined" component={Link} to="/add-address" color="primary">
                             Create Shipper
                             </Button>

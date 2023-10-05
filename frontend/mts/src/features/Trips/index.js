@@ -116,7 +116,7 @@ function Trips() {
       <Button variant="contained"
       color="primary"
       component={Link}
-      to="/add-dispatch">
+      to="/add-trip">
         Add Dispatch
       </Button>
     </Box>

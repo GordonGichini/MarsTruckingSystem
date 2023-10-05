@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-    baseURL: 'http://localhost:5002',
+    baseURL: 'http://localhost:5002/api',
 });
 
 export const fetchAddresses = async () => {
@@ -41,7 +41,7 @@ export const deleteAddress = async (id) => {
 
 export const fetchPlannedLoads = async () => {
     try {
-    const response = await api.get('/api/plannedLoads');
+    const response = await api.get('/plannedLoads');
     return response.data;
     } catch (error) {
         throw new Error('Failed to fetch planned loads');
@@ -50,7 +50,7 @@ export const fetchPlannedLoads = async () => {
   
 export const createPlannedLoad = async (newPlannedLoad) => {
     try {
-        const response = await api.post('/api/plannedLoads', newPlannedLoad);
+        const response = await api.post('/plannedLoads', newPlannedLoad);
         return response.data;
     } catch (error) {
         throw new Error('Failed to create a new planned load');

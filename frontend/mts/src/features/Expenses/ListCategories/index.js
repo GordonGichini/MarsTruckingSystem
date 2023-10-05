@@ -4,7 +4,6 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import api from '../../../api';
 import InNavBar from '../../../common/Header/InNavBar';
-//import Footer from '../../../pages/HomePage/components/Footer';
 import AddCategoryForm from '../AddCategoryForm';
 import { AppBar, Toolbar, Typography, Button, makeStyles, ButtonGroup, Table, TableContainer, TableHead, TableRow, TableCell, TableBody } from '@material-ui/core';
 
@@ -45,7 +44,7 @@ function ListCategories() {
 
   const createExpenseCategory = async (newExpenseCategoryData) => {
     try {
-      const response = await api.post('/api/expenseCategories', newExpenseCategoryData);
+      const response = await api.post('/expenseCategories', newExpenseCategoryData);
       const newExpenseCategory = response.data;
 
       if (response.status === 201) {
@@ -70,7 +69,7 @@ function ListCategories() {
 
   useEffect(() => {
     //fetching expense categories from backend
-    api.get('/api/expenseCategories')
+    api.get('/expenseCategories')
     .then((response) => {
       setExpenseCategories(response.data);
     })

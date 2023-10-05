@@ -76,7 +76,7 @@ export default function ExpenseFormPage() {
     //fetching available trips when the component mounts
     const fetchAvailableTrips = async () => {
       try {
-        const response = await axios.get('/api/trips');
+        const response = await axios.get('/trips');
         if (response.status === 200) {
           setAvailableTrips(response.data);
         }
@@ -90,7 +90,7 @@ export default function ExpenseFormPage() {
 
   const handleCreateExpense = async (values) => {
     try {
-      const response = await axios.post('/api/expenses', values);
+      const response = await axios.post('/expenses', values);
       if (response.status === 201) {
         toast.success('Expense created successfully.');
         const newExpenseId = response.data._id;
@@ -178,6 +178,7 @@ export default function ExpenseFormPage() {
           <Field
           name="assignToTrip"
           as={RadioGroup}
+          label="Assign to Trip"
           className={classes.radioGroup}
           aria-label="assign to trip"
           variant="outlined"

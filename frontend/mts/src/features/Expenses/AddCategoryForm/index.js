@@ -22,7 +22,7 @@ function AddCategoryForm({ open, onClose, onSave }) {
     setLoading(true);
 
   try {
-    const response = await api.post('/api/expenseCategories', { name, status });
+    const response = await api.post('/expenseCategories', { name, status });
     if (response.status === 201) {
       setMessage('');
       setName('');
