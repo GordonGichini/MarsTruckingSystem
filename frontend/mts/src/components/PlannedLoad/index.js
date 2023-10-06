@@ -1,5 +1,5 @@
 import React from 'react';
-import { Typography, TextField, Button, Box, Grid } from '@material-ui/core';
+import { Typography, TextField, Button, Box, Grid, FormControl, InputLabel, Select, MenuItem } from '@material-ui/core';
 import InNavBar from '../../common/Header/InNavBar';
 import { Link } from 'react-router-dom';
 import { makeStyles } from '@mui/styles';
@@ -85,30 +85,30 @@ const useStyles = makeStyles((theme) => ({
 
     };
 
-     const validationSchema = Yup.object({
+     const validationSchema = Yup.object().shape({
         customLoadNumber: Yup.string(),
         customer: Yup.string().required('Customer is required'),
-        shipper: Yup.string().required('Required'),
-        pickupDate: Yup.date().required('Required'),
-        driverInstructions: Yup.string().required('Required'),
-        bol: Yup.string().required('Required'),
-        customerRequiredInfo: Yup.string().required('Required'),
-        weight: Yup.number().required('Required'),
-        quantity: Yup.number().required('Required'),
-        notes: Yup.string().required('Required'),
-        commodity: Yup.string().required('Required'),
-        consignee: Yup.string().required('Required'),
-        deliveryDate: Yup.date().required('Required'),
-        instructions: Yup.string().required('Required'),
-        primaryFee: Yup.number().required('Required'),
-        primaryFeeType: Yup.string().required('Required'),
-        fscAmount: Yup.number().required('Required'),
-        fscAmountType: Yup.string().required('Required'),
-        detention: Yup.number().required('Required'),
-        lumper: Yup.number().required('Required'),
-        stopOff: Yup.number().required('Required'),
-        tarpFee: Yup.number().required('Required'),
-        invoiceAdvance: Yup.number().required('Required')
+        shipper: Yup.string().required('Shipper is required'),
+        pickupDate: Yup.date().required('Pickup date is required'),
+        driverInstructions: Yup.string().required('Driver instructions is required'),
+        bol: Yup.string().required('BOL is required'),
+        customerRequiredInfo: Yup.string().required('Customer required info is required'),
+        weight: Yup.number().required('weight is required'),
+        quantity: Yup.number().required('quantity is required'),
+        notes: Yup.string(),
+        commodity: Yup.string(),
+        consignee: Yup.string().required('Consignee is required'),
+        deliveryDate: Yup.date().required('Delivery date is required'),
+        instructions: Yup.string().required('Instructions are required'),
+        primaryFee: Yup.number().required('Primary fee is required'),
+        primaryFeeType: Yup.string().required('Primary fee type is required'),
+        fscAmount: Yup.number().required('fsc amount is required'),
+        fscAmountType: Yup.string().required('fsc amount type is required'),
+        detention: Yup.number().required('Detention is required'),
+        lumper: Yup.number().required('Lumper is required'),
+        stopOff: Yup.number().required('Stop Off is required'),
+        tarpFee: Yup.number().required('Tarp fee is required'),
+        invoiceAdvance: Yup.number().required('Invoice advance is required')
     });
 
 
@@ -118,18 +118,16 @@ export default function PlannedLoad() {
     const dispatch = useDispatch();
 
 
-    const handleSubmit = (values, { setSubmitting }) => {
+    const handleSubmit = async (values, { setSubmitting }) => {
+        try {
         // dispatch the action to create a planned load
-        dispatch(createPlannedLoadAsync(values))
-        .then(() => {
+        dispatch(createPlannedLoadAsync(values));
             alert('Planned load created successfully!');
-        })
-        .catch((error) => {
-            alert('Error creating planned load. Please try again.');
-        })
-        .finally(() => {
+        } catch (error) {
+        alert('Error creating planned load. Please try again.');
+        } finally {
             setSubmitting(false);
-        });
+        };
     };
 
     return (
@@ -153,7 +151,7 @@ export default function PlannedLoad() {
             type="text"
             label="Custom Load Number"
             name="customLoadNumber"
-            component={TextField}
+            as={TextField}
             margin='normal'
             variant="outlined"
             className={classes.inputField}
@@ -165,7 +163,7 @@ export default function PlannedLoad() {
             type="text"
             label="Customer"
             name="customer"
-            component={TextField}
+            as={TextField}
             margin='normal'
             variant="outlined"
             className={classes.inputField}
@@ -188,7 +186,7 @@ export default function PlannedLoad() {
                         type="text"
                         label="Shipper"
                         name="shipper"
-                        component={TextField}
+                        as={TextField}
                         margin='normal'
                         className={classes.inputField}
                         variant="outlined"
@@ -200,7 +198,7 @@ export default function PlannedLoad() {
                         type="date"
                         label="Pickup date"
                         name="pickupDate"
-                        component={TextField}
+                        as={TextField}
                         margin='normal'
                         className={classes.inputField}
                         variant="outlined"
@@ -210,7 +208,7 @@ export default function PlannedLoad() {
                         type="text"
                         label="Instructions"
                         name="instructions"
-                        component={TextField}
+                        as={TextField}
                         margin='normal'
                         className={classes.inputField}
                         multiline
@@ -222,7 +220,7 @@ export default function PlannedLoad() {
                         type="text"
                         label="BOL"
                         name="bol"
-                        component={TextField}
+                        as={TextField}
                         margin='normal'
                         className={classes.inputField}
                         variant="outlined"
@@ -233,7 +231,7 @@ export default function PlannedLoad() {
                         type="text"
                         label="Customer Required Info (included on invoice)"
                         name="customerRequiredInfo"
-                        component={TextField}
+                        as={TextField}
                         margin='normal'
                         className={classes.inputField}
                         multiline
@@ -245,7 +243,7 @@ export default function PlannedLoad() {
                         type="number"
                         label="Weight"
                         name="weight"
-                        component={TextField}
+                        as={TextField}
                         margin='normal'
                         className={classes.inputField}
                         variant="outlined"
@@ -256,7 +254,7 @@ export default function PlannedLoad() {
                         type="number"
                         label="Quantity"
                         name="quantity"
-                        component={TextField}
+                        as={TextField}
                         margin='normal'
                         className={classes.inputField}
                         variant="outlined"
@@ -266,7 +264,7 @@ export default function PlannedLoad() {
                         type="text"
                         label="Notes"
                         name="notes"
-                        component={TextField}
+                        as={TextField}
                         margin="normal"
                         className={classes.inputField}
                         variant="outlined"
@@ -276,7 +274,7 @@ export default function PlannedLoad() {
                         type="text"
                         label="Commodity"
                         name="commodity"
-                        component={TextField}
+                        as={TextField}
                         margin="normal"
                         className={classes.inputField}
                         variant="outlined"
@@ -290,7 +288,7 @@ export default function PlannedLoad() {
                 type="text"
                 label="Consignee Name"
                 name="consigneeName"
-                component={TextField}
+                as={TextField}
                 margin='normal'
                 className={classes.inputField}
                 variant="outlined"
@@ -302,7 +300,7 @@ export default function PlannedLoad() {
                 type="date"
                 label="Delivery Date"
                 name="deliveryDate"
-                component={TextField}
+                as={TextField}
                 margin='normal'
                 className={classes.inputField}
                 variant="outlined"
@@ -312,7 +310,7 @@ export default function PlannedLoad() {
                 type="text"
                 label="Instructions"
                 name="instructions"
-                component={TextField}
+                as={TextField}
                 margin='normal'
                 className={classes.inputField}
                 variant="outlined"
@@ -335,7 +333,7 @@ export default function PlannedLoad() {
                 type="number"
                 label="Primary Fee"
                 name="primaryFee"
-                component={TextField}
+                as={TextField}
                 margin='normal'
                 className={classes.inputField}
                 variant="outlined"
@@ -359,7 +357,7 @@ export default function PlannedLoad() {
                 type="number"
                 label="Fuel Surcharge Fee"
                 name="fscAmount"
-                component={TextField}
+                as={TextField}
                 margin='normal'
                 className={classes.inputField}
                 variant="outlined"
@@ -384,7 +382,7 @@ export default function PlannedLoad() {
                     type="number"
                     label="Detention"
                     name="detention"
-                    component={TextField}
+                    as={TextField}
                     margin='normal'
                     className={classes.inputField}
                     variant="outlined"
@@ -394,7 +392,7 @@ export default function PlannedLoad() {
                     type="number"
                     label="Lumper"
                     name="lumper"
-                    component={TextField}
+                    as={TextField}
                     margin='normal'
                     className={classes.inputField}
                     variant="outlined"
@@ -404,7 +402,7 @@ export default function PlannedLoad() {
                     type="number"
                     label="Stop Off"
                     name="stopOff"
-                    component={TextField}
+                    as={TextField}
                     margin='normal'
                     className={classes.inputField}
                     variant="outlined"
@@ -414,7 +412,7 @@ export default function PlannedLoad() {
                     type="number"
                     label="Tarp Fee"
                     name="tarpFee"
-                    component={TextField}
+                    as={TextField}
                     margin='normal'
                     className={classes.inputField}
                     variant="outlined"
@@ -424,7 +422,7 @@ export default function PlannedLoad() {
                     type="number"
                     label="Additional"
                     name="additional"
-                    component={TextField}
+                    as={TextField}
                     margin='normal'
                     className={classes.inputField}
                     variant="outlined"
@@ -438,7 +436,7 @@ export default function PlannedLoad() {
                     type="number"
                     label="Invoice Advance"
                     name="invoiceAdvance"
-                    component={TextField}
+                    as={TextField}
                     margin='normal'
                     className={classes.inputField}
                     variant="outlined"

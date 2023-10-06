@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import * as api from '../../api';
+import { createSelector } from 'reselect';
 
 export const fetchPlannedLoadsAsync = createAsyncThunk(
     'plannedLoads/fetchPlannedLoads',
@@ -44,7 +45,11 @@ const plannedLoadsSlice = createSlice({
       const updatedLoad = action.payload;
       const index = state.plannedLoads.findIndex((load) => load.id === updatedLoad.id);
       if (index !== -1) {
-        state.plannedLoads[index] = updatedLoad;
+        state.plannedLoads = [
+          ...state.plannedLoads.slice(0, index),
+          updatedLoad,
+          ...state.plannedLoads.slice(index + 1),
+        ];
       }
     },
     plannedLoadRemoved: (state, action) => {
@@ -52,13 +57,25 @@ const plannedLoadsSlice = createSlice({
       const idToRemove = action.payload;
       state.plannedLoads = state.plannedLoads.filter((load) => load.id !== idToRemove);
     },
+    setPlannedLoads: (state, action) => {
+      state.plannedLoads = action.payload;
+    },
   },
 });
 
 export const {
   plannedLoadAdded,
   plannedLoadUpdated,
+  setPlannedLoads,
   plannedLoadRemoved,
 } = plannedLoadsSlice.actions;
+
+//Defining a base selector to get the plannedLoads slice
+const selectPlannedLoadsSlice = (state) => state.plannedLoads;
+
+export const selectedPlannedLoads = createSelector(
+  [selectPlannedLoadsSlice],
+  (plannedLoadsSlice) => plannedLoadsSlice.plannedLoads
+);
 
 export default plannedLoadsSlice.reducer;

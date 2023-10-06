@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import InNavBar from '../../common/Header/InNavBar';
-import { Typography, makeStyles, Button, TextField, Box } from '@material-ui/core';
+import { Typography, makeStyles, Button, Box, Table, TableContainer, TableHead, TableRow, TableCell, TableBody } from '@material-ui/core';
+import { useSelector, useDispatch } from 'react-redux';
+import { createPlannedLoadAsync, selectedPlannedLoads } from '../../redux/slices/plannedLoadsSlice';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -36,6 +38,31 @@ const useStyles = makeStyles((theme) => ({
 
 function LoadPlanner() {
     const classes = useStyles();
+    const dispatch = useDispatch();
+
+    const plannedLoads = useSelector(selectPlannedLoads);
+
+    const [hasPlannedLoads, setHasPlannedLoads] = useState(false);
+
+    useEffect(() => {
+      // Check if there are planned loads to determine whether to display the table
+      if (plannedLoads.length > 0) {
+        setHasPlannedLoads(true);
+      } else {
+        setHasPlannedLoads(false);
+      }
+    }, [plannedLoads]);
+
+    const handleCreatePlannedLoad = (values) => {
+      // Dispatch the action to create a planned load using Redux toolkit
+      dispatch(createPlannedLoadAsync(values))
+      .then(() => {
+        alert('Planned load created successfully!');
+      })
+      .catch((error) => {
+        alert('Error creating planned load.Please try again.');
+      });
+    };
 
   return (
     <div style={{ flex: 1 }}>
@@ -64,6 +91,28 @@ function LoadPlanner() {
           Add Trip 
         </Button>
       </Box>
+      {hasPlannedLoads ? (
+        <TableContainer>
+          <Table>
+            <TableHead>
+              <TableRow>
+                <TableCell>Load Number</TableCell>
+                <TableCell>Customer</TableCell>
+                {/* Add more table headers as needed */}
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {plannedLoads.map((plannedLoad) => (
+                <TableRow key={plannedLoad.id}>
+                  <TableCell>{plannedLoad.customLoadNumber}</TableCell>
+                  <TableCell>{plannedLoad.customer}</TableCell>
+                  {/* Add more table cells based on your planned load data */}
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      ) : (
       <Box className={classes.maintenanceVideoContainer}>
         <Typography variant="h6">
           Next Step: Add Your First Planned Load
@@ -82,10 +131,9 @@ function LoadPlanner() {
         </Button>
       </Box>
       </Box>
-    </div>
-
-   
-  )
+      )}
+    </div>   
+  );
 }
 
-export default LoadPlanner
+export default LoadPlanner;
