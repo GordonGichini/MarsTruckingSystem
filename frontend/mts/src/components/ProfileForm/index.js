@@ -28,7 +28,8 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: theme.spacing(2),
   },
   search: {
-    width: '60%',
+    width: '50%',
+    justifyContent: 'center',
     marginLeft: theme.spacing(2),
       '& .MuiOutlinedInput-root': {
     '& fieldset': {

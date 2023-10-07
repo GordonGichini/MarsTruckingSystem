@@ -3,7 +3,7 @@ import * as api from '../../api';
 import { createSelector } from 'reselect';
 
 export const fetchPlannedLoadsAsync = createAsyncThunk(
-    'plannedLoads/fetchPlannedLoads',
+    '/plannedLoads',
     async () => {
         try {
         const data = await api.fetchPlannedLoads();
@@ -15,7 +15,7 @@ export const fetchPlannedLoadsAsync = createAsyncThunk(
 );
 
 export const createPlannedLoadAsync = createAsyncThunk(
-    'plannedLoads/createPlannedLoad',
+    '/plannedLoads',
     async (newPlannedLoad) => {
         try {
         const data = await api.createPlannedLoad(newPlannedLoad);
