@@ -3,10 +3,10 @@ const getMileController = require('../controllers/getMileController');
 const router = express.Router();
 
 // Create a get Mile
-router.post('/create', getMileController.createGetMile);
+router.post('/', getMileController.createGetMile);
 
 // Fetch get miles
-router.get('/get', getMileController.getAllGetMiles);
+router.get('/', getMileController.getAllGetMiles);
 
 // Fetch getmiles by ID
 router.get('/:id', getMileController.getMilesById);

@@ -3,10 +3,10 @@ const companyProfileController = require('../controllers/companyProfileControlle
 const router = express.Router();
 
 // Create a company profile
-router.post('/create', companyProfileController.createCompanyProfile);
+router.post('/', companyProfileController.createCompanyProfile);
 
 // Fetch company profile
-router.get('/get', companyProfileController.getCompanyProfile);
+router.get('/', companyProfileController.getCompanyProfile);
 
 // Fetch a companyprofile by ID
 router.get('/:id', companyProfileController.getCompanyProfileById);

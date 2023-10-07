@@ -3,10 +3,10 @@ const calendarPlanController = require('../controllers/calendarPlanController');
 const router = express.Router();
 
 // Create a new calendar plan
-router.post('/create', calendarPlanController.createCalendarPlan);
+router.post('/', calendarPlanController.createCalendarPlan);
 
 // Fetch all calendar plans
-router.get('/get', calendarPlanController.getAllCalendarPlans);
+router.get('/', calendarPlanController.getAllCalendarPlans);
 
 // Fetch a single calendar plan by ID
 router.get('/:id', calendarPlanController.getCalendarPlanById);

@@ -3,10 +3,10 @@ const invoiceController = require('../controllers/invoiceController');
 const router = express.Router();
 
 // Create a new invoice
-router.post('/create', invoiceController.createInvoice);
+router.post('/', invoiceController.createInvoice);
 
 // Fetch all expenses
-router.get('/get', invoiceController.getAllInvoices);
+router.get('/', invoiceController.getAllInvoices);
 
 // Fetch a single expense by ID
 router.get('/:id', invoiceController.getInvoiceById);

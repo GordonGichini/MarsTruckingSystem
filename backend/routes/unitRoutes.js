@@ -3,10 +3,10 @@ const unitController = require('../controllers/unitController');
 const router = express.Router();
 
 // Create a new unit
-router.post('/create', unitController.createUnit);
+router.post('/', unitController.createUnit);
 
 // Fetch all units
-router.get('/get', unitController.getAllUnits);
+router.get('/', unitController.getAllUnits);
 
 // Fetch a single unit by ID
 router.get('/:id', unitController.getUnitById);

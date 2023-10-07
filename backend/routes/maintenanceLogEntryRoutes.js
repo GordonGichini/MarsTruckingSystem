@@ -3,10 +3,10 @@ const maintenanceLogEntryController = require('../controllers/maintenanceLogEntr
 const router = express.Router();
 
 // Create a new log entry
-router.post('/create', maintenanceLogEntryController.createMaintenanceLogEntry);
+router.post('/', maintenanceLogEntryController.createMaintenanceLogEntry);
 
 // Fetch all log entries
-router.get('/get', maintenanceLogEntryController.getAllMaintenanceLogEntries);
+router.get('/', maintenanceLogEntryController.getAllMaintenanceLogEntries);
 
 // Fetch a single log entry by ID
 router.get('/:id', maintenanceLogEntryController.getMaintenanceLogEntryById);

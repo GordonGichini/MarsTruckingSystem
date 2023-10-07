@@ -3,10 +3,10 @@ const driverController = require('../controllers/driverController');
 const router = express.Router();
 
 // Create a driver
-router.post('/create', driverController.createDriver);
+router.post('/', driverController.createDriver);
 
 // Fetch drivers
-router.get('/get', driverController.getAllDrivers);
+router.get('/', driverController.getAllDrivers);
 
 // Fetch a driver by ID
 router.get('/:id', driverController.getDriverById);

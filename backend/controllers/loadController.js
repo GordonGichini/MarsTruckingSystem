@@ -3,40 +3,36 @@ const Load = require('../models/load');
 // Create a load 
 exports.createLoad = async (req, res) => {
     try {
-        const {
-          type,
-          loadNo,
-          tripNo,
-          status,
-          pickup,
-          delivery,
-          driver,
-          truck,
-          customer,
-          from,
-          to,
-          bol,
-          total
-        } = req.body;
-        console.log('Received Data:', req.body);
+      // Retrieve the planned load ID to convert
+      const plannedLoadId = req.params.id;
 
+      // Find the planned load by ID
+      const plannedLoad = await PlannedLoad.findById(plannedLoadId);
+
+      if (!plannedLoad) {
+        return res.status(404).json({ error: 'Planned Load not found' });
+      }
+      // Create a new load using the data from the planned load
         const newLoad = new Load({
-          type,
-          loadNo,
-          tripNo,
-          status,
-          pickup,
-          delivery,
-          driver,
-          truck,
-          customer,
-          from,
-          to,
-          bol,
-          total
+          type: 'actual',
+          loadNo: generateCustomLoadNumber(),
+          tripNo: plannedLoad.tripNo,
+          status: 'in-transit',
+          pickup: plannedLoad.pickup,
+          delivery: plannedLoad.delivery,
+          driver: plannedLoad.driver,
+          truck: plannedLoad.truck,
+          customer: plannedLoad.customer,
+          from: plannedLoad.from,
+          to: plannedLoad.to,
+          bol: plannedLoad.bol,
+          total: plannedLoad.total,
         });
 
         const savedLoad = await newLoad.save();
+
+        await plannedLoad.findByIdAndDelete(plannedLoadId);
+
         res.status(201).json(savedLoad);
     } catch (error) {
         console.error('Error creating load:', error);

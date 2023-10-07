@@ -15,26 +15,26 @@ const {
 } = require('../controllers/addressBookController');
 
 // Define routes for CRUD operations
-router.route('/addresses').post(createAddress).get(getAllAddresses);
-router.route('/addresses/:id').get(getAddressById).put(updateAddressById).delete(deleteAddressById);
+router.route('/').post(createAddress).get(getAllAddresses);
+router.route('/:id').get(getAddressById).put(updateAddressById).delete(deleteAddressById);
 
 // Search Addresses
-router.get('/addresses/search', searchAddresses);
+router.get('/search', searchAddresses);
 
 // Sort Addresses
-router.get('/addresses/sort/:criteria', sortAddresses);
+router.get('/sort/:criteria', sortAddresses);
 
 // Pagination
-router.get('/addresses/page/:page', paginateAddresses);
+router.get('/page/:page', paginateAddresses);
 
 // Filter Addresses
-router.get('/addresses/filter', filterAddresses);
+router.get('/filter', filterAddresses);
 
 // Bulk Operations
-router.post('/addresses/bulk/delete', bulkDeleteAddresses);
+router.post('/bulk/delete', bulkDeleteAddresses);
 
 // Export Addresses
-router.get('/addresses/export', exportAddresses);
+router.get('/export', exportAddresses);
 
 
 
