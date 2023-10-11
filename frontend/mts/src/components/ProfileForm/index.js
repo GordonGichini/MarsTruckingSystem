@@ -1,8 +1,11 @@
 import React from 'react';
-import { Typography, TextField, Button, Box, Grid } from '@material-ui/core';
+import { Typography, TextField, Button, Box } from '@material-ui/core';
 import InNavBar from '../../common/Header/InNavBar';
 import { makeStyles } from '@mui/styles';
 import { useTheme } from '@mui/material/styles';
+import { Formik, Form, Field, ErrorMessage } from 'formik';
+import * as Yup from 'yup';
+
 
 const useStyles = makeStyles((theme) => ({
   formContainer: {
@@ -30,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
   search: {
     width: '50%',
     justifyContent: 'center',
-    marginLeft: theme.spacing(2),
+    marginLeft: theme.spacing(4),
       '& .MuiOutlinedInput-root': {
     '& fieldset': {
       borderColor: 'green',
@@ -45,7 +48,7 @@ const useStyles = makeStyles((theme) => ({
 
   },
   inputField: {
-      width: '98%',
+      width: '68%',
       margin : theme.spacing(1, 0),
       '& .MuiOutlinedInput-root': {
     '& fieldset': {
@@ -73,18 +76,42 @@ const useStyles = makeStyles((theme) => ({
     },
   }));
 
+  const initialValues = {
+    companyName: '',
+    street: '',
+    aptSuiteOther: '',
+    city: '',
+    state: '',
+    zipCode: '',
+    phoneNumber: '',
+    phoneExtension: '',
+    alternatePhone: '',
+    alternatePhoneExtension: '',
+    number: '',
+    fax: '',
+    email: '',
+    website: '',
+    contact: '',
+    notes: '',
+    motorCarrierNumber: '',
+    taxId: '',
+  };
 
 
-
-
-
+  const validationSchema = Yup.object().shape({
+    companyName: Yup.string().required('Company Name is required'),
+    // validation rules for other fields here
+  })
 
 
 export default function ProfileForm() {
   const classes = useStyles();
   const theme = useTheme();
-  const handleSaveClick = () => {
+
+  const handleSaveClick = (values) => {
+    // Handle form submission
     // Logic for saving address details
+    console.log(values);
   };
 
   return (
@@ -98,39 +125,45 @@ export default function ProfileForm() {
       <TextField label="Search" variant="outlined" className={classes.search} />
       <Typography variant="caption">Select an address to autofill this form</Typography>
 
+      <Formik
+      initialValues={initialValues}
+      validationSchema={validationSchema}
+      onSubmit={handleSaveClick}
+      >
+        {() => (
+          <Form>
       <Box className={classes.formContainer}>   
-        <Grid container spacing={3}>
-          <Grid item xs={6}>
-        <TextField label="Company Name" margin='normal' variant="outlined" className={classes.inputField} />
-        <TextField label="Street" margin='normal' variant="outlined" className={classes.inputField} />
-        <TextField label="Apt/Suite/Other" margin='normal' variant="outlined" className={classes.inputField} />
-        <TextField label="City" margin='normal' variant="outlined" className={classes.inputField} />
-        <TextField label="State/Province" margin='normal' variant="outlined" className={classes.inputField} />
-        <TextField label="ZIP Code" margin='normal' variant="outlined" className={classes.inputField} />
-        <TextField label="Phone Number" margin='normal' variant="outlined" className={classes.inputField} />
-        <TextField label="Phone Extension Number" margin='normal' variant="outlined" className={classes.inputField} />
-        <TextField label="Alternate Phone" margin='normal' variant="outlined" className={classes.inputField} />
-        </Grid>
-        <Grid item xs={6}>
-        <TextField label="Alternate Phone Extension" margin='normal' variant="outlined" className={classes.inputField} />
+        <Field name="companyName" as={TextField} label="Company Name" margin='normal' variant="outlined" className={classes.inputField} />
+        <ErrorMessage name="companyName" component="div" className="error" />
+        <Field name="street" as={TextField} label="Street" margin='normal' variant="outlined" className={classes.inputField} />
+        <Field name="aptSuiteOther" as={TextField} label="Apt/Suite/Other" margin='normal' variant="outlined" className={classes.inputField} />
+        <Field name="city" as={TextField} label="City" margin='normal' variant="outlined" className={classes.inputField} />
+        <Field name="state" as={TextField} label="State" margin='normal' variant="outlined" className={classes.inputField} />
+        <Field name="zipCode" as={TextField} label="ZIP Code" margin='normal' variant="outlined" className={classes.inputField} />
+        <Field name="phoneNumber" as={TextField} label="Phone Number" margin='normal' variant="outlined" className={classes.inputField} />
+        <Field name="phoneExtensionNumber" as={TextField} label="Phone Extension Number" margin='normal' variant="outlined" className={classes.inputField} />
+        <Field name="alternatePhone" as={TextField} label="Alternate Phone" margin='normal' variant="outlined" className={classes.inputField} />
+        <Field name="alternatePhoneExtension" as={TextField} label="Alternate Phone Extension" margin='normal' variant="outlined" className={classes.inputField} />
         
-        <TextField label="Number" margin='normal' variant="outlined" className={classes.inputField} />
-        <TextField label="Fax" margin='normal' variant="outlined" className={classes.inputField} />
-        <TextField label="Email" margin='normal' variant="outlined" className={classes.inputField} />
-        <TextField label="Website" margin='normal' variant="outlined" className={classes.inputField} />
-        <TextField label="Contact" margin='normal' variant="outlined" className={classes.inputField} />
-        <TextField label="Notes" margin='normal' variant="outlined" className={classes.inputField} />
-        <TextField label="Motor Carrier Number" margin='normal' variant="outlined" className={classes.inputField} />
-        <TextField label="Tax ID (EIN#)" margin='normal' variant="outlined" className={classes.inputField} />
+        <Field name="number" as={TextField} label="Number" margin='normal' variant="outlined" className={classes.inputField} />
+        <Field name="fax" as={TextField} label="Fax" margin='normal' variant="outlined" className={classes.inputField} />
+        <Field name="email" as={TextField} label="Email" margin='normal' variant="outlined" className={classes.inputField} />
+        <Field name="website" as={TextField} label="Website" margin='normal' variant="outlined" className={classes.inputField} />
+        <Field name="contact" as={TextField} label="Contact" margin='normal' variant="outlined" className={classes.inputField} />
+        <Field name="notes" as={TextField} label="Notes" margin='normal' variant="outlined" className={classes.inputField} />
+        <Field name="motorCarrierNumber" as={TextField} label="Motor Carrier Number" margin='normal' variant="outlined" className={classes.inputField} />
+        <Field name="taxId" as={TextField} label="Tax ID (EIN#)" margin='normal' variant="outlined" className={classes.inputField} />
 
-        <Button variant="contained" color="primary" onClick={handleSaveClick}>
+        <Button type="submit" variant="contained" color="primary">
           Save
         </Button>
         <Button variant="text" color="secondary">
           Cancel
         </Button>
-        </Grid></Grid>
       </Box>
+      </Form>
+        )}
+        </Formik>
     </div>
   );
 }
