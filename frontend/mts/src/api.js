@@ -4,6 +4,10 @@ const api = axios.create({
     baseURL: 'http://localhost:5002/api',
 });
 
+export const saveUnitData = (unitData) => {
+    return axios.post('/units', unitData);
+  };
+
 export const saveCompanyData = async (companyData) => {
     try {
       const response = await api.post('/companyProfiles', companyData);
