@@ -4,6 +4,15 @@ const api = axios.create({
     baseURL: 'http://localhost:5002/api',
 });
 
+export const saveCompanyData = async (companyData) => {
+    try {
+      const response = await api.post('/companyProfiles', companyData);
+      return response.data;
+    } catch (error) {
+      throw new Error('Failed to save company data');
+    }
+  };
+
 export const fetchAddresses = async () => {
     try {
     const response = await api.get('/addresses');

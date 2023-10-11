@@ -5,6 +5,8 @@ import { makeStyles } from '@mui/styles';
 import { useTheme } from '@mui/material/styles';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
+import { useDispatch } from 'react-redux';
+import { saveCompanyDataAsync } from '../../redux/slices/companySlice';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -107,10 +109,12 @@ const useStyles = makeStyles((theme) => ({
 export default function ProfileForm() {
   const classes = useStyles();
   const theme = useTheme();
+  const dispatch = useDispatch();
 
   const handleSaveClick = (values) => {
     // Handle form submission
     // Logic for saving address details
+    dispatch(saveCompanyDataAsync(values));
     console.log(values);
   };
 
