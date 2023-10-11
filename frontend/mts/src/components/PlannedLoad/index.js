@@ -4,10 +4,9 @@ import InNavBar from '../../common/Header/InNavBar';
 import { Link } from 'react-router-dom';
 import { makeStyles } from '@mui/styles';
 import { useDispatch } from 'react-redux';
-import { Formik, Form, Field, ErrorMessage } from 'formik';
+import { Formik, Form, FieldArray, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { createPlannedLoadAsync } from '../../redux/slices/plannedLoadsSlice';
-
 
 const useStyles = makeStyles((theme) => ({
     formContainer: {
@@ -81,7 +80,9 @@ const useStyles = makeStyles((theme) => ({
         stopOff: '',
         tarpFee: '',
         additional: '',
-        invoiceAdvance: ''
+        invoiceAdvance: '',
+        pickups: [],
+        deliveries: []
 
     };
 
@@ -121,7 +122,7 @@ export default function PlannedLoad() {
     const handleSubmit = async (values, { setSubmitting }) => {
         try {
         // dispatch the action to create a planned load
-        dispatch(createPlannedLoadAsync(values));
+        await dispatch(createPlannedLoadAsync(values));
             alert('Planned load created successfully!');
         } catch (error) {
         alert('Error creating planned load. Please try again.');
@@ -138,7 +139,7 @@ export default function PlannedLoad() {
              onSubmit={handleSubmit} 
              validationSchema={validationSchema} 
              >
-                {({ isSubmitting }) => (
+                {({ values, isSubmitting }) => (
                     <Form>
             <Box className={classes.formContainer}>
         <Typography variant="h6" className={classes.sectionTitle}>Add Planned Load</Typography>
@@ -182,10 +183,15 @@ export default function PlannedLoad() {
                         <Grid container spacing={6}>
                             <Grid item xs={6}>
                         <Typography variant="subtitle1">Pickup</Typography>
+                        <FieldArray name="pickups">
+                            {({ push, remove }) => (
+                                <div>
+                                    {values.pickups.map((pickup, index) => (
+                                        <div key={index}>
                         <Field
                         type="text"
                         label="Shipper"
-                        name="shipper"
+                        name={`pickups.${index}.shipper`}
                         as={TextField}
                         margin='normal'
                         className={classes.inputField}
@@ -197,7 +203,7 @@ export default function PlannedLoad() {
                         <Field
                         type="date"
                         label="Pickup date"
-                        name="pickupDate"
+                        name={`pickups.${index}.pickupDate`}
                         as={TextField}
                         margin='normal'
                         className={classes.inputField}
@@ -207,7 +213,7 @@ export default function PlannedLoad() {
                         <Field
                         type="text"
                         label="Instructions"
-                        name="instructions"
+                        name={`pickups.${index}.instructions`}
                         as={TextField}
                         margin='normal'
                         className={classes.inputField}
@@ -219,7 +225,7 @@ export default function PlannedLoad() {
                         <Field
                         type="text"
                         label="BOL"
-                        name="bol"
+                        name={`pickups.${index}.bol`}
                         as={TextField}
                         margin='normal'
                         className={classes.inputField}
@@ -230,7 +236,7 @@ export default function PlannedLoad() {
                         <Field
                         type="text"
                         label="Customer Required Info (included on invoice)"
-                        name="customerRequiredInfo"
+                        name={`pickups.${index}.customerRequiredInfo`}
                         as={TextField}
                         margin='normal'
                         className={classes.inputField}
@@ -242,7 +248,7 @@ export default function PlannedLoad() {
                         <Field
                         type="number"
                         label="Weight"
-                        name="weight"
+                        name={`pickups.${index}.weight`}
                         as={TextField}
                         margin='normal'
                         className={classes.inputField}
@@ -253,7 +259,7 @@ export default function PlannedLoad() {
                         <Field
                         type="number"
                         label="Quantity"
-                        name="quantity"
+                        name={`pickups.${index}.quantity`}
                         as={TextField}
                         margin='normal'
                         className={classes.inputField}
@@ -263,7 +269,7 @@ export default function PlannedLoad() {
                         <Field
                         type="text"
                         label="Notes"
-                        name="notes"
+                        name={`pickups.${index}.notes`}
                         as={TextField}
                         margin="normal"
                         className={classes.inputField}
@@ -273,21 +279,32 @@ export default function PlannedLoad() {
                         <Field
                         type="text"
                         label="Commodity"
-                        name="commodity"
+                        name={`pickups.${index}.commodity`}
                         as={TextField}
                         margin="normal"
                         className={classes.inputField}
                         variant="outlined"
                         />
-                        <Button variant="outlined">Add Another Pickup</Button>
+                        <Button variant="outlined" onClick={() => remove(index)}>Remove Pickup</Button>
+                        </div>
+                                    ))}
+                        <Button variant="outlined" onClick={() => push({})}>Add Another Pickup</Button>
+                        </div> 
+                                    )}
+                                    </FieldArray>
                         </Grid>
 
                 <Grid item xs={6}>
                 <Typography variant="subtitle2">Delivery</Typography>
+                <FieldArray name="deliveries">
+                    {({ push, remove }) => (
+                        <div>
+                            {values.deliveries.map((delivery, index) => (
+                                <div key={index}>
                 <Field
                 type="text"
                 label="Consignee Name"
-                name="consigneeName"
+                name={`deliveries.${index}.consigneeName`}
                 as={TextField}
                 margin='normal'
                 className={classes.inputField}
@@ -299,7 +316,7 @@ export default function PlannedLoad() {
                 <Field
                 type="date"
                 label="Delivery Date"
-                name="deliveryDate"
+                name={`deliveries.${index}.deliveryDate`}
                 as={TextField}
                 margin='normal'
                 className={classes.inputField}
@@ -309,16 +326,25 @@ export default function PlannedLoad() {
                 <Field
                 type="text"
                 label="Instructions"
-                name="instructions"
+                name={`deliveries.${index}.instructions`}
                 as={TextField}
                 margin='normal'
                 className={classes.inputField}
                 variant="outlined"
                 />
 
-                <Button variant="outlined" color="primary">
+                <Button variant="outlined" color="primary" onClick={() => remove(index)}>
+                    Remove Delivery
+                </Button>
+                </div>
+                            ))}
+
+                <Button variant="outlined" color="primary" onClick={() => push({})}>
                     Add Another Delivery
                 </Button>
+                </div> 
+                    )}
+                    </FieldArray>
                 </Grid>
                 </Grid>
                 </Box>               
