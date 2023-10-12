@@ -46,6 +46,7 @@ export default function DriverFormPage() {
 
   const handleSaveClick = (values) => {
     dispatch(saveDriverDataAsync(values));
+    console.log(values);
   };
   const classes = useStyles();
 
@@ -63,7 +64,7 @@ export default function DriverFormPage() {
       })}
       onSubmit={handleSaveClick}
       >
-      <form className={classes.formContainer}>
+      <Form className={classes.formContainer}>
 
       <Box my={2}>
         <Field type="text" name="firstName" as={TextField} label="First Name" variant="outlined" margin='normal'className={classes.inputField}/>
@@ -104,7 +105,7 @@ export default function DriverFormPage() {
           Save
         </Button>
       </Box>
-      </form>
+      </Form>
       </Formik>
       </Paper>
     </div>

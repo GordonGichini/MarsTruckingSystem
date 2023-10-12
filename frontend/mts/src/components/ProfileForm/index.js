@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Typography, TextField, Button, Box } from '@material-ui/core';
 import InNavBar from '../../common/Header/InNavBar';
 import { makeStyles } from '@mui/styles';
@@ -110,12 +111,19 @@ export default function ProfileForm() {
   const classes = useStyles();
   const theme = useTheme();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
 
-  const handleSaveClick = (values) => {
-    // Handle form submission
-    // Logic for saving address details
+  const handleSaveClick = async (values) => {
+    setLoading(true);
+    try {
     dispatch(saveCompanyDataAsync(values));
-    console.log(values);
+    navigate('/company-profile');
+    } catch (error) {
+      // handle any errors if the saving operation failed
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -140,12 +148,12 @@ export default function ProfileForm() {
         <Field name="companyName" as={TextField} label="Company Name" margin='normal' variant="outlined" className={classes.inputField} />
         <ErrorMessage name="companyName" component="div" className="error" />
         <Field name="street" as={TextField} label="Street" margin='normal' variant="outlined" className={classes.inputField} />
-        <Field name="aptSuiteOther" as={TextField} label="Apt/Suite/Other" margin='normal' variant="outlined" className={classes.inputField} />
+        <Field name="apt" as={TextField} label="Apt" margin='normal' variant="outlined" className={classes.inputField} />
         <Field name="city" as={TextField} label="City" margin='normal' variant="outlined" className={classes.inputField} />
         <Field name="state" as={TextField} label="State" margin='normal' variant="outlined" className={classes.inputField} />
         <Field name="zipCode" as={TextField} label="ZIP Code" margin='normal' variant="outlined" className={classes.inputField} />
         <Field name="phoneNumber" as={TextField} label="Phone Number" margin='normal' variant="outlined" className={classes.inputField} />
-        <Field name="phoneExtensionNumber" as={TextField} label="Phone Extension Number" margin='normal' variant="outlined" className={classes.inputField} />
+        <Field name="phoneNumberExtension" as={TextField} label="Phone Number Extension" margin='normal' variant="outlined" className={classes.inputField} />
         <Field name="alternatePhone" as={TextField} label="Alternate Phone" margin='normal' variant="outlined" className={classes.inputField} />
         <Field name="alternatePhoneExtension" as={TextField} label="Alternate Phone Extension" margin='normal' variant="outlined" className={classes.inputField} />
         
@@ -158,8 +166,8 @@ export default function ProfileForm() {
         <Field name="motorCarrierNumber" as={TextField} label="Motor Carrier Number" margin='normal' variant="outlined" className={classes.inputField} />
         <Field name="taxId" as={TextField} label="Tax ID (EIN#)" margin='normal' variant="outlined" className={classes.inputField} />
 
-        <Button type="submit" variant="contained" color="primary">
-          Save
+        <Button type="submit" variant="contained" color="primary" disabled={loading}>
+          {loading ? 'Saving...' : 'Save'}
         </Button>
         <Button variant="text" color="secondary">
           Cancel

@@ -92,7 +92,7 @@ export default function UnitFormPage() {
             status: Yup.string().required('Required'),
             // Add validation rules for other fields
           })}
-          onSubmit={handleSave}
+          onSubmit={handleSaveClick}
         >
           <Form>
 
