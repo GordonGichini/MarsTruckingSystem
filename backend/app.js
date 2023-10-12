@@ -72,5 +72,5 @@ app.use(errorMiddleware);
 // Other routes and configurations
 
 // Start the server
-const port = process.env.PORT || 5002;
+const port = process.env.PORT || 5003;
 app.listen(port, () => console.log(`Server is running on port ${port}`));
