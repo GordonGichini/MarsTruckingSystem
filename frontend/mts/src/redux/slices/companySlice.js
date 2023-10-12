@@ -45,8 +45,6 @@ const companySlice = createSlice({
   },
 });
 
-// Export the asynchronous thunk action
-export { saveCompanyDataAsync };
 
 // Export the synchronous actions if you have any
 export const { updateCompanyData } = companySlice.actions;

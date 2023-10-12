@@ -122,7 +122,8 @@ export default function PlannedLoad() {
     const handleSubmit = async (values, { setSubmitting }) => {
         try {
         // dispatch the action to create a planned load
-        await dispatch(createPlannedLoadAsync(values));
+        dispatch(createPlannedLoadAsync(values));
+        console.log(values);
             alert('Planned load created successfully!');
         } catch (error) {
         alert('Error creating planned load. Please try again.');

@@ -4,9 +4,23 @@ const api = axios.create({
     baseURL: 'http://localhost:5002/api',
 });
 
-export const saveUnitData = (unitData) => {
-    return axios.post('/units', unitData);
-  };
+export const saveDriverData = async (driverData) => {
+    try {
+        const response = await api.post('/drivers', driverData);
+        return response.data;
+    } catch (error) {
+        throw new Error('Failed to save driver data');
+    }
+}
+
+export const saveUnitData = async (unitData) => {
+    try {
+        const response = await api.post('/units', unitData);
+        return response.data;
+  } catch (error) {
+    throw new Error('Failed to save unit');
+  }
+}
 
 export const saveCompanyData = async (companyData) => {
     try {

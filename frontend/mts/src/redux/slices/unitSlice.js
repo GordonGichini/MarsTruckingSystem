@@ -37,6 +37,6 @@ const unitSlice = createSlice({
   },
 });
 
-export const selectUnit = (state) => state.unit.unit;
+export const selectUnit = (state) => state.unit;
 
 export default unitSlice.reducer;
