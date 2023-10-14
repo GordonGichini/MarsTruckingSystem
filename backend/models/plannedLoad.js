@@ -38,7 +38,7 @@ const plannedLoadSchema = new mongoose.Schema({
       message: 'Pickup date must be a future date',
     },
   },
-  driverInstructions: {
+  instructions: {
     type: String,
     required: false,
   },
@@ -108,6 +108,10 @@ const plannedLoadSchema = new mongoose.Schema({
   },
   tarpFee: {
     type: Number,
+    required: true,
+  },
+  additional: {
+    type: String,
     required: true,
   },
   invoiceAdvance: {
