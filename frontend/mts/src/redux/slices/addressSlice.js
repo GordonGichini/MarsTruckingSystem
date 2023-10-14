@@ -3,7 +3,7 @@ import * as api from '../../api';
 
 
 export const fetchAddressesAsync = createAsyncThunk(
-  '/addresses',
+  'addresses/fetchAddresses',
   async () => {
     const data = await api.fetchAddresses();
     return data;
@@ -11,7 +11,7 @@ export const fetchAddressesAsync = createAsyncThunk(
 );
 
 export const createAddressAsync = createAsyncThunk(
-  '/addresses',
+  'addresses/createAddress',
   async (newAddress) => {
     const response = await api.createAddress(newAddress); // Replace with your API call
     return response.data;
@@ -19,7 +19,7 @@ export const createAddressAsync = createAsyncThunk(
 );
 
 export const updateAddressAsync = createAsyncThunk(
-  '/addresses/:id',
+  'addresses/updateAddress',
   async (updatedAddress) => {
     const response = await api.updateAddress(updatedAddress);
     return response.data;
@@ -27,7 +27,7 @@ export const updateAddressAsync = createAsyncThunk(
 );
 
 export const deleteAddressAsync = createAsyncThunk(
-  '/addresses/delete',
+  'addresses/deleteAddress',
   async (idToDelete) => {
     await api.deleteAddress(idToDelete);
     return idToDelete;

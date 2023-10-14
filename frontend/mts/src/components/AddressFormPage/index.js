@@ -1,12 +1,13 @@
-import React from 'react';
-import { Typography, TextField, Button, Box } from '@material-ui/core';
+import React, { useState } from 'react';
+import { Typography, TextField, Button, Box, MenuItem, Select } from '@material-ui/core';
 import InNavBar from '../../common/Header/InNavBar';
 import { makeStyles } from '@mui/styles';
+import { useNavigate } from 'react-router-dom';
 import { useTheme } from '@mui/material/styles';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { useDispatch } from 'react-redux';
-import { addAddress } from '../../redux/slices/addressSlice';
+import { createAddressAsync } from '../../redux/slices/addressSlice';
 
 const useStyles = makeStyles((theme) => ({
   formContainer: {
@@ -78,6 +79,7 @@ const useStyles = makeStyles((theme) => ({
   }));
 
   const initialValues = {
+    entry: '',
     companyName: '',
     street: '',
     aptSuiteOther: '',
@@ -99,6 +101,7 @@ const useStyles = makeStyles((theme) => ({
   };
 
   const validationSchema = Yup.object({
+    entry: Yup.string().required('Entry is required'),
     companyName: Yup.string().required('Company Name is required'),
 
   });
@@ -106,13 +109,22 @@ const useStyles = makeStyles((theme) => ({
 export default function AddressFormPage() {
   const classes = useStyles();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
   const theme = useTheme();
 
 
-  const handleSubmit = (values, { setSubmitting }) => {
+  const handleSaveClick = async (values) => {
+    setLoading(true);
+    try {
     // Logic for saving address details
-    dispatch(addAddress(values));
-    setSubmitting(false);
+    dispatch(createAddressAsync(values));
+    navigate('/dashboard');
+    } catch (error)  {
+      // handle any errors if the saving operation failed
+    } finally {
+    setLoading(false);
+    }
   };
 
   return (
@@ -123,29 +135,30 @@ export default function AddressFormPage() {
       <Formik 
       initialValues={initialValues}
       validationSchema={validationSchema}
-      onSubmit={handleSubmit}
+      onSubmit={handleSaveClick}
       >
-        {({ isSubmitting }) => (
+        {() => (
           <Form>
-
       <Box className={classes.formContainer}> 
-        <Field 
-        type="text"
-        label="Search"
-        name="search" 
-        component={TextField}
-        variant="outlined" 
-        className={classes.search} 
-        />
         <Typography variant="caption">
           Select an address to autofill this form
           </Typography>
+          <Typography variant="subtitle1">Entry</Typography>
+        <Field as={Select} type="text" name="entry" label="Entry" variant="outlined" className={classes.inputField}>
+          <MenuItem value="customer">Customer</MenuItem>
+          <MenuItem value="shipper">Shipper</MenuItem>
+          <MenuItem value="consignee">Consignee</MenuItem>
+          <MenuItem value="maintenance_vendor">Maintenance vendor</MenuItem>
+          <MenuItem value="fuel_vendor">Fuel vendor</MenuItem>
+          <MenuItem value="driver">Driver</MenuItem>
+        </Field>
+        <ErrorMessage name="entry" component="div" className="error" />
         <Field 
         type="text"
         label="Company Name" 
         name="companyName"
         margin='normal' 
-        component={TextField}
+        as={TextField}
         variant="outlined" 
         className={classes.inputField} 
         />
@@ -154,16 +167,16 @@ export default function AddressFormPage() {
         label="Street" 
         name="street" 
         margin='normal' 
-        component={TextField} 
+        as={TextField} 
         variant="outlined" 
         className={classes.inputField} 
         />
         <Field 
         type="text" 
-        label="Apt/Suite/Other" 
-        name="apt/suite/other" 
+        label="Apt" 
+        name="apt" 
         margin='normal' 
-        component={TextField} 
+        as={TextField} 
         variant="outlined" 
         className={classes.inputField} 
         />
@@ -181,7 +194,7 @@ export default function AddressFormPage() {
         label="State" 
         name="state" 
         margin='normal' 
-        component={TextField} 
+        as={TextField} 
         variant="outlined" 
         className={classes.inputField} 
         />
@@ -190,7 +203,7 @@ export default function AddressFormPage() {
         label="ZIP Code" 
         name="zipCode" 
         margin='normal' 
-        component={TextField} 
+        as={TextField} 
         variant="outlined" 
         className={classes.inputField} 
         />
@@ -199,16 +212,16 @@ export default function AddressFormPage() {
         label="Phone Number" 
         name="phoneNumber" 
         margin='normal' 
-        component={TextField} 
+        as={TextField} 
         variant="outlined" 
         className={classes.inputField} 
         />
         <Field 
         type="text" 
-        label="Phone Extension Number" 
-        name="phoneExtensionNumber" 
+        label="Phone Number Extension" 
+        name="phoneNumberExtension" 
         margin='normal' 
-        component={TextField} 
+        as={TextField} 
         variant="outlined" 
         className={classes.inputField} 
         />
@@ -217,7 +230,7 @@ export default function AddressFormPage() {
         label="Alternate Phone" 
         name="alternatePhone" 
         margin='normal' 
-        component={TextField} 
+        as={TextField} 
         variant="outlined" 
         className={classes.inputField} 
         />
@@ -227,26 +240,17 @@ export default function AddressFormPage() {
         label="Alternate Phone Extension" 
         name="alternatePhoneExtension" 
         margin='normal' 
-        component={TextField} 
+        as={TextField} 
         variant="outlined" 
         className={classes.inputField} 
         />
-        
-        <Field 
-        type="text" 
-        label="Number" 
-        name="number" 
-        margin='normal' 
-        component={TextField} 
-        variant="outlined" 
-        className={classes.inputField} 
-        />
+
         <Field 
         type="text" 
         label="Fax" 
         name="fax" 
         margin='normal' 
-        component={TextField} 
+        as={TextField} 
         variant="outlined" 
         className={classes.inputField} 
         />
@@ -255,7 +259,7 @@ export default function AddressFormPage() {
         label="Email" 
         name="email" 
         margin='normal' 
-        component={TextField} 
+        as={TextField} 
         variant="outlined" 
         className={classes.inputField} 
         />
@@ -264,7 +268,7 @@ export default function AddressFormPage() {
         label="Website" 
         name="website" 
         margin='normal' 
-        component={TextField} 
+        as={TextField} 
         variant="outlined" 
         className={classes.inputField} 
         />
@@ -273,7 +277,7 @@ export default function AddressFormPage() {
         label="Contact" 
         name="contact" 
         margin='normal' 
-        component={TextField} 
+        as={TextField} 
         variant="outlined" 
         className={classes.inputField} 
         />
@@ -282,7 +286,7 @@ export default function AddressFormPage() {
         label="Notes" 
         name="notes" 
         margin='normal' 
-        component={TextField} 
+        as={TextField} 
         variant="outlined" 
         className={classes.inputField} 
         />
@@ -290,7 +294,7 @@ export default function AddressFormPage() {
         type="text" 
         label="Motor Carrier Number" 
         name="motorCarrierNumber" 
-        component={TextField} 
+        as={TextField} 
         margin='normal' 
         variant="outlined" 
         className={classes.inputField} 
@@ -298,9 +302,9 @@ export default function AddressFormPage() {
         <Field 
         type="text" 
         label="Tax ID (EIN#)" 
-        name="taxId(EIN#)" 
+        name="taxId" 
         margin='normal' 
-        component={TextField} 
+        as={TextField} 
         variant="outlined" 
         className={classes.inputField} 
         />
@@ -309,9 +313,9 @@ export default function AddressFormPage() {
         variant="contained" 
         color="primary" 
         type="submit" 
-        disabled={isSubmitting} 
+        disabled={loading} 
         className={classes.button}>
-          Save
+        {loading ? 'Saving...' : 'Save' }
         </Button>
         <Button variant="text" color="secondary">
           Cancel

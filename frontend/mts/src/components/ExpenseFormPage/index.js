@@ -59,11 +59,31 @@ const useStyles = makeStyles((theme) => ({
  },
   },
 
-}));
+})); 
+const initialValues = {
+          expenseCategory: '',
+          amount: '',
+          description: '',
+          assignToTrip: 'no',
+          selectedTrip: '',
+          expenseDate: '',
+          unit: '',
+          gallons: '',
+          odometer: '',
+          fuelVendor: '',
+          state: '',
+        };
+        const validationSchema = {
+          expenseCategory: Yup.string().required('Expense Category is required'),
+          companyName: Yup.string().required('Company Name is required'),
+
+
+        };
 
 export default function ExpenseFormPage() {
   const navigate = useNavigate();
   const theme = useTheme();
+  const [loading, setLoading] = useState(false);
   const classes = useStyles();
 
   const state = ['Alabama','Alaska','Arizona','Arkansas','California','Colorado','Connecticut','Delaware','Florida','Georgia','Hawaii','Idaho','Illinois','Indiana','Iowa','Kansas','Kentucky','Louisiana','Maine','Maryland','Massachusetts','Michigan','Minnesota','Mississippi','Missouri','Montana','Nebraska','Nevada','New Hampshire','New Jersey','New Mexico','New York','North Carolina','North Dakota','Ohio','Oklahoma','Oregon','Pennsylvania','Rhode Island','South Carolina','South Dakota','Tennessee','Texas','Utah','Vermont','Virginia','Washington','West Virginia','Wisconsin','Wyoming']
@@ -90,7 +110,7 @@ export default function ExpenseFormPage() {
 
   const handleCreateExpense = async (values) => {
     try {
-      const response = await axios.post('/expenses', values);
+      const response = await api.post('/expenses', values);
       if (response.status === 201) {
         toast.success('Expense created successfully.');
         const newExpenseId = response.data._id;
@@ -108,33 +128,9 @@ export default function ExpenseFormPage() {
       <Box className={classes.formContainer}>
         <Typography variant="h6" className={classes.sectionTitle}>Add Expense</Typography>
         <Formik
-        initialValues={{
-          expenseCategory: '',
-          amount: '',
-          description: '',
-          assignToTrip: 'no',
-          selectedTrip: '',
-          expenseDate: '',
-          unit: '',
-          gallons: '',
-          odometer: '',
-          fuelVendor: '',
-          state: '',
-        }}
-        validationSchema={Yup.object({
-          expenseCategory: Yup.string().required('Required'),
-          amount: Yup.number().required('required'),
-          description: Yup.string().required('Required'),
-          assignToTrip: Yup.boolean().required('required'),
-          expenseDate: Yup.date().required('required'),
-          unit: Yup.string().required('required'),
-          gallons: Yup.number().required('required'),
-          odometer: Yup.number().required('required'),
-          fuelVendor: Yup.string().required('required'),
-          state: Yup.string().required('Please select a state'),
-
-          // other validations
-        })}
+       
+       initialValues={initialValues}
+        validationSchema={validationSchema}
         onSubmit={handleCreateExpense}
         >
           {({ isSubmitting, values, setFieldValue }) => (
@@ -175,6 +171,7 @@ export default function ExpenseFormPage() {
           margin='normal'        
           className={classes.inputField}
           />
+          <Typography variant="h5">Assign to Trip</Typography>
           <Field
           name="assignToTrip"
           as={RadioGroup}

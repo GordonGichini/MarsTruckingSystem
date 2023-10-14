@@ -1,11 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Typography, TextField, Button, Box, Grid, FormControl, InputLabel, Select, MenuItem } from '@material-ui/core';
 import InNavBar from '../../common/Header/InNavBar';
 import { Link } from 'react-router-dom';
 import { makeStyles } from '@mui/styles';
 import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { Formik, Form, FieldArray, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
+import { useTheme } from '@mui/material/styles';
 import { createPlannedLoadAsync } from '../../redux/slices/plannedLoadsSlice';
 
 const useStyles = makeStyles((theme) => ({
@@ -117,19 +119,24 @@ const useStyles = makeStyles((theme) => ({
 export default function PlannedLoad() {
     const classes = useStyles();
     const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const [loading, setLoading] = useState(false);
+    const theme = useTheme();
 
 
-    const handleSubmit = async (values, { setSubmitting }) => {
+    const handleSaveClick = async (values) => {
+        setLoading(true);
         try {
         // dispatch the action to create a planned load
         dispatch(createPlannedLoadAsync(values));
-        console.log(values);
+        navigate('/dashboard');
+
             alert('Planned load created successfully!');
         } catch (error) {
         alert('Error creating planned load. Please try again.');
         } finally {
-            setSubmitting(false);
-        };
+            setLoading(false);
+        }
     };
 
     return (
@@ -137,10 +144,10 @@ export default function PlannedLoad() {
             <InNavBar />
             <Formik
              initialValues={initialValues} 
-             onSubmit={handleSubmit} 
+             onSubmit={handleSaveClick} 
              validationSchema={validationSchema} 
              >
-                {({ values, isSubmitting }) => (
+                {( values ) => (
                     <Form>
             <Box className={classes.formContainer}>
         <Typography variant="h6" className={classes.sectionTitle}>Add Planned Load</Typography>
@@ -304,8 +311,8 @@ export default function PlannedLoad() {
                                 <div key={index}>
                 <Field
                 type="text"
-                label="Consignee Name"
-                name={`deliveries.${index}.consigneeName`}
+                label="Consignee"
+                name={`deliveries.${index}.consignee`}
                 as={TextField}
                 margin='normal'
                 className={classes.inputField}
@@ -470,7 +477,9 @@ export default function PlannedLoad() {
                     />
                     </Box>
                     </Box>
-                    <Button variant="outlined" type="submit" disabled={isSubmitting}>Save </Button>
+                    <Button variant="outlined" type="submit" color="primary" disabled={loading} className={classes.button}>
+                    {loading ? 'Saving...' : 'Save' }
+                    </Button>
                 <Button variant="text">cancel</Button>
             </Form>
     )}

@@ -5,7 +5,7 @@ import InNavBar from '../../common/Header/InNavBar';
 import { useTheme } from '@mui/material/styles';
 import { Formik, Field, Form, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
-import { FormControlLabel, Radio, RadioGroup, Typography, Button, Box, MenuItem } from '@material-ui/core';
+import { FormControlLabel, Radio, RadioGroup, Typography, TextField, Button, Box, MenuItem, Select } from '@material-ui/core';
 
 import { saveUnitDataAsync } from '../../redux/slices/unitSlice';
 import { selectUnit } from '../../redux/slices/unitSlice';
@@ -44,6 +44,31 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+const initialValues = {
+            unitType: '',
+            ownershipType: '',
+            status: 'active',
+            vin: '',
+            make: '',
+            model: '',
+            description: '',
+            year: '',
+            yearPurchased: '',
+            purchasePrice: '',
+            licensePlateNumber: '',
+            licensePlateExpiration: '',
+            informationStickerExpiration: '',
+            insuranceExpiration: '',
+            initialLocation: '',
+          };
+
+          const validationSchema = Yup.object().shape({
+            unitType: Yup.string().required('Required'),
+            ownershipType: Yup.string().required('Required'),
+            status: Yup.string().required('Required'),
+            // Add validation rules for other fields
+          })
+          
 
 export default function UnitFormPage() {
   const theme = useTheme();
@@ -69,43 +94,22 @@ export default function UnitFormPage() {
       <Typography variant="h5" className={classes.title}>Add a Unit</Typography>
       <Box className={classes.formContainer}>
       <Formik
-          initialValues={{
-            type: '',
-            ownershipType: '',
-            status: 'active',
-            vin: '',
-            make: '',
-            model: '',
-            description: '',
-            year: '',
-            yearPurchased: '',
-            purchasePrice: '',
-            licensePlateNumber: '',
-            licensePlateExpiration: '',
-            informationStickerExpiration: '',
-            insuranceExpiration: '',
-            initialLocation: '',
-          }}
-          validationSchema={Yup.object({
-            type: Yup.string().required('Required'),
-            ownershipType: Yup.string().required('Required'),
-            status: Yup.string().required('Required'),
-            // Add validation rules for other fields
-          })}
-          onSubmit={handleSaveClick}
+      initialValues={initialValues}
+      validationSchema={validationSchema}
+      onSubmit={handleSaveClick}
         >
+          {() => (
           <Form>
-
         <Typography variant="subtitle1">Unit Type</Typography>
-        <Field as="select" name="type" label="Type" variant="outlined"className={classes.inputField}>
+        <Field as={Select} name="unitType" label="Unit Type" variant="outlined" className={classes.inputField}>
           <MenuItem value="truck">Truck</MenuItem>
           <MenuItem value="trailer">Trailer</MenuItem>
           <MenuItem value="misc">Misc</MenuItem>
         </Field>
-        <ErrorMessage name="type" component="div" className="error" />
+        <ErrorMessage name="unitType" component="div" className="error" />
 
         <Typography variant="subtitle1">Ownership Type</Typography>
-        <Field as="select" name="ownershipType" label="Ownership Type" variant="outlined"className={classes.inputField}>
+        <Field as={Select} name="ownershipType" label="Ownership Type" variant="outlined" className={classes.inputField}>
           <MenuItem value="companyOwned">Company Owned</MenuItem>
           <MenuItem value="ownerOperator">Owner Operator</MenuItem>
         </Field>
@@ -128,22 +132,22 @@ export default function UnitFormPage() {
 
         {showOptionalFields && (
           <div>
-            <Field label="VIN" variant="outlined" margin='normal' className={classes.inputField} />
-            <Field label="Make" variant="outlined" margin='normal' className={classes.inputField} />
-            <Field label="Model" variant="outlined" margin='normal' className={classes.inputField} />
-            <Field label="Description" variant="outlined" margin='normal' className={classes.inputField} />
-            <Field label="Year" variant="outlined" margin='normal' className={classes.inputField} />
-            <Field label="Year Purchased" variant="outlined" margin='normal' className={classes.inputField} />
-            <Field label="Purchase Price" variant="outlined" margin='normal' className={classes.inputField} />
-            <Field label="License Plate Number" variant="outlined" margin='normal' className={classes.inputField} />
-            <Field label="License Plate Expiration" variant="outlined" margin='normal' className={classes.inputField} />
-            <Field label="Information Sticker Expiration" variant="outlined" margin='normal' className={classes.inputField} />
-            <Field label="Insurance Expiration" variant="outlined" margin='normal' className={classes.inputField} />
+            <Field name="vin" as={TextField} label="VIN" variant="outlined" margin='normal' className={classes.inputField} />
+            <Field name="make" as={TextField} label="Make" variant="outlined" margin='normal' className={classes.inputField} />
+            <Field name="model" as={TextField} label="Model" variant="outlined" margin='normal' className={classes.inputField} />
+            <Field name="description" as={TextField} label="Description" variant="outlined" margin='normal' className={classes.inputField} />
+            <Field name="year" as={TextField} label="Year" variant="outlined" margin='normal' className={classes.inputField} />
+            <Field name="yearPurchased" as={TextField} label="Year Purchased" variant="outlined" margin='normal' className={classes.inputField} />
+            <Field name="purchasePrice" as={TextField} label="Purchase Price" variant="outlined" margin='normal' className={classes.inputField} />
+            <Field name="licensePlateNumber" as={TextField} label="License Plate Number" variant="outlined" margin='normal' className={classes.inputField} />
+            <Field name="licensePlateExpiration" as={TextField} label="License Plate Expiration" variant="outlined" margin='normal' className={classes.inputField} />
+            <Field name="informationStickerExpiration" as={TextField} label="Information Sticker Expiration" variant="outlined" margin='normal' className={classes.inputField} />
+            <Field name="insuranceExpiration" as={TextField} label="Insurance Expiration" variant="outlined" margin='normal' className={classes.inputField} />
           </div>
         )}
 
         <Typography variant="h5">Initial Location</Typography>
-        <Field label="Initial location" variant="outlined" margin="normal" className={classes.inputField} />
+        <Field name="initialLocation" as={TextField} label="Initial location" variant="outlined" margin="normal" className={classes.inputField} />
         <Typography variant="body2">
           The initial location of the unit is used to accurately calculate mileage.
         </Typography>
@@ -151,13 +155,14 @@ export default function UnitFormPage() {
           Create Initial Location
         </Button>
 
-        <Button variant="outlined" color="primary" onClick={handleSaveClick}>
+        <Button type="submit" variant="outlined" color="primary">
           Save
         </Button>
         <Button variant="text" color="secondary">
           Cancel
         </Button>
         </Form>
+          )}
         </Formik>
         </Box>
     </div>
