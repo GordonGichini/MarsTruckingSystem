@@ -194,7 +194,7 @@ export default function PlannedLoad() {
                         <FieldArray name="pickups">
                             {({ push, remove }) => (
                                 <div>
-                                    {values.pickups.map((pickup, index) => (
+                                    {(values.pickups || []).map((pickup, index) => (
                                         <div key={index}>
                         <Field
                         type="text"
@@ -307,7 +307,7 @@ export default function PlannedLoad() {
                 <FieldArray name="deliveries">
                     {({ push, remove }) => (
                         <div>
-                            {values.deliveries.map((delivery, index) => (
+                            {(values.deliveries || []).map((delivery, index) => (
                                 <div key={index}>
                 <Field
                 type="text"
