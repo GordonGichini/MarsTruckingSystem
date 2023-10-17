@@ -70,10 +70,11 @@ export const {
   plannedLoadRemoved,
 } = plannedLoadsSlice.actions;
 
+
 //Defining a base selector to get the plannedLoads slice
 const selectPlannedLoadsSlice = (state) => state.plannedLoads;
 
-export const selectedPlannedLoads = createSelector(
+export const selectPlannedLoads = createSelector(
   [selectPlannedLoadsSlice],
   (plannedLoadsSlice) => plannedLoadsSlice.plannedLoads
 );

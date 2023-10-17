@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import InNavBar from '../../common/Header/InNavBar';
 import { Typography, makeStyles, Button, Box, Table, TableContainer, TableHead, TableRow, TableCell, TableBody } from '@material-ui/core';
 import { useSelector, useDispatch } from 'react-redux';
-import { createPlannedLoadAsync, selectedPlannedLoads } from '../../redux/slices/plannedLoadsSlice';
+import { createPlannedLoadAsync, selectPlannedLoads } from '../../redux/slices/plannedLoadsSlice';
 
 
 const useStyles = makeStyles((theme) => ({

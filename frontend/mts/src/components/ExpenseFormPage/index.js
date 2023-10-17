@@ -1,12 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { Typography, Radio, RadioGroup, TextField, Button, FormControl, Select, MenuItem, InputLabel, Box, FormControlLabel } from '@material-ui/core';
 import { makeStyles } from '@mui/styles';
+import { useDispatch, useSelector } from 'react-redux';
+import { saveExpenseDataAsync } from '../../redux/slices/expenseSlice';
 import InNavBar from '../../common/Header/InNavBar';
 import { useTheme } from '@mui/material/styles';
 import { useNavigate } from 'react-router-dom';
+import { useFormik } from 'formik';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import axios from 'axios';
+
 import api from '../../api';
 import { toast } from 'react-toastify';
 
@@ -83,6 +87,7 @@ const initialValues = {
 export default function ExpenseFormPage() {
   const navigate = useNavigate();
   const theme = useTheme();
+  const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
   const classes = useStyles();
 
@@ -108,39 +113,30 @@ export default function ExpenseFormPage() {
     fetchAvailableTrips();
   }, []); //empty dependency array ensures this effect runs only once on mount
 
-  const handleCreateExpense = async (values) => {
-    try {
-      const response = await api.post('/expenses', values);
-      if (response.status === 201) {
-        toast.success('Expense created successfully.');
-        const newExpenseId = response.data._id;
-      navigate(`/expenses/${newExpenseId}`);
-      }
-    } catch (error) {
-      console.error('Error creating expense:', error);
-      toast.error('An error occurred while creating the expense. Please try again.');
-    }
+  const handleSaveClick = (values) => {
+
+    dispatch(saveExpenseDataAsync(values));
   };
+
+  const formik = useFormik({
+    initialValues: initialValues,
+    validationSchema: validationSchema,
+    onSubmit: handleSaveClick,
+  });
 
   return (
     <div>
       <InNavBar />
       <Box className={classes.formContainer}>
         <Typography variant="h6" className={classes.sectionTitle}>Add Expense</Typography>
-        <Formik
-       
-       initialValues={initialValues}
-        validationSchema={validationSchema}
-        onSubmit={handleCreateExpense}
-        >
-          {({ isSubmitting, values, setFieldValue }) => (
+        <Formik>
           <Form>
                <FormControl variant="outlined" className={classes.inputField}>
                  <InputLabel>Expense Category</InputLabel>
                  <Select
                    name="expenseCategory"
-                   value={values.expenseCategory}
-                   onChange={(event) => setFieldValue('expenseCategory', event.target.value)}
+                   value={formik.values.expenseCategory}
+                   onChange={formik.handleChange}
                  >
                    <MenuItem value="fuel">Fuel</MenuItem>
                    <MenuItem value="reeferFuel">Reefer Fuel</MenuItem>
@@ -197,8 +193,8 @@ export default function ExpenseFormPage() {
               <InputLabel>Select Trip</InputLabel>
               <Select
               name="selectedTrip"
-              value={values.selectedTrip}
-              onChange={(event) => setFieldValue('selectedTrip', event.target.value)}
+              value={formik.values.selectedTrip}
+              onChange={formik.handleChange}
               >
                 <MenuItem value="">Select a Trip</MenuItem>
                 {availableTrips.map((trip) => (
@@ -291,7 +287,6 @@ export default function ExpenseFormPage() {
           color="primary" 
           className={classes.button}
           type="submit"
-          disabled={isSubmitting}
           >
           Create Expense
         </Button>
@@ -300,7 +295,6 @@ export default function ExpenseFormPage() {
           Cancel
         </Button>
         </Form>
-          )}
         </Formik>
         </Box>
     </div>

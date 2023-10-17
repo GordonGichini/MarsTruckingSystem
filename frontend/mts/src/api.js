@@ -31,6 +31,51 @@ export const saveCompanyData = async (companyData) => {
     }
   };
 
+export const fetchExpenses = async () => {
+    try {
+        const response = await api.get('/expenses');
+        return response.data;
+    } catch (error) {
+        throw new Error('Failed to fetch expenses');
+    }
+};
+
+export const saveExpenseData = async (expenseData) => {
+    try {
+        const response = await api.post('/expenses', expenseData);
+        return response.data;
+    } catch (error) {
+        throw new Error('Failed to save expense data');
+    }
+};
+
+export const createExpense = async (expense) => {
+    try {
+        const response = await api.post('/expenses', expense);
+        return response.data;
+    } catch (error) {
+        throw new Error('Failed to create expense')
+    }
+};
+
+export const updateExpense = async (id, updatedExpense) => {
+    try {
+    const response = await api.put(`/expenses/${id}`, updatedExpense);
+    return response.data;
+    } catch (error) {
+        throw new Error('Failed to update the expense');
+    }
+};
+
+export const deleteExpense = async (id) => {
+    try {
+    const response = await api.delete(`/expenses/${id}`);
+    return response.data;
+    } catch (error) {
+        throw new Error('Failed to delete the expense');
+    }
+};
+
 export const fetchAddresses = async () => {
     try {
     const response = await api.get('/addresses');

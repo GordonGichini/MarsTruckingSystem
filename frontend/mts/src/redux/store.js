@@ -4,6 +4,7 @@ import plannedLoadsSlice from './slices/plannedLoadsSlice';
 import companySlice from './slices/companySlice';
 import driverSlice from './slices/driverSlice';
 import unitSlice from './slices/unitSlice';
+import expenseSlice from './slices/expenseSlice';
 
 // Create the Redux store
 const store = configureStore({
@@ -13,6 +14,7 @@ const store = configureStore({
         company: companySlice.reducer,
         driver: driverSlice.reducer,
         unit: unitSlice.reducer,
+        expenses: expenseSlice.reducer,
     },
 });
 
