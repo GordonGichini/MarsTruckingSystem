@@ -1,7 +1,8 @@
 import {HomePage, SignInSide, SignUpSide, ErrorPage, Dashboard, ProfilePage} from "./pages";
 import {Trips, Loads, LoadPlanner, Expenses, Invoices, Maintenance, Drivers, Addresses, Units, Subscription, Reports} from "./features";
 import { EmptyMove, DetailedList } from "./features/Trips";
-import { AddCategoryForm, ListCategories } from "./features/Expenses";
+import { AddCategoryForm, ListCategories, ExpenseDetails } from "./features/Expenses";
+import { UnitDetails } from "./features/Units";
 import { MaintenancePlans, NewCalendarPlan, NewMilePlan } from "./features/Maintenances";
 import { CompanyOverview, ExpensesReport, FuelExpenses, FuelVendor, IRPStateMiles, OverTheRoadDays, ProfitAndLoss, QuarterlyIFTA, QuarterlyMaintenance, ReeferFuelExpenses, Settlement, Tax, UnitOperatingIncome } from './features/Reports';
 import { EditPage } from "./pages/ProfilePage";
@@ -42,6 +43,8 @@ function App() {
         <Route path="/add-trip" element={<TripForm/>} />
         <Route path="/add-planned-load" element={<PlannedLoad/>} />
         <Route path="/add-expense" element={<ExpenseFormPage/>} />
+        <Route path="/expense-details/:newExpenseId" element={<ExpenseDetails/>} />
+        <Route path="/unit-details/:newUnitId" element={<UnitDetails/>} />
         <Route path="/editpage" element={<EditPage/>} />
         <Route path="/subscription" element={<Subscription/>} />
         <Route path="/edit_company_profile" element={<ProfileForm/>} />

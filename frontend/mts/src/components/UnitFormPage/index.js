@@ -5,6 +5,7 @@ import InNavBar from '../../common/Header/InNavBar';
 import { useTheme } from '@mui/material/styles';
 import { Formik, Field, Form, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
+import { useNavigate } from 'react-router-dom';
 import { FormControlLabel, Radio, RadioGroup, Typography, TextField, Button, Box, MenuItem, Select } from '@material-ui/core';
 
 import { saveUnitDataAsync } from '../../redux/slices/unitSlice';
@@ -73,6 +74,7 @@ const initialValues = {
 export default function UnitFormPage() {
   const theme = useTheme();
   const classes = useStyles();
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const [showOptionalFields, setShowOptionalFields] = useState(false);
 
@@ -80,10 +82,23 @@ export default function UnitFormPage() {
     setShowOptionalFields(!showOptionalFields);
   };
 
-  const handleSaveClick = (values) => {
-    // Logic for saving unit details
-    dispatch(saveUnitDataAsync(values));
-    console.log(values);
+  const handleSaveClick = async (values) => {
+    console.log("handleSaveClick called");
+    try {
+      const response = await dispatch(saveUnitDataAsync(values));
+      console.log("Response:", response);
+       
+      if (response.payload && response.payload.id) {
+        const newUnitId = response.payload.id;
+        console.log("New Unit ID before navigation:", newUnitId);
+        navigate(`/unit-details/${newUnitId}`);
+        console.log("New Unit ID after navigation:", newUnitId);
+
+      }
+    } catch (error) {
+      console.error('Error creating unit:', error);
+    }
+  
   };
 
   const savedUnit = useSelector(selectUnit);

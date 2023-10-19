@@ -29,6 +29,7 @@ const unitSlice = createSlice({
       .addCase(saveUnitDataAsync.fulfilled, (state, action) => {
         state.loading = false;
         state.unit = action.payload;
+        state.newUnitId = action.payload.id;
       })
       .addCase(saveUnitDataAsync.rejected, (state, action) => {
         state.loading = false;

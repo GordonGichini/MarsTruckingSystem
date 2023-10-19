@@ -5,9 +5,10 @@ import Footer from '../../pages/HomePage/components/Footer';
 import { Typography, makeStyles, Button, TextField, Box } from '@material-ui/core';
 import AddCategoryForm from './AddCategoryForm';
 import ListCategories from './ListCategories';
+import ExpenseDetails from './ExpenseDetails';
 import Stack from '@mui/material/Stack';
 
-export { AddCategoryForm, ListCategories }
+export { AddCategoryForm, ListCategories, ExpenseDetails }
 
 const useStyles = makeStyles((theme) => ({
   title: {

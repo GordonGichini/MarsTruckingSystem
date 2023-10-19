@@ -72,6 +72,7 @@ const expenseSlice = createSlice({
         .addCase(saveExpenseDataAsync.fulfilled, (state, action) => {
             state.loading = false;
             state.expenses.push(action.payload);
+            state.newExpenseId = action.payload.id;
         })
         .addCase(saveExpenseDataAsync.rejected, (state, action) => {
             state.loading = false;
@@ -79,6 +80,8 @@ const expenseSlice = createSlice({
         });
     },
 });
+
+export const selectExpense = (state) => state.expense;
 
 export const { addExpense, updateExpense, deleteExpense } = expenseSlice.actions;
 

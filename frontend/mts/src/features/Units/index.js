@@ -1,7 +1,10 @@
 import React from 'react';
 import InNavBar from '../../common/Header/InNavBar';
 import Footer from '../../pages/HomePage/components/Footer';
+import UnitDetails from './UnitDetails';
 import { Typography, makeStyles, ButtonGroup, Button, TextField, Box } from '@material-ui/core';
+
+export { UnitDetails }
 
 const useStyles = makeStyles((theme) => ({
   appBar: {

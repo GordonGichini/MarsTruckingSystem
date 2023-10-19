@@ -6,11 +6,9 @@ import { saveExpenseDataAsync } from '../../redux/slices/expenseSlice';
 import InNavBar from '../../common/Header/InNavBar';
 import { useTheme } from '@mui/material/styles';
 import { useNavigate } from 'react-router-dom';
-import { useFormik } from 'formik';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import axios from 'axios';
-
 import api from '../../api';
 import { toast } from 'react-toastify';
 
@@ -77,13 +75,11 @@ const initialValues = {
           fuelVendor: '',
           state: '',
         };
-        const validationSchema = {
-          expenseCategory: Yup.string().required('Expense Category is required'),
-          companyName: Yup.string().required('Company Name is required'),
 
+const validationSchema = Yup.object({
+  // validations 
 
-        };
-
+});
 export default function ExpenseFormPage() {
   const navigate = useNavigate();
   const theme = useTheme();
@@ -113,23 +109,29 @@ export default function ExpenseFormPage() {
     fetchAvailableTrips();
   }, []); //empty dependency array ensures this effect runs only once on mount
 
-  const handleSaveClick = (values) => {
+  const handleSaveClick = async (values) => {
+    try {
+      const response = await dispatch(saveExpenseDataAsync(values));
 
-    dispatch(saveExpenseDataAsync(values));
+      if (response.payload && response.payload._id) {
+        const newExpenseId = response.payload._id;
+        navigate(`/expense-details/${newExpenseId}`);
+      }
+    } catch (error) {
+      console.error('Error creating expense:', error);
+    }
   };
-
-  const formik = useFormik({
-    initialValues: initialValues,
-    validationSchema: validationSchema,
-    onSubmit: handleSaveClick,
-  });
 
   return (
     <div>
       <InNavBar />
       <Box className={classes.formContainer}>
         <Typography variant="h6" className={classes.sectionTitle}>Add Expense</Typography>
-        <Formik>
+        <Formik
+        initialValues={initialValues}
+        validationSchema={validationSchema}
+        onSubmit={handleSaveClick}>
+          {(formik) => (
           <Form>
                <FormControl variant="outlined" className={classes.inputField}>
                  <InputLabel>Expense Category</InputLabel>
@@ -167,7 +169,7 @@ export default function ExpenseFormPage() {
           margin='normal'        
           className={classes.inputField}
           />
-          <Typography variant="h5">Assign to Trip</Typography>
+          <Typography variant="h6">Assign to Trip</Typography>
           <Field
           name="assignToTrip"
           as={RadioGroup}
@@ -188,7 +190,7 @@ export default function ExpenseFormPage() {
             />
           </Field>
 
-          {values.assignToTrip === 'yes' && (
+          {formik.values.assignToTrip === 'yes' && (
             <FormControl halfWidth variant="outlined" className={classes.inputField}>
               <InputLabel>Select Trip</InputLabel>
               <Select
@@ -221,7 +223,7 @@ export default function ExpenseFormPage() {
         />
 
         <Field
-          name="Unit"
+          name="unit"
           as={TextField}
           label='unit'
           variant="outlined"
@@ -230,7 +232,7 @@ export default function ExpenseFormPage() {
         />
 
         <Field
-          name="Gallons"
+          name="gallons"
           type="number"
           as={TextField}
           label='gallons'
@@ -240,7 +242,7 @@ export default function ExpenseFormPage() {
         />
 
         <Field
-          name="Odometer"
+          name="odometer"
           type="number"
           as={TextField}
           label='odometer'
@@ -250,7 +252,7 @@ export default function ExpenseFormPage() {
         />
 
         <Field
-          name="Fuel Vendor"
+          name="fuelVendor"
           as={TextField}
           label='fuelVendor'
           variant="outlined"
@@ -295,6 +297,7 @@ export default function ExpenseFormPage() {
           Cancel
         </Button>
         </Form>
+          )}
         </Formik>
         </Box>
     </div>
