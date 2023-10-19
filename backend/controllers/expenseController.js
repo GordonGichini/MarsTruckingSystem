@@ -35,7 +35,9 @@ exports.createExpense = async (req, res) => {
     });
 
     const savedExpense = await newExpense.save();
-    res.status(201).json(savedExpense);
+    const expenseId = savedExpense._id;
+
+    res.status(201).json({ _id: expenseId, ...savedExpense.toObject() });
   } catch (error) {
     console.error('Error creating expense:', error);
     res.status(500).json({ error: 'An error occurred while creating the expense' });

@@ -4,6 +4,7 @@ const Unit = require('../models/unit');
 exports.createUnit = async (req, res) => {
   try {
     const {
+      number,
       unitType,
       ownershipType,
       status,
@@ -24,6 +25,7 @@ exports.createUnit = async (req, res) => {
     console.log('Received Data:', req.body);
 
     const newUnit = new Unit({
+      number,
       unitType,
       ownershipType,
       status,

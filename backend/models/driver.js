@@ -43,7 +43,27 @@ const driverSchema = new mongoose.Schema({
     },
     defaultPaymentType: {
         type: String,
+        enum: ['manual', 'loadPayPercent', 'payPerMile', 'driverContract'],
         required: true,
+    },
+    loadPayPercent: {
+        type: Number,
+        min: 0,
+        max: 100,
+    },
+    loadedMilePay: {
+        type: Number,
+        min: 0,
+    },
+    emptyMilePay: {
+        type: Number,
+        min: 0,
+    },
+    freeMilesRange: {
+        type: String,
+    },
+    driverContract: {
+        type: String,
     },
     licenseNumber: {
         type: Number,

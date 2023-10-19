@@ -1,6 +1,11 @@
 const mongoose = require('mongoose');
 
 const unitSchema = new mongoose.Schema({
+
+    number: {
+        type: Number,
+        required: true,
+    },
     unitType: {
         type: String,
         required: true,
@@ -14,7 +19,7 @@ const unitSchema = new mongoose.Schema({
         required: true,
     },
     vin: {
-        type: Number,
+        type: mongoose.Schema.Types.Mixed,
         required: false,
     },
     make: {
@@ -49,7 +54,7 @@ const unitSchema = new mongoose.Schema({
         type: Date,
         required: false,
     },
-    informationStickerExpiration: {
+    inspectionStickerExpiration: {
         type: Date,
         required: false
     },
