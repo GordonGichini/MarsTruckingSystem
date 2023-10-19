@@ -115,6 +115,8 @@ export default function UnitFormPage() {
         >
           {() => (
           <Form>
+            <Typography variant="subtitle1">Number</Typography>
+            <Field name="number" as={TextField} label="Number" variant="outlined" margin='normal' className={classes.inputField} />
         <Typography variant="subtitle1">Unit Type</Typography>
         <Field as={Select} name="unitType" label="Unit Type" variant="outlined" className={classes.inputField}>
           <MenuItem value="truck">Truck</MenuItem>
@@ -155,9 +157,9 @@ export default function UnitFormPage() {
             <Field name="yearPurchased" as={TextField} label="Year Purchased" variant="outlined" margin='normal' className={classes.inputField} />
             <Field name="purchasePrice" as={TextField} label="Purchase Price" variant="outlined" margin='normal' className={classes.inputField} />
             <Field name="licensePlateNumber" as={TextField} label="License Plate Number" variant="outlined" margin='normal' className={classes.inputField} />
-            <Field name="licensePlateExpiration" as={TextField} label="License Plate Expiration" variant="outlined" margin='normal' className={classes.inputField} />
-            <Field name="informationStickerExpiration" as={TextField} label="Information Sticker Expiration" variant="outlined" margin='normal' className={classes.inputField} />
-            <Field name="insuranceExpiration" as={TextField} label="Insurance Expiration" variant="outlined" margin='normal' className={classes.inputField} />
+            <Field type="date" name="licensePlateExpiration" as={TextField} label="License Plate Expiration" variant="outlined" margin='normal' className={classes.inputField} />
+            <Field type="date" name="inspectionStickerExpiration" as={TextField} label="Information Sticker Expiration" variant="outlined" margin='normal' className={classes.inputField} />
+            <Field type="date" name="insuranceExpiration" as={TextField} label="Insurance Expiration" variant="outlined" margin='normal' className={classes.inputField} />
           </div>
         )}
 

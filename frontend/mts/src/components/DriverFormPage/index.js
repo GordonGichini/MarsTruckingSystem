@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import InNavBar from '../../common/Header/InNavBar';
-import { Paper, Typography, TextField, Button, Box } from '@material-ui/core';
+import { Paper, Typography, TextField, Select, Button, Box } from '@material-ui/core';
 import { Formik, Field, Form, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { useNavigate } from 'react-router-dom';
@@ -47,7 +47,12 @@ const initialValues = {
   alternatePhone: '',
   fax: '',
   email: '',
-  defaultPaymentType: '',
+  defaultPaymentType: 'manual',
+  loadPayPercent: '',
+  loadedMilePay: '',
+  emptyMilePay: '',
+  freeMilesRange: '',
+  driverContract: '',
   licenseNumber: '',
   licenseExpiration: '',
   licenseIssuingState: '',
@@ -69,6 +74,7 @@ const validationSchema = Yup.object({
 export default function DriverFormPage() {
   const [showEmergencyContact1, setShowEmergencyContact1] = useState(false);
   const [showEmergencyContact2, setShowEmergencyContact2] = useState(false);
+  const [selectedPaymentType, setSelectedPaymentType] = useState('manual');
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
@@ -121,7 +127,40 @@ export default function DriverFormPage() {
         <Field type="text" name="alternatePhone" as={TextField} label="Alternate Phone" variant="outlined" margin='normal'className={classes.inputField} />
         <Field type="text" name="fax" as={TextField} label="Fax" variant="outlined" margin='normal'className={classes.inputField} />
         <Field type="text" name="email" as={TextField} label="Email" margin='normal' variant="outlined" className={classes.inputField} />
-        <Field type="text" name="defaultPaymentType" as={TextField} label="Default Payment Type" variant="outlined" margin='normal'className={classes.inputField} />
+
+        <Field type="text" name="defaultPaymentType" as={Select} label="Default Payment Type" variant="outlined" margin='normal'className={classes.inputField}
+        onChange={(e) => setSelectedPaymentType(e.target.value)}>
+          <option value="manual">Manual Pay</option>
+          <option value="loadPayPercent">Load Pay per Percent</option>
+          <option value="payPerMile">Pay per Mile</option>
+          <option value="driverContract">Driver Contract</option>
+          </Field>
+
+          {selectedPaymentType === 'loadPayPercent' && (
+            <div>
+              <label>Load Pay %:</label>
+              <Field type="number" name="loadPayPercent" />
+            </div>
+          )} 
+
+          {selectedPaymentType === 'payPerMile' && (
+            <div>
+              <label>Loaded Mile Pay</label>
+              <Field type="text" name="loadedMilePay" />
+              <label>Empty Mile Pay</label>
+              <Field type="text" name="emptyMilePay" />
+              <label>Free Miles Range</label>
+              <Field type="text" name="freeMilesRange" />
+            </div>
+          )}
+
+          {selectedPaymentType === 'driverContract' && (
+            <div>
+              <label>Driver Contract</label>
+              <Field type="text" name="driverContract" />
+            </div>
+          )}
+
         <Field type="text" name="licenseNumber" as={TextField} label="License Number" variant="outlined" margin='normal'className={classes.inputField} />
         <Field type="date" name="licenseExpiration" as={TextField} label="License Expiration" variant="outlined" margin='normal'className={classes.inputField} />
         <Field type="text" name="licenseIssuingState" as={TextField} label="License Issuing State/Jurisdiction" variant="outlined" margin='normal'className={classes.inputField} />

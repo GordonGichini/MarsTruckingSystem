@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from "react-router-dom";
 import InNavBar from '../../common/Header/InNavBar';
 import Footer from '../../pages/HomePage/components/Footer';
@@ -48,6 +48,9 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: theme.spacing(2),
     padding: theme.spacing(2),
     borderRadius: theme.spacing(2),
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   addExpenseButton: {
     display: 'flex',
@@ -72,9 +75,10 @@ function Expenses() {
 
   const handleSaveCategory = (category) => {
     // Save the category data here
-    console.log(category);
-    
+    console.log(category);    
   };
+
+
 
   return (
     <div>
