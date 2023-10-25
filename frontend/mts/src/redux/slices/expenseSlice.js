@@ -77,11 +77,23 @@ const expenseSlice = createSlice({
         .addCase(saveExpenseDataAsync.rejected, (state, action) => {
             state.loading = false;
             state.error = action.error.message;
-        });
+        })
+        .addCase(fetchExpensesAsync.pending, (state) => {
+            state.loading = true;
+            state.error = null;
+          })
+          .addCase(fetchExpensesAsync.fulfilled, (state, action) => {
+            state.loading = false;
+            state.expenses = action.payload;
+          })
+          .addCase(fetchExpensesAsync.rejected, (state, action) => {
+            state.loading = false;
+            state.error = action.error.message;
+          });
     },
 });
 
-export const selectExpense = (state) => state.expense;
+export const selectExpenses = (state) => state.expense;
 
 export const { addExpense, updateExpense, deleteExpense } = expenseSlice.actions;
 

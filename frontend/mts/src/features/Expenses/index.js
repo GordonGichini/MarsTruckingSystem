@@ -2,11 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { Link } from "react-router-dom";
 import InNavBar from '../../common/Header/InNavBar';
 import Footer from '../../pages/HomePage/components/Footer';
-import { Typography, makeStyles, Button, TextField, Box } from '@material-ui/core';
+import { Typography, makeStyles, Button, Table, Paper, TableHead, TableBody, TableCell, TableRow, TableContainer, TextField, Box } from '@material-ui/core';
 import AddCategoryForm from './AddCategoryForm';
 import ListCategories from './ListCategories';
 import ExpenseDetails from './ExpenseDetails';
 import Stack from '@mui/material/Stack';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchExpensesAsync, selectExpenses } from '../../redux/slices/expenseSlice';
 
 export { AddCategoryForm, ListCategories, ExpenseDetails }
 
@@ -59,11 +61,21 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: theme.spacing(2),
     marginBottom: theme.spacing(2),
   },
+  table: {
+    minWidth: 650,
+  },
 }));
 
 function Expenses() {
   const classes = useStyles();
   const [isAddCategoryOpen, setAddCategoryOpen] = useState(false);
+  const dispatch = useDispatch();
+  const expenses = useSelector(selectExpenses);
+
+  // Fetch expenses when the component mounts 
+  useEffect(() => {
+    dispatch(fetchExpensesAsync());
+  }, [dispatch]);
 
   const handleOpenAddCategory = () => {
     setAddCategoryOpen(true);
@@ -77,7 +89,6 @@ function Expenses() {
     // Save the category data here
     console.log(category);    
   };
-
 
 
   return (
@@ -103,12 +114,38 @@ function Expenses() {
       />
         <Box className={classes.expenseContainer}>
           <Typography variant="h5" className={classes.title}>Welcome to Expenses</Typography>
+          {expenses.length === 0 ? (
         <Box className={classes.videoContainer}>
           {/* Add your expense video component here */}
           {/* <ExpenseVideo /> */}
         </Box>
-        
 
+          ) : (
+            <TableContainer component={Paper}>
+            <Table className={classes.table} aria-label="simple table">
+              <TableHead>
+                <TableRow>
+                  <TableCell>Expense Name</TableCell>
+                  <TableCell align="right">Amount</TableCell>
+                  <TableCell align="right">Date</TableCell>
+                  <TableCell align="right">Category</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {expenses.map((expense) => (
+                  <TableRow key={expense.id}>
+                    <TableCell component="th" scope="row">
+                      {expense.name}
+                    </TableCell>
+                    <TableCell align="right">{expense.amount}</TableCell>
+                    <TableCell align="right">{expense.date}</TableCell>
+                    <TableCell align="right">{expense.category}</TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
+        )}
         <Box className={classes.addExpenseButton}>
           <Button variant="contained" color="primary" component={Link} to="/add-expense">
             Add First Expense

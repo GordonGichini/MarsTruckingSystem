@@ -147,7 +147,7 @@ export default function PlannedLoad() {
              onSubmit={handleSaveClick} 
              validationSchema={validationSchema} 
              >
-                {( values ) => (
+                {(values) => (
                     <Form>
             <Box className={classes.formContainer}>
         <Typography variant="h6" className={classes.sectionTitle}>Add Planned Load</Typography>
@@ -191,11 +191,153 @@ export default function PlannedLoad() {
                         <Grid container spacing={6}>
                             <Grid item xs={6}>
                         <Typography variant="subtitle1">Pickup</Typography>
-                        <FieldArray name="pickups">
-                            {({ push, remove }) => (
-                                <div>
-                                    {(values.pickups || []).map((pickup, index) => (
-                                        <div key={index}>
+                        <PickupSection classes={classes} values={values} />
+                        </Grid>
+                <Grid item xs={6}>
+                <Typography variant="subtitle2">Delivery</Typography>
+               <DeliverySection classes={classes} values={values} />
+                </Grid>
+                </Grid>
+                </Box>               
+            {/* Including other input fields and forms here */}
+            </Box>
+
+                
+                <Box className={classes.formContainer}>
+                    <Box className={classes.formSection}>
+                    <Typography variant="subtitle2" className={classes.sectionSubtitle}>Fees/Charges</Typography>
+                <Field
+                type="number"
+                label="Primary Fee"
+                name="primaryFee"
+                as={TextField}
+                margin='normal'
+                className={classes.inputField}
+                variant="outlined"
+                />
+                <Typography variant="caption">Enter Primary Fee, then select Fee Type below</Typography>
+
+                <Field
+                type="text"
+                label="Primary Fee Type"
+                name="primaryFeeType"
+                as={Select}
+                margin='normal'
+                className={classes.inputField}
+                variant="outlined"
+                >
+                <option value="mileage">Mileage</option>
+                <option value="flat_rate">Flat Rate</option> 
+                </Field>
+
+                <Field
+                type="number"
+                label="Fuel Surcharge Fee"
+                name="fscAmount"
+                as={TextField}
+                margin='normal'
+                className={classes.inputField}
+                variant="outlined"
+                />
+                <Typography variant="caption">Enter an amount then select an FSC Amount Type below</Typography>
+
+                <Field
+                type="text"
+                label= "FSC amount Type"
+                name="fscAmountType"
+                as={Select}
+                margin='normal'
+                className={classes.inputField}
+                variant="outlined"
+                >
+                    <option value="percentage">Percentage of Base Rate</option>
+                    <option value="cents_per_mile">Cents Per Mile</option>
+                    <option value="percentage_of_fuel_cost">Percentage of Fuel cost</option>
+                </Field>
+                    <Typography variant="subtitle2">Accessory Fees</Typography>
+                    <Field
+                    type="number"
+                    label="Detention"
+                    name="detention"
+                    as={TextField}
+                    margin='normal'
+                    className={classes.inputField}
+                    variant="outlined"
+                    />
+
+                    <Field
+                    type="number"
+                    label="Lumper"
+                    name="lumper"
+                    as={TextField}
+                    margin='normal'
+                    className={classes.inputField}
+                    variant="outlined"
+                    />
+
+                    <Field
+                    type="number"
+                    label="Stop Off"
+                    name="stopOff"
+                    as={TextField}
+                    margin='normal'
+                    className={classes.inputField}
+                    variant="outlined"
+                    />
+
+                    <Field
+                    type="number"
+                    label="Tarp Fee"
+                    name="tarpFee"
+                    as={TextField}
+                    margin='normal'
+                    className={classes.inputField}
+                    variant="outlined"
+                    />
+
+                    <Field
+                    type="number"
+                    label="Additional"
+                    name="additional"
+                    as={TextField}
+                    margin='normal'
+                    className={classes.inputField}
+                    variant="outlined"
+                    />
+
+                    <Button variant="outlined" color="primary">
+                        Add Additional Fee
+                        </Button>
+                        <Typography variant="h6">Invoice Advance</Typography>
+                    <Field
+                    type="number"
+                    label="Invoice Advance"
+                    name="invoiceAdvance"
+                    as={TextField}
+                    margin='normal'
+                    className={classes.inputField}
+                    variant="outlined"
+                    />
+                    </Box>
+                    </Box>
+                    <Button variant="outlined" type="submit" color="primary" disabled={loading} className={classes.button}>
+                    {loading ? 'Saving...' : 'Save' }
+                    </Button>
+                <Button variant="text">cancel</Button>
+            </Form>
+    )}
+            </Formik> 
+            </div> 
+    );
+}
+
+function PickupSection({ classes, values }) {
+    return (
+        <FieldArray name="pickups">
+            {({ push, remove }) => (
+                <div>
+                    {Array.isArray(values.pickups) && values.pickups.map((pickup, index) => (
+                     <div key={index}>
                         <Field
                         type="text"
                         label="Shipper"
@@ -293,21 +435,42 @@ export default function PlannedLoad() {
                         className={classes.inputField}
                         variant="outlined"
                         />
-                        <Button variant="outlined" onClick={() => remove(index)}>Remove Pickup</Button>
-                        </div>
-                                    ))}
-                        <Button variant="outlined" onClick={() => push({})}>Add Another Pickup</Button>
-                        </div> 
-                                    )}
-                                    </FieldArray>
-                        </Grid>
+                        <Button 
+                        variant="outlined" 
+                        onClick={() =>
+                            push({
+                                shipper: '',
+                                pickupDate: '',
+                                instructions: '',
+                                bol: '',
+                                customerRequiredInfo: '',
+                                weight: '',
+                                quantity: '',
+                                notes: '',
+                                commodity: '',
+                            })}>
+                            Add Another Pickup
+                        </Button>
+                        <Button variant="outlined" onClick={() => remove(index)}>
+                            Remove Pickup
+                        </Button>
+                 </div> 
+                ))}
+                <Button variant="outlined" onClick={() => push({})}>
+                    Add Another Pickup
+                </Button>
+                </div>
+            )}
+        </FieldArray>
+    );
+}
 
-                <Grid item xs={6}>
-                <Typography variant="subtitle2">Delivery</Typography>
-                <FieldArray name="deliveries">
-                    {({ push, remove }) => (
+function DeliverySection({ classes, values }) {
+    return (
+        <FieldArray name="deliveries">
+                 {({ push, remove }) => (
                         <div>
-                            {(values.deliveries || []).map((delivery, index) => (
+                            {Array.isArray(values.deliveries) && values.deliveries.map((delivery, index) => (
                                 <div key={index}>
                 <Field
                 type="text"
@@ -341,150 +504,29 @@ export default function PlannedLoad() {
                 variant="outlined"
                 />
 
-                <Button variant="outlined" color="primary" onClick={() => remove(index)}>
-                    Remove Delivery
-                </Button>
-                </div>
-                            ))}
+                <Button 
+                variant="outlined" 
+                color="primary" 
+                onClick={() => push({
+                    consignee: '',
+                    deliveryDate: '',
+                    instructions: '',
 
-                <Button variant="outlined" color="primary" onClick={() => push({})}>
+                })}
+                >
                     Add Another Delivery
                 </Button>
+                <Button variant="outlined" onClick={() => remove(index)}>
+                    Remove Delivery
+                </Button>
+                </div> 
+                            ))}
+                            <Button variant="outlined" onClick={() => push({})}>
+                                Add Another Delivery
+                            </Button>
                 </div> 
                     )}
                     </FieldArray>
-                </Grid>
-                </Grid>
-                </Box>               
-            {/* Including other input fields and forms here */}
-            </Box>
-
-                
-                <Box className={classes.formContainer}>
-                    <Box className={classes.formSection}>
-                    <Typography variant="subtitle2" className={classes.sectionSubtitle}>Fees/Charges</Typography>
-                <Field
-                type="number"
-                label="Primary Fee"
-                name="primaryFee"
-                as={TextField}
-                margin='normal'
-                className={classes.inputField}
-                variant="outlined"
-                />
-                <Typography variant="caption">Enter Primary Fee, then select Fee Type below</Typography>
-
-                <Field
-                type="text"
-                label="Primary Fee Type"
-                name="primaryFeeType"
-                as="select"
-                margin='normal'
-                className={classes.inputField}
-                variant="outlined"
-                >
-                <option value="mileage">Mileage</option>
-                <option value="flat_rate">Flat Rate</option> 
-                </Field>
-
-                <Field
-                type="number"
-                label="Fuel Surcharge Fee"
-                name="fscAmount"
-                as={TextField}
-                margin='normal'
-                className={classes.inputField}
-                variant="outlined"
-                />
-                <Typography variant="caption">Enter an amount then select an FSC Amount Type below</Typography>
-
-                <Field
-                type="text"
-                label= "FSC amount Type"
-                name="fscAmountType"
-                as="select"
-                margin='normal'
-                className={classes.inputField}
-                variant="outlined"
-                >
-                    <option value="percentage">Percentage of Base Rate</option>
-                    <option value="cents_per_mile">Cents Per Mile</option>
-                    <option value="percentage_of_fuel_cost">Percentage of Fuel cost</option>
-                </Field>
-                    <Typography variant="subtitle2">Accessory Fees</Typography>
-                    <Field
-                    type="number"
-                    label="Detention"
-                    name="detention"
-                    as={TextField}
-                    margin='normal'
-                    className={classes.inputField}
-                    variant="outlined"
-                    />
-
-                    <Field
-                    type="number"
-                    label="Lumper"
-                    name="lumper"
-                    as={TextField}
-                    margin='normal'
-                    className={classes.inputField}
-                    variant="outlined"
-                    />
-
-                    <Field
-                    type="number"
-                    label="Stop Off"
-                    name="stopOff"
-                    as={TextField}
-                    margin='normal'
-                    className={classes.inputField}
-                    variant="outlined"
-                    />
-
-                    <Field
-                    type="number"
-                    label="Tarp Fee"
-                    name="tarpFee"
-                    as={TextField}
-                    margin='normal'
-                    className={classes.inputField}
-                    variant="outlined"
-                    />
-
-                    <Field
-                    type="number"
-                    label="Additional"
-                    name="additional"
-                    as={TextField}
-                    margin='normal'
-                    className={classes.inputField}
-                    variant="outlined"
-                    />
-
-                    <Button variant="outlined" color="primary">
-                        Add Additional Fee
-                        </Button>
-                        <Typography variant="h6">Invoice Advance</Typography>
-                    <Field
-                    type="number"
-                    label="Invoice Advance"
-                    name="invoiceAdvance"
-                    as={TextField}
-                    margin='normal'
-                    className={classes.inputField}
-                    variant="outlined"
-                    />
-                    </Box>
-                    </Box>
-                    <Button variant="outlined" type="submit" color="primary" disabled={loading} className={classes.button}>
-                    {loading ? 'Saving...' : 'Save' }
-                    </Button>
-                <Button variant="text">cancel</Button>
-            </Form>
-    )}
-            </Formik> 
-            </div> 
     );
-    }
+}
 

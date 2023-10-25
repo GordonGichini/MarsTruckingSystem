@@ -198,7 +198,7 @@ export default function DriverFormPage() {
           </div>
         )}
 
-        <Button variant="contained" color="primary" disabled={loading} className={classes.button}>
+        <Button type="submit" variant="contained" color="primary" disabled={loading} className={classes.button}>
           {loading ? 'Saving...' : 'Save' }
         </Button>
       </Box>
