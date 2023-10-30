@@ -13,6 +13,20 @@ export const saveDriverData = async (driverData) => {
     }
 }
 
+export const fetchUnits = async () => {
+    try {
+        const response = await api.get('/units');
+
+        if (!response.ok) {
+            throw new Error(`Error fetching units: ${response.statusText}`);
+        }
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        throw error;
+    }
+};
+
 export const saveUnitData = async (unitData) => {
     try {
         const response = await api.post('/units', unitData);

@@ -3,12 +3,14 @@ import ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux';
 import { configureStore } from '@reduxjs/toolkit';
 import plannedLoadsReducer from './redux/slices/plannedLoadsSlice';
+import unitReducer from './redux/slices/unitSlice';
 import { BrowserRouter } from 'react-router-dom';
 import App from './App';
 
 const store = configureStore({
   reducer: {
     plannedLoads: plannedLoadsReducer,
+    unit: unitReducer,
     // Add other reducers
   },
 });
