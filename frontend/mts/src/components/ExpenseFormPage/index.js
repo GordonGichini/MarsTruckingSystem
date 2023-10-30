@@ -90,7 +90,7 @@ export default function ExpenseFormPage() {
   const state = ['Alabama','Alaska','Arizona','Arkansas','California','Colorado','Connecticut','Delaware','Florida','Georgia','Hawaii','Idaho','Illinois','Indiana','Iowa','Kansas','Kentucky','Louisiana','Maine','Maryland','Massachusetts','Michigan','Minnesota','Mississippi','Missouri','Montana','Nebraska','Nevada','New Hampshire','New Jersey','New Mexico','New York','North Carolina','North Dakota','Ohio','Oklahoma','Oregon','Pennsylvania','Rhode Island','South Carolina','South Dakota','Tennessee','Texas','Utah','Vermont','Virginia','Washington','West Virginia','Wisconsin','Wyoming']
 
   //state for handling API responses and errors
-  const [apiError, setApiError] = useState(null);
+  //const [apiError, setApiError] = useState(null);
   const [availableTrips, setAvailableTrips] = useState([]);
 
   useEffect(() => {
@@ -282,8 +282,6 @@ export default function ExpenseFormPage() {
         </Field>
         <ErrorMessage name="state" component="div" className="error-message" />
 
-        {apiError && <div className={classes.error}>{apiError}</div>}
-
         <Button
          variant="outlined"
           color="primary" 
@@ -293,7 +291,7 @@ export default function ExpenseFormPage() {
           Create Expense
         </Button>
 
-        <Button type="button" variant="text">
+        <Button type="button" className={classes.button} variant="text">
           Cancel
         </Button>
         </Form>

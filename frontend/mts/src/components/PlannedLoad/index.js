@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import { makeStyles } from '@mui/styles';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { Formik, Form, FieldArray, Field, ErrorMessage } from 'formik';
+import { Formik, Form, Field, FieldArray, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { useTheme } from '@mui/material/styles';
 import { createPlannedLoadAsync } from '../../redux/slices/plannedLoadsSlice';
@@ -63,7 +63,7 @@ const useStyles = makeStyles((theme) => ({
         customer: '',
         shipper: '',
         pickupDate: '',
-        driverInstructions: '',
+        instructions: '',
         bol: '',
         customerRequiredInfo: '',
         weight: '',
@@ -84,7 +84,7 @@ const useStyles = makeStyles((theme) => ({
         additional: '',
         invoiceAdvance: '',
         pickups: [],
-        deliveries: []
+        deliveries: [],
 
     };
 
@@ -93,7 +93,7 @@ const useStyles = makeStyles((theme) => ({
         customer: Yup.string().required('Customer is required'),
         shipper: Yup.string().required('Shipper is required'),
         pickupDate: Yup.date().required('Pickup date is required'),
-        driverInstructions: Yup.string().required('Driver instructions is required'),
+        instructions: Yup.string().required('Driver instructions is required'),
         bol: Yup.string().required('BOL is required'),
         customerRequiredInfo: Yup.string().required('Customer required info is required'),
         weight: Yup.number().required('weight is required'),
@@ -191,11 +191,193 @@ export default function PlannedLoad() {
                         <Grid container spacing={6}>
                             <Grid item xs={6}>
                         <Typography variant="subtitle1">Pickup</Typography>
-                        <PickupSection classes={classes} values={values} />
+                        <FieldArray name="pickups">
+                            {({ push, remove }) => (
+                                <div>
+                    {(values.pickups || []).map((pickup, index) => (
+                     <div key={index}>
+                        <Field
+                        type="text"
+                        label="Shipper"
+                        name={`pickups.${index}.shipper`}
+                        as={TextField}
+                        margin='normal'
+                        className={classes.inputField}
+                        variant="outlined"
+                        /> 
+                        <Button variant="outlined" component={Link} to="/add-address" color="primary">
+                            Create Shipper
+                            </Button>
+                        <Field
+                        type="date"
+                        label="Pickup date"
+                        name={`pickups.${index}.pickupDate`}
+                        as={TextField}
+                        margin='normal'
+                        className={classes.inputField}
+                        variant="outlined"
+                        />
+
+                        <Field
+                        type="text"
+                        label="Instructions"
+                        name={`pickups.${index}.instructions`}
+                        as={TextField}
+                        margin='normal'
+                        className={classes.inputField}
+                        multiline
+                        variant="outlined"
+                        />
+                        <Typography variant="caption">ELD drivers can view in mobile app and trip report. (Pick up number, Apt. time, etc.)</Typography>
+
+                        <Field
+                        type="text"
+                        label="BOL"
+                        name={`pickups.${index}.bol`}
+                        as={TextField}
+                        margin='normal'
+                        className={classes.inputField}
+                        variant="outlined"
+                        />
+                        <Typography variant="caption">ELD driver can view, enter and edit BOL in mobile app</Typography>
+
+                        <Field
+                        type="text"
+                        label="Customer Required Info (included on invoice)"
+                        name={`pickups.${index}.customerRequiredInfo`}
+                        as={TextField}
+                        margin='normal'
+                        className={classes.inputField}
+                        multiline
+                        variant="outlined"
+                        />
+                        <Typography variant="caption">Included on invoice(rate con number, customer tracking number, PO* etc)</Typography>
+
+                        <Field
+                        type="number"
+                        label="Weight"
+                        name={`pickups.${index}.weight`}
+                        as={TextField}
+                        margin='normal'
+                        className={classes.inputField}
+                        variant="outlined"
+                        />
+                        <Typography variant="caption">Used to calculate per weight fees. Enter total weight,not tonnes, cwt etc</Typography>
+
+                        <Field
+                        type="number"
+                        label="Quantity"
+                        name={`pickups.${index}.quantity`}
+                        as={TextField}
+                        margin='normal'
+                        className={classes.inputField}
+                        variant="outlined"
+                        />
+
+                        <Field
+                        type="text"
+                        label="Notes"
+                        name={`pickups.${index}.notes`}
+                        as={TextField}
+                        margin="normal"
+                        className={classes.inputField}
+                        variant="outlined"
+                        />
+
+                        <Field
+                        type="text"
+                        label="Commodity"
+                        name={`pickups.${index}.commodity`}
+                        as={TextField}
+                        margin="normal"
+                        className={classes.inputField}
+                        variant="outlined"
+                        />
+                        
+                        <Button variant="outlined" onClick={() => remove(index)}>
+                            Remove Pickup
+                        </Button>
+                 </div> 
+                ))}
+                <Button 
+                        variant="outlined" 
+                        onClick={() =>
+                            push({
+                                shipper: '',
+                                pickupDate: '',
+                                instructions: '',
+                                bol: '',
+                                customerRequiredInfo: '',
+                                weight: '',
+                                quantity: '',
+                                notes: '',
+                                commodity: '',
+                            })}>
+                            Add Another Pickup
+                        </Button>
+                        </div>
+                            )}
+                            </FieldArray>
                         </Grid>
                 <Grid item xs={6}>
                 <Typography variant="subtitle2">Delivery</Typography>
-               <DeliverySection classes={classes} values={values} />
+                <FieldArray name="deliveries">
+                    {({ push, remove }) => (
+                        <div>
+                {(values.deliveries || []).map((delivery, index) => (
+                 <div key={index}>
+                <Field
+                type="text"
+                label="Consignee"
+                name={`deliveries.${index}.consignee`}
+                as={TextField}
+                margin='normal'
+                className={classes.inputField}
+                variant="outlined"
+                />
+                <Button variant="outlined" component={Link} to="/add-address" color="primary">
+                    Create Consignee
+                    </Button> 
+                <Field
+                type="date"
+                label="Delivery Date"
+                name={`deliveries.${index}.deliveryDate`}
+                as={TextField}
+                margin='normal'
+                className={classes.inputField}
+                variant="outlined"
+                />
+
+                <Field
+                type="text"
+                label="Instructions"
+                name={`deliveries.${index}.instructions`}
+                as={TextField}
+                margin='normal'
+                className={classes.inputField}
+                variant="outlined"
+                />
+              
+                <Button variant="outlined" onClick={() => remove(index)}>
+                    Remove Delivery
+                </Button>
+                </div> 
+                            ))}
+                     <Button 
+                variant="outlined" 
+                color="primary" 
+                onClick={() => push({
+                    consignee: '',
+                    deliveryDate: '',
+                    instructions: '',
+
+                })}
+                >
+                    Add Another Delivery
+                </Button>
+                </div>
+                    )}
+                    </FieldArray>
                 </Grid>
                 </Grid>
                 </Box>               
@@ -331,202 +513,4 @@ export default function PlannedLoad() {
     );
 }
 
-function PickupSection({ classes, values }) {
-    return (
-        <FieldArray name="pickups">
-            {({ push, remove }) => (
-                <div>
-                    {Array.isArray(values.pickups) && values.pickups.map((pickup, index) => (
-                     <div key={index}>
-                        <Field
-                        type="text"
-                        label="Shipper"
-                        name={`pickups.${index}.shipper`}
-                        as={TextField}
-                        margin='normal'
-                        className={classes.inputField}
-                        variant="outlined"
-                        /> 
-                        <Button variant="outlined" component={Link} to="/add-address" color="primary">
-                            Create Shipper
-                            </Button>
-                        <Field
-                        type="date"
-                        label="Pickup date"
-                        name={`pickups.${index}.pickupDate`}
-                        as={TextField}
-                        margin='normal'
-                        className={classes.inputField}
-                        variant="outlined"
-                        />
-
-                        <Field
-                        type="text"
-                        label="Instructions"
-                        name={`pickups.${index}.instructions`}
-                        as={TextField}
-                        margin='normal'
-                        className={classes.inputField}
-                        multiline
-                        variant="outlined"
-                        />
-                        <Typography variant="caption">ELD drivers can view in mobile app and trip report. (Pick up number, Apt. time, etc.)</Typography>
-
-                        <Field
-                        type="text"
-                        label="BOL"
-                        name={`pickups.${index}.bol`}
-                        as={TextField}
-                        margin='normal'
-                        className={classes.inputField}
-                        variant="outlined"
-                        />
-                        <Typography variant="caption">ELD driver can view, enter and edit BOL in mobile app</Typography>
-
-                        <Field
-                        type="text"
-                        label="Customer Required Info (included on invoice)"
-                        name={`pickups.${index}.customerRequiredInfo`}
-                        as={TextField}
-                        margin='normal'
-                        className={classes.inputField}
-                        multiline
-                        variant="outlined"
-                        />
-                        <Typography variant="caption">Included on invoice(rate con number, customer tracking number, PO* etc)</Typography>
-
-                        <Field
-                        type="number"
-                        label="Weight"
-                        name={`pickups.${index}.weight`}
-                        as={TextField}
-                        margin='normal'
-                        className={classes.inputField}
-                        variant="outlined"
-                        />
-                        <Typography variant="caption">Used to calculate per weight fees. Enter total weight,not tonnes, cwt etc</Typography>
-
-                        <Field
-                        type="number"
-                        label="Quantity"
-                        name={`pickups.${index}.quantity`}
-                        as={TextField}
-                        margin='normal'
-                        className={classes.inputField}
-                        variant="outlined"
-                        />
-
-                        <Field
-                        type="text"
-                        label="Notes"
-                        name={`pickups.${index}.notes`}
-                        as={TextField}
-                        margin="normal"
-                        className={classes.inputField}
-                        variant="outlined"
-                        />
-
-                        <Field
-                        type="text"
-                        label="Commodity"
-                        name={`pickups.${index}.commodity`}
-                        as={TextField}
-                        margin="normal"
-                        className={classes.inputField}
-                        variant="outlined"
-                        />
-                        <Button 
-                        variant="outlined" 
-                        onClick={() =>
-                            push({
-                                shipper: '',
-                                pickupDate: '',
-                                instructions: '',
-                                bol: '',
-                                customerRequiredInfo: '',
-                                weight: '',
-                                quantity: '',
-                                notes: '',
-                                commodity: '',
-                            })}>
-                            Add Another Pickup
-                        </Button>
-                        <Button variant="outlined" onClick={() => remove(index)}>
-                            Remove Pickup
-                        </Button>
-                 </div> 
-                ))}
-                <Button variant="outlined" onClick={() => push({})}>
-                    Add Another Pickup
-                </Button>
-                </div>
-            )}
-        </FieldArray>
-    );
-}
-
-function DeliverySection({ classes, values }) {
-    return (
-        <FieldArray name="deliveries">
-                 {({ push, remove }) => (
-                        <div>
-                            {Array.isArray(values.deliveries) && values.deliveries.map((delivery, index) => (
-                                <div key={index}>
-                <Field
-                type="text"
-                label="Consignee"
-                name={`deliveries.${index}.consignee`}
-                as={TextField}
-                margin='normal'
-                className={classes.inputField}
-                variant="outlined"
-                />
-                <Button variant="outlined" component={Link} to="/add-address" color="primary">
-                    Create Consignee
-                    </Button> 
-                <Field
-                type="date"
-                label="Delivery Date"
-                name={`deliveries.${index}.deliveryDate`}
-                as={TextField}
-                margin='normal'
-                className={classes.inputField}
-                variant="outlined"
-                />
-
-                <Field
-                type="text"
-                label="Instructions"
-                name={`deliveries.${index}.instructions`}
-                as={TextField}
-                margin='normal'
-                className={classes.inputField}
-                variant="outlined"
-                />
-
-                <Button 
-                variant="outlined" 
-                color="primary" 
-                onClick={() => push({
-                    consignee: '',
-                    deliveryDate: '',
-                    instructions: '',
-
-                })}
-                >
-                    Add Another Delivery
-                </Button>
-                <Button variant="outlined" onClick={() => remove(index)}>
-                    Remove Delivery
-                </Button>
-                </div> 
-                            ))}
-                            <Button variant="outlined" onClick={() => push({})}>
-                                Add Another Delivery
-                            </Button>
-                </div> 
-                    )}
-                    </FieldArray>
-    );
-}
 

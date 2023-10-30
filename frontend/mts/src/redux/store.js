@@ -16,6 +16,7 @@ const store = configureStore({
         unit: unitSlice.reducer,
         expenses: expenseSlice.reducer,
     },
+    devTools: process.env.NODE_ENV !== 'production',
 });
 
 export default store;

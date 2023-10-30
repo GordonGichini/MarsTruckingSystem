@@ -10,6 +10,15 @@ export const fetchAddressesAsync = createAsyncThunk(
   }
 );
 
+// Async thunk to save an address
+export const saveAddressDataAsync = createAsyncThunk(
+  'addresses/saveAddressData',
+  async (addressData) => {
+      const response = await api.saveAddressData(addressData);
+      return response.data
+  }
+);
+
 export const createAddressAsync = createAsyncThunk(
   'addresses/createAddress',
   async (newAddress) => {
@@ -63,6 +72,19 @@ const addressSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
+    .addCase(saveAddressDataAsync.pending, (state) => {
+      state.loading = true;
+      state.error = null;
+  })
+  .addCase(saveAddressDataAsync.fulfilled, (state, action) => {
+      state.loading = false;
+      state.addresses.push(action.payload);
+      state.newAddressId = action.payload.id;
+  })
+  .addCase(saveAddressDataAsync.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.error.message;
+  })
     .addCase(fetchAddressesAsync.pending, (state) => {
       state.status = 'loading';
     })

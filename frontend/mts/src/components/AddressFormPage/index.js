@@ -7,7 +7,7 @@ import { useTheme } from '@mui/material/styles';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { useDispatch } from 'react-redux';
-import { createAddressAsync } from '../../redux/slices/addressSlice';
+import { saveAddressDataAsync } from '../../redux/slices/addressSlice';
 
 const useStyles = makeStyles((theme) => ({
   formContainer: {
@@ -90,7 +90,6 @@ const useStyles = makeStyles((theme) => ({
     phoneNumberExtension: '',
     alternatePhone: '',
     alternatePhoneExtension: '',
-    number: '',
     fax: '',
     email: '',
     website: '',
@@ -118,8 +117,8 @@ export default function AddressFormPage() {
     setLoading(true);
     try {
     // Logic for saving address details
-    dispatch(createAddressAsync(values));
-    navigate('/dashboard');
+    dispatch(saveAddressDataAsync(values));
+    navigate('/addresses');
     } catch (error)  {
       // handle any errors if the saving operation failed
     } finally {

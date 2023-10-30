@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-    baseURL: 'http://localhost:5005/api',
+    baseURL: 'http://localhost:5006/api',
 });
 
 export const saveDriverData = async (driverData) => {
@@ -32,6 +32,15 @@ export const saveCompanyData = async (companyData) => {
   };
 
 export const fetchExpenses = async () => {
+    try {
+        const response = await api.get('/expenses');
+        return response.data;
+    } catch (error) {
+        throw new Error('Failed to fetch expenses');
+    }
+};
+
+export const fetchExpenseDetails = async () => {
     try {
         const response = await api.get('/expenses');
         return response.data;
@@ -84,6 +93,16 @@ export const fetchAddresses = async () => {
         throw new Error('Failed to fetch addresses');
     }
 };
+
+export const saveAddressData = async (addressData) => {
+    try {
+        const response = await api.post('/addresses', addressData);
+        return response.data;
+    } catch (error) {
+        throw new Error('Failed to save address data');
+    }
+};
+
 
 export const createAddress = async (address) => {
     try {

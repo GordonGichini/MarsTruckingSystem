@@ -43,8 +43,11 @@ function App() {
         <Route path="/add-trip" element={<TripForm/>} />
         <Route path="/add-planned-load" element={<PlannedLoad/>} />
         <Route path="/add-expense" element={<ExpenseFormPage/>} />
-        <Route path="/expense-details/:newExpenseId" element={<ExpenseDetails/>} />
-        <Route path="/unit-details/:newUnitId" element={<UnitDetails/>} />
+        <Route path="/expense/:id" element={<ExpenseDetails/>} />
+        <Route path="/unit/:i
+        
+        
+        d" element={<UnitDetails/>} />
         <Route path="/editpage" element={<EditPage/>} />
         <Route path="/subscription" element={<Subscription/>} />
         <Route path="/edit_company_profile" element={<ProfileForm/>} />
