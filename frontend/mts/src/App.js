@@ -44,10 +44,7 @@ function App() {
         <Route path="/add-planned-load" element={<PlannedLoad/>} />
         <Route path="/add-expense" element={<ExpenseFormPage/>} />
         <Route path="/expense/:id" element={<ExpenseDetails/>} />
-        <Route path="/unit/:i
-        
-        
-        d" element={<UnitDetails/>} />
+        <Route path="/unit/:id" element={<UnitDetails/>} />
         <Route path="/editpage" element={<EditPage/>} />
         <Route path="/subscription" element={<Subscription/>} />
         <Route path="/edit_company_profile" element={<ProfileForm/>} />

@@ -27,6 +27,15 @@ export const fetchUnits = async () => {
     }
 };
 
+export const fetchUnitDetails = async (unitId) => {
+    try {
+        const response = await api.get(`/units/${unitId}`);
+        return response.data;
+    } catch (error) {
+        throw error;
+    }
+};
+
 export const saveUnitData = async (unitData) => {
     try {
         const response = await api.post('/units', unitData);

@@ -8,8 +8,8 @@ import * as Yup from 'yup';
 import { useNavigate } from 'react-router-dom';
 import { FormControlLabel, Radio, RadioGroup, Typography, TextField, Button, Box, MenuItem, Select } from '@material-ui/core';
 
-import { saveUnitDataAsync } from '../../redux/slices/unitSlice';
-import { selectUnit } from '../../redux/slices/unitSlice';
+import { fetchUnitDetailsAsync, saveUnitDataAsync } from '../../redux/slices/unitSlice';
+
 
 
 const useStyles = makeStyles((theme) => ({
@@ -46,6 +46,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const initialValues = {
+            number: '',
             unitType: '',
             ownershipType: '',
             status: 'active',
@@ -58,7 +59,7 @@ const initialValues = {
             purchasePrice: '',
             licensePlateNumber: '',
             licensePlateExpiration: '',
-            informationStickerExpiration: '',
+            inspectionStickerExpiration: '',
             insuranceExpiration: '',
             initialLocation: '',
           };
@@ -83,25 +84,22 @@ export default function UnitFormPage() {
   };
 
   const handleSaveClick = async (values) => {
-    console.log("handleSaveClick called");
     try {
       const response = await dispatch(saveUnitDataAsync(values));
-      console.log("Response:", response);
        
-      if (response.payload && response.payload.id) {
-        const newUnitId = response.payload.id;
-        console.log("New Unit ID before navigation:", newUnitId);
-        navigate(`/unit-details/${newUnitId}`);
-        console.log("New Unit ID after navigation:", newUnitId);
+      if (response.payload && response.payload._id) {
+        const newUnitId = response.payload._id.$oid;
+        navigate(`/units/${newUnitId}`);
 
+        dispatch(fetchUnitDetailsAsync(newUnitId));
+      } else {
+        console.error('Error creating unit:', response.payload.error);
       }
     } catch (error) {
       console.error('Error creating unit:', error);
     }
   
   };
-
-  const savedUnit = useSelector(selectUnit);
 
   return (
     <div>
@@ -158,7 +156,7 @@ export default function UnitFormPage() {
             <Field name="purchasePrice" as={TextField} label="Purchase Price" variant="outlined" margin='normal' className={classes.inputField} />
             <Field name="licensePlateNumber" as={TextField} label="License Plate Number" variant="outlined" margin='normal' className={classes.inputField} />
             <Field type="date" name="licensePlateExpiration" as={TextField} label="License Plate Expiration" variant="outlined" margin='normal' className={classes.inputField} />
-            <Field type="date" name="inspectionStickerExpiration" as={TextField} label="Information Sticker Expiration" variant="outlined" margin='normal' className={classes.inputField} />
+            <Field type="date" name="inspectionStickerExpiration" as={TextField} label="Inspection Sticker Expiration" variant="outlined" margin='normal' className={classes.inputField} />
             <Field type="date" name="insuranceExpiration" as={TextField} label="Insurance Expiration" variant="outlined" margin='normal' className={classes.inputField} />
           </div>
         )}

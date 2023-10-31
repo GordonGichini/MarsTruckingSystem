@@ -1,7 +1,18 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import * as api from '../../api'; 
 
-
+// Async thunk to fetch unit details by ID
+export const fetchUnitDetailsAsync = createAsyncThunk(
+  'unit/fetchUnitDetails',
+  async (unitId) => {
+    try {
+      const response = await api.fetchUnitDetails(unitId);
+      return response.data;
+    } catch (error) {
+      throw error;
+    }
+  }
+);
 // Async thunk to fetch units from the database
 export const fetchUnitsAsync = createAsyncThunk('unit/fetchUnits', async () => {
   try {
@@ -25,11 +36,30 @@ export const saveUnitDataAsync = createAsyncThunk(
 });
 
 const initialState = {
-  unit: null,
+  unit: {
+    number: '',
+    unitType: '',
+    ownershipType: '',
+    status: 'active',
+    vin: '',
+    make: '',
+    model: '',
+    description: '',
+    year: '',
+    yearPurchased: '',
+    purchasePrice: '',
+    licensePlateNumber: '',
+    licensePlateExpiration: '',
+    inspectionStickerExpiration: '',
+    insuranceExpiration: '',
+    initialLocation: '',
+    _id: null,
+  },
   loading: false,
   error: null,
   hasInteracted: false,
   units: [],
+  unitDetails: null,
 };
 
 const unitSlice = createSlice({
@@ -44,10 +74,10 @@ const unitSlice = createSlice({
       })
       .addCase(saveUnitDataAsync.fulfilled, (state, action) => {
         state.loading = false;
-        state.unit = action.payload;
-        state.newUnitId = action.payload.id;
+        state.unit = { ...action.payload };
+        state.newUnitId = action.payload._id;
         state.hasInteracted = true;
-      })
+      })      
       .addCase(saveUnitDataAsync.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message;
@@ -61,6 +91,18 @@ const unitSlice = createSlice({
         state.units = action.payload;
       })
       .addCase(fetchUnitsAsync.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error.message;
+      })
+      .addCase(fetchUnitDetailsAsync.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(fetchUnitDetailsAsync.fulfilled, (state, action) => {
+        state.loading = false;
+        state.unitDetails = action.payload;
+      })
+      .addCase(fetchUnitDetailsAsync.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message;
       });

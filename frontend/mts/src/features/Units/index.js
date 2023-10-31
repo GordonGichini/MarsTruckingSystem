@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import InNavBar from '../../common/Header/InNavBar';
 import Footer from '../../pages/HomePage/components/Footer';
 import UnitDetails from './UnitDetails';
-import { Typography, makeStyles, ButtonGroup, Button, TextField, Box } from '@material-ui/core';
+import { Typography, makeStyles, ButtonGroup, Button, TextField, Table, Paper, TableHead, TableBody, TableCell, TableRow, TableContainer, Box } from '@material-ui/core';
 import { useSelector, useDispatch } from 'react-redux';
 import { saveUnitDataAsync, selectUnit, fetchUnitsAsync } from '../../redux/slices/unitSlice';
 
@@ -101,6 +101,36 @@ export default function Units() {
         {hasInteracted ? (
           // Render data table or content
           <div>
+          <TableContainer component={Paper}>
+            <Table className={classes.table} aria-label="simple table">
+              <TableHead>
+                <TableRow>
+                  <TableCell>Unit Number</TableCell>
+                  <TableCell>Type</TableCell>
+                  <TableCell>Make/Model</TableCell>
+                  <TableCell>Status</TableCell>
+                  <TableCell>License Plate</TableCell>
+                  <TableCell>Inspection Exp</TableCell>
+                  <TableCell>Insurance Exp</TableCell>
+                  <TableCell>Actions</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {Array.isArray(units) && units.map((unit) => (
+                  <TableRow key={unit.id}>
+                    <TableCell component="th" scope="row">{unit.number}</TableCell>
+                    <TableCell>{unit.unitType}</TableCell>
+                    <TableCell>{unit.make}</TableCell>
+                    <TableCell>{unit.status}</TableCell>
+                    <TableCell>{unit.licensePlateNumber}</TableCell>
+                    <TableCell>{unit.inspectionStickerExpiration}</TableCell>
+                    <TableCell>{unit.insuranceExpiration}</TableCell>
+                    <TableCell>{unit.actions}</TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
             {units && units.length > 0 ? (
               // Render the fetched units in the table
               <div>
