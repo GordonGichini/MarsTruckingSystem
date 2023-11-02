@@ -17,7 +17,7 @@ exports.createUnit = async (req, res) => {
       purchasePrice,
       licensePlateNumber,
       licensePlateExpiration,
-      informationStickerExpiration,
+      inspectionStickerExpiration,
       insuranceExpiration,
       initialLocation,
       // Add other fields as needed
@@ -38,7 +38,7 @@ exports.createUnit = async (req, res) => {
       purchasePrice,
       licensePlateNumber,
       licensePlateExpiration,
-      informationStickerExpiration,
+      inspectionStickerExpiration,
       insuranceExpiration,
       initialLocation,
      

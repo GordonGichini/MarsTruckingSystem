@@ -1,40 +1,37 @@
 const express = require('express');
 const router = express.Router();
-const {
-  createAddress,
-  getAllAddresses,
-  getAddressById,
-  updateAddressById,
-  deleteAddressById,
-  searchAddresses,
-  sortAddresses,
-  paginateAddresses,
-  filterAddresses,
-  bulkDeleteAddresses,
-  exportAddresses,
-} = require('../controllers/addressBookController');
+const addressBookController = require('../controllers/addressBookController')
+
 
 // Define routes for CRUD operations
-router.route('/').post(createAddress).get(getAllAddresses);
-router.route('/:id').get(getAddressById).put(updateAddressById).delete(deleteAddressById);
+router.post('/', addressBookController.createAddress)
+
+router.get('/', addressBookController.getAllAddresses);
+
+router.get('/:id', addressBookController.getAddressById);
+
+router.put('/:id', addressBookController.updateAddressById);
+
+
+router.delete('/:id', addressBookController.deleteAddressById);
 
 // Search Addresses
-router.get('/search', searchAddresses);
+router.get('/search', addressBookController.searchAddresses);
 
 // Sort Addresses
-router.get('/sort/:criteria', sortAddresses);
+router.get('/sort/:criteria', addressBookController.sortAddresses);
 
 // Pagination
-router.get('/page/:page', paginateAddresses);
+router.get('/page/:page', addressBookController.paginateAddresses);
 
 // Filter Addresses
-router.get('/filter', filterAddresses);
+router.get('/filter', addressBookController.filterAddresses);
 
 // Bulk Operations
-router.post('/bulk/delete', bulkDeleteAddresses);
+router.post('/bulk/delete', addressBookController.bulkDeleteAddresses);
 
 // Export Addresses
-router.get('/export', exportAddresses);
+router.get('/export', addressBookController.exportAddresses);
 
 
 

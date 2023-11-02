@@ -3,13 +3,56 @@ const AddressBook = require('../models/addressBook');
 // Create a new address book entry
 const createAddress = async (req, res) => {
   try {
-    const address = new AddressBook(req.body);
-    await address.save();
-    res.status(201).json({ success: true, data: address });
-  } catch (error) {
-    res.status(400).json({ success: false, error: error.message });
-  }
+    const {
+      entry,
+      companyName,
+      street,
+      apt,
+      city,
+      state,
+      zipCode,
+      phoneNumber,
+      phoneNumberExtension,
+      alternatePhone,
+      alternatePhoneExtension,
+      fax,
+      email,
+      website,
+      contact,
+      notes,
+      motorCarrierNumber,
+      taxId
+  } = req.body;
+
+  const newAddress = new AddressBook({
+    entry,
+      companyName,
+      street,
+      apt,
+      city,
+      state,
+      zipCode,
+      phoneNumber,
+      phoneNumberExtension,
+      alternatePhone,
+      alternatePhoneExtension,
+      fax,
+      email,
+      website,
+      contact,
+      notes,
+      motorCarrierNumber,
+      taxId
+  });
+
+  const savedAddress = await newAddress.save();
+  res.status(201).json(savedAddress);
+} catch (error) {
+  res.status(500).json({ error: 'An error occurred while creating an address' });
+}
 };
+
+
 
 // Get all address book entries
 const getAllAddresses = async (req, res) => {

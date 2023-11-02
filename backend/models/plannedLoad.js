@@ -1,19 +1,11 @@
 const mongoose = require('mongoose');
 
 const plannedLoadSchema = new mongoose.Schema({
-  load: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Load',
-  },
-  status: {
-    type: String,
-    enum: ['Planned', 'Active'],
-    default: 'Planned',
-  },
-  associatedTrip: {
+  trip: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Trip',
   },
+  
   customLoadNumber: {
     type: String,
     required: true,

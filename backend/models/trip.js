@@ -1,13 +1,28 @@
 const mongoose = require('mongoose');
 
+const stopSchema = new mongoose.Schema({
+    location: {
+        type: String,
+        required: true,
+    },
+    timestamp: {
+        type: Date,
+        required: true,
+    },
+    notes: {
+        type: String,
+        required: false,
+    },
+});
+
 const tripSchema = new mongoose.Schema({
     loads: [{
-        type: Number,
+        type: mongoose.Schema.Types.ObjectId,
         ref: 'Load',
         required: true,
     }],
     customTripNumber: {
-      type: Number,
+      type: String,
       required: false  
     },
     driverName: {
@@ -34,22 +49,8 @@ const tripSchema = new mongoose.Schema({
         type: Number,
         required: true
     },
-    routingStop: {
-        type: String,
-        required: false
-    },
-    routingStopDate: {
-        type: Date,
-        required: false
-    },
-    instructions: {
-        type: String,
-        required: false
-    },
-    notes: {
-        type: String,
-        required: false
-    },
+    routingStops: [stopSchema],
+
     fuelExpenses: {
         type: String,
         required: false

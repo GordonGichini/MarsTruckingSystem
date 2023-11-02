@@ -49,7 +49,7 @@ app.use('/api', protectedRoutes);
 //app.use('/api/register', authRoutes);
 //app.use('/api/login', authRoutes);
 //app.use('/api/logout', authRoutes);
-app.use('/api/addresses', addressBookRoutes);
+app.use('/api/addressBook', addressBookRoutes);
 app.use('/api/expenses', expenseRoutes);
 app.use('/api/expenseCategories', expenseCategoryRoutes);
 app.use('/api/plannedLoads', plannedLoadRoutes);
