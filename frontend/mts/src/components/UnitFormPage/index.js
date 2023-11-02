@@ -89,7 +89,7 @@ export default function UnitFormPage() {
        
       if (response.payload && response.payload._id) {
         const newUnitId = response.payload._id.$oid;
-        navigate(`/units/${newUnitId}`);
+        navigate(`/unit/${newUnitId}`);
 
         dispatch(fetchUnitDetailsAsync(newUnitId));
       } else {

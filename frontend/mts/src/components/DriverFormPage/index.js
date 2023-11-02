@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
   },
   inputField: {
     width: '60%',
-    margin: theme.spacing(1, 0),
+    margin: theme.spacing(2, 2),
     '& .MuiOutlinedInput-root': {
   '& fieldset': {
     borderColor: 'green',

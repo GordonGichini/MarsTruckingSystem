@@ -115,7 +115,7 @@ export default function ExpenseFormPage() {
 
       if (response.payload && response.payload._id) {
         const newExpenseId = response.payload._id;
-        navigate(`/expense-details/${newExpenseId}`);
+        navigate(`/expense/${newExpenseId}`);
       }
     } catch (error) {
       console.error('Error creating expense:', error);
