@@ -7,7 +7,7 @@ exports.createLoad = async (req, res) => {
       const plannedLoadId = req.params.id;
 
       // Find the planned load by ID
-      const plannedLoad = await PlannedLoad.findById(plannedLoadId);
+      const plannedLoad = await plannedLoad.findById(plannedLoadId);
 
       if (!plannedLoad) {
         return res.status(404).json({ error: 'Planned Load not found' });

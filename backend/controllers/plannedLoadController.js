@@ -4,7 +4,6 @@ const Load = require('../models/load');
 exports.createPlannedLoad = async (req, res) => {
     try {
         const {
-            loadId,
             customLoadNumber,
             customer,
             shipper,
@@ -32,14 +31,7 @@ exports.createPlannedLoad = async (req, res) => {
 
         const loadNumber = customLoadNumber || (await generateCustomLoadNumber());
 
-        // Check if the loadId exists
-        const existingLoad = await Load.findById(loadId);
-        if (!existingLoad) {
-          return res.status(404).json({ message: 'Load not found' });
-        }
-
         const newPlannedLoad = await PlannedLoad.create({
-          load: loadId,
           customLoadNumber: loadNumber,
             customer,
             shipper,
